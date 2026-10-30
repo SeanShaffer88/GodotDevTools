@@ -1,0 +1,32 @@
+; Engine configuration file.
+; This root project is the DEMO + TEST project for the GodotDevTools suite.
+; Its demo/ content deliberately contains one detectable problem per tool
+; (a visual diff, an overflowing UI, a tiny low-contrast label, a huge and a
+; duplicated texture, an unused asset, a broken dialogue branch, a lossy
+; network case, a patrol enemy, a door interaction, a broken export preset)
+; so the test suites can verify every check the tools promise.
+
+config_version=5
+
+[application]
+
+config/name="GodotDevTools - Demo"
+run/main_scene="res://demo/main/main.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://demo/shared/icon.svg"
+
+[display]
+
+window/size/viewport_width=1152
+window/size/viewport_height=648
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation="landscape"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/visual_regression/plugin.cfg", "res://addons/time_machine/plugin.cfg", "res://addons/responsive_ui/plugin.cfg", "res://addons/asset_health/plugin.cfg", "res://addons/dialogue_quest/plugin.cfg", "res://addons/network_sim/plugin.cfg", "res://addons/scene_search/plugin.cfg", "res://addons/accessibility/plugin.cfg", "res://addons/export_doctor/plugin.cfg")
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"

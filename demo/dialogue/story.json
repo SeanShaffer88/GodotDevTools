@@ -1,0 +1,99 @@
+{
+  "dialogues": {
+    "tavern": {
+      "start": "intro",
+      "nodes": {
+        "intro": {
+          "speaker": "Innkeeper",
+          "text": "Welcome in. What do you need?",
+          "choices": [
+            {
+              "text": "Ask about the guard",
+              "next": "guard",
+              "condition": {
+                "var": "met_guard",
+                "op": "==",
+                "value": true
+              }
+            },
+            {
+              "text": "Leave",
+              "next": "bye"
+            },
+            {
+              "text": "Ask about the ghost",
+              "next": "ghost_node"
+            }
+          ]
+        },
+        "guard": {
+          "speaker": "Innkeeper",
+          "text": "The guard wants paying.",
+          "choices": [
+            {
+              "text": "Pay 5 gold",
+              "next": "paid",
+              "condition": {
+                "var": "gold",
+                "op": ">=",
+                "value": 5
+              },
+              "effects": {
+                "gold_paid": true
+              }
+            },
+            {
+              "text": "Walk away",
+              "next": "bye"
+            }
+          ]
+        },
+        "paid": {
+          "speaker": "Innkeeper",
+          "text": "Done. The gate is open.",
+          "end": true
+        },
+        "bye": {
+          "speaker": "Innkeeper",
+          "text": "Mind the road.",
+          "end": true
+        },
+        "secret_room": {
+          "speaker": "Nobody",
+          "text": "A room no path reaches.",
+          "end": true
+        }
+      }
+    }
+  },
+  "quests": {
+    "find_herbs": {
+      "title": "Find Herbs",
+      "requires": []
+    },
+    "guard_duty": {
+      "title": "Guard Duty",
+      "requires": [
+        "find_herbs"
+      ]
+    },
+    "royal_audience": {
+      "title": "Royal Audience",
+      "requires": [
+        "crown_jewel"
+      ]
+    },
+    "cycle_a": {
+      "title": "Loop A",
+      "requires": [
+        "cycle_b"
+      ]
+    },
+    "cycle_b": {
+      "title": "Loop B",
+      "requires": [
+        "cycle_a"
+      ]
+    }
+  }
+}

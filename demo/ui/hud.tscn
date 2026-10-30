@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://demo/ui/hud.gd" id="1"]
+[ext_resource type="Texture2D" path="res://demo/assets/hero.png" id="2"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1")
+
+[node name="WideBanner" type="Control" parent="."]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 2000.0
+offset_bottom = 40.0
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 300.0
+offset_bottom = 40.0
+text = "Score: 0"
+
+[node name="TinyLabel" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 300.0
+offset_bottom = 62.0
+theme_override_font_sizes/font_size = 9
+text = "Hard to read"
+
+[node name="DimLabel" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 72.0
+offset_right = 300.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.2, 0.2, 0.22, 1)
+text = "Low contrast text"
+
+[node name="NoFocusButton" type="Button" parent="."]
+offset_left = 16.0
+offset_top = 110.0
+offset_right = 180.0
+offset_bottom = 146.0
+focus_mode = 0
+text = "Cannot tab to me"
+
+[node name="StatusIndicator" type="ColorRect" parent="."]
+offset_left = 200.0
+offset_top = 110.0
+offset_right = 232.0
+offset_bottom = 142.0
+color = Color(0, 0.8, 0, 1)
+
+[node name="HeroImage" type="TextureRect" parent="."]
+offset_left = 400.0
+offset_top = 200.0
+offset_right = 656.0
+offset_bottom = 456.0
+texture = ExtResource("2")

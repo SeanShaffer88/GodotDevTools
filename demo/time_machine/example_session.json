@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "frames": [
+    {
+      "frame": 0,
+      "inputs": [],
+      "state": {
+        "hp": 10,
+        "x": 0
+      }
+    },
+    {
+      "frame": 1,
+      "inputs": [
+        {
+          "action": "ui_right",
+          "pressed": true
+        }
+      ],
+      "state": {
+        "hp": 10,
+        "x": 4
+      }
+    },
+    {
+      "frame": 2,
+      "inputs": [
+        {
+          "action": "ui_accept",
+          "pressed": true
+        }
+      ],
+      "state": {
+        "hp": 9,
+        "x": 4
+      }
+    }
+  ]
+}
