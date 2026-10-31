@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Content Descriptor Checklist (`content_descriptor`): User-defined content questionnaire with recorded answers: unanswered, invalid, missing evidence, stale reviews. No rating claim. Dock, CLI, fixture and test suite.
+- Patch Delta Estimator (`patch_delta`): Two staged builds compared file by file (MD5): added, removed and changed bytes, monolithic pack warnings, delta budget. Dock, CLI, fixture and test suite.
+- Settings File Validator (`settings_validator`): Player settings files (ConfigFile or JSON) against a schema: unknown keys, wrong types, out-of-range and disallowed values. Dock, CLI, fixture and test suite.
+- Accessibility Options Coverage (`a11y_options`): Keyword evidence in scripts, scenes and data that expected accessibility options exist (subtitles, remapping, text size, colour-blind modes, reduced motion, mono audio, hold/toggle). Dock, CLI, fixture and test suite.
+- Handheld Readiness Checklist (`handheld_readiness`): Stretch mode, text size scaled to a target screen height, actions without gamepad bindings, and buttons that cannot take focus. Dock, CLI, fixture and test suite.
 - Store Asset Validator (`store_assets`): Store images (PNG/JPEG headers) against a user-written profile: missing files, wrong sizes, screenshot counts. Dock, CLI, fixture and test suite.
 - Android Permissions Reviewer (`android_permissions`): Permissions requested by each Android export preset; sensitive ones flagged for review, optional justification file. Dock, CLI, fixture and test suite.
 - Version Consistency Checker (`version_consistency`): Project `config/version` against version strings in export presets (Android, Windows, macOS, iOS, web). Dock, CLI, fixture and test suite.

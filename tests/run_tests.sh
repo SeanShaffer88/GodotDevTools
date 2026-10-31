@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -259,4 +259,14 @@ gate "notice collector flags the unlicensed package" \
   res://addons/third_party_notices/cli/tpn_cli.gd -- --dir=res://demo/shipping/vendor --fail-on=missing_license
 gate "release notes flag the breaking change" \
   res://addons/release_notes/cli/rln_cli.gd -- --commits=res://demo/shipping/commits.txt --fail-on=breaking_change
+gate "content checklist flags the unanswered question" \
+  res://addons/content_descriptor/cli/cdc_cli.gd -- --input=res://demo/shipping/descriptors.json --today=2026-10-31 --fail-on=unanswered
+gate "patch estimator flags the over-budget patch" \
+  res://addons/patch_delta/cli/pde_cli.gd -- --old=res://demo/shipping/builds/v1 --new=res://demo/shipping/builds/v2 --max-delta=10000 --fail-on=delta_budget
+gate "settings validator flags the out-of-range volume" \
+  res://addons/settings_validator/cli/ssv_cli.gd -- --dir=res://demo/shipping/settings --fail-on=out_of_range
+gate "options coverage flags missing colour-blind support" \
+  res://addons/a11y_options/cli/aoc_cli.gd -- --dir=res://demo/shipping --fail-on=option_not_found
+gate "handheld checklist flags the mouse-only action" \
+  res://addons/handheld_readiness/cli/hrc_cli.gd -- --dir=res://demo/shipping/handheld --project=res://demo/shipping/handheld/project_handheld.godot --fail-on=no_gamepad_binding
 echo "ALL GATE CHECKS PASSED"

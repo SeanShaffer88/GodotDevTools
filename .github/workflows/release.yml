@@ -137,7 +137,12 @@ jobs:
             android_permissions:AndroidPermissions \
             version_consistency:VersionCheck \
             third_party_notices:ThirdPartyNotices \
-            release_notes:ReleaseNotes
+            release_notes:ReleaseNotes \
+            content_descriptor:ContentDescriptors \
+            patch_delta:PatchDelta \
+            settings_validator:SettingsValidator \
+            a11y_options:A11yOptions \
+            handheld_readiness:HandheldReadiness
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

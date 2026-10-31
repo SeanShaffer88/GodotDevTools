@@ -126,11 +126,11 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 - [ ] **Version Consistency Checker** (in progress) — `addons/version_consistency`: version strings across project settings, export presets and plugin configs. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Third-Party Notice Collector** (in progress) — `addons/third_party_notices`: gather license files from addons and assets into a notices report. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Release Notes Generator** (in progress) — `addons/release_notes`: group conventional-commit messages into draft release notes. Godot 4.3 headless suite and CLI gate passed; editor session pending.
-- [ ] **Content Descriptor Checklist** — user-defined content questionnaire with recorded answers; no rating claim.
-- [ ] **Patch Delta Estimator** — changed, added and removed bytes between two staged builds.
-- [ ] **Settings File Validator** — user settings files against a schema with defaults and ranges.
-- [ ] **Accessibility Options Coverage** — expected player options (subtitles, remapping, text scale) located in project data.
-- [ ] **Handheld Readiness Checklist** — 1280x800 layout, minimum text size and gamepad-only navigation checks.
+- [ ] **Content Descriptor Checklist** (in progress) — `addons/content_descriptor`: user-defined content questionnaire with recorded answers; no rating claim. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Patch Delta Estimator** (in progress) — `addons/patch_delta`: changed, added and removed bytes between two staged builds. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Settings File Validator** (in progress) — `addons/settings_validator`: user settings files against a schema with defaults and ranges. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Accessibility Options Coverage** (in progress) — `addons/a11y_options`: expected player options (subtitles, remapping, text scale) located in project data. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Handheld Readiness Checklist** (in progress) — `addons/handheld_readiness`: 1280x800 layout, minimum text size and gamepad-only navigation checks. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 
 ## Expansion - shared components, runtimes and native crates (optional; no tool may depend on them)
 
