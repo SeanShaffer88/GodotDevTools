@@ -108,14 +108,14 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 
 ## Expansion - testing, CI and reliability
 
-- [ ] **Flaky Test Detector** — rerun histories to flake rate per test, with quarantine suggestions.
-- [ ] **Golden Data Snapshot Tester** — compare JSON outputs to goldens with path-level diffs.
+- [ ] **Flaky Test Detector** (in progress) — `addons/flaky_tests`: rerun histories to flake rate per test, with quarantine suggestions. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Golden Data Snapshot Tester** (in progress) — `addons/golden_snapshot`: compare JSON outputs to goldens with path-level diffs. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Input Sequence Fuzzer** — seeded, bounded input sequences generated from the InputMap for replay.
-- [ ] **Error Log Grouper** — group Godot error/warning output by normalized signature and count.
-- [ ] **Log Warning Budget Gate** — warning and error counts in headless logs against a baseline.
+- [ ] **Error Log Grouper** (in progress) — `addons/log_grouper`: group Godot error/warning output by normalized signature and count. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Log Warning Budget Gate** (in progress) — `addons/log_budget`: warning and error counts in headless logs against a baseline. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **GDScript Warning Baseline** — per-file warning-code counts that may only go down.
 - [ ] **Scene Load Smoke Tester** — load and instantiate every scene headless; report failures.
-- [ ] **State Trace Determinism Diff** — compare two recorded state traces and report the first divergence.
+- [ ] **State Trace Determinism Diff** (in progress) — `addons/trace_diff`: compare two recorded state traces and report the first divergence. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Micro-Benchmark Harness** — repeatable timed runs with JSON output that feeds the Performance Regression Gate.
 - [ ] **GDScript Mutation Tester** — mutate operators in a core script and report mutants the suite fails to kill.
 

@@ -122,7 +122,12 @@ jobs:
             light_cost:LightCost \
             env_cost:EnvCost \
             palette_check:PaletteCheck \
-            theme_audit:ThemeAudit
+            theme_audit:ThemeAudit \
+            flaky_tests:FlakyTests \
+            golden_snapshot:GoldenSnapshots \
+            log_grouper:LogGrouper \
+            log_budget:LogBudget \
+            trace_diff:TraceDiff
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

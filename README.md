@@ -90,6 +90,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Environment Feature Cost Matrix | Environment features enabled per scene/resource (SDFGI, SSR, SSAO, SSIL, volumetric fog, glow...) with relative cost tiers and Compatibility-renderer support. | `addons/env_cost` |
 | Colour Palette Consistency Checker | Colour literals in scenes, resources and scripts compared with an approved palette by CIE76 delta E. | `addons/palette_check` |
 | Theme Resource Auditor | Theme override counts per scene, distinct and near-duplicate font sizes, and theme type variations no scene uses. | `addons/theme_audit` |
+| Flaky Test Detector | Test-run histories (JUnit XML folders or JSON): same-commit pass/fail flips, flip rates and always-failing tests. | `addons/flaky_tests` |
+| Golden Data Snapshot Tester | JSON outputs compared with approved goldens by JSON path (changed, added, removed, type changes) with a float tolerance. | `addons/golden_snapshot` |
+| Error Log Grouper | Godot log errors and warnings grouped by normalized signature (numbers and quoted names masked) with counts and first location. | `addons/log_grouper` |
+| Log Warning Budget Gate | Error/warning counts and new message signatures in a captured log against a committed baseline. | `addons/log_budget` |
+| State Trace Determinism Diff | Two recorded per-frame state traces compared key by key; first divergent frame, diverging keys, length mismatch. | `addons/trace_diff` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -237,6 +242,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `env_cost/cli/ecm_cli.gd` | `--dir` `--max-cost` `--renderer` `--fail-on` |
 | `palette_check/cli/pcc_cli.gd` | `--dir` `--palette` `--fail-on` |
 | `theme_audit/cli/tra_cli.gd` | `--dir` `--max-overrides` `--max-font-sizes` `--fail-on` |
+| `flaky_tests/cli/flk_cli.gd` | `--input` `--flip-rate` `--fail-on` |
+| `golden_snapshot/cli/gst_cli.gd` | `--current` `--golden` `--tolerance` `--fail-on` |
+| `log_grouper/cli/lgr_cli.gd` | `--log` `--fail-on` |
+| `log_budget/cli/lbg_cli.gd` | `--log` `--baseline` `--fail-on` |
+| `trace_diff/cli/sdt_cli.gd` | `--first` `--second` `--tolerance` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 
