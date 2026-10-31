@@ -1,0 +1,23 @@
+{
+ "summary": {
+  "issues": 2
+ },
+ "issues": [
+  {
+   "severity": "warning",
+   "kind": "duplicate",
+   "path": "res://art/hero_copy.png",
+   "line": 0,
+   "message": "Duplicate of hero.png.",
+   "fix": "Fix it."
+  },
+  {
+   "severity": "warning",
+   "kind": "oversized_texture",
+   "path": "res://art/big.png",
+   "line": 0,
+   "message": "3000x2000 texture.",
+   "fix": "Fix it."
+  }
+ ]
+}

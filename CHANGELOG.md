@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Report Schema (`report_schema`): Documented JSON Schema for tool reports (summary + issues with severity/kind/message) and a validator for report folders. Dock, CLI, fixture and test suite.
+- SARIF Exporter (`sarif_export`): Converts every tool report in a folder into one SARIF 2.1.0 log (one run per tool) for code-scanning views. Dock, CLI, fixture and test suite.
+- JUnit Exporter (`junit_export`): Converts tool reports into JUnit XML: one suite per tool, one test case per finding kind, failures carrying each finding. Dock, CLI, fixture and test suite.
+- Static HTML Dashboard (`html_dashboard`): One self-contained offline HTML page: per-tool counts by severity and every finding, filterable, light and dark. Dock, CLI, fixture and test suite.
+- Report Diff (`report_diff`): Two report folders compared: new, fixed and unchanged findings, matched by tool, kind, path and message so moved lines still match. Dock, CLI, fixture and test suite.
 - Content Descriptor Checklist (`content_descriptor`): User-defined content questionnaire with recorded answers: unanswered, invalid, missing evidence, stale reviews. No rating claim. Dock, CLI, fixture and test suite.
 - Patch Delta Estimator (`patch_delta`): Two staged builds compared file by file (MD5): added, removed and changed bytes, monolithic pack warnings, delta budget. Dock, CLI, fixture and test suite.
 - Settings File Validator (`settings_validator`): Player settings files (ConfigFile or JSON) against a schema: unknown keys, wrong types, out-of-range and disallowed values. Dock, CLI, fixture and test suite.

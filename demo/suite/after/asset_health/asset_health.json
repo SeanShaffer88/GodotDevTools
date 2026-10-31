@@ -1,0 +1,23 @@
+{
+ "summary": {
+  "issues": 2
+ },
+ "issues": [
+  {
+   "severity": "warning",
+   "kind": "oversized_texture",
+   "path": "res://art/big.png",
+   "line": 0,
+   "message": "3000x2000 texture.",
+   "fix": "Fix it."
+  },
+  {
+   "severity": "info",
+   "kind": "unused",
+   "path": "res://art/orphan.png",
+   "line": 0,
+   "message": "Not referenced <b>anywhere</b> & unused.",
+   "fix": "Fix it."
+  }
+ ]
+}

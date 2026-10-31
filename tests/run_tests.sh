@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -269,4 +269,18 @@ gate "options coverage flags missing colour-blind support" \
   res://addons/a11y_options/cli/aoc_cli.gd -- --dir=res://demo/shipping --fail-on=option_not_found
 gate "handheld checklist flags the mouse-only action" \
   res://addons/handheld_readiness/cli/hrc_cli.gd -- --dir=res://demo/shipping/handheld --project=res://demo/shipping/handheld/project_handheld.godot --fail-on=no_gamepad_binding
+gate "report schema flags the malformed report" \
+  res://addons/report_schema/cli/rsv_cli.gd -- --reports=res://demo/suite/after --fail-on=schema_violation
+test -s reports/report_schema/report.schema.json
+gate "SARIF exporter notes the skipped report" \
+  res://addons/sarif_export/cli/srf_cli.gd -- --reports=res://demo/suite/after --fail-on=skipped_report
+test -s reports/sarif_export/gdt.sarif
+gate "JUnit exporter notes the skipped report" \
+  res://addons/junit_export/cli/jux_cli.gd -- --reports=res://demo/suite/after --fail-on=skipped_report
+test -s reports/junit_export/gdt-junit.xml
+gate "dashboard notes the skipped report" \
+  res://addons/html_dashboard/cli/hdb_cli.gd -- --reports=res://demo/suite/after --fail-on=skipped_report
+test -s reports/html_dashboard/dashboard.html
+gate "report diff gates on new findings" \
+  res://addons/report_diff/cli/rdf_cli.gd -- --before=res://demo/suite/before --after=res://demo/suite/after --fail-on=new_finding
 echo "ALL GATE CHECKS PASSED"
