@@ -1,0 +1,5 @@
+# Regression Test Prioritizer
+
+Rank tests by how many distinct changed paths explicitly map to them. Mapping shape: `{"paths":{"src/player.gd":["tests/test_player.gd"]}}`; changed paths: `{"changed":["src/player.gd"]}`. Matches are **exact**, not globbed or inferred from the scene dependency graph. Ties sort by test path; duplicate paths and duplicate test mappings are counted once. Unmapped changes are warnings, not proof that no test is needed. The output is a recommendation and never runs or excludes tests.
+
+Enable the dock, or run `godot --headless --path . --script res://addons/test_priority/cli/priority_cli.gd -- --first=res://demo/test_priority/mapping.json --second=res://demo/test_priority/changes.json --fail-on=unmapped_path`. `--out` changes the report directory. JSON and Markdown reports are written under `res://reports/test_priority` by default. Selected warnings or `issues` exit 2; malformed input and I/O errors exit 1; otherwise exit 0. This tool does not read Git or infer dependencies. Godot and hands-on editor verification are pending.

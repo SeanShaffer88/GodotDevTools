@@ -1,0 +1,1 @@
+{"transitions":[{"from":"idle","to":"walk"},{"from":"walk","to":"idle"},{"from":"walk","to":"jump"}]}
