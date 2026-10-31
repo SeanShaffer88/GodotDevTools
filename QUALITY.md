@@ -1,11 +1,11 @@
 # GodotDevTools - Quality Scorecard
 
-Gate: `sh tests/run_tests.sh ~/workspace/tools/godot` on Godot 4.3.stable - **93/93 test checks passed, 0 failed** across the nine suites (VRT 12, GSTM 12, RUIP 8, AHD 10, DQD 15, MNS 12, NLSS 9, A11Y 8, BED 7), plus every CLI smoke and exit-code-2 gate assertion in the same run.
+Gate: `sh tests/run_tests.sh <godot-binary>` - **104/104 test checks passed, 0 failed** across the nine suites (VRT 16, GSTM 12, RUIP 8, AHD 10, DQD 22, MNS 12, NLSS 9, A11Y 8, BED 7), plus every CLI smoke and exit-code-2 gate assertion in the same run. The gate runs automatically in CI (`.github/workflows/tests.yml`) on every push and pull request, green on both Godot 4.3.stable and 4.5.stable headless (Linux).
 
 | Dimension | Score (1-5) | Evidence |
 |---|---|---|
 | Correctness | 4 | Per-tool suites pass on a fixture that contains one deliberate case per promised check; CLI exit-code gates verified for visual regression, asset health, dialogue, accessibility and export doctor. |
-| Completeness vs brief | 4 | All nine requested tools built as installable addons with editor dock + CLI + tests. Two brief items are delivered in reduced form and documented as limitations: automatic in-editor screenshot capture (compare/highlight/approve are built; the shutter is the game's test scene) and a drawn dialogue node-graph (branch lists + full simulation are built). |
+| Completeness vs brief | 4 | All nine requested tools built as installable addons with editor dock + CLI + tests. The two once-reduced brief items are now built: the one-click capture runner (dock Capture section + core `vrt_capture.gd`; live viewport pass is editor/game-only by nature) and the drawn dialogue node-graph (core `dqd_layout.gd` + dock GraphView pane). Both await a hands-on editor session for full verification, like the other dock surfaces. |
 | Code quality | 4 | One core operation per tool, no editor APIs in cores, docks/CLIs are thin shells; deterministic seeds where randomness exists. |
 | Tests | 4 | Fixture-driven suites per tool plus CLI smoke and exit-code gates in one `run_tests.sh`. No coverage tooling for GDScript; suites assert behaviour, not lines. |
 | UX / plain language | 4 | Every dock control has a tooltip and an offline `?` help text; every finding carries a plain-words fix. Hands-on editor session still owed, so not a 5. |
@@ -16,6 +16,6 @@ Overall: gate green = shippable as v1.0.0 with the limitations stated in README.
 
 ## Verification status
 
-- Verified: all core operations, CLI reports and CI gates, on Godot 4.3.stable headless (Linux).
-- Partially Verified: editor docks (headless editor import passes and plugin scripts parse; clicking through the docks in a real editor session is owed) and the two runtime nodes (they wrap verified cores).
-- Unverified: hands-on Windows editor use, large-project performance, Godot versions other than 4.3.
+- Verified: all core operations (including the new `vrt_capture.gd` pure parts and `dqd_layout.gd`), CLI reports and CI gates, on Godot 4.3.stable **and 4.5.stable** headless (Linux) - the CI workflow runs the full gate on both on every push and pull request.
+- Partially Verified: editor docks (headless editor import passes and plugin scripts parse; clicking through the docks in a real editor session is owed), the two runtime nodes (they wrap verified cores), the dock capture runner's live viewport pass and the drawn graph pane (their pure cores are verified; rendering needs a real editor session).
+- Unverified: hands-on Windows editor use, large-project performance, Godot versions other than 4.3/4.5.

@@ -10,7 +10,9 @@ Copy `addons/visual_regression` into your project's `addons/` folder, then enabl
 
 ## In the editor
 
-Put approved screenshots in res://visual_baselines named <scene>__<width>x<height>.png and fresh captures in res://visual_current with the same names, then Run. Failing pairs differ from the approved picture; the CLI writes a highlight image per failure (changed pixels in magenta). Approve a change by copying the capture over the baseline.
+Capture: list scene paths in the Capture box (comma-separated; empty means the project's main scene), set the output folder (default res://visual_current), and press **Capture now**. Each scene is instantiated in an offscreen viewport at every standard resolution, given two frames to settle, and saved as <scene>__<width>x<height>.png - the same names the compare run reads. The capture pass needs the editor's renderer, so it runs in the editor or a real game window, never headless.
+
+Compare: put approved screenshots in res://visual_baselines with the same names and fresh captures in res://visual_current, then **Run check**. Failing pairs differ from the approved picture; the CLI writes a highlight image per failure (changed pixels in magenta). Approve a change by copying the capture over the baseline.
 
 Every control in the dock has a tooltip; the `?` button repeats this help inside the editor, offline.
 
