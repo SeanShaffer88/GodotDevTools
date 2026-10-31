@@ -1,0 +1,2 @@
+A normal menu label.
+PLACEHOLDER: replace the temporary text before shipping.
