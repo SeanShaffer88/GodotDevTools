@@ -169,7 +169,12 @@ jobs:
             ability_sim:AbilitySim \
             procgen_constraints:ProcgenConstraints \
             controller_glyphs:ControllerGlyphs \
-            colorvision:ColorVision
+            colorvision:ColorVision \
+            merge_conflicts:MergeConflicts \
+            cleanup_workbench:CleanupWorkbench \
+            scene_snapshot:SceneSnapshot \
+            property_drift:PropertyDrift \
+            art_handoff:ArtHandoff
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

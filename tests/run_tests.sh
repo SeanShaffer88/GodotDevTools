@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp smc pcw ssg npd aeh; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -329,4 +329,15 @@ gate "glyph validator flags the unknown roll action" \
   res://addons/controller_glyphs/cli/cgp_cli.gd -- --dir=res://demo/glyphs --project=res://demo/ci/input_actions.godot --fail-on=unknown_action
 gate "colour vision previewer flags the red/green pair" \
   res://addons/colorvision/cli/cvp_cli.gd -- --input=res://demo/glyphs/palette_cvd.json --fail-on=indistinct_under_cvd
+gate "merge assistant explains the id collision" \
+  res://addons/merge_conflicts/cli/smc_cli.gd -- --dir=res://demo/workflow/conflicts --fail-on=id_collision
+gate "cleanup workbench lists the stale import" \
+  res://addons/cleanup_workbench/cli/pcw_cli.gd -- --dir=res://demo/workflow/cleanup --fail-on=stale_import
+gate "snapshot diff reports the removed lamp" \
+  res://addons/scene_snapshot/cli/ssg_cli.gd -- --scene=res://demo/workflow/snapshot/level_v2.tscn --compare=res://demo/workflow/snapshot/level_v1.tscn --fail-on=node_removed
+test -s reports/scene_snapshot/snapshot.json
+gate "drift monitor flags the odd label" \
+  res://addons/property_drift/cli/npd_cli.gd -- --dir=res://demo/workflow/drift --fail-on=property_outlier
+gate "handoff validator flags the unapplied scale" \
+  res://addons/art_handoff/cli/aeh_cli.gd -- --dir=res://demo/workflow/handoff --fail-on=unapplied_scale
 echo "ALL GATE CHECKS PASSED"

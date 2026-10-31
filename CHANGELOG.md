@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Scene Merge Conflict Assistant (`merge_conflicts`): Git conflict hunks in scene/resource/project text explained by section, node and property (property clashes, ext_resource id collisions, load_steps); read-only. Dock, CLI, fixture and test suite.
+- Project Cleanup Workbench (`cleanup_workbench`): Review list of unreferenced assets, duplicate files (MD5), stale .import/.uid sidecars and empty folders; never deletes. Dock, CLI, fixture and test suite.
+- Scene Review Snapshot Generator (`scene_snapshot`): Reproducible scene inventory (nodes, types, scripts, instances, stored properties) as JSON, and a node/property diff against another version. Dock, CLI, fixture and test suite.
+- Node Property Drift Monitor (`property_drift`): Per node type and property, the dominant stored value across scenes; outliers drifting from it, or deviations from a committed baseline. Dock, CLI, fixture and test suite.
+- Art-to-Engine Handoff Validator (`art_handoff`): glTF/GLB handoff checks: unapplied node scale, implausible bounds, default material/animation names, missing UVs for textured materials, unknown -col style suffixes. Dock, CLI, fixture and test suite.
 - AI Perception Debugger (`ai_perception`): 2D sight (range, field of view, wall occlusion) and hearing (range x noise, walls muffle) per agent-target pair with a decision trace and expectations. Dock, CLI, fixture and test suite.
 - Gameplay Ability Simulator (`ability_sim`): Priority-rotation simulation of abilities with costs, cooldowns, cast times and regenerating resources: casts, DPS, idle and wasted resource time. Dock, CLI, fixture and test suite.
 - Procedural Generation Constraint Tester (`procgen_constraints`): Generated text-grid maps checked by flood fill: reachable exit, key before door, isolated floor pockets, dead-end share; failure rate across seeds. Dock, CLI, fixture and test suite.

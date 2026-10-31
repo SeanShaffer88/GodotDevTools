@@ -137,6 +137,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Procedural Generation Constraint Tester | Generated text-grid maps checked by flood fill: reachable exit, key before door, isolated floor pockets, dead-end share; failure rate across seeds. | `addons/procgen_constraints` |
 | Controller Glyph and Prompt Validator | Action tokens in prompt text checked against the InputMap, per-device bindings, and glyph images in per-device folders. | `addons/controller_glyphs` |
 | Color-Vision and Contrast Previewer | Palette colours simulated for protanopia, deuteranopia and tritanopia (Machado 2009, full severity); pairs below a delta E threshold flagged, simulated colours listed. | `addons/colorvision` |
+| Scene Merge Conflict Assistant | Git conflict hunks in scene/resource/project text explained by section, node and property (property clashes, ext_resource id collisions, load_steps); read-only. | `addons/merge_conflicts` |
+| Project Cleanup Workbench | Review list of unreferenced assets, duplicate files (MD5), stale .import/.uid sidecars and empty folders; never deletes. | `addons/cleanup_workbench` |
+| Scene Review Snapshot Generator | Reproducible scene inventory (nodes, types, scripts, instances, stored properties) as JSON, and a node/property diff against another version. | `addons/scene_snapshot` |
+| Node Property Drift Monitor | Per node type and property, the dominant stored value across scenes; outliers drifting from it, or deviations from a committed baseline. | `addons/property_drift` |
+| Art-to-Engine Handoff Validator | glTF/GLB handoff checks: unapplied node scale, implausible bounds, default material/animation names, missing UVs for textured materials, unknown -col style suffixes. | `addons/art_handoff` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -331,6 +336,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `procgen_constraints/cli/pgc_cli.gd` | `--dir` `--max-dead-end-ratio` `--fail-on` |
 | `controller_glyphs/cli/cgp_cli.gd` | `--dir` `--glyphs` `--project` `--token` `--fail-on` |
 | `colorvision/cli/cvp_cli.gd` | `--input` `--fail-on` |
+| `merge_conflicts/cli/smc_cli.gd` | `--dir` `--fail-on` |
+| `cleanup_workbench/cli/pcw_cli.gd` | `--dir` `--root` `--fail-on` |
+| `scene_snapshot/cli/ssg_cli.gd` | `--scene` `--compare` `--fail-on` |
+| `property_drift/cli/npd_cli.gd` | `--dir` `--baseline` `--min-nodes` `--majority` `--fail-on` |
+| `art_handoff/cli/aeh_cli.gd` | `--dir` `--min-size` `--max-size` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 
