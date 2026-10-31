@@ -1,0 +1,7 @@
+{
+  "tables": {
+    "chest": {"weights": {"common": 70, "rare": 25, "epic": 5}, "observed": {"common": 702, "rare": 248, "epic": 50}},
+    "gacha": {"weights": {"common": 80, "rare": 18, "legend": 2}, "observed": {"common": 860, "rare": 138, "legend": 2}},
+    "coin": {"weights": {"heads": 1, "tails": 1}, "observed": {"heads": 3, "tails": 1}}
+  }
+}

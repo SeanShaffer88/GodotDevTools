@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -197,4 +197,14 @@ gate "xp planner flags the level 5 wall" \
   res://addons/xp_curve/cli/xpc_cli.gd -- --input=res://demo/balance/xp.json --fail-on=level_wall
 gate "crafting validator flags the unobtainable amulet" \
   res://addons/crafting_graph/cli/cgv_cli.gd -- --input=res://demo/balance/crafting.json --fail-on=unobtainable_goal
+gate "achievement checker flags the unreachable tycoon" \
+  res://addons/achievements/cli/ach_cli.gd -- --input=res://demo/balance/achievements.json --fail-on=unreachable_threshold
+gate "wave planner flags the wave 2 crowd" \
+  res://addons/wave_budget/cli/wsb_cli.gd -- --input=res://demo/balance/waves.json --fail-on=alive_budget
+gate "fairness tester flags the rigged gacha" \
+  res://addons/rng_fairness/cli/rft_cli.gd -- --input=res://demo/balance/fairness.json --fail-on=unfair_distribution
+gate "save auditor flags the growing event log" \
+  res://addons/save_bloat/cli/sba_cli.gd -- --dir=res://demo/balance/saves --fail-on=key_growth
+gate "dialogue variable lint flags variables nothing sets" \
+  res://addons/dialogue_vars/cli/dvl_cli.gd -- --dir=res://demo/dialogue --fail-on=read_never_set
 echo "ALL GATE CHECKS PASSED"

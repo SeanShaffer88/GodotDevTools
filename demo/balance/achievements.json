@@ -1,0 +1,13 @@
+{
+  "events": ["enemy_killed", "level_completed", "jump"],
+  "stats": {"kills": 999999, "coins": 99999, "deaths": 999999},
+  "achievements": [
+    {"id": "first_blood", "requires": {"event": "enemy_killed"}},
+    {"id": "slayer", "requires": {"stat": "kills", "gte": 1000}},
+    {"id": "tycoon", "requires": {"stat": "coins", "gte": 1000000}},
+    {"id": "acrobat", "requires": {"event": "double_jump"}},
+    {"id": "completionist", "requires": {"all": ["slayer", "tycoon", "speedster"]}},
+    {"id": "loop_a", "requires": {"all": ["loop_b"]}},
+    {"id": "loop_b", "requires": {"all": ["loop_a"]}}
+  ]
+}

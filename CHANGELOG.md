@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Achievement Reachability Checker (`achievements`): Unlock conditions checked against declared events and capped stats; unknown references, unreachable thresholds, cycles and blocked meta-achievements. Dock, CLI, fixture and test suite.
+- Wave Spawner Budget Planner (`wave_budget`): Timeline simulation of wave spawn groups: peak enemies alive, spawns per second, overruns past wave duration. Dock, CLI, fixture and test suite.
+- Random Table Fairness Tester (`rng_fairness`): Pearson chi-square goodness of fit of recorded outcome counts against intended weights, with p-values and small-sample warnings. Dock, CLI, fixture and test suite.
+- Save File Bloat Auditor (`save_bloat`): JSON save size by key path, dominant keys, growth across ordered sample saves, total-size budget. Dock, CLI, fixture and test suite.
+- Dialogue Variable Lint (`dialogue_vars`): Dialogue condition reads versus effect writes in dialogue JSON; read-never-set, set-never-read and type mismatches, with an external-variable allow list. Dock, CLI, fixture and test suite.
 - Loot Table and Economy Simulator (`loot_sim`): Seeded weighted-table simulation: per-item odds, expected value per open, observed rates and 99th-percentile drought lengths. Dock, CLI, fixture and test suite.
 - Difficulty Curve Analyzer (`difficulty_curve`): Enemy-to-player power ratio per level from a data table; flags spikes, dips and ratios beyond a ceiling. Dock, CLI, fixture and test suite.
 - Damage Formula Sandbox (`damage_sandbox`): Evaluates a formula over a stat grid with Godot's Expression class; flags negative, overflowing, non-finite and non-monotonic results. Dock, CLI, fixture and test suite.
