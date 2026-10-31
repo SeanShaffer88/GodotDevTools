@@ -56,6 +56,7 @@ jobs:
             seed_replay:SeedReplay \
             shader_doctor:ShaderDoctor \
             signal_spy:SignalSpy \
+            subtitle_audit:SubtitleAudit \
             test_runner:TestRunner \
             thermal_sim:ThermalSim \
             tilemap_rules:TilemapRules \

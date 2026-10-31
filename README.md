@@ -4,7 +4,7 @@
 
 Thirty tools for developers who build games with Godot 4: visual regression testing, a game-state time machine, a responsive UI previewer, an asset health dashboard, a dialogue and quest debugger, a multiplayer network simulator, natural-language scene search, an automated accessibility checker, a build and export doctor, a draw-call and batching profiler, a save-game schema migrator, a physics collision matrix visualizer, procedural animation solvers, an audio mixing sandbox, a memory leak and orphan hunter, an input matrix and rebinding suite, a shader analyzer, a signal flow spy, a localization matrix, a behaviour tree and state machine debugger, a camera shake and framing orchestrator, a deterministic seed and replay runner, a level whiteboxing suite, a cross-platform filesystem mock, a tilemap rule generator, a headless test runner, a thermal and battery emulation dock, a prefab instance guard, a GDScript documentation generator, and a scene dependency map.
 
-The [roadmap](ROADMAP.md) tracks 50 proposed tools and their implementation status. The [Demo-to-Release Content Guard](addons/release_guard/README.md) and [Naming and Folder Convention Enforcer](addons/naming_conventions/README.md) are under development.
+The [roadmap](ROADMAP.md) tracks 50 proposed tools and their implementation status. The [Demo-to-Release Content Guard](addons/release_guard/README.md) and [Naming and Folder Convention Enforcer](addons/naming_conventions/README.md) are under development, as is the [Subtitle Timing and Readability Auditor](addons/subtitle_audit/README.md).
 
 ## TL;DR
 
