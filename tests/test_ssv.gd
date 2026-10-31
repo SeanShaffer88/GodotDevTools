@@ -20,6 +20,7 @@ func _has(result: Dictionary, kind: String, line: int) -> bool:
 
 func _init() -> void:
     var result: Dictionary = op.run("res://demo/shipping/settings")
+    check("object values are compared as text, never built", op.flatten("x.cfg", "[a]\nb=Object(Node,\"name\":\"x\")\n")["a/b"] is String)
     check("one sample file validated", result["summary"]["files"] == 1)
     check("volume 1.4 out of range", op._count(result, "out_of_range") == 1)
     check("fullscreen string is wrong type", op._count(result, "wrong_type") == 1)

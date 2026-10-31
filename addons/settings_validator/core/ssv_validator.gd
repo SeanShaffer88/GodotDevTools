@@ -94,7 +94,10 @@ func flatten(path: String, text: String) -> Variant:
     var ini := parse_ini(text)
     var values := {}
     for k in ini.keys():
-        values[k] = str_to_var(str(ini[k]["value"]))
+        var raw := str(ini[k]["value"])
+        # str_to_var builds live engine objects from Object(...) text, so an
+        # untrusted file could instantiate classes. Compare such values as text.
+        values[k] = raw if raw.contains("Object(") else str_to_var(raw)
     return values
 
 

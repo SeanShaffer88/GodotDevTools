@@ -7,6 +7,7 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- AUDIT.md (security, privacy and quality audit with evidence labels), CREDITS.md and DESCRIPTION.md.
 - Pause, Focus, and Lifecycle Tester (`lifecycle`): Effective process mode per scripted node while paused (pause menus that freeze themselves, gameplay that keeps running), missing focus/suspend handling, wall-clock timing. Dock, CLI, fixture and test suite.
 - Privacy and Permissions Auditor (`privacy_audit`): Inventory of network endpoints and APIs, device identifiers, clipboard, microphone/camera use and external links, for a privacy review. Dock, CLI, fixture and test suite.
 - Offline and Poor-Connection Test Harness (`offline_harness`): Static: HTTP requests without timeouts and completion handlers that ignore result codes. Runtime: drop-in HTTP node applying seeded offline/timeout/slow/error faults. Dock, CLI, fixture and test suite.
@@ -111,6 +112,10 @@ All notable changes to GodotDevTools are recorded here. The format follows
 ### Fixed
 
 - Dialogue and Quest Debugger file discovery now skips `reports/` and `visual_reports/`, so a second gate run in the same checkout no longer reads its own report as dialogue data.
+
+### Security
+
+- Macro Recorder refuses `Object(...)` values and Settings Validator compares them as text: `str_to_var` instantiates engine objects from such text (AUDIT.md F1).
 
 ## [1.1.0] - 2026-10-30
 
