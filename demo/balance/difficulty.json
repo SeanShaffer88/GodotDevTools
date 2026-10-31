@@ -1,0 +1,8 @@
+{"levels": [
+  {"level": 1, "enemy_power": 10, "player_power": 12},
+  {"level": 2, "enemy_power": 12, "player_power": 14},
+  {"level": 3, "enemy_power": 14, "player_power": 16},
+  {"level": 4, "enemy_power": 26, "player_power": 18},
+  {"level": 5, "enemy_power": 20, "player_power": 21},
+  {"level": 6, "enemy_power": 14, "player_power": 24}
+]}

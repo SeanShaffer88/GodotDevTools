@@ -1,0 +1,4 @@
+{
+  "xp_to_next": [100, 150, 220, 300, 2400, 500, 650],
+  "xp_per_minute": [{"from_level": 1, "rate": 50}, {"from_level": 4, "rate": 80}]
+}

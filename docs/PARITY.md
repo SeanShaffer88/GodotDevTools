@@ -90,6 +90,11 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Resource UID Integrity Checker: declared vs referenced uid:// values | uid_integrity core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Project Settings Drift Report: key-level diff against a baseline | settings_drift core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Scene Lint Rule Engine: JSON rules over scene node trees | scene_lint core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Loot Table and Economy Simulator: analytic odds plus seeded simulation | loot_sim core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Difficulty Curve Analyzer: per-level power ratio spikes and dips | difficulty_curve core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Damage Formula Sandbox: grid evaluation with range and monotonicity checks | damage_sandbox core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| XP Curve Planner: time-to-level with wall and order checks | xp_curve core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Crafting and Inventory Graph Validator: recipe reachability fixpoint | crafting_graph core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |
