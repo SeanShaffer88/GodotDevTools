@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -217,4 +217,14 @@ gate "atlas planner reports the oversize background" \
   res://addons/atlas_planner/cli/atp_cli.gd -- --input=res://demo/assets_audit/atlas.json --fail-on=sprite_too_big
 gate "texture filter checker flags mipmapped pixel art" \
   res://addons/texture_filter/cli/tfc_cli.gd -- --dir=res://demo/assets_audit --fail-on=pixel_mipmaps
+gate "mesh stats flags the over-budget terrain" \
+  res://addons/mesh_stats/cli/msr_cli.gd -- --dir=res://demo/rendering --max-triangles=5000 --fail-on=triangle_budget
+gate "light estimator flags the shadowed street lamps" \
+  res://addons/light_cost/cli/lsc_cli.gd -- --dir=res://demo/rendering --fail-on=shadow_budget
+gate "environment matrix flags high-cost features" \
+  res://addons/env_cost/cli/ecm_cli.gd -- --dir=res://demo/rendering --renderer=forward_plus --fail-on=expensive_feature
+gate "palette checker flags the off-palette accent" \
+  res://addons/palette_check/cli/pcc_cli.gd -- --dir=res://demo/rendering --palette=res://demo/rendering/palette.json --fail-on=off_palette
+gate "theme auditor flags font-size sprawl" \
+  res://addons/theme_audit/cli/tra_cli.gd -- --dir=res://demo/rendering --fail-on=font_size_sprawl
 echo "ALL GATE CHECKS PASSED"

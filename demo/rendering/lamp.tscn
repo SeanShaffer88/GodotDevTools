@@ -1,0 +1,7 @@
+[gd_scene format=3]
+
+[node name="Lamp" type="Node3D"]
+
+[node name="Light" type="OmniLight3D" parent="."]
+shadow_enabled = true
+omni_range = 6.0

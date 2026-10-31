@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Mesh Statistics Report (`mesh_stats`): Triangles, vertices, primitives and materials per glTF/GLB file from accessor counts, against budgets. Dock, CLI, fixture and test suite.
+- 3D Light and Shadow Cost Estimator (`light_cost`): Omni, spot and directional lights per scene (instanced scenes followed), shadow casters, against budgets and renderer limits. Dock, CLI, fixture and test suite.
+- Environment Feature Cost Matrix (`env_cost`): Environment features enabled per scene/resource (SDFGI, SSR, SSAO, SSIL, volumetric fog, glow...) with relative cost tiers and Compatibility-renderer support. Dock, CLI, fixture and test suite.
+- Colour Palette Consistency Checker (`palette_check`): Colour literals in scenes, resources and scripts compared with an approved palette by CIE76 delta E. Dock, CLI, fixture and test suite.
+- Theme Resource Auditor (`theme_audit`): Theme override counts per scene, distinct and near-duplicate font sizes, and theme type variations no scene uses. Dock, CLI, fixture and test suite.
 - Font Glyph Coverage Checker (`font_glyphs`): Characters used per locale in translation CSV/PO files checked against a TTF/OTF cmap table (formats 4 and 12). Dock, CLI, fixture and test suite.
 - Audio Loudness and Clipping Auditor (`audio_levels`): WAV peak/RMS dBFS, clipped samples, DC offset and sample-rate outliers from the PCM data itself. Dock, CLI, fixture and test suite.
 - Audio Import Settings Auditor (`audio_import`): Audio `.import` loop and compression settings against clip role (music/sfx folder patterns) and WAV length. Dock, CLI, fixture and test suite.

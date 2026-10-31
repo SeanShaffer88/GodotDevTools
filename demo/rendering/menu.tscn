@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Theme" path="res://demo/rendering/ui_theme.tres" id="1_theme"]
+
+[node name="Menu" type="Control"]
+theme = ExtResource("1_theme")
+
+[node name="Bg" type="ColorRect" parent="."]
+color = Color(0.113725, 0.168627, 0.32549, 1)
+
+[node name="Accent" type="ColorRect" parent="."]
+color = Color(0.2, 0.8, 0.95, 1)
+
+[node name="Title" type="Label" parent="."]
+theme_override_colors/font_color = Color(1, 0.945098, 0.909804, 1)
+theme_override_font_sizes/font_size = 48
+
+[node name="Subtitle" type="Label" parent="."]
+theme_override_font_sizes/font_size = 31
+
+[node name="Play" type="Button" parent="."]
+theme_type_variation = &"PrimaryButton"
+theme_override_font_sizes/font_size = 22
+
+[node name="Quit" type="Button" parent="."]
+theme_override_font_sizes/font_size = 21
+
+[node name="Credits" type="Label" parent="."]
+theme_override_font_sizes/font_size = 13
+
+[node name="Version" type="Label" parent="."]
+theme_override_font_sizes/font_size = 11
+
+[node name="Hint" type="Label" parent="."]
+theme_override_font_sizes/font_size = 17
+theme_override_constants/outline_size = 2
