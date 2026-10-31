@@ -100,11 +100,11 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 - [ ] **Audio Import Settings Auditor** (in progress) — `addons/audio_import`: loop flags and compression mode against clip length and role. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Texture Atlas Packing Planner** (in progress) — `addons/atlas_planner`: shelf-pack sprite sizes into atlas pages; waste and page count. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Texture Filter Consistency Checker** (in progress) — `addons/texture_filter`: pixel-art folders with filtering or mipmaps on, and the reverse. Godot 4.3 headless suite and CLI gate passed; editor session pending.
-- [ ] **Mesh Statistics Report** — vertex, index and primitive counts from glTF JSON against budgets.
-- [ ] **3D Light and Shadow Cost Estimator** — shadow-casting lights and omni/spot counts per scene.
-- [ ] **Environment Feature Cost Matrix** — WorldEnvironment features enabled per scene against target tiers.
-- [ ] **Colour Palette Consistency Checker** — colours in themes and scenes against an approved palette (delta E).
-- [ ] **Theme Resource Auditor** — theme override sprawl, inconsistent font sizes, unused theme types.
+- [ ] **Mesh Statistics Report** (in progress) — `addons/mesh_stats`: vertex, index and primitive counts from glTF JSON against budgets. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **3D Light and Shadow Cost Estimator** (in progress) — `addons/light_cost`: shadow-casting lights and omni/spot counts per scene. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Environment Feature Cost Matrix** (in progress) — `addons/env_cost`: WorldEnvironment features enabled per scene against target tiers. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Colour Palette Consistency Checker** (in progress) — `addons/palette_check`: colours in themes and scenes against an approved palette (delta E). Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Theme Resource Auditor** (in progress) — `addons/theme_audit`: theme override sprawl, inconsistent font sizes, unused theme types. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 
 ## Expansion - testing, CI and reliability
 

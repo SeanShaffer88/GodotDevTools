@@ -85,6 +85,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Audio Import Settings Auditor | Audio `.import` loop and compression settings against clip role (music/sfx folder patterns) and WAV length. | `addons/audio_import` |
 | Texture Atlas Packing Planner | Shelf-packs sprite sizes (from PNG headers or a JSON list) into atlas pages; page count, waste, oversize sprites. | `addons/atlas_planner` |
 | Texture Filter Consistency Checker | Pixel-art texture imports (by folder pattern) checked for mipmaps and lossy compression, plus the project default canvas filter. | `addons/texture_filter` |
+| Mesh Statistics Report | Triangles, vertices, primitives and materials per glTF/GLB file from accessor counts, against budgets. | `addons/mesh_stats` |
+| 3D Light and Shadow Cost Estimator | Omni, spot and directional lights per scene (instanced scenes followed), shadow casters, against budgets and renderer limits. | `addons/light_cost` |
+| Environment Feature Cost Matrix | Environment features enabled per scene/resource (SDFGI, SSR, SSAO, SSIL, volumetric fog, glow...) with relative cost tiers and Compatibility-renderer support. | `addons/env_cost` |
+| Colour Palette Consistency Checker | Colour literals in scenes, resources and scripts compared with an approved palette by CIE76 delta E. | `addons/palette_check` |
+| Theme Resource Auditor | Theme override counts per scene, distinct and near-duplicate font sizes, and theme type variations no scene uses. | `addons/theme_audit` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -227,6 +232,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `audio_import/cli/aia_cli.gd` | `--dir` `--music-pattern` `--sfx-pattern` `--max-wav-seconds` `--fail-on` |
 | `atlas_planner/cli/atp_cli.gd` | `--input` `--page-size` `--padding` `--max-pages` `--max-waste` `--fail-on` |
 | `texture_filter/cli/tfc_cli.gd` | `--dir` `--pixel-pattern` `--project` `--fail-on` |
+| `mesh_stats/cli/msr_cli.gd` | `--dir` `--max-triangles` `--max-materials` `--fail-on` |
+| `light_cost/cli/lsc_cli.gd` | `--dir` `--max-shadowed` `--max-lights` `--renderer` `--fail-on` |
+| `env_cost/cli/ecm_cli.gd` | `--dir` `--max-cost` `--renderer` `--fail-on` |
+| `palette_check/cli/pcc_cli.gd` | `--dir` `--palette` `--fail-on` |
+| `theme_audit/cli/tra_cli.gd` | `--dir` `--max-overrides` `--max-font-sizes` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 

@@ -117,7 +117,12 @@ jobs:
             audio_levels:AudioLevels \
             audio_import:AudioImport \
             atlas_planner:AtlasPlanner \
-            texture_filter:TextureFilter
+            texture_filter:TextureFilter \
+            mesh_stats:MeshStats \
+            light_cost:LightCost \
+            env_cost:EnvCost \
+            palette_check:PaletteCheck \
+            theme_audit:ThemeAudit
           do
             folder="${pair%%:*}"
             name="${pair##*:}"
