@@ -142,6 +142,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Scene Review Snapshot Generator | Reproducible scene inventory (nodes, types, scripts, instances, stored properties) as JSON, and a node/property diff against another version. | `addons/scene_snapshot` |
 | Node Property Drift Monitor | Per node type and property, the dominant stored value across scenes; outliers drifting from it, or deviations from a committed baseline. | `addons/property_drift` |
 | Art-to-Engine Handoff Validator | glTF/GLB handoff checks: unapplied node scale, implausible bounds, default material/animation names, missing UVs for textured materials, unknown -col style suffixes. | `addons/art_handoff` |
+| Gameplay Scenario Test Builder | JSON gameplay scenarios (wait, press/release actions, call, set, assert) run headless against an instanced scene, one step per physics frame. | `addons/scenario_tests` |
+| Crash and Error Reproduction Packager | Local bug-report bundle: redacted log (emails, IPs, tokens, user paths), engine/OS details, repro steps and a manifest, optionally zipped. Never uploads. | `addons/crash_packager` |
+| Save Corruption and Recovery Tester | Corrupted variants of a sample JSON save (truncated, empty, wrong root, wrong types, missing keys, extreme numbers) fed to your loader; accepted-invalid and no-fallback cases reported. | `addons/save_corruption` |
+| Property-Based Gameplay Tester | Seeded random and edge inputs for pure static functions, properties as expressions, failures shrunk to minimal counterexamples. | `addons/property_tests` |
+| Resource Load Failure Simulator | Runtime `load()` results used without null checks, chained `load().instantiate()`, missing literal paths, threaded loads without status checks. | `addons/load_failure` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -341,6 +346,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `scene_snapshot/cli/ssg_cli.gd` | `--scene` `--compare` `--fail-on` |
 | `property_drift/cli/npd_cli.gd` | `--dir` `--baseline` `--min-nodes` `--majority` `--fail-on` |
 | `art_handoff/cli/aeh_cli.gd` | `--dir` `--min-size` `--max-size` `--fail-on` |
+| `scenario_tests/cli/gsb_cli.gd` | `--scenario` `--fail-on` |
+| `crash_packager/cli/crp_cli.gd` | `--log` `--steps` `--zip` `--max-log-bytes` `--fail-on` |
+| `save_corruption/cli/scr_cli.gd` | `--save` `--loader` `--allow-null` `--fail-on` |
+| `property_tests/cli/pbt_cli.gd` | `--input` `--runs` `--fail-on` |
+| `load_failure/cli/rlf_cli.gd` | `--dir` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 

@@ -174,7 +174,12 @@ jobs:
             cleanup_workbench:CleanupWorkbench \
             scene_snapshot:SceneSnapshot \
             property_drift:PropertyDrift \
-            art_handoff:ArtHandoff
+            art_handoff:ArtHandoff \
+            scenario_tests:ScenarioTests \
+            crash_packager:CrashPackager \
+            save_corruption:SaveCorruption \
+            property_tests:PropertyTests \
+            load_failure:LoadFailures
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

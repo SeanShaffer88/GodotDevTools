@@ -1,0 +1,4 @@
+{"script": "res://demo/testing/props/angles.gd", "seed": 7, "runs": 200, "tests": [
+  {"function": "wrap_degrees", "args": [{"type": "int", "min": -100000, "max": 100000}], "properties": ["result >= 0", "result < 360"]},
+  {"function": "clamp_hp", "args": [{"type": "int", "min": -5000, "max": 5000}, {"type": "int", "min": 1, "max": 1000}], "properties": ["result >= 0", "result <= args[1]"]}
+]}

@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp smc pcw ssg npd aeh; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp smc pcw ssg npd aeh gsb crp scr pbt rlf; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -340,4 +340,16 @@ gate "drift monitor flags the odd label" \
   res://addons/property_drift/cli/npd_cli.gd -- --dir=res://demo/workflow/drift --fail-on=property_outlier
 gate "handoff validator flags the unapplied scale" \
   res://addons/art_handoff/cli/aeh_cli.gd -- --dir=res://demo/workflow/handoff --fail-on=unapplied_scale
+gate "scenario runner catches the wrong assertion" \
+  res://addons/scenario_tests/cli/gsb_cli.gd -- --scenario=res://demo/testing/scenario/hold_and_add.json --fail-on=assertion_failed
+echo "== crash packager writes a redacted bundle =="
+"$GODOT" --headless --path . --script res://addons/crash_packager/cli/crp_cli.gd -- --log=res://demo/testing/crash/godot.log --steps=res://demo/testing/crash/steps.txt
+test -s reports/crash_packager/log_redacted.txt
+if grep -q "alice" reports/crash_packager/log_redacted.txt; then echo "FAIL: personal data left in package"; exit 1; fi
+gate "save corruption tester catches the naive loader" \
+  res://addons/save_corruption/cli/scr_cli.gd -- --save=res://demo/testing/saves/sample.json --loader=res://demo/testing/saves/naive_loader.gd --fail-on=accepted_invalid
+gate "property tester finds the negative angle" \
+  res://addons/property_tests/cli/pbt_cli.gd -- --input=res://demo/testing/props/spec.json --fail-on=property_failed
+gate "load failure simulator flags the unchecked level load" \
+  res://addons/load_failure/cli/rlf_cli.gd -- --dir=res://demo/testing/loads --fail-on=unchecked_load,missing_resource
 echo "ALL GATE CHECKS PASSED"

@@ -1,0 +1,9 @@
+{"scene": "res://demo/testing/scenario/counter.tscn", "steps": [
+  {"action": "ui_accept", "press": true},
+  {"frames": 6},
+  {"action": "ui_accept", "press": false},
+  {"assert": {"node": ".", "property": "count", "op": ">=", "value": 5}},
+  {"call": {"node": ".", "method": "add", "args": [10]}},
+  {"assert": {"node": ".", "property": "count", "op": ">=", "value": 15}},
+  {"assert": {"node": ".", "property": "count", "op": "==", "value": 999}}
+]}

@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Gameplay Scenario Test Builder (`scenario_tests`): JSON gameplay scenarios (wait, press/release actions, call, set, assert) run headless against an instanced scene, one step per physics frame. Dock, CLI, fixture and test suite.
+- Crash and Error Reproduction Packager (`crash_packager`): Local bug-report bundle: redacted log (emails, IPs, tokens, user paths), engine/OS details, repro steps and a manifest, optionally zipped. Never uploads. Dock, CLI, fixture and test suite.
+- Save Corruption and Recovery Tester (`save_corruption`): Corrupted variants of a sample JSON save (truncated, empty, wrong root, wrong types, missing keys, extreme numbers) fed to your loader; accepted-invalid and no-fallback cases reported. Dock, CLI, fixture and test suite.
+- Property-Based Gameplay Tester (`property_tests`): Seeded random and edge inputs for pure static functions, properties as expressions, failures shrunk to minimal counterexamples. Dock, CLI, fixture and test suite.
+- Resource Load Failure Simulator (`load_failure`): Runtime `load()` results used without null checks, chained `load().instantiate()`, missing literal paths, threaded loads without status checks. Dock, CLI, fixture and test suite.
 - Scene Merge Conflict Assistant (`merge_conflicts`): Git conflict hunks in scene/resource/project text explained by section, node and property (property clashes, ext_resource id collisions, load_steps); read-only. Dock, CLI, fixture and test suite.
 - Project Cleanup Workbench (`cleanup_workbench`): Review list of unreferenced assets, duplicate files (MD5), stale .import/.uid sidecars and empty folders; never deletes. Dock, CLI, fixture and test suite.
 - Scene Review Snapshot Generator (`scene_snapshot`): Reproducible scene inventory (nodes, types, scripts, instances, stored properties) as JSON, and a node/property diff against another version. Dock, CLI, fixture and test suite.
