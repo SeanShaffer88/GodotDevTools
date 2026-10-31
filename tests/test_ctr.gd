@@ -43,7 +43,7 @@ func _init() -> void:
     _check("finish-less harness flagged (gate kind)", _kinds(demo["issues"]).has("no_finish"), str(demo["issues"]))
     var plan_ok := false
     for row in demo["plan"]:
-        if str(row["path"]) == "res://demo/tests/sample_pass.gd" and (row["command"] as Array).has("--script"):
+        if str(row["path"]) == "res://demo/tests/test_pass.gd" and (row["command"] as Array).has("--script"):
             plan_ok = true
     _check("plan builds a headless command per harness file", plan_ok, str(demo["plan"]))
     var verdict: Dictionary = op.classify_check_output("WARNING: something\n", 0)
