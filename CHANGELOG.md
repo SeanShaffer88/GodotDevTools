@@ -12,6 +12,7 @@ All notable changes to GodotDevTools are recorded here. The format follows
 - **Visual Regression - one-click capture runner** (was the top roadmap item): `core/vrt_capture.gd` plans scene x resolution captures, instantiates each scene in an offscreen `SubViewport`, lets it settle, and saves `<scene>__<width>x<height>.png` into the capture folder the compare run reads. The dock has a Capture section (scene list, output folder, Capture now). The live pass needs a renderer, so it runs in the editor or a game window, never headless; the pure plan/path/report parts are test-covered.
 - **Dialogue and Quest - drawn node-graph view** (was the second roadmap item): `core/dqd_layout.gd` computes a deterministic layered layout (BFS depth from the start, ghost boxes for missing targets, unreachable nodes parked below the deepest layer, issue flags from `analyse()`); the dock paints it in a scrollable pane with start/end/warning/ghost colouring and `[if]` tags on conditional choices.
 - `CHANGELOG.md`, `CONTRIBUTING.md`, issue templates and a pull-request template.
+- `AI_USAGE.md`: repo-aware guide for AI agents - a pasteable project prompt (where the tools are, what to inspect first, how to apply them), the exact file map with links, the demo-fixture index, the full CLI reference taken from the code (defaults, fail-on kinds, exit codes), and the rules for changing the repo. Linked from the README.
 - Tests: 11 new checks (VRT 12 -> 16, DQD 15 -> 22); the suite total is now 104.
 
 ### Changed
