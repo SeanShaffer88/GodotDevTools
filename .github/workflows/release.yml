@@ -47,6 +47,7 @@ jobs:
             network_sim:NetworkSim \
             prefab_guard:PrefabGuard \
             proc_anim:ProcAnim \
+            release_guard:ReleaseGuard \
             responsive_ui:ResponsiveUI \
             scene_dependency:SceneDependency \
             scene_search:SceneSearch \
