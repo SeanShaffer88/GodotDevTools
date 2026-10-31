@@ -13,16 +13,16 @@ and documentation disagree, the code wins and the docs get fixed.
 ## The prompt (copy everything inside the box)
 
 ```text
-You are working with GodotDevTools: twenty-nine independent developer tools for
+You are working with GodotDevTools: thirty independent developer tools for
 Godot 4 games, in a repo that is itself a Godot demo/test project. Everything
 is offline, deterministic, MIT-licensed GDScript with no third-party
-dependencies. Godot 4.3-stable and 4.5-stable are CI-verified; no other
-version may be claimed without a test run.
+dependencies. The previous 29-tool baseline passed CI on Godot 4.3-stable and 4.5-stable;
+run the current full gate before claiming the new addon is verified.
 
 WHERE THE TOOLS ARE
 - addons/<tool>/ for: accessibility, asset_health, dialogue_quest,
   export_doctor, network_sim, responsive_ui, scene_search, time_machine,
-  visual_regression and the twenty additional addons listed in README.md.
+  visual_regression and the additional addons listed in README.md.
   Each folder is independently installable.
 - Inside each tool: plugin.cfg + plugin.gd (editor entry point), core/ (the
   ONE operation - all checking logic, no editor APIs), ui/ (editor dock, a
@@ -78,7 +78,7 @@ RULES THAT MUST NOT BREAK
 ## Where the tools are
 
 Twenty-nine addons, one folder each, no cross-dependencies. The original nine
-are mapped below; see the [root README](README.md) for all twenty-nine.
+are mapped below; see the [root README](README.md) for all thirty.
 
 | Tool (plugin name) | Core - the operation | Dock | CLI | Runtime |
 |---|---|---|---|---|
@@ -108,7 +108,7 @@ Orientation files, cheapest signal first:
    Partially Verified / built-with-status matrix. This bounds what may be
    claimed.
 4. [QUALITY.md](QUALITY.md) - current gate count and scorecard
-   (292/292 checks at the time of writing; the file is the source of truth).
+   (the file is the source of truth).
 5. [CHANGELOG.md](CHANGELOG.md) - what changed recently, under [Unreleased].
 6. [tests/run_tests.sh](tests/run_tests.sh) - the full gate script; reading it
    shows exactly which CLI invocations and exit-code-2 paths are enforced.
@@ -235,7 +235,7 @@ through it; set latency/jitter/loss in the inspector; deliveries arrive on its
 The pattern is: run a CLI, treat exit 2 as failure, archive the reports.
 This repo's own [.github/workflows/tests.yml](.github/workflows/tests.yml) is
 the worked example - it runs [tests/run_tests.sh](tests/run_tests.sh) (import
-check, twenty-nine suites, CLI smokes, and exit-code-2 gate assertions) headless on
+check, thirty suites, CLI smokes, and exit-code-2 gate assertions) headless on
 Godot 4.3-stable and 4.5-stable on pushes to main and pull requests, and uploads
 `reports/` + `visual_reports/` as artifacts. A minimal game-project pipeline:
 
