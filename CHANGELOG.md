@@ -7,6 +7,8 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Started Build Size Attribution Explorer with staged-directory file-size reporting, budgets, a dock, CLI and fixtures.
+
 - Started Feature Flag and Rollout Simulator with deterministic offline bucketing, prerequisite checks, fallback simulation, a dock and CLI.
 
 - Started Performance Regression Gate with baseline comparison, noise tolerances, a dock, headless CLI and fixtures.

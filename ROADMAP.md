@@ -62,7 +62,7 @@ This roadmap captures proposed tools, not a promise that every design is already
 - [ ] **Platform Certification Checklist Runner** — track configurable platform-release requirements.
 - [ ] **Privacy and Permissions Auditor** — inventory permissions, collection points and endpoints for review.
 - [ ] **Offline and Poor-Connection Test Harness** — simulate outages, timeouts and interrupted requests.
-- [ ] **Build Size Attribution Explorer** — attribute exported build size to assets and categories.
+- [ ] **Build Size Attribution Explorer** (in progress) — actual staged-directory file sizes by folder and extension, with budgets; Godot tests and editor verification pending. Archive-internal source attribution remains future work.
 - [ ] **Demo-to-Release Content Guard** (in progress) — flag configurable placeholder and development markers for review; initial static scanner passed the Godot 4.3/4.5 CI gate in PR #4; hands-on editor verification remains.
-- [ ] **Feature Flag and Rollout Simulator** (in progress) — offline deterministic rollout and prerequisite simulation added; Godot tests and editor verification pending.
+- [ ] **Feature Flag and Rollout Simulator** (in progress) — offline deterministic rollout and prerequisite simulation passed Godot 4.3/4.5 CI in PR #9; hands-on editor verification pending.
 - [ ] **Player Telemetry Schema Validator** (in progress) — local event and field checks plus explicit sensitive-field review passed Godot 4.3/4.5 CI in PR #7; hands-on editor verification pending.
