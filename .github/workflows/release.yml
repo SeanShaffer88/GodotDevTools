@@ -150,7 +150,12 @@ jobs:
             report_diff:ReportDiff \
             suppressions:Suppressions \
             suite_dispatcher:SuiteDispatcher \
-            precommit:Precommit
+            precommit:Precommit \
+            shader_variants:ShaderVariants \
+            lod_planner:LODPlanner \
+            anim_audit:AnimAudit \
+            render_compat:RenderCompat \
+            overdraw:Overdraw
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

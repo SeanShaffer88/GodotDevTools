@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://demo/rendering/terrain.gltf" id="1_terrain"]
+
+[node name="City" type="Node3D"]
+
+[node name="Tower" type="MeshInstance3D" parent="."]
+visibility_range_begin = 50.0
+visibility_range_end = 20.0
+
+[node name="Tree" type="MeshInstance3D" parent="."]
+visibility_range_end = 120.0
+
+[node name="Terrain" parent="." instance=ExtResource("1_terrain")]

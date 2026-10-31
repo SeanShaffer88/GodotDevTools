@@ -5,15 +5,15 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 ## Performance and rendering
 
 - [ ] **Frame-Time Spike Investigator** — correlate frame spikes with scene changes, node counts, physics and markers.
-- [ ] **GPU Budget and Overdraw Analyzer** — highlight overdraw and estimate fill-rate pressure at target resolutions.
+- [ ] **GPU Budget and Overdraw Analyzer** (in progress) — `addons/overdraw`: highlight overdraw and estimate fill-rate pressure at target resolutions. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Texture Memory and Streaming Planner** (in progress) — Asset Health now totals source-side uncompressed estimates with an optional budget; platform-specific formats, actual streaming and hardware verification remain future work.
-- [ ] **Shader Variant Budget Manager** — inventory shader variants and flag compilation and memory risks.
+- [ ] **Shader Variant Budget Manager** (in progress) — `addons/shader_variants`: inventory shader variants and flag compilation and memory risks. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Startup and Scene-Load Profiler** — break down startup and transition costs.
 - [ ] **Object Pool Advisor** (in progress) — `addons/pool_advisor`: scores instantiate() sites (per-frame, repeating, looped, self-freeing) and merges optional recorded spawn counts from a runtime counter; Godot 4.3 headless suite passed, editor and live-game sessions pending.
-- [ ] **LOD and Visibility Range Planner** — flag missing LODs and problematic visibility distances.
+- [ ] **LOD and Visibility Range Planner** (in progress) — `addons/lod_planner`: flag missing LODs and problematic visibility distances. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Particle Budget Inspector** (in progress) — `addons/particle_budget`: static per-scene capacity (amount x amount_ratio, instanced children followed) against scene/emitter/CPU/preprocess budgets; Godot 4.3 headless suite passed, editor session pending.
-- [ ] **Animation Performance Auditor** — identify excessive tracks, redundant keys and invisible updates.
-- [ ] **Rendering Settings Compatibility Matrix** — compare features and fallbacks across renderers and targets.
+- [ ] **Animation Performance Auditor** (in progress) — `addons/anim_audit`: identify excessive tracks, redundant keys and invisible updates. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Rendering Settings Compatibility Matrix** (in progress) — `addons/render_compat`: compare features and fallbacks across renderers and targets. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 
 ## Physics, navigation and gameplay
 

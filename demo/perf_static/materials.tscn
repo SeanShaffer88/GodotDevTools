@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3]
+
+[sub_resource type="StandardMaterial3D" id="M1"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="M2"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="M3"]
+transparency = 1
+emission_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="M4"]
+normal_enabled = true
+rim_enabled = true
+
+[sub_resource type="ORMMaterial3D" id="M5"]
+normal_enabled = true
+rim_enabled = true
+
+[node name="Props" type="Node3D"]
