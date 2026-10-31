@@ -157,6 +157,11 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Procedural Generation Constraint Tester: flood-fill constraints over generated maps | procgen_constraints core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Controller Glyph and Prompt Validator: prompt tokens vs actions, bindings and glyphs | controller_glyphs core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Color-Vision and Contrast Previewer: CVD simulation of palette pairs | colorvision core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Scene Merge Conflict Assistant: conflict hunks explained by node and property | merge_conflicts core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Project Cleanup Workbench: candidate list for manual cleanup | cleanup_workbench core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Scene Review Snapshot Generator: scene inventory and diff | scene_snapshot core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Node Property Drift Monitor: convention outliers and baseline deviations | property_drift core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Art-to-Engine Handoff Validator: glTF export hygiene | art_handoff core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |

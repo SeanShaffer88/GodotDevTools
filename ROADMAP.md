@@ -31,15 +31,15 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 ## Content and workflow
 
 - [ ] **Scene Change Impact Analyzer** (in progress) — reverse dependency walk added to Scene Dependency Map; Godot 4.3/4.5 CI passed; hands-on editor verification pending.
-- [ ] **Scene Merge Conflict Assistant** — explain scene conflicts by node and property without silently rewriting files.
+- [ ] **Scene Merge Conflict Assistant** (in progress) — `addons/merge_conflicts`: explain scene conflicts by node and property without silently rewriting files. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Resource Rename and Reference Assistant** (in progress) — read-only direct reference and transitive impact preview added; no automated rename, Godot 4.3/4.5 CI passed; hands-on editor verification pending.
 - [ ] **Asset Import Preset Auditor** (in progress) — optional importer-specific preset checks added to Asset Health; Godot 4.3/4.5 CI passed; hands-on editor verification pending.
-- [ ] **Project Cleanup Workbench** — collect unused candidates, duplicates and stale imports for review.
+- [ ] **Project Cleanup Workbench** (in progress) — `addons/cleanup_workbench`: collect unused candidates, duplicates and stale imports for review. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Naming and Folder Convention Enforcer** (in progress) — file/folder checks passed Godot 4.3/4.5 CI in PR #5; opt-in static node, signal and group checks added, Godot 4.3/4.5 CI passed, hands-on editor verification pending.
-- [ ] **Scene Review Snapshot Generator** — generate reproducible scene inventories and diffs.
+- [ ] **Scene Review Snapshot Generator** (in progress) — `addons/scene_snapshot`: generate reproducible scene inventories and diffs. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Editor Action Macro Recorder** — record and preview repeatable editor actions with undo support.
-- [ ] **Node Property Drift Monitor** — compare node properties against team baselines.
-- [ ] **Art-to-Engine Handoff Validator** — check model scale, orientation, materials, animation and collisions.
+- [ ] **Node Property Drift Monitor** (in progress) — `addons/property_drift`: compare node properties against team baselines. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Art-to-Engine Handoff Validator** (in progress) — `addons/art_handoff`: check model scale, orientation, materials, animation and collisions. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 
 ## Testing and reliability
 

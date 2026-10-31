@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[node name="Level" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(100, 250)
+
+[node name="Camera" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)
+
+[node name="Coin" type="Area2D" parent="."]
