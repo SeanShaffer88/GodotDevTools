@@ -49,14 +49,14 @@ func ease_value(ease_name: String, t: float) -> float:
         "out_quad":
             return 1.0 - (1.0 - x) * (1.0 - x)
         "in_out_cubic":
-            return 4.0 * x * x * x if x < 0.5 else 1.0 - powf(-2.0 * x + 2.0, 3.0) / 2.0
+            return 4.0 * x * x * x if x < 0.5 else 1.0 - pow(-2.0 * x + 2.0, 3.0) / 2.0
         "out_back":
             var c := 1.70158 + 1.0
-            return 1.0 + c * powf(x - 1.0, 3.0) + 1.70158 * powf(x - 1.0, 2.0)
+            return 1.0 + c * pow(x - 1.0, 3.0) + 1.70158 * pow(x - 1.0, 2.0)
         "out_elastic":
             if x == 0.0 or x == 1.0:
                 return x
-            return powf(2.0, -10.0 * x) * sin((x * 10.0 - 0.75) * (TAU / 3.0)) + 1.0
+            return pow(2.0, -10.0 * x) * sin((x * 10.0 - 0.75) * (TAU / 3.0)) + 1.0
     return x
 
 
