@@ -110,6 +110,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Settings File Validator | Player settings files (ConfigFile or JSON) against a schema: unknown keys, wrong types, out-of-range and disallowed values. | `addons/settings_validator` |
 | Accessibility Options Coverage | Keyword evidence in scripts, scenes and data that expected accessibility options exist (subtitles, remapping, text size, colour-blind modes, reduced motion, mono audio, hold/toggle). | `addons/a11y_options` |
 | Handheld Readiness Checklist | Stretch mode, text size scaled to a target screen height, actions without gamepad bindings, and buttons that cannot take focus. | `addons/handheld_readiness` |
+| Report Schema | Documented JSON Schema for tool reports (summary + issues with severity/kind/message) and a validator for report folders. | `addons/report_schema` |
+| SARIF Exporter | Converts every tool report in a folder into one SARIF 2.1.0 log (one run per tool) for code-scanning views. | `addons/sarif_export` |
+| JUnit Exporter | Converts tool reports into JUnit XML: one suite per tool, one test case per finding kind, failures carrying each finding. | `addons/junit_export` |
+| Static HTML Dashboard | One self-contained offline HTML page: per-tool counts by severity and every finding, filterable, light and dark. | `addons/html_dashboard` |
+| Report Diff | Two report folders compared: new, fixed and unchanged findings, matched by tool, kind, path and message so moved lines still match. | `addons/report_diff` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -277,6 +282,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `settings_validator/cli/ssv_cli.gd` | `--dir` `--schema` `--fail-on` |
 | `a11y_options/cli/aoc_cli.gd` | `--dir` `--expect` `--fail-on` |
 | `handheld_readiness/cli/hrc_cli.gd` | `--dir` `--project` `--target-height` `--min-text-px` `--fail-on` |
+| `report_schema/cli/rsv_cli.gd` | `--reports` `--fail-on` |
+| `sarif_export/cli/srf_cli.gd` | `--reports` `--fail-on` |
+| `junit_export/cli/jux_cli.gd` | `--reports` `--fail-level` `--fail-on` |
+| `html_dashboard/cli/hdb_cli.gd` | `--reports` `--title` `--fail-on` |
+| `report_diff/cli/rdf_cli.gd` | `--before` `--after` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 

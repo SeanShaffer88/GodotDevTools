@@ -1,0 +1,15 @@
+{
+ "summary": {
+  "issues": 1
+ },
+ "issues": [
+  {
+   "severity": "warning",
+   "kind": "broken_path",
+   "path": "res://player.gd",
+   "line": 16,
+   "message": "`$Weapon/Muzzle` does not resolve.",
+   "fix": "Fix it."
+  }
+ ]
+}

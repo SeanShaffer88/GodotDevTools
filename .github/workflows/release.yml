@@ -142,7 +142,12 @@ jobs:
             patch_delta:PatchDelta \
             settings_validator:SettingsValidator \
             a11y_options:A11yOptions \
-            handheld_readiness:HandheldReadiness
+            handheld_readiness:HandheldReadiness \
+            report_schema:ReportSchema \
+            sarif_export:SARIFExport \
+            junit_export:JUnitExport \
+            html_dashboard:HTMLDashboard \
+            report_diff:ReportDiff
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

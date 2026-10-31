@@ -1,0 +1,23 @@
+{
+ "summary": {
+  "issues": 2
+ },
+ "issues": [
+  {
+   "severity": "warning",
+   "kind": "broken_path",
+   "path": "res://player.gd",
+   "line": 17,
+   "message": "`$Weapon/Muzzle` does not resolve.",
+   "fix": "Fix it."
+  },
+  {
+   "severity": "error",
+   "kind": "scan_error",
+   "path": "res://locked.tscn",
+   "line": 0,
+   "message": "Cannot read file.",
+   "fix": "Fix it."
+  }
+ ]
+}

@@ -130,6 +130,11 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Settings File Validator: schema validation of settings files | settings_validator core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Accessibility Options Coverage: keyword evidence of expected player options | a11y_options core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Handheld Readiness Checklist: stretch, scaled text size, gamepad bindings, focus | handheld_readiness core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Report Schema: JSON Schema document plus validator | report_schema core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| SARIF Exporter: reports to SARIF 2.1.0 | sarif_export core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| JUnit Exporter: reports to JUnit XML | junit_export core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Static HTML Dashboard: offline single-page report summary | html_dashboard core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Report Diff: new/fixed/unchanged findings between two runs | report_diff core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |
