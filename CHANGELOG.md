@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Node Path Breakage Detector (`node_paths`): Resolve `$Path`, `get_node("...")` and `%Unique` strings against every scene tree that uses the script, following instanced scenes. Dock, CLI, fixture and test suite.
+- Unused Signal and Method Finder (`unused_symbols`): Find signals never emitted or connected and functions referenced nowhere in scripts or scene connections. Dock, CLI, fixture and test suite.
+- Typed GDScript Coverage Meter (`type_coverage`): Share of variables, parameters and return values with static types, per file and project, with a minimum-percentage gate. Dock, CLI, fixture and test suite.
+- Script Complexity Reporter (`script_complexity`): Per-function branch complexity, length and nesting depth with configurable thresholds. Dock, CLI, fixture and test suite.
+- Duplicate Code Detector (`duplicate_code`): Normalized line-window clone detection across GDScript files, merged into the longest repeated blocks. Dock, CLI, fixture and test suite.
 - Roadmap expanded from 50 to 110 proposed tools and components: sixty new entries across editor productivity, gameplay balance, rendering/audio/assets, testing/CI, shipping, and optional shared components (report schema, exporters, dispatcher, CI action, native accelerator research).
 - Particle Budget Inspector (`particle_budget`): static per-scene particle capacity with instanced children followed, against scene, emitter, CPU-emitter and preprocess budgets; dock, CLI, fixture and 17-check suite.
 - Object Pool Advisor (`pool_advisor`): scores `instantiate()` sites as pool candidates, merges optional recorded spawn counts, and ships a runtime spawn counter node; dock, CLI, fixture and 18-check suite.

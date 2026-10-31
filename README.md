@@ -60,6 +60,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Regression Test Prioritizer | Rank tests using explicit mappings and an optional static dependency graph. | `addons/test_priority` |
 | Particle Budget Inspector | Total particle capacity per scene (amount x amount_ratio, instanced children followed) against scene, emitter, CPU and preprocess budgets. | `addons/particle_budget` |
 | Object Pool Advisor | Rank instantiate() sites as pool candidates (per-frame, repeating, looped, self-freeing); optional recorded spawn counts from a runtime counter. | `addons/pool_advisor` |
+| Node Path Breakage Detector | Resolve `$Path`, `get_node("...")` and `%Unique` strings against every scene tree that uses the script, following instanced scenes. | `addons/node_paths` |
+| Unused Signal and Method Finder | Find signals never emitted or connected and functions referenced nowhere in scripts or scene connections. | `addons/unused_symbols` |
+| Typed GDScript Coverage Meter | Share of variables, parameters and return values with static types, per file and project, with a minimum-percentage gate. | `addons/type_coverage` |
+| Script Complexity Reporter | Per-function branch complexity, length and nesting depth with configurable thresholds. | `addons/script_complexity` |
+| Duplicate Code Detector | Normalized line-window clone detection across GDScript files, merged into the longest repeated blocks. | `addons/duplicate_code` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -177,6 +182,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 ```
 | `particle_budget/cli/pbi_cli.gd` | `--dir` `--max-scene` `--max-emitter` `--max-cpu-emitter` `--max-preprocess` `--fail-on` |
 | `pool_advisor/cli/opa_cli.gd` | `--dir` `--counts` `--min-score` `--rate-threshold` `--fail-on` |
+| `node_paths/cli/npb_cli.gd` | `--dir` `--report-unattached` `--fail-on` |
+| `unused_symbols/cli/usf_cli.gd` | `--dir` `--include-private` `--fail-on` |
+| `type_coverage/cli/tcm_cli.gd` | `--dir` `--min-percent` `--fail-on` |
+| `script_complexity/cli/scx_cli.gd` | `--dir` `--max-complexity` `--max-lines` `--max-nesting` `--fail-on` |
+| `duplicate_code/cli/dup_cli.gd` | `--dir` `--min-lines` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 
