@@ -1,0 +1,1 @@
+{"flags":{"core":{"default":true,"rollout":100},"shop":{"default":false,"rollout":50,"requires":["core"]},"broken":{"default":false,"rollout":100,"requires":["not_defined"]}}}

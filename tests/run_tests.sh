@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -115,4 +115,8 @@ test -s reports/telemetry_schema/telemetry_schema.json
 gate "performance gate detects the slower fixture" \
   res://addons/performance_gate/cli/perf_cli.gd -- --baseline=res://demo/performance/baseline.json --current=res://demo/performance/current.json --fail-on=regression
 test -s reports/performance_gate/performance_gate.json
+gate "flag simulator detects unknown prerequisites" \
+  res://addons/flag_simulator/cli/flag_cli.gd -- --config=res://demo/flags/flags.json --fail-on=errors
+test -s reports/flag_simulator/flag_simulator.json
+"$GODOT" --headless --path . --script res://addons/flag_simulator/cli/flag_cli.gd -- --config=res://demo/flags/clean.json --unavailable
 echo "ALL GATE CHECKS PASSED"

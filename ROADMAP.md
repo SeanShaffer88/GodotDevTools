@@ -52,7 +52,7 @@ This roadmap captures proposed tools, not a promise that every design is already
 - [ ] **Resource Load Failure Simulator** — test fallbacks for missing, invalid or delayed resources.
 - [ ] **Pause, Focus, and Lifecycle Tester** — exercise pause, focus, resize and suspend/resume.
 - [ ] **Screenshot Baseline Review Queue** — review visual changes with metadata and approval history.
-- [ ] **Performance Regression Gate** (in progress) — compares scalar benchmark measurements against baselines with absolute/relative noise tolerances; Godot tests and editor verification pending.
+- [ ] **Performance Regression Gate** (in progress) — scalar baseline comparison with absolute/relative noise tolerances passed Godot 4.3/4.5 CI in PR #8; hands-on editor verification pending.
 
 ## Shipping, accessibility and live operations
 
@@ -64,5 +64,5 @@ This roadmap captures proposed tools, not a promise that every design is already
 - [ ] **Offline and Poor-Connection Test Harness** — simulate outages, timeouts and interrupted requests.
 - [ ] **Build Size Attribution Explorer** — attribute exported build size to assets and categories.
 - [ ] **Demo-to-Release Content Guard** (in progress) — flag configurable placeholder and development markers for review; initial static scanner passed the Godot 4.3/4.5 CI gate in PR #4; hands-on editor verification remains.
-- [ ] **Feature Flag and Rollout Simulator** — test flag combinations and unavailable configuration.
+- [ ] **Feature Flag and Rollout Simulator** (in progress) — offline deterministic rollout and prerequisite simulation added; Godot tests and editor verification pending.
 - [ ] **Player Telemetry Schema Validator** (in progress) — local event and field checks plus explicit sensitive-field review passed Godot 4.3/4.5 CI in PR #7; hands-on editor verification pending.
