@@ -27,3 +27,19 @@ Run the CLI with no options once for a default report; each CLI writes JSON + Ma
 ## How it works
 
 The work lives in one core operation under `core/` with no editor-only APIs, so the editor dock, the CLI and the tests all run exactly the same check. The dock and CLI add no logic of their own.
+
+## Screenshot review queue
+
+Generate a review queue alongside the visual report with `--review-queue`:
+
+```sh
+godot --headless --path . --script res://addons/visual_regression/cli/vrt_cli.gd -- \
+  --baseline=res://demo/visual/baselines --current=res://demo/visual/current --review-queue
+godot --headless --path . --script res://addons/visual_regression/cli/vrt_review_cli.gd -- \
+  --queue=res://visual_reports/review_queue.json --out=res://visual_reports/review_decided.json \
+  --name=menu__320x240.png --decision=approved --reviewer=reviewer --note="Reviewed change"
+```
+
+The queue lists non-passing comparisons with SHA-256 fingerprints. Missing or unreadable captures are blocked. Recording an `approved` or `rejected` decision requires a reviewer and rechecks both images against their recorded fingerprints; a changed image requires a new queue. A decision appends reviewer, note, timestamp and fingerprints to the item's history in a **new, distinct JSON file**. To add another decision, use that file as the next `--queue` and choose another `--out` file. The dock displays the number of review items; inspect the screenshots and highlights separately.
+
+**A review decision is metadata only.** It never copies or changes baselines. The existing manual approval process remains separate; recheck file hashes before any later promotion. Queue files are editable local JSON, not tamper-proof or identity-verified audit records. History lasts only if the output files are preserved; regenerating a queue starts a new history. New review features and the dock require Godot CI and hands-on editor verification.

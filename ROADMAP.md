@@ -51,7 +51,7 @@ This roadmap captures proposed tools, not a promise that every design is already
 - [ ] **Property-Based Gameplay Tester** — generate bounded input sequences to check invariants.
 - [ ] **Resource Load Failure Simulator** — test fallbacks for missing, invalid or delayed resources.
 - [ ] **Pause, Focus, and Lifecycle Tester** — exercise pause, focus, resize and suspend/resume.
-- [ ] **Screenshot Baseline Review Queue** — review visual changes with metadata and approval history.
+- [ ] **Screenshot Baseline Review Queue** (in progress) — fingerprinted local review metadata and decision history added to visual regression; Godot CI and hands-on review pending. Baseline promotion remains manual.
 - [ ] **Performance Regression Gate** (in progress) — scalar baseline comparison with absolute/relative noise tolerances passed Godot 4.3/4.5 CI in PR #8; hands-on editor verification pending.
 
 ## Shipping, accessibility and live operations

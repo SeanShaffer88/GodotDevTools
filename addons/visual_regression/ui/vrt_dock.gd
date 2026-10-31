@@ -3,6 +3,7 @@
 extends VBoxContainer
 
 const Baselines := preload("res://addons/visual_regression/core/vrt_baselines.gd")
+const Review := preload("res://addons/visual_regression/core/vrt_review.gd")
 const Capture := preload("res://addons/visual_regression/core/vrt_capture.gd")
 
 var _results: RichTextLabel
@@ -59,6 +60,8 @@ const HELP_TEXT := "Capture: list scene paths (comma-separated; empty = the main
 func _on_run() -> void:
     var result: Dictionary = _run_check()
     _show(result)
+    var queue: Dictionary = Review.new().build(result, "res://visual_baselines", "res://visual_current")
+    _results.text += "\nReview queue: %d item(s); use the CLI to save and record decisions." % queue["items"].size()
 
 
 func _on_capture() -> void:

@@ -7,6 +7,8 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Added fingerprinted screenshot review queues and explicit reviewer decision history to Visual Regression Testing.
+
 - Added optional importer preset checks and aggregate source-texture estimate budgets to Asset Health.
 
 - Added static change-impact analysis and read-only rename previews to Scene Dependency Map.
