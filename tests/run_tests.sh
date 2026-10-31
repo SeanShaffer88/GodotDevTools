@@ -128,6 +128,8 @@ test -s reports/cert_check/cert_check.json
 gate "state coverage reports unvisited transition" \
   res://addons/state_coverage/cli/coverage_cli.gd -- --fail-on=uncovered_transition
 test -s reports/state_coverage/state_coverage.json
+gate "state coverage detects discontinuous trace" \
+  res://addons/state_coverage/cli/coverage_cli.gd -- --first=res://demo/state_coverage/model.json --second=res://demo/state_coverage/discontinuous_trace.json --check-continuity --fail-on=trace_discontinuity
 gate "test prioritizer reports unmapped path" \
   res://addons/test_priority/cli/priority_cli.gd -- --fail-on=unmapped_path
 test -s reports/test_priority/test_priority.json

@@ -1,13 +1,17 @@
 ## Compare declared state transitions with observed transition records.
 extends RefCounted
 
-func analyze(model: Dictionary, trace: Dictionary) -> Dictionary:
+func analyze(model: Dictionary, trace: Dictionary, check_continuity: bool = false) -> Dictionary:
     var issues: Array = []
     var rows: Array = []
     if typeof(model.get("transitions")) != TYPE_ARRAY or typeof(trace.get("transitions")) != TYPE_ARRAY:
         return _result(rows, [_issue("error", "input_error", "input", "Both inputs need transition arrays.")])
     if model["transitions"].is_empty():
         return _result(rows, [_issue("error", "input_error", "model", "Model must contain at least one transition.")])
+    if trace.has("truncated") and typeof(trace["truncated"]) != TYPE_BOOL:
+        return _result(rows, [_issue("error", "input_error", "trace.truncated", "Truncated must be a boolean.")])
+    if bool(trace.get("truncated", false)):
+        issues.append(_issue("warning", "truncated_trace", "trace", "Older transitions were dropped; coverage may be incomplete."))
     var declared := {}
     for index in range(model["transitions"].size()):
         var edge = model["transitions"][index]
@@ -19,11 +23,22 @@ func analyze(model: Dictionary, trace: Dictionary) -> Dictionary:
             issues.append(_issue("error", "duplicate_transition", "model[%d]" % index, "Transition is declared twice."))
         else:
             declared[key] = {"from": edge["from"], "to": edge["to"], "count": 0}
+    var previous_to := ""
+    var have_previous := false
     for index in range(trace["transitions"].size()):
         var edge = trace["transitions"][index]
         if not _valid(edge):
             issues.append(_issue("error", "invalid_transition", "trace[%d]" % index, "Transition requires nonempty string from/to fields."))
+            have_previous = false
             continue
+        if edge.has("reset") and typeof(edge["reset"]) != TYPE_BOOL:
+            issues.append(_issue("error", "invalid_transition", "trace[%d]" % index, "Reset must be a boolean when present."))
+            have_previous = false
+            continue
+        if check_continuity and have_previous and not bool(edge.get("reset", false)) and str(edge["from"]) != previous_to:
+            issues.append(_issue("warning", "trace_discontinuity", "trace[%d]" % index, "Transition does not start at the previous destination."))
+        previous_to = str(edge["to"])
+        have_previous = true
         var key := JSON.stringify([edge["from"], edge["to"]])
         if not declared.has(key):
             issues.append(_issue("warning", "unexpected_transition", "trace[%d]" % index, "Observed transition is not in the model."))
@@ -47,12 +62,12 @@ func _issue(severity: String, kind: String, path: String, message: String) -> Di
 func _result(rows: Array, issues: Array) -> Dictionary:
     return {"summary": {"items": rows.size(), "issues": issues.size()}, "rows": rows, "issues": issues}
 
-func run(first_path: String, second_path: String) -> Dictionary:
+func run(first_path: String, second_path: String, check_continuity: bool = false) -> Dictionary:
     var first := _read(first_path)
     var second := _read(second_path)
     if not first["ok"] or not second["ok"]:
         return _result([], [_issue("error", "input_error", "input", "Both inputs must be readable JSON objects.")])
-    return analyze(first["data"], second["data"])
+    return analyze(first["data"], second["data"], check_continuity)
 
 func _read(path: String) -> Dictionary:
     var file := FileAccess.open(path, FileAccess.READ)
