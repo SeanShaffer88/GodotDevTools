@@ -121,11 +121,11 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 
 ## Expansion - shipping, platform and live operations
 
-- [ ] **Store Asset Validator** — icon and screenshot dimensions against a user-defined store profile.
-- [ ] **Android Permissions Reviewer** — export preset permissions and features listed for human review.
-- [ ] **Version Consistency Checker** — version strings across project settings, export presets and plugin configs.
-- [ ] **Third-Party Notice Collector** — gather license files from addons and assets into a notices report.
-- [ ] **Release Notes Generator** — group conventional-commit messages into draft release notes.
+- [ ] **Store Asset Validator** (in progress) — `addons/store_assets`: icon and screenshot dimensions against a user-defined store profile. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Android Permissions Reviewer** (in progress) — `addons/android_permissions`: export preset permissions and features listed for human review. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Version Consistency Checker** (in progress) — `addons/version_consistency`: version strings across project settings, export presets and plugin configs. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Third-Party Notice Collector** (in progress) — `addons/third_party_notices`: gather license files from addons and assets into a notices report. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Release Notes Generator** (in progress) — `addons/release_notes`: group conventional-commit messages into draft release notes. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Content Descriptor Checklist** — user-defined content questionnaire with recorded answers; no rating claim.
 - [ ] **Patch Delta Estimator** — changed, added and removed bytes between two staged builds.
 - [ ] **Settings File Validator** — user settings files against a schema with defaults and ranges.

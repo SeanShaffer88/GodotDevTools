@@ -132,7 +132,12 @@ jobs:
             warning_baseline:WarningBaseline \
             scene_smoke:SceneSmoke \
             bench_harness:BenchHarness \
-            mutation_tester:MutationTester
+            mutation_tester:MutationTester \
+            store_assets:StoreAssets \
+            android_permissions:AndroidPermissions \
+            version_consistency:VersionCheck \
+            third_party_notices:ThirdPartyNotices \
+            release_notes:ReleaseNotes
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Store Asset Validator (`store_assets`): Store images (PNG/JPEG headers) against a user-written profile: missing files, wrong sizes, screenshot counts. Dock, CLI, fixture and test suite.
+- Android Permissions Reviewer (`android_permissions`): Permissions requested by each Android export preset; sensitive ones flagged for review, optional justification file. Dock, CLI, fixture and test suite.
+- Version Consistency Checker (`version_consistency`): Project `config/version` against version strings in export presets (Android, Windows, macOS, iOS, web). Dock, CLI, fixture and test suite.
+- Third-Party Notice Collector (`third_party_notices`): License files gathered per addon/vendor folder into a notices report; missing licenses and copyleft licenses flagged for review. Dock, CLI, fixture and test suite.
+- Release Notes Generator (`release_notes`): Conventional-commit subjects grouped into draft release notes (breaking, added, fixed, performance, other). Dock, CLI, fixture and test suite.
 - Input Sequence Fuzzer (`input_fuzzer`): Seeded, bounded press/hold/release sequences generated from the InputMap; a runtime node replays them frame by frame. Dock, CLI, fixture and test suite.
 - GDScript Warning Baseline (`warning_baseline`): Static per-file counts of UNUSED_VARIABLE, UNUSED_PARAMETER and UNREACHABLE_CODE patterns, ratcheted against a committed baseline. Dock, CLI, fixture and test suite.
 - Scene Load Smoke Tester (`scene_smoke`): Loads and instantiates every scene headless; load/instantiate failures, missing dependencies, unknown node types. Dock, CLI, fixture and test suite.

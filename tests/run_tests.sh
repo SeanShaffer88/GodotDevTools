@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -249,4 +249,14 @@ echo "== bench harness output feeds the performance gate =="
 grep -q '"bench_math.bench_sum_array"' reports/bench_harness/bench_harness.json
 gate "mutation tester finds surviving boundary mutants" \
   res://addons/mutation_tester/cli/gmt_cli.gd -- --target=res://demo/ci/mutation/clamp_health.gd --test=res://demo/ci/mutation/test_clamp_health.gd --fail-on=survived_mutant
+gate "store validator flags the undersized icon" \
+  res://addons/store_assets/cli/sav_cli.gd -- --profile=res://demo/shipping/store/profile.json --fail-on=wrong_size
+gate "permission reviewer flags camera and location" \
+  res://addons/android_permissions/cli/apr_cli.gd -- --presets=res://demo/shipping/android_presets.cfg --fail-on=sensitive_permission
+gate "version checker flags the stale Windows product version" \
+  res://addons/version_consistency/cli/vcc_cli.gd -- --project=res://demo/shipping/version_project.godot --presets=res://demo/shipping/android_presets.cfg --fail-on=version_mismatch
+gate "notice collector flags the unlicensed package" \
+  res://addons/third_party_notices/cli/tpn_cli.gd -- --dir=res://demo/shipping/vendor --fail-on=missing_license
+gate "release notes flag the breaking change" \
+  res://addons/release_notes/cli/rln_cli.gd -- --commits=res://demo/shipping/commits.txt --fail-on=breaking_change
 echo "ALL GATE CHECKS PASSED"
