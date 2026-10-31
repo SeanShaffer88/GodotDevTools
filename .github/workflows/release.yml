@@ -41,6 +41,7 @@ jobs:
             dialogue_quest:DialogueQuest \
             doc_gen:DocGen \
             export_doctor:ExportDoctor \
+            flag_simulator:FlagSimulator \
             input_matrix:InputMatrix \
             l10n_matrix:L10nMatrix \
             leak_hunter:LeakHunter \
