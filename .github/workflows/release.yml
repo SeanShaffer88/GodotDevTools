@@ -38,6 +38,7 @@ jobs:
             bt_debugger:BTDebugger \
             build_size:BuildSize \
             camera_orch:CameraOrch \
+            cert_check:CertCheck \
             collision_matrix:CollisionMatrix \
             dialogue_quest:DialogueQuest \
             doc_gen:DocGen \
@@ -59,8 +60,10 @@ jobs:
             seed_replay:SeedReplay \
             shader_doctor:ShaderDoctor \
             signal_spy:SignalSpy \
+            state_coverage:StateCoverage \
             subtitle_audit:SubtitleAudit \
             telemetry_schema:TelemetrySchema \
+            test_priority:TestPriority \
             test_runner:TestRunner \
             thermal_sim:ThermalSim \
             tilemap_rules:TilemapRules \

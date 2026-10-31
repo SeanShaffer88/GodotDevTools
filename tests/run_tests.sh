@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -122,4 +122,13 @@ test -s reports/flag_simulator/flag_simulator.json
 gate "build size explorer detects an over-budget file" \
   res://addons/build_size/cli/bs_cli.gd -- --dir=res://demo/build_size --max-file=1 --fail-on=file_budget
 test -s reports/build_size/build_size.json
+gate "checklist reports failed requirement" \
+  res://addons/cert_check/cli/cert_cli.gd -- --fail-on=failed_check
+test -s reports/cert_check/cert_check.json
+gate "state coverage reports unvisited transition" \
+  res://addons/state_coverage/cli/coverage_cli.gd -- --fail-on=uncovered_transition
+test -s reports/state_coverage/state_coverage.json
+gate "test prioritizer reports unmapped path" \
+  res://addons/test_priority/cli/priority_cli.gd -- --fail-on=unmapped_path
+test -s reports/test_priority/test_priority.json
 echo "ALL GATE CHECKS PASSED"

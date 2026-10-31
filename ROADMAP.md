@@ -46,8 +46,8 @@ This roadmap captures proposed tools, not a promise that every design is already
 - [ ] **Gameplay Scenario Test Builder** — compose repeatable actions and assertions.
 - [ ] **Crash and Error Reproduction Packager** — bundle approved logs, settings and reproduction information.
 - [ ] **Save Corruption and Recovery Tester** — inject invalid saves and verify recovery behavior.
-- [ ] **State Transition Coverage Tracker** — report exercised and uncovered gameplay transitions.
-- [ ] **Regression Test Prioritizer** — suggest tests based on changed files and dependencies.
+- [ ] **State Transition Coverage Tracker** (in progress) — compare supplied model and trace; runtime instrumentation, Godot tests and editor verification pending.
+- [ ] **Regression Test Prioritizer** (in progress) — rank exact-path mappings; dependency inference, Godot tests and editor verification pending.
 - [ ] **Property-Based Gameplay Tester** — generate bounded input sequences to check invariants.
 - [ ] **Resource Load Failure Simulator** — test fallbacks for missing, invalid or delayed resources.
 - [ ] **Pause, Focus, and Lifecycle Tester** — exercise pause, focus, resize and suspend/resume.
@@ -59,10 +59,10 @@ This roadmap captures proposed tools, not a promise that every design is already
 - [ ] **Controller Glyph and Prompt Validator** — check device-specific prompts for input actions.
 - [ ] **Color-Vision and Contrast Previewer** — preview color-vision differences and color-only cues.
 - [ ] **Subtitle Timing and Readability Auditor** (in progress) — JSON cue timing, reading speed, line length and optional speaker checks passed Godot 4.3/4.5 CI in PR #6; hands-on editor verification pending. Safe-area and rendered-layout checks remain future work.
-- [ ] **Platform Certification Checklist Runner** — track configurable platform-release requirements.
+- [ ] **Platform Certification Checklist Runner** (in progress) — compare a user-defined checklist with recorded results; no certification claim. Godot tests and editor verification pending.
 - [ ] **Privacy and Permissions Auditor** — inventory permissions, collection points and endpoints for review.
 - [ ] **Offline and Poor-Connection Test Harness** — simulate outages, timeouts and interrupted requests.
-- [ ] **Build Size Attribution Explorer** (in progress) — actual staged-directory file sizes by folder and extension, with budgets; Godot tests and editor verification pending. Archive-internal source attribution remains future work.
+- [ ] **Build Size Attribution Explorer** (in progress) — actual staged-directory file sizes and budgets passed Godot 4.3/4.5 CI in PR #10; hands-on editor verification pending. Archive-internal source attribution remains future work.
 - [ ] **Demo-to-Release Content Guard** (in progress) — flag configurable placeholder and development markers for review; initial static scanner passed the Godot 4.3/4.5 CI gate in PR #4; hands-on editor verification remains.
 - [ ] **Feature Flag and Rollout Simulator** (in progress) — offline deterministic rollout and prerequisite simulation passed Godot 4.3/4.5 CI in PR #9; hands-on editor verification pending.
 - [ ] **Player Telemetry Schema Validator** (in progress) — local event and field checks plus explicit sensitive-field review passed Godot 4.3/4.5 CI in PR #7; hands-on editor verification pending.

@@ -7,6 +7,8 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Started a batch of three offline tools: user-defined platform checklist runner, state-transition coverage tracker, and exact-mapping regression test prioritizer.
+
 - Started Build Size Attribution Explorer with staged-directory file-size reporting, budgets, a dock, CLI and fixtures.
 
 - Started Feature Flag and Rollout Simulator with deterministic offline bucketing, prerequisite checks, fallback simulation, a dock and CLI.

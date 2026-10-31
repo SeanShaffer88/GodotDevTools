@@ -1,0 +1,1 @@
+{"paths":{"addons/combat/core.gd":["tests/test_combat.gd","tests/test_gameplay.gd"],"addons/inventory/core.gd":["tests/test_inventory.gd","tests/test_gameplay.gd"]}}
