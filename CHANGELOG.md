@@ -7,6 +7,8 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Added optional Scene Dependency Map graph input to Regression Test Prioritizer, with transitive impact evidence and cycle-safe traversal.
+
 - Added opt-in bounded state-transition recording, trace truncation warnings, and optional continuity checks to the State Transition Coverage Tracker.
 
 - Started a batch of three offline tools: user-defined platform checklist runner, state-transition coverage tracker, and exact-mapping regression test prioritizer.

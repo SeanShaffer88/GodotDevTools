@@ -1,0 +1,1 @@
+{"edges":[{"from":"res://demo/dependencies/main.tscn","to":"res://demo/dependencies/main.gd"},{"from":"res://demo/dependencies/main.gd","to":"res://demo/dependencies/material.tres"}]}

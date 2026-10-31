@@ -1,5 +1,6 @@
 extends SceneTree
 const Core := preload("res://addons/test_priority/core/priority_plan.gd")
+const SceneMap := preload("res://addons/scene_dependency/core/sdm_graph.gd")
 var passes := 0
 var failures := 0
 
@@ -28,6 +29,20 @@ func _init() -> void:
     check("ties sorted by test name", plan["rows"][0]["test"] == "test_a")
     check("invalid mappings rejected", kinds(op.analyze({"paths": {"a": "test"}}, {"changed": ["a"]})).has("invalid_mapping"))
     check("invalid changed path rejected", kinds(op.analyze(mapping, {"changed": [null]})).has("invalid_path"))
+    var graph: Dictionary = SceneMap.new().run("res://demo/dependencies", ["res://demo/dependencies/main.tscn"])
+    var graph_mapping := {"paths": {"res://demo/dependencies/main.tscn": ["scene_test"]}}
+    var graph_changes := {"changed": ["res://demo/dependencies/material.tres"]}
+    var indirect: Dictionary = op.analyze(graph_mapping, graph_changes, graph)
+    check("dependency map discovers transitive affected test", indirect["rows"].size() == 1 and indirect["rows"][0]["test"] == "scene_test")
+    check("evidence traces chain to mapped scene", indirect["rows"][0]["evidence"][0]["dependency_chain"] == ["res://demo/dependencies/material.tres", "res://demo/dependencies/main.gd", "res://demo/dependencies/main.tscn"])
+    var cycle := {"edges": [{"from": "a", "to": "b"}, {"from": "b", "to": "a"}, {"from": "a", "to": "b"}]}
+    var cyclic: Dictionary = op.analyze({"paths": {"a": ["test"], "b": ["test"]}}, {"changed": ["a", "b"]}, cycle)
+    check("cycles terminate and score unique changes", cyclic["rows"][0]["score"] == 2 and cyclic["rows"][0]["evidence"].size() == 4)
+    check("invalid graph rejected", kinds(op.analyze(mapping, {"changed": ["a"]}, {"edges": [{"from": "x"}]})).has("invalid_graph"))
+    check("empty mapped test set is not silently covered", kinds(op.analyze({"paths": {"a": []}}, {"changed": ["a"]})).has("unmapped_path"))
+    check("missing graph file is an error", kinds(op.run("res://demo/test_priority/mapping.json", "res://demo/test_priority/changes.json", "res://missing_priority_graph.json")).has("input_error"))
+    var graph_fixture: Dictionary = op.run("res://demo/test_priority/graph_mapping.json", "res://demo/test_priority/graph_changes.json", "res://demo/test_priority/graph.json")
+    check("graph JSON files are supported", graph_fixture["rows"].size() == 1 and graph_fixture["rows"][0]["test"] == "res://tests/test_sdm.gd")
     check("invalid input shape reported", kinds(op.analyze({}, {})).has("input_error"))
     check("missing file reported", kinds(op.run("res://nonexistent_batch_fixture.json", "res://nonexistent_batch_fixture.json")).has("input_error"))
     check("markdown report renders", op.to_markdown(fixture).begins_with("# "))
