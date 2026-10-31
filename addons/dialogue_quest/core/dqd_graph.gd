@@ -63,7 +63,7 @@ func _walk(dir_path: String, out: Array) -> void:
             continue
         var full := dir_path.path_join(name)
         if dir.current_is_dir():
-            if name not in [".godot", "addons"]:
+            if name not in [".godot", "addons", "reports", "visual_reports"]:
                 _walk(full, out)
         elif name.get_extension() == "json":
             var text := FileAccess.get_file_as_string(full)

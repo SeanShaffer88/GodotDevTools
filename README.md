@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/SeanShaffer88/GodotDevTools/actions/workflows/tests.yml/badge.svg)](https://github.com/SeanShaffer88/GodotDevTools/actions/workflows/tests.yml)
 
-Forty Godot 4 addons cover testing, performance, content, workflow and release checks. The table below links each addon to its purpose and folder. Many tools are static analyzers, simulations or estimates rather than runtime measurements; consult each addon README for its scope and limitations.
+Independent Godot 4 addons cover testing, performance, content, workflow and release checks. The table below links each addon to its purpose and folder. Many tools are static analyzers, simulations or estimates rather than runtime measurements; consult each addon README for its scope and limitations.
 
 The [roadmap](ROADMAP.md) tracks 50 proposed tools and their implementation status. The [Demo-to-Release Content Guard](addons/release_guard/README.md) and [Naming and Folder Convention Enforcer](addons/naming_conventions/README.md) are under development, alongside the [Subtitle Timing and Readability Auditor](addons/subtitle_audit/README.md), [Player Telemetry Schema Validator](addons/telemetry_schema/README.md), [Performance Regression Gate](addons/performance_gate/README.md), [Feature Flag and Rollout Simulator](addons/flag_simulator/README.md), and [Build Size Attribution Explorer](addons/build_size/README.md).
 
@@ -10,11 +10,11 @@ The [checklist runner](addons/cert_check/README.md), [state coverage tracker](ad
 
 ## TL;DR
 
-Think of this as a workshop wall for a Godot project. Each tool is a separate instrument that hangs on the same wall: you can take down just one and use it in your own game project, or hang all forty. Each one looks at your game the way a careful tester would - comparing pictures against approved ones, replaying the exact buttons that caused a bug, trying your menus on phone screens, weighing your textures, walking your dialogue, shaking your network, searching your scenes in plain words, flagging accessibility issues for human review, checking your export settings before release day, estimating draw-call breakers, migrating your old saves, mapping your collision layers, solving your animation rigs, mixing your audio on paper, hunting your leaks, laying out your input bindings, reading your shaders, spying on your signals, checking translation coverage, tracing your behaviour trees, orchestrating your cameras, replaying your seeds, snapping your blockouts, mocking your filesystems, generating your tile rules, running your tests headless, estimating your thermal load, guarding your prefab instances, and documenting your code. Each tool also has a headless CLI; available checks and gate options vary.
+Think of this as a workshop wall for a Godot project. Each tool is a separate instrument that hangs on the same wall: you can take down just one and use it in your own game project, or hang them all. Each one looks at your game the way a careful tester would - comparing pictures against approved ones, replaying the exact buttons that caused a bug, trying your menus on phone screens, weighing your textures, walking your dialogue, shaking your network, searching your scenes in plain words, flagging accessibility issues for human review, checking your export settings before release day, estimating draw-call breakers, migrating your old saves, mapping your collision layers, solving your animation rigs, mixing your audio on paper, hunting your leaks, laying out your input bindings, reading your shaders, spying on your signals, checking translation coverage, tracing your behaviour trees, orchestrating your cameras, replaying your seeds, snapping your blockouts, mocking your filesystems, generating your tile rules, running your tests headless, estimating your thermal load, guarding your prefab instances, and documenting your code. Each tool also has a headless CLI; available checks and gate options vary.
 
 AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a pasteable project prompt plus the exact file map, inspection order, and full CLI reference with defaults and exit codes.
 
-## The forty tools
+## The tools
 
 | Tool | What it does | Addon folder |
 |---|---|---|
@@ -58,6 +58,8 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Platform Certification Checklist Runner | Compare user-defined requirements to recorded reviews; does not certify compliance. | `addons/cert_check` |
 | State Transition Coverage Tracker | Compare recorded transitions to a model; includes opt-in bounded runtime recording. | `addons/state_coverage` |
 | Regression Test Prioritizer | Rank tests using explicit mappings and an optional static dependency graph. | `addons/test_priority` |
+| Particle Budget Inspector | Total particle capacity per scene (amount x amount_ratio, instanced children followed) against scene, emitter, CPU and preprocess budgets. | `addons/particle_budget` |
+| Object Pool Advisor | Rank instantiate() sites as pool candidates (per-frame, repeating, looped, self-freeing); optional recorded spawn counts from a runtime counter. | `addons/pool_advisor` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -81,7 +83,7 @@ No placeholder images are used in the meantime.
 
 For one tool: copy its `addons/<tool>` folder into your project's `addons/` folder and enable it under Project -> Project Settings -> Plugins. Check the assets on the [GitHub Releases](https://github.com/SeanShaffer88/GodotDevTools/releases) page before downloading: older releases do not contain every current addon. Unzip an addon or suite archive into your project root.
 
-For all forty: copy all forty `addons/` folders from this checkout (or use a suite release that includes them), then enable the plugins you want. Each tool works on its own; none depends on another.
+For the whole suite: copy every `addons/` folder from this checkout (or use a suite release that includes them), then enable the plugins you want. Each tool works on its own; none depends on another.
 
 ## How to use
 
@@ -108,7 +110,7 @@ For authoritative options, consult each addon README and CLI script.
 
 ## Downloads
 
-The published [v1.0.0 release](https://github.com/SeanShaffer88/GodotDevTools/releases/tag/v1.0.0) contains nine individual addon zips and a suite zip for those nine, not the current forty. The repository contains the newer addons; v1.1.0 is prepared but not yet published. The release workflow is configured to gate and package 40 individual zips plus a suite for a future release. Dispatch on main or a `v*` tag starts the gate before packaging (`.github/workflows/release.yml`).
+The published [v1.0.0 release](https://github.com/SeanShaffer88/GodotDevTools/releases/tag/v1.0.0) contains nine individual addon zips and a suite zip for those nine, not the current set. The repository contains the newer addons; v1.1.0 is prepared but not yet published. The release workflow is configured to gate and package one zip per addon plus a suite for a future release. Dispatch on main or a `v*` tag starts the gate before packaging (`.github/workflows/release.yml`).
 
 ## Command-line reference
 
@@ -173,6 +175,8 @@ QUALITY.md                quality scorecard
 PROJECT_RULES.md          project rule sheet
 AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 ```
+| `particle_budget/cli/pbi_cli.gd` | `--dir` `--max-scene` `--max-emitter` `--max-cpu-emitter` `--max-preprocess` `--fail-on` |
+| `pool_advisor/cli/opa_cli.gd` | `--dir` `--counts` `--min-score` `--rate-threshold` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 

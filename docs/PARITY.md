@@ -78,6 +78,8 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Asset Health: importer preset comparisons | asset_health core + CLI + dock | Unverified (Godot tests added; imported metadata and editor session required) |
 | Asset Health: aggregate uncompressed source texture estimate and budget | asset_health core + CLI + dock | Unverified (Godot tests added; not measured or platform-specific GPU memory) |
 | Screenshot review queue: fingerprints and recorded decisions | visual_regression core + CLI + dock | Unverified (Godot tests added; local editable metadata only; no automatic baseline promotion) |
+| Particle Budget Inspector: static emitter capacity per scene with instance chains | particle_budget core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Object Pool Advisor: spawn-site scoring plus optional runtime spawn counts | pool_advisor core + CLI + dock + runtime node | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |

@@ -90,7 +90,9 @@ jobs:
             time_machine:TimeMachine \
             vfs_mock:VFSMock \
             visual_regression:VisualRegression \
-            whitebox:Whitebox
+            whitebox:Whitebox \
+            particle_budget:ParticleBudget \
+            pool_advisor:PoolAdvisor
           do
             folder="${pair%%:*}"
             name="${pair##*:}"
