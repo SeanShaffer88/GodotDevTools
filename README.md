@@ -128,6 +128,10 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Physics Jitter and Tunneling Detector | Small rigid bodies without CCD, scripts writing rigid-body transforms, move_and_slide in _process, low physics tick rate. | `addons/physics_jitter` |
 | Character Controller Test Course | Platformer tuning (gravity, jump velocity, speed, coyote time, floor angle) against course obstacles via kinematics: unreachable ledges, unjumpable gaps, too-steep slopes. | `addons/controller_course` |
 | Hitbox and Hurtbox Timeline Viewer | Active windows of hitbox/hurtbox shapes from animation `disabled`/`monitoring` tracks; windows left open, shorter than a physics frame, and invulnerability windows. | `addons/hitbox_timeline` |
+| Navigation Mesh Diagnostic Lab | Baked NavigationPolygon analysis: disconnected regions, passages narrower than the agent, unreachable and off-mesh targets. | `addons/navmesh_lab` |
+| Spawn Point and Encounter Validator | 2D spawn markers (group or name) checked against static collision shapes, minimum spacing and an optional navmesh. | `addons/spawn_validator` |
+| Interaction Reachability Checker | Interactable trigger areas (group or name) checked against navmesh reachable from the player start. | `addons/interaction_reach` |
+| World Boundary and Out-of-Bounds Auditor | 2D level extents from static collision: missing kill floor/world boundary below, open sides, kill zones overlapping floors. | `addons/world_bounds` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -313,6 +317,10 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `physics_jitter/cli/pjt_cli.gd` | `--dir` `--project` `--min-size` `--fail-on` |
 | `controller_course/cli/cct_cli.gd` | `--input` `--margin` `--fail-on` |
 | `hitbox_timeline/cli/hht_cli.gd` | `--dir` `--physics-fps` `--hurt-pattern` `--fail-on` |
+| `navmesh_lab/cli/nml_cli.gd` | `--nav` `--targets` `--fail-on` |
+| `spawn_validator/cli/spv_cli.gd` | `--scene` `--min-spacing` `--spawn-pattern` `--nav` `--fail-on` |
+| `interaction_reach/cli/irc_cli.gd` | `--scene` `--nav` `--start` `--pattern` `--fail-on` |
+| `world_bounds/cli/wba_cli.gd` | `--scene` `--kill-pattern` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 

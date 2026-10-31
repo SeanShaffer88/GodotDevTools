@@ -7,6 +7,10 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Navigation Mesh Diagnostic Lab (`navmesh_lab`): Baked NavigationPolygon analysis: disconnected regions, passages narrower than the agent, unreachable and off-mesh targets. Dock, CLI, fixture and test suite.
+- Spawn Point and Encounter Validator (`spawn_validator`): 2D spawn markers (group or name) checked against static collision shapes, minimum spacing and an optional navmesh. Dock, CLI, fixture and test suite.
+- Interaction Reachability Checker (`interaction_reach`): Interactable trigger areas (group or name) checked against navmesh reachable from the player start. Dock, CLI, fixture and test suite.
+- World Boundary and Out-of-Bounds Auditor (`world_bounds`): 2D level extents from static collision: missing kill floor/world boundary below, open sides, kill zones overlapping floors. Dock, CLI, fixture and test suite.
 - Frame-Time Spike Investigator (`frame_spikes`): Spikes in recorded per-frame timings correlated with markers, node-count jumps and physics time; runtime recorder node included. Dock, CLI, fixture and test suite.
 - Startup and Scene-Load Profiler (`load_profiler`): Measured load and instantiate time per scene (cache bypassed), dependency and node counts, against budgets. Dock, CLI, fixture and test suite.
 - Physics Jitter and Tunneling Detector (`physics_jitter`): Small rigid bodies without CCD, scripts writing rigid-body transforms, move_and_slide in _process, low physics tick rate. Dock, CLI, fixture and test suite.

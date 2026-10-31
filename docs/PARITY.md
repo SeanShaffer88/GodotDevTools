@@ -148,6 +148,10 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Physics Jitter and Tunneling Detector: static tunneling and jitter risks | physics_jitter core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Character Controller Test Course: kinematic reachability of course obstacles | controller_course core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Hitbox and Hurtbox Timeline Viewer: active windows from animation tracks | hitbox_timeline core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Navigation Mesh Diagnostic Lab: 2D navmesh connectivity and clearance | navmesh_lab core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Spawn Point and Encounter Validator: blocked, crowded and off-mesh spawns | spawn_validator core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Interaction Reachability Checker: trigger areas vs reachable navmesh | interaction_reach core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| World Boundary and Out-of-Bounds Auditor: level extents vs kill zones and boundaries | world_bounds core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |
