@@ -72,6 +72,7 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | State transition coverage: explicit bounded runtime recording | state_coverage core + runtime node | Unverified (headless tests added; real-game and editor session pending; transitions must be recorded explicitly) |
 | Test prioritizer: exact path-to-test mappings | test_priority core + CLI + dock | Verified on fixture in PR #11; hands-on editor session pending |
 | Test prioritizer: optional dependency-graph impact propagation and evidence | test_priority core + CLI + dock | Unverified (Godot tests added; static graph may miss dynamic dependencies; editor session pending) |
+| Subtitle audit: SRT and WebVTT subset import | subtitle_audit core + CLI + dock | Unverified (Godot tests added; rendered layout and editor verification pending) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |

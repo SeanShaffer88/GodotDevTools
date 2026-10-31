@@ -1,4 +1,4 @@
-## Offline subtitle timing audit. Input is a JSON object containing a cues array.
+## Offline subtitle timing audit. Supports JSON cues and a documented SRT/WebVTT subset.
 extends RefCounted
 
 const DEFAULT_MIN_SECONDS := 1.0
@@ -8,11 +8,93 @@ const DEFAULT_MAX_LINE := 42
 func run(path: String, options: Dictionary = {}) -> Dictionary:
     var file := FileAccess.open(path, FileAccess.READ)
     if file == null:
-        return _result(0, [_issue("error", "input_error", path, "Cannot read subtitle file.", "Choose a readable JSON file.")])
+        return _result(0, [_issue("error", "input_error", path, "Cannot read subtitle file.", "Choose a readable subtitle file.")])
+    var text := file.get_as_text()
+    var extension := path.get_extension().to_lower()
+    if extension in ["srt", "vtt"]:
+        var parsed := parse_timed_text(text, extension)
+        if not parsed["ok"]:
+            return _result(0, [_issue("error", "input_error", path, str(parsed["error"]), "Correct the subtitle file and retry.")])
+        return analyze({"cues": parsed["cues"]}, options)
     var parser := JSON.new()
-    if parser.parse(file.get_as_text()) != OK or typeof(parser.data) != TYPE_DICTIONARY:
+    if parser.parse(text) != OK or typeof(parser.data) != TYPE_DICTIONARY:
         return _result(0, [_issue("error", "input_error", path, "Invalid JSON or top-level value is not an object.", "Provide a JSON object with a cues array.")])
     return analyze(parser.data, options)
+
+## Parse a documented text subset; never return partial cues on malformed input.
+func parse_timed_text(text: String, format: String) -> Dictionary:
+    if format not in ["srt", "vtt"]:
+        return {"ok": false, "error": "Unsupported timed-text format."}
+    var normalized := text.trim_prefix("\ufeff").replace("\r\n", "\n").replace("\r", "\n")
+    var lines := normalized.split("\n")
+    var index := 0
+    var cues: Array = []
+    if format == "vtt":
+        if lines.is_empty() or not (lines[0] == "WEBVTT" or lines[0].begins_with("WEBVTT ") or lines[0].begins_with("WEBVTT\t")):
+            return {"ok": false, "error": "Missing WEBVTT header."}
+        index = 1
+        while index < lines.size() and not lines[index].strip_edges().is_empty():
+            if lines[index].contains("-->"):
+                return {"ok": false, "error": "WEBVTT header must be separated from cues by a blank line."}
+            index += 1
+    while index < lines.size():
+        while index < lines.size() and lines[index].strip_edges().is_empty():
+            index += 1
+        if index >= lines.size():
+            break
+        var first := str(lines[index]).strip_edges()
+        if format == "vtt" and (first == "NOTE" or first.begins_with("NOTE ") or first.begins_with("NOTE\t") or first == "STYLE" or first == "REGION"):
+            index += 1
+            while index < lines.size() and not lines[index].strip_edges().is_empty():
+                if lines[index].contains("-->"):
+                    return {"ok": false, "error": "Missing blank line before cue at line %d." % (index + 1)}
+                index += 1
+            continue
+        if not first.contains("-->"):
+            if format == "srt" and not first.is_valid_int():
+                return {"ok": false, "error": "Invalid SRT cue identifier at line %d." % (index + 1)}
+            index += 1
+            if index >= lines.size() or not lines[index].contains("-->"):
+                return {"ok": false, "error": "Missing cue timing after identifier at line %d." % index}
+        var timing_line := str(lines[index]).strip_edges()
+        var parts := timing_line.split("-->")
+        if parts.size() != 2:
+            return {"ok": false, "error": "Invalid timing at line %d." % (index + 1)}
+        var right := str(parts[1]).strip_edges()
+        var right_parts := right.replace("\t", " ").split(" ", false)
+        if right_parts.is_empty() or (format == "srt" and right_parts.size() != 1):
+            return {"ok": false, "error": "Invalid timing or unsupported SRT settings at line %d." % (index + 1)}
+        var start := _timestamp(str(parts[0]).strip_edges(), format)
+        var end := _timestamp(str(right_parts[0]), format)
+        if start < 0.0 or end < 0.0:
+            return {"ok": false, "error": "Invalid timestamp at line %d." % (index + 1)}
+        index += 1
+        var body: Array[String] = []
+        while index < lines.size() and not lines[index].strip_edges().is_empty():
+            if lines[index].contains("-->"):
+                return {"ok": false, "error": "Missing blank line before cue at line %d." % (index + 1)}
+            body.append(lines[index])
+            index += 1
+        cues.append({"start": start, "end": end, "text": "\n".join(body)})
+    if cues.is_empty():
+        return {"ok": false, "error": "No subtitle cues found."}
+    return {"ok": true, "cues": cues}
+
+func _timestamp(value: String, format: String) -> float:
+    var regex := RegEx.new()
+    if format == "srt":
+        regex.compile("^([0-9]{2,}):([0-9]{2}):([0-9]{2}),([0-9]{3})$")
+    else:
+        regex.compile("^(?:([0-9]{2,}):)?([0-9]{2}):([0-9]{2})\\.([0-9]{3})$")
+    var found := regex.search(value)
+    if found == null:
+        return -1.0
+    var hours := int(found.get_string(1)) if found.get_string(1) != "" else 0
+    var minutes := int(found.get_string(2))
+    var seconds := int(found.get_string(3))
+    if minutes >= 60 or seconds >= 60:
+        return -1.0
+    return hours * 3600.0 + minutes * 60.0 + seconds + int(found.get_string(4)) / 1000.0
 
 func analyze(data: Dictionary, options: Dictionary = {}) -> Dictionary:
     var issues: Array = []

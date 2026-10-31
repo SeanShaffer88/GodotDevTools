@@ -1,0 +1,10 @@
+WEBVTT
+
+NOTE A sample cue track
+
+intro
+00:00.000 --> 00:02.000 position:50%
+Welcome to the station.
+
+00:01.500 --> 00:02.000
+Please watch your step as you exit the train.

@@ -58,7 +58,7 @@ This roadmap captures proposed tools, not a promise that every design is already
 
 - [ ] **Controller Glyph and Prompt Validator** — check device-specific prompts for input actions.
 - [ ] **Color-Vision and Contrast Previewer** — preview color-vision differences and color-only cues.
-- [ ] **Subtitle Timing and Readability Auditor** (in progress) — JSON cue timing, reading speed, line length and optional speaker checks passed Godot 4.3/4.5 CI in PR #6; hands-on editor verification pending. Safe-area and rendered-layout checks remain future work.
+- [ ] **Subtitle Timing and Readability Auditor** (in progress) — JSON cue checks passed Godot 4.3/4.5 CI in PR #6; SRT/WebVTT subset import added, pending CI. Hands-on editor, safe-area and rendered-layout checks remain future work.
 - [ ] **Platform Certification Checklist Runner** (in progress) — compare a user-defined checklist with recorded results; no certification claim. Godot tests and editor verification pending.
 - [ ] **Privacy and Permissions Auditor** — inventory permissions, collection points and endpoints for review.
 - [ ] **Offline and Poor-Connection Test Harness** — simulate outages, timeouts and interrupted requests.

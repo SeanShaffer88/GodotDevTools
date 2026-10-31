@@ -10,7 +10,7 @@ func _init() -> void:
     custom_minimum_size = Vector2(320, 250)
     _path = LineEdit.new()
     _path.text = "res://demo/subtitles/cues.json"
-    _path.tooltip_text = "Path to subtitle JSON. See the addon README for format."
+    _path.tooltip_text = "Path to subtitle JSON, SRT or WebVTT. See the addon README for supported formats."
     add_child(_path)
     _speaker = CheckBox.new()
     _speaker.text = "Require speaker labels"
@@ -23,7 +23,7 @@ func _init() -> void:
     add_child(button)
     _output = RichTextLabel.new()
     _output.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    _output.text = "Enter a subtitle JSON path, then audit."
+    _output.text = "Enter a subtitle JSON, SRT or VTT path, then audit."
     add_child(_output)
 
 func _on_run() -> void:
