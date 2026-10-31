@@ -123,6 +123,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Animation Performance Auditor | Animation resources in scenes and .tres: constant tracks, redundant interior keys, duplicate-time keys, track budgets. | `addons/anim_audit` |
 | Rendering Settings Compatibility Matrix | Rendering nodes and environment features used per scene against a renderer support matrix (built-in Compatibility list, overridable JSON). | `addons/render_compat` |
 | GPU Budget and Overdraw Analyzer | 2D overdraw estimate per scene (sprite/rect areas clipped to the screen) and fill-rate at target resolutions and frame rates. | `addons/overdraw` |
+| Frame-Time Spike Investigator | Spikes in recorded per-frame timings correlated with markers, node-count jumps and physics time; runtime recorder node included. | `addons/frame_spikes` |
+| Startup and Scene-Load Profiler | Measured load and instantiate time per scene (cache bypassed), dependency and node counts, against budgets. | `addons/load_profiler` |
+| Physics Jitter and Tunneling Detector | Small rigid bodies without CCD, scripts writing rigid-body transforms, move_and_slide in _process, low physics tick rate. | `addons/physics_jitter` |
+| Character Controller Test Course | Platformer tuning (gravity, jump velocity, speed, coyote time, floor angle) against course obstacles via kinematics: unreachable ledges, unjumpable gaps, too-steep slopes. | `addons/controller_course` |
+| Hitbox and Hurtbox Timeline Viewer | Active windows of hitbox/hurtbox shapes from animation `disabled`/`monitoring` tracks; windows left open, shorter than a physics frame, and invulnerability windows. | `addons/hitbox_timeline` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -303,6 +308,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `anim_audit/cli/apa_cli.gd` | `--dir` `--max-tracks` `--fail-on` |
 | `render_compat/cli/rcm_cli.gd` | `--dir` `--renderer` `--matrix` `--fail-on` |
 | `overdraw/cli/gbo_cli.gd` | `--dir` `--width` `--height` `--max-overdraw` `--fps` `--fail-on` |
+| `frame_spikes/cli/fts_cli.gd` | `--input` `--spike-factor` `--window` `--max-miss-rate` `--fail-on` |
+| `load_profiler/cli/slp_cli.gd` | `--dir` `--max-load-ms` `--max-instantiate-ms` `--fail-on` |
+| `physics_jitter/cli/pjt_cli.gd` | `--dir` `--project` `--min-size` `--fail-on` |
+| `controller_course/cli/cct_cli.gd` | `--input` `--margin` `--fail-on` |
+| `hitbox_timeline/cli/hht_cli.gd` | `--dir` `--physics-fps` `--hurt-pattern` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 
