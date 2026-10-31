@@ -46,6 +46,8 @@ func _init() -> void:
     counter.record("", "spawned")
     var snap: Dictionary = counter.snapshot(2.0)
     check("runtime counter snapshot feeds the advisor", op.rates_from_counts(snap, [])["res://demo/pooling/bullet.tscn"]["rate"] == 1.0)
+    counter.record("res://demo/pooling/bullet.tscn", "spawn")
+    check("unknown counter field is ignored, not a script error", counter.snapshot(1.0)["scenes"]["res://demo/pooling/bullet.tscn"]["spawned"] == 2)
     counter.enabled = false
     counter.record("res://demo/pooling/bullet.tscn", "spawned")
     check("disabled counter records nothing", counter.snapshot(1.0)["scenes"]["res://demo/pooling/bullet.tscn"]["spawned"] == 2)

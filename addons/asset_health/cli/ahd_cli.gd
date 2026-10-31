@@ -10,12 +10,21 @@ func _init() -> void:
     var op = Scanner.new()
     var preset := ""
     var budget := 0
+    var platform_budgets := {}
     for arg in args:
         if arg.begins_with("--big-texture="):
             var px := int(arg.trim_prefix("--big-texture="))
             op.big_texture_pixels = px * px
         elif arg.begins_with("--preset="):
             preset = arg.trim_prefix("--preset=")
+        elif arg.begins_with("--desktop-budget=") or arg.begins_with("--mobile-budget="):
+            var platform := arg.substr(2, arg.find("-budget") - 2)
+            var raw_p := arg.get_slice("=", 1)
+            if not raw_p.is_valid_int():
+                printerr("Invalid %s budget" % platform)
+                quit(1)
+                return
+            platform_budgets[platform] = int(raw_p)
         elif arg.begins_with("--texture-budget="):
             var raw := arg.trim_prefix("--texture-budget=")
             if not raw.is_valid_int():
@@ -23,8 +32,8 @@ func _init() -> void:
                 quit(1)
                 return
             budget = int(raw)
-    var result: Dictionary = op.scan(preset, budget)
-    _emit(op, result, args, "res://reports/asset_health", ["oversized_texture", "duplicate", "unused", "import_inconsistent", "slow_load", "texture_budget", "preset_mismatch", "preset_missing", "preset_no_match", "preset_invalid", "preset_read_error", "invalid_budget"])
+    var result: Dictionary = op.scan(preset, budget, platform_budgets)
+    _emit(op, result, args, "res://reports/asset_health", ["oversized_texture", "duplicate", "unused", "import_inconsistent", "slow_load", "texture_budget", "platform_texture_budget", "preset_mismatch", "preset_missing", "preset_no_match", "preset_invalid", "preset_read_error", "invalid_budget"])
 
 func _write(path: String, content: String) -> bool:
     var f := FileAccess.open(path, FileAccess.WRITE)

@@ -38,6 +38,9 @@ func _on_removed(node: Node) -> void:
 func record(scene_path: String, field: String) -> void:
     if not enabled or scene_path == "":
         return
+    if field != "spawned" and field != "freed":
+        push_warning("Pool counter: field must be \"spawned\" or \"freed\", got \"%s\"." % field)
+        return
     if not _counts.has(scene_path):
         _counts[scene_path] = {"spawned": 0, "freed": 0}
     _counts[scene_path][field] += 1

@@ -107,6 +107,9 @@ func analyze(data: Dictionary, options: Dictionary = {}) -> Dictionary:
     if not data.has("cues") or typeof(data["cues"]) != TYPE_ARRAY:
         return _result(0, [_issue("error", "input_error", "cues", "Expected a cues array.", "Add a cues array to the subtitle JSON object.")])
     var cues: Array = data["cues"]
+    var layout := _layout(options)
+    if layout.has("error"):
+        return _result(0, [_issue("error", "invalid_options", "layout", str(layout["error"]), "Check --font, --font-size, --layout-width, --safe-area and --max-lines.")])
     var valid: Array = []
     for index in range(cues.size()):
         var label := "cues[%d]" % index
@@ -137,6 +140,12 @@ func analyze(data: Dictionary, options: Dictionary = {}) -> Dictionary:
             if line.length() > max_line:
                 issues.append(_issue("warning", "long_line", label, "A line has %d characters (limit %d)." % [line.length(), max_line], "Reword or reflow the subtitle and test the actual display."))
                 break
+        if not layout.is_empty() and not text.strip_edges().is_empty():
+            var fit := measure(text, layout)
+            if fit["clipped"]:
+                issues.append(_issue("warning", "layout_clipped", label, "A word is %.0f px wide; the safe area is %.0f px at size %d." % [fit["widest_word"], layout["box"], layout["size"]], "Shorten or hyphenate the word, or lower the font size."))
+            elif int(fit["lines"]) > int(layout["max_lines"]):
+                issues.append(_issue("warning", "layout_overflow", label, "Wraps to %d lines in a %.0f px safe area at size %d (limit %d)." % [fit["lines"], layout["box"], layout["size"], layout["max_lines"]], "Split the cue or shorten the text; check it in the game's subtitle box."))
         if require_speaker and str(cue.get("speaker", "")).strip_edges().is_empty():
             issues.append(_issue("warning", "missing_speaker", label, "Cue has no speaker label.", "Add a speaker label where identification is needed."))
     valid.sort_custom(func(a, b): return a["start"] < b["start"] if a["start"] != b["start"] else a["index"] < b["index"])
@@ -149,6 +158,46 @@ func analyze(data: Dictionary, options: Dictionary = {}) -> Dictionary:
             furthest_end = float(cue["end"])
             furthest_index = int(cue["index"])
     return _result(cues.size(), issues)
+
+## Rendered-layout options -> {font, size, box, max_lines}; {} when not
+## requested; {"error": ...} when invalid. Requested by any of font_size,
+## font, layout_width, safe_area or max_lines.
+func _layout(options: Dictionary) -> Dictionary:
+    var keys := ["font_size", "font", "layout_width", "safe_area", "max_lines"]
+    if not keys.any(func(k): return options.has(k)):
+        return {}
+    var size := int(options.get("font_size", 32))
+    var width := float(options.get("layout_width", 1920))
+    var safe := float(options.get("safe_area", 0.9))
+    var max_lines := int(options.get("max_lines", 2))
+    if size <= 0 or width <= 0.0 or safe <= 0.0 or safe > 1.0 or max_lines <= 0:
+        return {"error": "Layout needs font_size > 0, layout_width > 0, 0 < safe_area <= 1 and max_lines > 0."}
+    var font: Font = ThemeDB.fallback_font
+    var font_path := str(options.get("font", ""))
+    if font_path != "":
+        var loaded: Variant = load(font_path) if ResourceLoader.exists(font_path) else null
+        if not loaded is Font:
+            return {"error": "Font %s could not be loaded." % font_path}
+        font = loaded
+    return {"font": font, "size": size, "box": width * safe, "max_lines": max_lines}
+
+
+## Lay text out with the engine's own line breaker (TextParagraph, the
+## TextServer path Label uses) inside the safe-area box:
+## {lines, clipped, widest_word}. Explicit newlines always break.
+func measure(text: String, layout: Dictionary) -> Dictionary:
+    var font: Font = layout["font"]
+    var size := int(layout["size"])
+    var box := float(layout["box"])
+    var para := TextParagraph.new()
+    para.break_flags = TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND
+    para.width = box
+    para.add_string(text, font, size)
+    var widest := 0.0
+    for word in text.replace("\n", " ").split(" ", false):
+        widest = maxf(widest, font.get_string_size(word, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x)
+    return {"lines": para.get_line_count(), "clipped": widest > box, "widest_word": widest}
+
 
 func _number(value) -> bool:
     return typeof(value) == TYPE_INT or typeof(value) == TYPE_FLOAT

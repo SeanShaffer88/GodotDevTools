@@ -50,6 +50,21 @@ func _init() -> void:
     check("missing cue separator rejected", not audit.parse_timed_text("1\n00:00:00,000 --> 00:00:02,000\nHello\n00:00:03,000 --> 00:00:04,000\nWorld", "srt")["ok"])
     check("empty timed text rejected", not audit.parse_timed_text("WEBVTT\n\nNOTE only a note\n", "vtt")["ok"])
     check("end before start remains audit error", kinds(audit.analyze({"cues": audit.parse_timed_text("1\n00:00:02,000 --> 00:00:01,000\nHello", "srt")["cues"]})).has("invalid_timing"))
+    var short_cue := {"cues": [{"start": 0.0, "end": 3.0, "text": "Hello there."}]}
+    check("layout off by default", not kinds(audit.analyze(short_cue)).has("layout_overflow"))
+    var lay := {"font_size": 32, "layout_width": 1920, "safe_area": 0.9, "max_lines": 2}
+    check("short cue fits the rendered box", kinds(audit.analyze(short_cue, lay)).filter(func(k): return str(k).begins_with("layout")).is_empty())
+    var m: Dictionary = audit.measure("Hello there.", audit._layout(lay))
+    check("real font metrics measured", int(m["lines"]) == 1 and float(m["widest_word"]) > 10.0)
+    var long_text := "This line keeps going far past what any reasonable subtitle box could hold at this size and it really should wrap onto several lines"
+    var narrow := {"font_size": 32, "layout_width": 640, "safe_area": 0.9, "max_lines": 2}
+    check("long cue overflows a narrow safe area", kinds(audit.analyze({"cues": [{"start": 0.0, "end": 9.0, "text": long_text}]}, narrow)).has("layout_overflow"))
+    check("same cue fits a wide box with more lines allowed", not kinds(audit.analyze({"cues": [{"start": 0.0, "end": 9.0, "text": long_text}]}, {"font_size": 32, "layout_width": 3840, "safe_area": 1.0, "max_lines": 4})).has("layout_overflow"))
+    check("explicit line breaks count", kinds(audit.analyze({"cues": [{"start": 0.0, "end": 6.0, "text": "a\nb\nc"}]}, lay)).has("layout_overflow"))
+    check("unbreakable word wider than the box is clipped", kinds(audit.analyze({"cues": [{"start": 0.0, "end": 6.0, "text": "Pneumonoultramicroscopicsilicovolcanoconiosis"}]}, {"font_size": 48, "layout_width": 400, "safe_area": 0.9})).has("layout_clipped"))
+    check("invalid safe area rejected", kinds(audit.analyze(short_cue, {"safe_area": 1.5})).has("invalid_options"))
+    check("missing font rejected", kinds(audit.analyze(short_cue, {"font": "res://missing_font.ttf"})).has("invalid_options"))
+    check("narrow box wraps the long cue to several lines", int(audit.measure(long_text, audit._layout(narrow))["lines"]) >= 3)
     check("markdown renders findings", audit.to_markdown(result).contains("overlap"))
     check("json parses", JSON.parse_string(audit.to_json(result)).has("issues"))
     print("Subtitle audit TESTS: %d passed, %d failed" % [passes, failures])
