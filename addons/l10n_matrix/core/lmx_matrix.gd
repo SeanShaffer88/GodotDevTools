@@ -216,7 +216,7 @@ func run(tables: Dictionary = {}) -> Dictionary:
                     loc, int(po_rules[loc]), loc, int(PLURAL_RULES[loc])],
                 "fix": "Correct the Plural-Forms header; wrong plural counts silently pick the wrong form at runtime."})
     var used := find_used_keys()
-    var source_locale := str(locales[0]) if not locales.is_empty() else "en"
+    var source_locale := "en" if "en" in locales else (str(locales[0]) if not locales.is_empty() else "en")
     for key in entries:
         var row: Dictionary = entries[key]
         for loc in locales:
