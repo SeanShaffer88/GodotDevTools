@@ -127,7 +127,12 @@ jobs:
             golden_snapshot:GoldenSnapshots \
             log_grouper:LogGrouper \
             log_budget:LogBudget \
-            trace_diff:TraceDiff
+            trace_diff:TraceDiff \
+            input_fuzzer:InputFuzzer \
+            warning_baseline:WarningBaseline \
+            scene_smoke:SceneSmoke \
+            bench_harness:BenchHarness \
+            mutation_tester:MutationTester
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

@@ -95,6 +95,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Error Log Grouper | Godot log errors and warnings grouped by normalized signature (numbers and quoted names masked) with counts and first location. | `addons/log_grouper` |
 | Log Warning Budget Gate | Error/warning counts and new message signatures in a captured log against a committed baseline. | `addons/log_budget` |
 | State Trace Determinism Diff | Two recorded per-frame state traces compared key by key; first divergent frame, diverging keys, length mismatch. | `addons/trace_diff` |
+| Input Sequence Fuzzer | Seeded, bounded press/hold/release sequences generated from the InputMap; a runtime node replays them frame by frame. | `addons/input_fuzzer` |
+| GDScript Warning Baseline | Static per-file counts of UNUSED_VARIABLE, UNUSED_PARAMETER and UNREACHABLE_CODE patterns, ratcheted against a committed baseline. | `addons/warning_baseline` |
+| Scene Load Smoke Tester | Loads and instantiates every scene headless; load/instantiate failures, missing dependencies, unknown node types. | `addons/scene_smoke` |
+| Micro-Benchmark Harness | Times `bench_*` methods with warm-up and repetitions; median, p95, spread; output is Performance Regression Gate input. | `addons/bench_harness` |
+| GDScript Mutation Tester | Operator mutants of one script, each run against its test in an isolated temporary project; surviving mutants show untested behaviour. | `addons/mutation_tester` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -247,6 +252,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `log_grouper/cli/lgr_cli.gd` | `--log` `--fail-on` |
 | `log_budget/cli/lbg_cli.gd` | `--log` `--baseline` `--fail-on` |
 | `trace_diff/cli/sdt_cli.gd` | `--first` `--second` `--tolerance` `--fail-on` |
+| `input_fuzzer/cli/isf_cli.gd` | `--project` `--seed` `--sequences` `--length` `--max-hold` `--include-ui` `--fail-on` |
+| `warning_baseline/cli/gwb_cli.gd` | `--dir` `--baseline` `--fail-on` |
+| `scene_smoke/cli/sst_cli.gd` | `--dir` `--fail-on` |
+| `bench_harness/cli/mbh_cli.gd` | `--script` `--iterations` `--warmup` `--max-cv` `--fail-on` |
+| `mutation_tester/cli/gmt_cli.gd` | `--target` `--test` `--max-mutants` `--timeout` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 

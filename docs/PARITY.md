@@ -115,6 +115,11 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Error Log Grouper: normalized signature grouping of Godot logs | log_grouper core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Log Warning Budget Gate: counts and new signatures vs baseline | log_budget core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | State Trace Determinism Diff: first divergence between two traces | trace_diff core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Input Sequence Fuzzer: seeded sequences from InputMap plus replay node | input_fuzzer core + CLI + dock + runtime node | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| GDScript Warning Baseline: static warning-pattern counts vs baseline | warning_baseline core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Scene Load Smoke Tester: headless load + instantiate of every scene | scene_smoke core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Micro-Benchmark Harness: repeated timing with gate-compatible output | bench_harness core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| GDScript Mutation Tester: operator mutants run in an isolated project copy | mutation_tester core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |
