@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="AudioStreamMicrophone" id="Mic"]
+
+[node name="VoiceChat" type="Node"]
+
+[node name="Capture" type="AudioStreamPlayer" parent="."]
+stream = SubResource("Mic")
+bus = &"Record"

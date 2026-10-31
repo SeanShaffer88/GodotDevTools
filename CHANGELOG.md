@@ -7,6 +7,10 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Pause, Focus, and Lifecycle Tester (`lifecycle`): Effective process mode per scripted node while paused (pause menus that freeze themselves, gameplay that keeps running), missing focus/suspend handling, wall-clock timing. Dock, CLI, fixture and test suite.
+- Privacy and Permissions Auditor (`privacy_audit`): Inventory of network endpoints and APIs, device identifiers, clipboard, microphone/camera use and external links, for a privacy review. Dock, CLI, fixture and test suite.
+- Offline and Poor-Connection Test Harness (`offline_harness`): Static: HTTP requests without timeouts and completion handlers that ignore result codes. Runtime: drop-in HTTP node applying seeded offline/timeout/slow/error faults. Dock, CLI, fixture and test suite.
+- Editor Action Macro Recorder (`macro_recorder`): Records Inspector property edits as JSON macros (node paths or selectors); previews changes on any scene; applies only with an explicit --apply. Dock, CLI, fixture and test suite.
 - Gameplay Scenario Test Builder (`scenario_tests`): JSON gameplay scenarios (wait, press/release actions, call, set, assert) run headless against an instanced scene, one step per physics frame. Dock, CLI, fixture and test suite.
 - Crash and Error Reproduction Packager (`crash_packager`): Local bug-report bundle: redacted log (emails, IPs, tokens, user paths), engine/OS details, repro steps and a manifest, optionally zipped. Never uploads. Dock, CLI, fixture and test suite.
 - Save Corruption and Recovery Tester (`save_corruption`): Corrupted variants of a sample JSON save (truncated, empty, wrong root, wrong types, missing keys, extreme numbers) fed to your loader; accepted-invalid and no-fallback cases reported. Dock, CLI, fixture and test suite.

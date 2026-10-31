@@ -26,7 +26,9 @@ WHERE THE TOOLS ARE
   Each folder is independently installable.
 - Inside each tool: plugin.cfg + plugin.gd (editor entry point), core/ (the
   ONE operation - all checking logic, no editor APIs), ui/ (editor dock, a
-  thin shell), cli/ (headless runner, a thin shell), and for tools with in-game functionality a runtime/ node you place in a game scene.
+  thin shell), cli/ (headless runner, a thin shell), and for tools with in-game functionality a runtime/ node you place in a game scene
+  (bt_debugger, camera_orch, collision_matrix, frame_spikes, input_fuzzer, input_matrix, leak_hunter, network_sim, offline_harness,
+  pool_advisor, proc_anim, scenario_tests, seed_replay, signal_spy, state_coverage, time_machine).
 - demo/ is a fixture project containing one deliberate problem per tool.
   tests/ holds one suite per tool plus run_tests.sh, the full gate.
   docs/PARITY.md is the capability matrix, QUALITY.md the scorecard,

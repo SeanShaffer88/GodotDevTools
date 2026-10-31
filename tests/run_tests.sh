@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp smc pcw ssg npd aeh gsb crp scr pbt rlf; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp smc pcw ssg npd aeh gsb crp scr pbt rlf pfl ppa ocn eam; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -352,4 +352,12 @@ gate "property tester finds the negative angle" \
   res://addons/property_tests/cli/pbt_cli.gd -- --input=res://demo/testing/props/spec.json --fail-on=property_failed
 gate "load failure simulator flags the unchecked level load" \
   res://addons/load_failure/cli/rlf_cli.gd -- --dir=res://demo/testing/loads --fail-on=unchecked_load,missing_resource
+gate "lifecycle tester flags the frozen pause menu" \
+  res://addons/lifecycle/cli/pfl_cli.gd -- --dir=res://demo/lifecycle --fail-on=pause_menu_frozen
+gate "privacy auditor lists the device identifier" \
+  res://addons/privacy_audit/cli/ppa_cli.gd -- --dir=res://demo/privacy --fail-on=device_identifier
+gate "offline harness flags the unhandled score request" \
+  res://addons/offline_harness/cli/ocn_cli.gd -- --dir=res://demo/privacy --fail-on=unhandled_result
+gate "macro preview reports the unmatched step" \
+  res://addons/macro_recorder/cli/eam_cli.gd -- --macro=res://demo/macros/center_labels.json --scene=res://demo/workflow/drift/menu.tscn --fail-on=step_unmatched
 echo "ALL GATE CHECKS PASSED"

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://demo/lifecycle/mover.gd" id="1_m"]
+[ext_resource type="Script" path="res://demo/lifecycle/pause_menu.gd" id="2_p"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource("1_m")
+
+[node name="Spinner" type="Node2D" parent="."]
+process_mode = 3
+script = ExtResource("1_m")
+
+[node name="PauseMenu" type="Control" parent="."]
+script = ExtResource("2_p")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
