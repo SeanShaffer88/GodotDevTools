@@ -126,6 +126,7 @@ func analyse() -> Dictionary:
         for e in es:
             if not nodes.has(e["to"]):
                 issues.append({"severity": "error", "kind": "missing_target", "path": did,
+                    "node": e["from"], "target": e["to"],
                     "message": "Dialogue '%s': node '%s' choice '%s' points at missing node '%s'." % [did, e["from"], e["choice_text"], e["to"]],
                     "fix": "Create the node, or point the choice at the node you meant."})
         var reachable: Dictionary = {start: true}
@@ -138,7 +139,7 @@ func analyse() -> Dictionary:
                     queue.append(e["to"])
         for nid in nodes:
             if not reachable.has(nid):
-                issues.append({"severity": "warning", "kind": "unreachable_node", "path": did,
+                issues.append({"severity": "warning", "kind": "unreachable_node", "path": did, "node": nid,
                     "message": "Dialogue '%s': node '%s' can never be reached from the start." % [did, nid],
                     "fix": "Point a choice at it, or delete it if it is leftover writing."})
             var node: Dictionary = nodes[nid]
@@ -147,7 +148,7 @@ func analyse() -> Dictionary:
                 if e["from"] == nid:
                     has_out = true
             if not has_out and not bool(node.get("end", false)):
-                issues.append({"severity": "warning", "kind": "dead_end", "path": did,
+                issues.append({"severity": "warning", "kind": "dead_end", "path": did, "node": nid,
                     "message": "Dialogue '%s': node '%s' stops the conversation but is not marked as an ending." % [did, nid],
                     "fix": "Add \"end\": true if the stop is intended, or add the missing choice."})
     for qid in quests:

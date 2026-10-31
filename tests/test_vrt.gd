@@ -28,6 +28,7 @@ func _kinds(issues: Array) -> Array:
 
 const Compare := preload("res://addons/visual_regression/core/vrt_compare.gd")
 const Baselines := preload("res://addons/visual_regression/core/vrt_baselines.gd")
+const Capture := preload("res://addons/visual_regression/core/vrt_capture.gd")
 
 
 func _img(color: Color) -> Image:
@@ -70,4 +71,19 @@ func _init() -> void:
             extra_seen = true
     _check("suite: menu diff is exactly the 16 changed pixels", int(menu.get("diff_pixels", -1)) == 16, str(menu.get("diff_pixels")))
     _check("suite: unapproved capture reported", extra_seen)
+    var cap = Capture.new()
+    var paths := cap.target_paths(plan)
+    _check("capture: target path follows the baseline naming",
+        paths.size() == 1 and paths[0] == "res://visual_current/hud__320x240.png", str(paths))
+    var custom := cap.target_paths(plan, "res://demo/out")
+    _check("capture: custom output dir honoured",
+        custom.size() == 1 and custom[0] == "res://demo/out/hud__320x240.png", str(custom))
+    var rep: Dictionary = cap.capture_report(plan, ["res://visual_current/hud__320x240.png"],
+        [{"scene": "res://nope.tscn", "size": Vector2i(320, 240), "reason": "scene_not_found"}])
+    _check("capture: report counts planned, written and failed",
+        int(rep["summary"]["planned"]) == 1 and int(rep["summary"]["written"]) == 1
+            and int(rep["summary"]["failed"]) == 1, str(rep["summary"]))
+    _check("capture: failure carries a plain-words fix",
+        (rep["issues"] as Array).size() == 1 and str((rep["issues"] as Array)[0]["fix"]) != "",
+        str(rep["issues"]))
     _finish("VRT TESTS")
