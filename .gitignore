@@ -3,3 +3,4 @@ reports/
 visual_reports/
 *.zip
 .godot-bin/
+*.translation

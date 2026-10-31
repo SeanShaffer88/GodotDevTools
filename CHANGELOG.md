@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Font Glyph Coverage Checker (`font_glyphs`): Characters used per locale in translation CSV/PO files checked against a TTF/OTF cmap table (formats 4 and 12). Dock, CLI, fixture and test suite.
+- Audio Loudness and Clipping Auditor (`audio_levels`): WAV peak/RMS dBFS, clipped samples, DC offset and sample-rate outliers from the PCM data itself. Dock, CLI, fixture and test suite.
+- Audio Import Settings Auditor (`audio_import`): Audio `.import` loop and compression settings against clip role (music/sfx folder patterns) and WAV length. Dock, CLI, fixture and test suite.
+- Texture Atlas Packing Planner (`atlas_planner`): Shelf-packs sprite sizes (from PNG headers or a JSON list) into atlas pages; page count, waste, oversize sprites. Dock, CLI, fixture and test suite.
+- Texture Filter Consistency Checker (`texture_filter`): Pixel-art texture imports (by folder pattern) checked for mipmaps and lossy compression, plus the project default canvas filter. Dock, CLI, fixture and test suite.
 - Achievement Reachability Checker (`achievements`): Unlock conditions checked against declared events and capped stats; unknown references, unreachable thresholds, cycles and blocked meta-achievements. Dock, CLI, fixture and test suite.
 - Wave Spawner Budget Planner (`wave_budget`): Timeline simulation of wave spawn groups: peak enemies alive, spawns per second, overruns past wave duration. Dock, CLI, fixture and test suite.
 - Random Table Fairness Tester (`rng_fairness`): Pearson chi-square goodness of fit of recorded outcome counts against intended weights, with p-values and small-sample warnings. Dock, CLI, fixture and test suite.

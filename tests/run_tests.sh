@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -207,4 +207,14 @@ gate "save auditor flags the growing event log" \
   res://addons/save_bloat/cli/sba_cli.gd -- --dir=res://demo/balance/saves --fail-on=key_growth
 gate "dialogue variable lint flags variables nothing sets" \
   res://addons/dialogue_vars/cli/dvl_cli.gd -- --dir=res://demo/dialogue --fail-on=read_never_set
+gate "glyph checker flags locales the ASCII font cannot draw" \
+  res://addons/font_glyphs/cli/fgc_cli.gd -- --font=res://demo/assets_audit/ascii_only.ttf --strings=res://demo/assets_audit --fail-on=missing_glyphs
+gate "audio auditor flags the clipped boom" \
+  res://addons/audio_levels/cli/ala_cli.gd -- --dir=res://demo/assets_audit --fail-on=clipping
+gate "audio import auditor flags the non-looping theme" \
+  res://addons/audio_import/cli/aia_cli.gd -- --dir=res://demo/assets_audit --fail-on=music_not_looping
+gate "atlas planner reports the oversize background" \
+  res://addons/atlas_planner/cli/atp_cli.gd -- --input=res://demo/assets_audit/atlas.json --fail-on=sprite_too_big
+gate "texture filter checker flags mipmapped pixel art" \
+  res://addons/texture_filter/cli/tfc_cli.gd -- --dir=res://demo/assets_audit --fail-on=pixel_mipmaps
 echo "ALL GATE CHECKS PASSED"
