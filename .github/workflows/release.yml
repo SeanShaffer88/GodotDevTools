@@ -102,7 +102,12 @@ jobs:
             autoload_graph:AutoloadGraph \
             uid_integrity:UIDIntegrity \
             settings_drift:SettingsDrift \
-            scene_lint:SceneLint
+            scene_lint:SceneLint \
+            loot_sim:LootSim \
+            difficulty_curve:DifficultyCurve \
+            damage_sandbox:DamageSandbox \
+            xp_curve:XPCurve \
+            crafting_graph:CraftingGraph
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

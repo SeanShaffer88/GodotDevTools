@@ -82,11 +82,11 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 
 ## Expansion - gameplay data and balance
 
-- [ ] **Loot Table and Economy Simulator** — seeded drop simulation, expected value, drought lengths and pity checks.
-- [ ] **Difficulty Curve Analyzer** — enemy power against player power per level from data tables; spikes and dips.
-- [ ] **Damage Formula Sandbox** — evaluate formulas over stat grids; flag negatives, overflows and non-monotonic results.
-- [ ] **XP Curve Planner** — time-to-level from XP tables and earn rates; flag walls and skips.
-- [ ] **Crafting and Inventory Graph Validator** — unobtainable items, recipe cycles, dead-end materials.
+- [ ] **Loot Table and Economy Simulator** (in progress) — `addons/loot_sim`: seeded drop simulation, expected value, drought lengths and pity checks. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Difficulty Curve Analyzer** (in progress) — `addons/difficulty_curve`: enemy power against player power per level from data tables; spikes and dips. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Damage Formula Sandbox** (in progress) — `addons/damage_sandbox`: evaluate formulas over stat grids; flag negatives, overflows and non-monotonic results. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **XP Curve Planner** (in progress) — `addons/xp_curve`: time-to-level from XP tables and earn rates; flag walls and skips. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Crafting and Inventory Graph Validator** (in progress) — `addons/crafting_graph`: unobtainable items, recipe cycles, dead-end materials. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Achievement Reachability Checker** — unlock conditions against declared events and stats.
 - [ ] **Wave Spawner Budget Planner** — wave definitions against concurrent-enemy and spawn-rate budgets.
 - [ ] **Random Table Fairness Tester** — chi-square goodness of fit for weighted tables over seeded draws.

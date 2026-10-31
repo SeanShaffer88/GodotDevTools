@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Loot Table and Economy Simulator (`loot_sim`): Seeded weighted-table simulation: per-item odds, expected value per open, observed rates and 99th-percentile drought lengths. Dock, CLI, fixture and test suite.
+- Difficulty Curve Analyzer (`difficulty_curve`): Enemy-to-player power ratio per level from a data table; flags spikes, dips and ratios beyond a ceiling. Dock, CLI, fixture and test suite.
+- Damage Formula Sandbox (`damage_sandbox`): Evaluates a formula over a stat grid with Godot's Expression class; flags negative, overflowing, non-finite and non-monotonic results. Dock, CLI, fixture and test suite.
+- XP Curve Planner (`xp_curve`): Minutes per level from an XP table (or formula) and earn rates by level band; flags grind walls and shrinking requirements. Dock, CLI, fixture and test suite.
+- Crafting and Inventory Graph Validator (`crafting_graph`): Fixpoint reachability over recipes from base items: unobtainable goals, missing inputs, self-bootstrapping recipes, dead-end items. Dock, CLI, fixture and test suite.
 - Export Variable Range Auditor (`export_ranges`): Scene-stored and default values of `@export_range` properties checked against their limits (honouring or_greater/or_less); optional list of unhinted numeric exports. Dock, CLI, fixture and test suite.
 - Autoload Dependency Graph (`autoload_graph`): Autoload-to-autoload references from project settings and scripts: cycles, missing scripts, and `_init`/`_enter_tree`/`_ready` use of autoloads declared later. Dock, CLI, fixture and test suite.
 - Resource UID Integrity Checker (`uid_integrity`): `uid://` references in ext_resources and scripts checked against declared UIDs (scene/resource headers, .import and .uid files): stale, duplicate and unknown UIDs. Dock, CLI, fixture and test suite.

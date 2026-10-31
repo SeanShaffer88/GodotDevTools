@@ -1,0 +1,12 @@
+{
+  "base_items": ["wood", "ore"],
+  "recipes": [
+    {"id": "plank", "inputs": {"wood": 1}, "outputs": {"plank": 4}},
+    {"id": "ingot", "inputs": {"ore": 2}, "outputs": {"ingot": 1}},
+    {"id": "sword", "inputs": {"ingot": 2, "plank": 1}, "outputs": {"sword": 1}},
+    {"id": "amulet", "inputs": {"moonstone": 1, "ingot": 1}, "outputs": {"amulet": 1}},
+    {"id": "elixir", "inputs": {"phoenix_ash": 1}, "outputs": {"phoenix_ash": 2, "elixir": 1}},
+    {"id": "sawdust", "inputs": {"plank": 1}, "outputs": {"sawdust": 3}}
+  ],
+  "goals": ["sword", "amulet"]
+}

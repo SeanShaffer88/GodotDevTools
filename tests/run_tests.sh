@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -187,4 +187,14 @@ gate "settings drift reports the changed fps cap" \
   res://addons/settings_drift/cli/psd_cli.gd -- --project=res://demo/settings_drift/current.cfg --baseline=res://demo/settings_drift/baseline.cfg --fail-on=setting_changed
 gate "scene lint flags the hero without a collision shape" \
   res://addons/scene_lint/cli/slr_cli.gd -- --dir=res://demo/scene_lint --fail-on=rule_violation
+gate "loot simulator flags the dragon blade drought" \
+  res://addons/loot_sim/cli/lts_cli.gd -- --input=res://demo/balance/loot.json --fail-on=drought_risk
+gate "difficulty analyzer flags the level 4 spike" \
+  res://addons/difficulty_curve/cli/dca_cli.gd -- --input=res://demo/balance/difficulty.json --fail-on=difficulty_spike
+gate "damage sandbox flags negative damage" \
+  res://addons/damage_sandbox/cli/dfs_cli.gd -- --input=res://demo/balance/damage.json --fail-on=negative_result
+gate "xp planner flags the level 5 wall" \
+  res://addons/xp_curve/cli/xpc_cli.gd -- --input=res://demo/balance/xp.json --fail-on=level_wall
+gate "crafting validator flags the unobtainable amulet" \
+  res://addons/crafting_graph/cli/cgv_cli.gd -- --input=res://demo/balance/crafting.json --fail-on=unobtainable_goal
 echo "ALL GATE CHECKS PASSED"

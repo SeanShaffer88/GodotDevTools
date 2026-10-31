@@ -1,0 +1,14 @@
+{
+  "tables": {
+    "chest": {"rolls": 1, "entries": [
+      {"item": "gold", "weight": 70, "value": 5},
+      {"item": "potion", "weight": 25, "value": 20},
+      {"item": "dragon_blade", "weight": 0.2, "value": 5000},
+      {"item": "broken_key", "weight": 0, "value": 0}
+    ]},
+    "boss": {"rolls": 3, "entries": [
+      {"item": "gem", "weight": 1, "value": 300},
+      {"item": "gold", "weight": 3, "value": 50}
+    ]}
+  }
+}

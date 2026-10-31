@@ -1,0 +1,5 @@
+{
+  "formula": "atk * (100.0 / (100.0 + def)) * mult - armor",
+  "vars": {"atk": [10, 50, 200], "def": [0, 50, 400], "mult": [0.5, 1.0, 2.0], "armor": [0, 20]},
+  "expect": {"min": 0, "max": 1000, "monotonic": {"atk": "increasing", "def": "decreasing"}}
+}
