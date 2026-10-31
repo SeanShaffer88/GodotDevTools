@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dj624agk5nec2"
+
+[deps]
+
+files=["res://demo/glyphs/prompts.en.translation"]
+
+source_file="res://demo/glyphs/prompts.csv"
+dest_files=["res://demo/glyphs/prompts.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

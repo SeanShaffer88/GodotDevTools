@@ -152,6 +152,11 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Spawn Point and Encounter Validator: blocked, crowded and off-mesh spawns | spawn_validator core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Interaction Reachability Checker: trigger areas vs reachable navmesh | interaction_reach core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | World Boundary and Out-of-Bounds Auditor: level extents vs kill zones and boundaries | world_bounds core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| AI Perception Debugger: traced sight/hearing decisions against expectations | ai_perception core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Gameplay Ability Simulator: fixed-step rotation simulation | ability_sim core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Procedural Generation Constraint Tester: flood-fill constraints over generated maps | procgen_constraints core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Controller Glyph and Prompt Validator: prompt tokens vs actions, bindings and glyphs | controller_glyphs core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Color-Vision and Contrast Previewer: CVD simulation of palette pairs | colorvision core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |

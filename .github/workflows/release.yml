@@ -164,7 +164,12 @@ jobs:
             navmesh_lab:NavmeshLab \
             spawn_validator:SpawnPoints \
             interaction_reach:InteractionReach \
-            world_bounds:WorldBounds
+            world_bounds:WorldBounds \
+            ai_perception:AIPerception \
+            ability_sim:AbilitySim \
+            procgen_constraints:ProcgenConstraints \
+            controller_glyphs:ControllerGlyphs \
+            colorvision:ColorVision
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

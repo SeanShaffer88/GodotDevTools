@@ -132,6 +132,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Spawn Point and Encounter Validator | 2D spawn markers (group or name) checked against static collision shapes, minimum spacing and an optional navmesh. | `addons/spawn_validator` |
 | Interaction Reachability Checker | Interactable trigger areas (group or name) checked against navmesh reachable from the player start. | `addons/interaction_reach` |
 | World Boundary and Out-of-Bounds Auditor | 2D level extents from static collision: missing kill floor/world boundary below, open sides, kill zones overlapping floors. | `addons/world_bounds` |
+| AI Perception Debugger | 2D sight (range, field of view, wall occlusion) and hearing (range x noise, walls muffle) per agent-target pair with a decision trace and expectations. | `addons/ai_perception` |
+| Gameplay Ability Simulator | Priority-rotation simulation of abilities with costs, cooldowns, cast times and regenerating resources: casts, DPS, idle and wasted resource time. | `addons/ability_sim` |
+| Procedural Generation Constraint Tester | Generated text-grid maps checked by flood fill: reachable exit, key before door, isolated floor pockets, dead-end share; failure rate across seeds. | `addons/procgen_constraints` |
+| Controller Glyph and Prompt Validator | Action tokens in prompt text checked against the InputMap, per-device bindings, and glyph images in per-device folders. | `addons/controller_glyphs` |
+| Color-Vision and Contrast Previewer | Palette colours simulated for protanopia, deuteranopia and tritanopia (Machado 2009, full severity); pairs below a delta E threshold flagged, simulated colours listed. | `addons/colorvision` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -321,6 +326,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `spawn_validator/cli/spv_cli.gd` | `--scene` `--min-spacing` `--spawn-pattern` `--nav` `--fail-on` |
 | `interaction_reach/cli/irc_cli.gd` | `--scene` `--nav` `--start` `--pattern` `--fail-on` |
 | `world_bounds/cli/wba_cli.gd` | `--scene` `--kill-pattern` `--fail-on` |
+| `ai_perception/cli/aip_cli.gd` | `--input` `--wall-muffle` `--fail-on` |
+| `ability_sim/cli/gas_cli.gd` | `--input` `--step` `--max-idle` `--fail-on` |
+| `procgen_constraints/cli/pgc_cli.gd` | `--dir` `--max-dead-end-ratio` `--fail-on` |
+| `controller_glyphs/cli/cgp_cli.gd` | `--dir` `--glyphs` `--project` `--token` `--fail-on` |
+| `colorvision/cli/cvp_cli.gd` | `--input` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 

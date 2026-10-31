@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -319,4 +319,14 @@ gate "interaction checker flags the unreachable chest" \
   res://addons/interaction_reach/cli/irc_cli.gd -- --scene=res://demo/gameplay/arena.tscn --nav=res://demo/gameplay/nav.tres --start=50,50 --fail-on=unreachable_interactable
 gate "world bounds auditor flags the missing kill floor" \
   res://addons/world_bounds/cli/wba_cli.gd -- --scene=res://demo/gameplay/arena.tscn --fail-on=missing_kill_floor
+gate "perception debugger flags the failed sentry expectation" \
+  res://addons/ai_perception/cli/aip_cli.gd -- --input=res://demo/gameplay/perception.json --fail-on=expectation_failed
+gate "ability simulator flags the uncastable meteor" \
+  res://addons/ability_sim/cli/gas_cli.gd -- --input=res://demo/gameplay/abilities.json --fail-on=never_castable
+gate "procgen tester flags failing seeds" \
+  res://addons/procgen_constraints/cli/pgc_cli.gd -- --dir=res://demo/gameplay/maps --fail-on=unreachable_exit,key_behind_door
+gate "glyph validator flags the unknown roll action" \
+  res://addons/controller_glyphs/cli/cgp_cli.gd -- --dir=res://demo/glyphs --project=res://demo/ci/input_actions.godot --fail-on=unknown_action
+gate "colour vision previewer flags the red/green pair" \
+  res://addons/colorvision/cli/cvp_cli.gd -- --input=res://demo/glyphs/palette_cvd.json --fail-on=indistinct_under_cvd
 echo "ALL GATE CHECKS PASSED"

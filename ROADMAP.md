@@ -22,9 +22,9 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 - [ ] **Physics Jitter and Tunneling Detector** (in progress) — `addons/physics_jitter`: surface fast bodies, conflicting transforms and unstable settings. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Hitbox and Hurtbox Timeline Viewer** (in progress) — `addons/hitbox_timeline`: inspect combat volumes alongside animation frames. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Spawn Point and Encounter Validator** (in progress) — `addons/spawn_validator`: check blocked, unsafe or unreachable spawns. Godot 4.3 headless suite and CLI gate passed; editor session pending.
-- [ ] **AI Perception Debugger** — visualize sight, hearing, occlusion and detection decisions.
-- [ ] **Gameplay Ability Simulator** — exercise costs, cooldowns, stacking and interrupts.
-- [ ] **Procedural Generation Constraint Tester** — verify seeded layouts against connectivity and placement constraints.
+- [ ] **AI Perception Debugger** (in progress) — `addons/ai_perception`: visualize sight, hearing, occlusion and detection decisions. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Gameplay Ability Simulator** (in progress) — `addons/ability_sim`: exercise costs, cooldowns, stacking and interrupts. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Procedural Generation Constraint Tester** (in progress) — `addons/procgen_constraints`: verify seeded layouts against connectivity and placement constraints. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **World Boundary and Out-of-Bounds Auditor** (in progress) — `addons/world_bounds`: find possible escape routes and exposed kill zones. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Interaction Reachability Checker** (in progress) — `addons/interaction_reach`: test whether interactables can be reached and activated. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 
@@ -56,8 +56,8 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 
 ## Shipping, accessibility and live operations
 
-- [ ] **Controller Glyph and Prompt Validator** — check device-specific prompts for input actions.
-- [ ] **Color-Vision and Contrast Previewer** — preview color-vision differences and color-only cues.
+- [ ] **Controller Glyph and Prompt Validator** (in progress) — `addons/controller_glyphs`: check device-specific prompts for input actions. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Color-Vision and Contrast Previewer** (in progress) — `addons/colorvision`: preview color-vision differences and color-only cues. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Subtitle Timing and Readability Auditor** (in progress) — JSON cue checks passed Godot 4.3/4.5 CI in PR #6; SRT/WebVTT subset import passed Godot 4.3/4.5 CI. Hands-on editor, safe-area and rendered-layout checks remain future work.
 - [ ] **Platform Certification Checklist Runner** (in progress) — compare a user-defined checklist with recorded results; no certification claim. Godot 4.3/4.5 CI passed; hands-on editor verification pending.
 - [ ] **Privacy and Permissions Auditor** — inventory permissions, collection points and endpoints for review.

@@ -1,0 +1,11 @@
+{
+  "duration": 60,
+  "resources": {"mana": {"max": 100, "start": 100, "regen": 5}},
+  "abilities": [
+    {"id": "meteor", "cost": {"mana": 150}, "cooldown": 30, "cast_time": 2.0, "damage": 900},
+    {"id": "fireball", "cost": {"mana": 30}, "cooldown": 4, "cast_time": 1.0, "damage": 120},
+    {"id": "frost", "cost": {"mana": 20}, "cooldown": 0.5, "cast_time": 1.5, "damage": 60},
+    {"id": "zap", "cost": {}, "cooldown": 0, "cast_time": 0, "damage": 1}
+  ],
+  "priority": ["meteor", "fireball", "frost", "zap"]
+}
