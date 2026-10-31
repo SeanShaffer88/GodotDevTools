@@ -4,6 +4,7 @@ const Core := preload("res://addons/test_priority/core/priority_plan.gd")
 var _first: LineEdit
 var _second: LineEdit
 var _output: RichTextLabel
+var _graph: LineEdit
 
 func _init() -> void:
     name = "Regression Test Prioritizer"
@@ -16,6 +17,10 @@ func _init() -> void:
     _second.text = "res://demo/test_priority/changes.json"
     _second.tooltip_text = "Second input JSON path; see addon README for format."
     add_child(_second)
+    _graph = LineEdit.new()
+    _graph.placeholder_text = "Optional dependency graph JSON path"
+    _graph.tooltip_text = "Optional Scene Dependency Map JSON; leave blank for direct mappings only."
+    add_child(_graph)
     var button := Button.new()
     button.text = "Run check"
     button.tooltip_text = "Analyze the input files without changing them."
@@ -28,4 +33,4 @@ func _init() -> void:
 
 func _on_run() -> void:
     var op = Core.new()
-    _output.text = op.to_markdown(op.run(_first.text, _second.text))
+    _output.text = op.to_markdown(op.run(_first.text, _second.text, _graph.text.strip_edges()))

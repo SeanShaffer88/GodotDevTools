@@ -133,4 +133,7 @@ gate "state coverage detects discontinuous trace" \
 gate "test prioritizer reports unmapped path" \
   res://addons/test_priority/cli/priority_cli.gd -- --fail-on=unmapped_path
 test -s reports/test_priority/test_priority.json
+echo "== test priority dependency graph smoke =="
+"$GODOT" --headless --path . --script res://addons/test_priority/cli/priority_cli.gd -- --first=res://demo/test_priority/graph_mapping.json --second=res://demo/test_priority/graph_changes.json --graph=res://demo/test_priority/graph.json --fail-on=unmapped_path
+grep -q 'test_sdm.gd' reports/test_priority/test_priority.json
 echo "ALL GATE CHECKS PASSED"

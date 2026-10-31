@@ -6,6 +6,7 @@ func _init() -> void:
     var second := "res://demo/test_priority/changes.json"
     var out := "res://reports/test_priority"
     var fail_on: Array = []
+    var graph := ""
     for arg in OS.get_cmdline_user_args():
         if arg.begins_with("--first="):
             first = arg.trim_prefix("--first=")
@@ -13,10 +14,12 @@ func _init() -> void:
             second = arg.trim_prefix("--second=")
         elif arg.begins_with("--out="):
             out = arg.trim_prefix("--out=")
+        elif arg.begins_with("--graph="):
+            graph = arg.trim_prefix("--graph=")
         elif arg.begins_with("--fail-on="):
             fail_on = Array(arg.trim_prefix("--fail-on=").split(","))
     var op = Core.new()
-    var result: Dictionary = op.run(first, second)
+    var result: Dictionary = op.run(first, second, graph)
     if DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(out)) != OK:
         printerr("Cannot create report directory: ", out)
         quit(1)
