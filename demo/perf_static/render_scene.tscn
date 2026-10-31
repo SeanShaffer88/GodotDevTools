@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[node name="Level" type="Node3D"]
+
+[node name="GI" type="VoxelGI" parent="."]
+
+[node name="Mist" type="FogVolume" parent="."]
+
+[node name="Probe" type="ReflectionProbe" parent="."]

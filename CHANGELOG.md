@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Shader Variant Budget Manager (`shader_variants`): Distinct BaseMaterial3D feature combinations (each a separate generated shader) plus #ifdef combinations in .gdshader files, against a budget. Dock, CLI, fixture and test suite.
+- LOD and Visibility Range Planner (`lod_planner`): Invalid visibility ranges, heavy instanced glTF/GLB meshes without visibility ranges, and imports with LOD generation off. Dock, CLI, fixture and test suite.
+- Animation Performance Auditor (`anim_audit`): Animation resources in scenes and .tres: constant tracks, redundant interior keys, duplicate-time keys, track budgets. Dock, CLI, fixture and test suite.
+- Rendering Settings Compatibility Matrix (`render_compat`): Rendering nodes and environment features used per scene against a renderer support matrix (built-in Compatibility list, overridable JSON). Dock, CLI, fixture and test suite.
+- GPU Budget and Overdraw Analyzer (`overdraw`): 2D overdraw estimate per scene (sprite/rect areas clipped to the screen) and fill-rate at target resolutions and frame rates. Dock, CLI, fixture and test suite.
 - Finding Suppression Baseline (`suppressions`): Accepted findings with written justifications and expiry dates applied to a reports folder; remaining findings re-emitted for gating. Dock, CLI, fixture and test suite.
 - Suite CLI Dispatcher (`suite_dispatcher`): Lists every installed tool CLI and runs any of them by name (or all with defaults) in a child process, passing options and exit codes through. Dock, CLI, fixture and test suite.
 - Pre-commit Hook Installer (`precommit`): Generates an opt-in git pre-commit hook running chosen tool CLIs; installs or removes only hooks it wrote. Dock, CLI, fixture and test suite.

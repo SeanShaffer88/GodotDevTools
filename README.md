@@ -118,6 +118,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Finding Suppression Baseline | Accepted findings with written justifications and expiry dates applied to a reports folder; remaining findings re-emitted for gating. | `addons/suppressions` |
 | Suite CLI Dispatcher | Lists every installed tool CLI and runs any of them by name (or all with defaults) in a child process, passing options and exit codes through. | `addons/suite_dispatcher` |
 | Pre-commit Hook Installer | Generates an opt-in git pre-commit hook running chosen tool CLIs; installs or removes only hooks it wrote. | `addons/precommit` |
+| Shader Variant Budget Manager | Distinct BaseMaterial3D feature combinations (each a separate generated shader) plus #ifdef combinations in .gdshader files, against a budget. | `addons/shader_variants` |
+| LOD and Visibility Range Planner | Invalid visibility ranges, heavy instanced glTF/GLB meshes without visibility ranges, and imports with LOD generation off. | `addons/lod_planner` |
+| Animation Performance Auditor | Animation resources in scenes and .tres: constant tracks, redundant interior keys, duplicate-time keys, track budgets. | `addons/anim_audit` |
+| Rendering Settings Compatibility Matrix | Rendering nodes and environment features used per scene against a renderer support matrix (built-in Compatibility list, overridable JSON). | `addons/render_compat` |
+| GPU Budget and Overdraw Analyzer | 2D overdraw estimate per scene (sprite/rect areas clipped to the screen) and fill-rate at target resolutions and frame rates. | `addons/overdraw` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -293,6 +298,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `suppressions/cli/fsb_cli.gd` | `--reports` `--suppressions` `--today` `--fail-on` |
 | `suite_dispatcher/cli/gdt_cli.gd` | `--addons` `--fail-on` |
 | `precommit/cli/pch_cli.gd` | `--config` `--install` `--uninstall` `--git-dir` `--fail-on` |
+| `shader_variants/cli/svb_cli.gd` | `--dir` `--max-variants` `--max-defines` `--fail-on` |
+| `lod_planner/cli/lod_cli.gd` | `--dir` `--heavy-triangles` `--fail-on` |
+| `anim_audit/cli/apa_cli.gd` | `--dir` `--max-tracks` `--fail-on` |
+| `render_compat/cli/rcm_cli.gd` | `--dir` `--renderer` `--matrix` `--fail-on` |
+| `overdraw/cli/gbo_cli.gd` | `--dir` `--width` `--height` `--max-overdraw` `--fps` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 

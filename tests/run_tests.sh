@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -291,4 +291,14 @@ if "$GODOT" --headless --path . --script res://addons/suite_dispatcher/cli/gdt_c
 echo "== precommit hook preview =="
 "$GODOT" --headless --path . --script res://addons/precommit/cli/pch_cli.gd -- --config=res://demo/suite/precommit.json
 grep -q "npb_cli.gd" reports/precommit/pre-commit
+gate "shader variant budget flags too many material setups" \
+  res://addons/shader_variants/cli/svb_cli.gd -- --dir=res://demo/perf_static --max-variants=3 --fail-on=variant_budget
+gate "LOD planner flags the inverted tower range" \
+  res://addons/lod_planner/cli/lod_cli.gd -- --dir=res://demo/perf_static --fail-on=invalid_range
+gate "animation auditor flags the constant track" \
+  res://addons/anim_audit/cli/apa_cli.gd -- --dir=res://demo/perf_static --fail-on=constant_track
+gate "render matrix flags VoxelGI under Compatibility" \
+  res://addons/render_compat/cli/rcm_cli.gd -- --dir=res://demo/perf_static --renderer=gl_compatibility --fail-on=unsupported_feature
+gate "overdraw analyzer flags the layered menu" \
+  res://addons/overdraw/cli/gbo_cli.gd -- --dir=res://demo/perf_static --fail-on=overdraw_budget
 echo "ALL GATE CHECKS PASSED"

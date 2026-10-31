@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://demo/perf_static/sky.png" id="1_sky"]
+[ext_resource type="Texture2D" path="res://demo/perf_static/cloud.png" id="2_cloud"]
+
+[node name="MenuBg" type="Node2D"]
+
+[node name="Sky" type="Sprite2D" parent="."]
+texture = ExtResource("1_sky")
+centered = false
+
+[node name="Cloud1" type="Sprite2D" parent="."]
+texture = ExtResource("2_cloud")
+scale = Vector2(2, 2)
+centered = false
+
+[node name="Cloud2" type="Sprite2D" parent="."]
+texture = ExtResource("2_cloud")
+scale = Vector2(2, 2)
+centered = false
+
+[node name="Vignette" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.3)
+
+[node name="Fade" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.2)
