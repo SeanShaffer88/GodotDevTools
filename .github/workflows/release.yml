@@ -1,0 +1,57 @@
+name: Release
+
+# On a version tag (v*), builds the installable zips from addons/ and
+# attaches them to a GitHub Release: one zip per tool plus the suite,
+# named exactly like the v1.0.0 release assets. Zips are no longer
+# committed to the repo root - the release is the only place they live.
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  gate:
+    name: Gate before release
+    uses: ./.github/workflows/tests.yml
+
+  release:
+    name: Build zips and publish release
+    needs: gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Build per-tool and suite zips
+        run: |
+          set -e
+          VERSION="${GITHUB_REF_NAME}"
+          mkdir -p dist
+          for pair in \
+            accessibility:Accessibility \
+            asset_health:AssetHealth \
+            dialogue_quest:DialogueQuest \
+            export_doctor:ExportDoctor \
+            network_sim:NetworkSim \
+            responsive_ui:ResponsiveUI \
+            scene_search:SceneSearch \
+            time_machine:TimeMachine \
+            visual_regression:VisualRegression
+          do
+            folder="${pair%%:*}"
+            name="${pair##*:}"
+            zip -qr "dist/GodotDevTools-${name}-${VERSION}.zip" "addons/${folder}"
+          done
+          zip -qr "dist/GodotDevTools-Suite-${VERSION}.zip" addons/
+          ls -la dist/
+
+      - name: Create GitHub Release with the zips
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/*.zip \
+            --title "GodotDevTools $GITHUB_REF_NAME" \
+            --generate-notes
