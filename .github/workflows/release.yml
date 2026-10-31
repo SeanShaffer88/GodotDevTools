@@ -97,7 +97,12 @@ jobs:
             unused_symbols:UnusedSymbols \
             type_coverage:TypeCoverage \
             script_complexity:ScriptComplexity \
-            duplicate_code:DuplicateCode
+            duplicate_code:DuplicateCode \
+            export_ranges:ExportRanges \
+            autoload_graph:AutoloadGraph \
+            uid_integrity:UIDIntegrity \
+            settings_drift:SettingsDrift \
+            scene_lint:SceneLint
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

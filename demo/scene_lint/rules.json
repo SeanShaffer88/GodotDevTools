@@ -1,0 +1,5 @@
+[
+  {"id": "body-needs-shape", "match_type": "CharacterBody2D", "require_child_type": ["CollisionShape2D", "CollisionPolygon2D"]},
+  {"id": "pascal-case-nodes", "match_type": "*", "name_pattern": "^[A-Z][A-Za-z0-9]*$"},
+  {"id": "no-font-overrides", "match_type": "Label", "forbid_property": "theme_override_font_sizes/font_size"}
+]

@@ -65,6 +65,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Typed GDScript Coverage Meter | Share of variables, parameters and return values with static types, per file and project, with a minimum-percentage gate. | `addons/type_coverage` |
 | Script Complexity Reporter | Per-function branch complexity, length and nesting depth with configurable thresholds. | `addons/script_complexity` |
 | Duplicate Code Detector | Normalized line-window clone detection across GDScript files, merged into the longest repeated blocks. | `addons/duplicate_code` |
+| Export Variable Range Auditor | Scene-stored and default values of `@export_range` properties checked against their limits (honouring or_greater/or_less); optional list of unhinted numeric exports. | `addons/export_ranges` |
+| Autoload Dependency Graph | Autoload-to-autoload references from project settings and scripts: cycles, missing scripts, and `_init`/`_enter_tree`/`_ready` use of autoloads declared later. | `addons/autoload_graph` |
+| Resource UID Integrity Checker | `uid://` references in ext_resources and scripts checked against declared UIDs (scene/resource headers, .import and .uid files): stale, duplicate and unknown UIDs. | `addons/uid_integrity` |
+| Project Settings Drift Report | Key-by-key diff of `project.godot` against a committed baseline, with ignore patterns. | `addons/settings_drift` |
+| Scene Lint Rule Engine | User-defined JSON rules over scene text: required child types, forbidden/required properties, node-name patterns; physics bodies need shapes by default. | `addons/scene_lint` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -187,6 +192,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `type_coverage/cli/tcm_cli.gd` | `--dir` `--min-percent` `--fail-on` |
 | `script_complexity/cli/scx_cli.gd` | `--dir` `--max-complexity` `--max-lines` `--max-nesting` `--fail-on` |
 | `duplicate_code/cli/dup_cli.gd` | `--dir` `--min-lines` `--fail-on` |
+| `export_ranges/cli/era_cli.gd` | `--dir` `--report-unhinted` `--fail-on` |
+| `autoload_graph/cli/alg_cli.gd` | `--project` `--fail-on` |
+| `uid_integrity/cli/uid_cli.gd` | `--dir` `--fail-on` |
+| `settings_drift/cli/psd_cli.gd` | `--project` `--baseline` `--ignore` `--fail-on` |
+| `scene_lint/cli/slr_cli.gd` | `--dir` `--rules` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 

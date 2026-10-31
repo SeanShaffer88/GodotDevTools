@@ -1,0 +1,9 @@
+extends Node
+
+
+func _ready() -> void:
+    Events.level_started.connect(_on_level)
+
+
+func _on_level() -> void:
+    Save.mark_dirty()

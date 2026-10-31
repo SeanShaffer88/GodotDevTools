@@ -69,16 +69,16 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 
 ## Expansion (60 more) - editor productivity and code health
 
-- [ ] **Scene Lint Rule Engine** — user-defined JSON rules over scene text (required children, forbidden properties, type constraints).
-- [ ] **Export Variable Range Auditor** — @export values in scenes outside their declared range hints, and numeric exports with no hint.
+- [ ] **Scene Lint Rule Engine** (in progress) — `addons/scene_lint`: user-defined JSON rules over scene text (required children, forbidden properties, type constraints). Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Export Variable Range Auditor** (in progress) — `addons/export_ranges`: @export values in scenes outside their declared range hints, and numeric exports with no hint. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Node Path Breakage Detector** (in progress) — `addons/node_paths`: `$Path` and `get_node("...")` strings checked against the scene trees that own the script. Godot 4.3 headless suite and CLI gate passed; editor session pending.
-- [ ] **Autoload Dependency Graph** — which autoloads reference which; flag cycles and init-order hazards.
+- [ ] **Autoload Dependency Graph** (in progress) — `addons/autoload_graph`: which autoloads reference which; flag cycles and init-order hazards. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Unused Signal and Method Finder** (in progress) — `addons/unused_symbols`: declared signals never emitted or connected, functions never referenced. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Typed GDScript Coverage Meter** (in progress) — `addons/type_coverage`: share of variables, parameters and returns with static types; ratchet gate. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Script Complexity Reporter** (in progress) — `addons/script_complexity`: per-function branch complexity, length and nesting depth with thresholds. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Duplicate Code Detector** (in progress) — `addons/duplicate_code`: normalized line-window clone detection across GDScript files. Godot 4.3 headless suite and CLI gate passed; editor session pending.
-- [ ] **Resource UID Integrity Checker** — `uid://` references versus declared ext_resource and `.uid` sidecars.
-- [ ] **Project Settings Drift Report** — compare `project.godot` against a committed baseline, key by key.
+- [ ] **Resource UID Integrity Checker** (in progress) — `addons/uid_integrity`: `uid://` references versus declared ext_resource and `.uid` sidecars. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Project Settings Drift Report** (in progress) — `addons/settings_drift`: compare `project.godot` against a committed baseline, key by key. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 
 ## Expansion - gameplay data and balance
 

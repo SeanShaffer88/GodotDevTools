@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[node name="Hero" type="CharacterBody2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="pickup zone" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="pickup zone"]
