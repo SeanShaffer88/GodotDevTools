@@ -1,0 +1,447 @@
+{
+	"session": {
+		"started_usec": 0
+	},
+	"events": [
+		{
+			"fire_id": "f1",
+			"t_usec": 0,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f2",
+			"t_usec": 10,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f3",
+			"t_usec": 20,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f4",
+			"t_usec": 30,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f5",
+			"t_usec": 40,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f6",
+			"t_usec": 50,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f7",
+			"t_usec": 60,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f8",
+			"t_usec": 70,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f9",
+			"t_usec": 80,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f10",
+			"t_usec": 90,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f11",
+			"t_usec": 100,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f12",
+			"t_usec": 110,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f13",
+			"t_usec": 120,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f14",
+			"t_usec": 130,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f15",
+			"t_usec": 140,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f16",
+			"t_usec": 150,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f17",
+			"t_usec": 160,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f18",
+			"t_usec": 170,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f19",
+			"t_usec": 180,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f20",
+			"t_usec": 190,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f21",
+			"t_usec": 200,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f22",
+			"t_usec": 210,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f23",
+			"t_usec": 220,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f24",
+			"t_usec": 230,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f25",
+			"t_usec": 240,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f26",
+			"t_usec": 250,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f27",
+			"t_usec": 260,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f28",
+			"t_usec": 270,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f29",
+			"t_usec": 280,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f30",
+			"t_usec": 290,
+			"signal": "heartbeat",
+			"emitter": "GameLoop",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f31",
+			"t_usec": 1000,
+			"signal": "damage_taken",
+			"emitter": "Player",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f31",
+			"t_usec": 1150,
+			"signal": "damage_taken",
+			"emitter": "",
+			"kind": "handle",
+			"listener": "HUD",
+			"depth": 1,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f32",
+			"t_usec": 2000,
+			"signal": "quest_updated",
+			"emitter": "QuestLog",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f33",
+			"t_usec": 3000,
+			"signal": "item_pickup",
+			"emitter": "Player",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f34",
+			"t_usec": 3001,
+			"signal": "item_pickup",
+			"emitter": "Inventory",
+			"kind": "emit",
+			"listener": "",
+			"depth": 1,
+			"parent_fire": "f33"
+		},
+		{
+			"fire_id": "f35",
+			"t_usec": 4000,
+			"signal": "cascade_1",
+			"emitter": "Bus",
+			"kind": "emit",
+			"listener": "",
+			"depth": 0,
+			"parent_fire": ""
+		},
+		{
+			"fire_id": "f36",
+			"t_usec": 4001,
+			"signal": "cascade_2",
+			"emitter": "Bus",
+			"kind": "emit",
+			"listener": "",
+			"depth": 1,
+			"parent_fire": "f35"
+		},
+		{
+			"fire_id": "f37",
+			"t_usec": 4002,
+			"signal": "cascade_3",
+			"emitter": "Bus",
+			"kind": "emit",
+			"listener": "",
+			"depth": 2,
+			"parent_fire": "f36"
+		},
+		{
+			"fire_id": "f38",
+			"t_usec": 4003,
+			"signal": "cascade_4",
+			"emitter": "Bus",
+			"kind": "emit",
+			"listener": "",
+			"depth": 3,
+			"parent_fire": "f37"
+		},
+		{
+			"fire_id": "f39",
+			"t_usec": 4004,
+			"signal": "cascade_5",
+			"emitter": "Bus",
+			"kind": "emit",
+			"listener": "",
+			"depth": 4,
+			"parent_fire": "f38"
+		},
+		{
+			"fire_id": "f40",
+			"t_usec": 4005,
+			"signal": "cascade_6",
+			"emitter": "Bus",
+			"kind": "emit",
+			"listener": "",
+			"depth": 5,
+			"parent_fire": "f39"
+		},
+		{
+			"fire_id": "f41",
+			"t_usec": 4006,
+			"signal": "cascade_7",
+			"emitter": "Bus",
+			"kind": "emit",
+			"listener": "",
+			"depth": 6,
+			"parent_fire": "f40"
+		},
+		{
+			"fire_id": "f42",
+			"t_usec": 4007,
+			"signal": "cascade_8",
+			"emitter": "Bus",
+			"kind": "emit",
+			"listener": "",
+			"depth": 7,
+			"parent_fire": "f41"
+		},
+		{
+			"fire_id": "f999",
+			"t_usec": 5000,
+			"signal": "ghost_signal",
+			"emitter": "",
+			"kind": "handle",
+			"listener": "Nobody",
+			"depth": 0,
+			"parent_fire": ""
+		}
+	]
+}

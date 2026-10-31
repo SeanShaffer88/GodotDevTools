@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(32, 32)
+
+[node name="Arena" type="Node2D"]
+
+[node name="EverythingBody" type="Area2D" parent="."]
+collision_layer = 1048575
+collision_mask = 1048575
+
+[node name="Shape" type="CollisionShape2D" parent="EverythingBody"]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="SpareRay" type="RayCast2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+target_position = Vector2(0, 100)

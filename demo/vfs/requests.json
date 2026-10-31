@@ -1,0 +1,6 @@
+[
+	{"op": "read", "path": "res://demo/vfs/Save.JSON"},
+	{"op": "write", "path": "res://demo/vfs/save.json"},
+	{"op": "read", "path": "user://../outside.txt"},
+	{"op": "write", "path": "user://progress.dat"}
+]

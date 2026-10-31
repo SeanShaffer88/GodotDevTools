@@ -1,0 +1,6 @@
+{
+	"grid": 1.0,
+	"subdivisions": 1,
+	"max_slope_degrees": 45.0,
+	"tolerance": 0.02
+}

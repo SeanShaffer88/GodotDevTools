@@ -1,0 +1,12 @@
+{
+	"preview_samples": 40,
+	"shakes": [
+		{"name": "impact", "amplitude": 10.0, "frequency": 28.0, "duration": 0.35, "seed": 7},
+		{"name": "rumble", "amplitude": 3.0, "frequency": 12.0, "duration": 1.2, "seed": 3}
+	],
+	"transitions": [
+		{"name": "zoom_in", "from": 1.0, "to": 0.6, "duration": 0.8, "ease": "in_out_cubic"},
+		{"name": "fade_out", "from": 1.0, "to": 0.0, "duration": 0.5, "ease": "wobbly"}
+	],
+	"framing": {"deadzone": [120, 80]}
+}

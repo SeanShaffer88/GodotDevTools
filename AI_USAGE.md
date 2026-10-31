@@ -3,8 +3,8 @@
 This file has two halves. The first is a **pasteable project prompt**: drop it
 into any AI assistant that will work in this repo, or in a game project that
 uses these tools. The second half is the **stable reference** the prompt points
-at - the exact file map, what to inspect and in which order, and every CLI
-invocation with its real defaults and exit codes, linked to the specific files.
+at - the exact file map, what to inspect and in which order, and CLI examples for the original tools. For the full list and options, see the
+[root README](README.md) and the individual addon READMEs.
 
 Facts below are taken from the code itself (CLI bodies, `plugin.cfg` files,
 [test suite](tests/run_tests.sh)), not from prose that could drift. When code
@@ -13,7 +13,7 @@ and documentation disagree, the code wins and the docs get fixed.
 ## The prompt (copy everything inside the box)
 
 ```text
-You are working with GodotDevTools: nine independent developer tools for
+You are working with GodotDevTools: twenty-nine independent developer tools for
 Godot 4 games, in a repo that is itself a Godot demo/test project. Everything
 is offline, deterministic, MIT-licensed GDScript with no third-party
 dependencies. Godot 4.3-stable and 4.5-stable are CI-verified; no other
@@ -22,11 +22,11 @@ version may be claimed without a test run.
 WHERE THE TOOLS ARE
 - addons/<tool>/ for: accessibility, asset_health, dialogue_quest,
   export_doctor, network_sim, responsive_ui, scene_search, time_machine,
-  visual_regression. Each folder is independently installable.
+  visual_regression and the twenty additional addons listed in README.md.
+  Each folder is independently installable.
 - Inside each tool: plugin.cfg + plugin.gd (editor entry point), core/ (the
   ONE operation - all checking logic, no editor APIs), ui/ (editor dock, a
-  thin shell), cli/ (headless runner, a thin shell), and for time_machine and
-  network_sim a runtime/ node you place in a game scene.
+  thin shell), cli/ (headless runner, a thin shell), and for tools with in-game functionality a runtime/ node you place in a game scene.
 - demo/ is a fixture project containing one deliberate problem per tool.
   tests/ holds one suite per tool plus run_tests.sh, the full gate.
   docs/PARITY.md is the capability matrix, QUALITY.md the scorecard,
@@ -77,8 +77,8 @@ RULES THAT MUST NOT BREAK
 
 ## Where the tools are
 
-Nine addons, one folder each, no cross-dependencies. Links go to the exact
-files that hold the behaviour.
+Twenty-nine addons, one folder each, no cross-dependencies. The original nine
+are mapped below; see the [root README](README.md) for all twenty-nine.
 
 | Tool (plugin name) | Core - the operation | Dock | CLI | Runtime |
 |---|---|---|---|---|
@@ -108,7 +108,7 @@ Orientation files, cheapest signal first:
    Partially Verified / built-with-status matrix. This bounds what may be
    claimed.
 4. [QUALITY.md](QUALITY.md) - current gate count and scorecard
-   (104/104 checks at the time of writing; the file is the source of truth).
+   (292/292 checks at the time of writing; the file is the source of truth).
 5. [CHANGELOG.md](CHANGELOG.md) - what changed recently, under [Unreleased].
 6. [tests/run_tests.sh](tests/run_tests.sh) - the full gate script; reading it
    shows exactly which CLI invocations and exit-code-2 paths are enforced.
@@ -130,13 +130,13 @@ The demo fixture - one deliberate problem per tool, all under [demo/](demo/):
 
 ### Headless CLI reference
 
-Invocation shape (same for all nine, from the project root):
+Invocation shape (same for all tools, from the project root):
 
 ```sh
 godot --headless --path . --script res://addons/<tool>/cli/<cli>.gd -- [options]
 ```
 
-Contract every CLI shares (from the code, uniform across all nine):
+Contract every CLI shares (from the code, for the original nine listed below):
 
 - Writes `<name>.json` and `<name>.md` reports into `--out=<dir>`
   (`--format=json,md` selects which; both by default).
@@ -182,7 +182,7 @@ Per-tool options, defaults and gate kinds:
 - **export_doctor** - [bed_cli.gd](addons/export_doctor/cli/bed_cli.gd):
   `--fail-on=errors`. Run before a release build: exit 2 means do not ship.
 
-All nine also accept `--out=<dir>` (defaults: `res://reports/<tool>`, except
+The original nine also accept `--out=<dir>` (defaults: `res://reports/<tool>`, except
 visual_regression's `res://visual_reports`) and `--format=json,md`. Generic
 `--fail-on=errors` (any error-severity finding) and `--fail-on=issues` (any
 finding) work everywhere.
@@ -235,8 +235,8 @@ through it; set latency/jitter/loss in the inspector; deliveries arrive on its
 The pattern is: run a CLI, treat exit 2 as failure, archive the reports.
 This repo's own [.github/workflows/tests.yml](.github/workflows/tests.yml) is
 the worked example - it runs [tests/run_tests.sh](tests/run_tests.sh) (import
-check, nine suites, CLI smokes, five exit-code-2 gate assertions) headless on
-Godot 4.3-stable and 4.5-stable on every push and PR, and uploads
+check, twenty-nine suites, CLI smokes, and exit-code-2 gate assertions) headless on
+Godot 4.3-stable and 4.5-stable on pushes to main and pull requests, and uploads
 `reports/` + `visual_reports/` as artifacts. A minimal game-project pipeline:
 
 ```yaml

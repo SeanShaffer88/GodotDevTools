@@ -1,0 +1,32 @@
+{
+	"initial": "idle",
+	"blackboard": {"suspicion": 0, "noise_level": 0.2},
+	"states": [
+		{
+			"name": "idle",
+			"on_enter": {"set": {"posture": "relaxed"}},
+			"tree": {
+				"type": "sequence", "name": "idle_root",
+				"children": [
+					{"type": "action", "name": "wait", "action": {"add": {"idle_ticks": 1}}},
+					{"type": "condition", "name": "heard_noise", "cond": {"key": "noise_level", "op": "gt", "value": 0.5}}
+				]
+			}
+		},
+		{
+			"name": "alert",
+			"tree": {
+				"type": "selector", "name": "alert_root",
+				"children": [
+					{"type": "condition", "name": "sees_player", "cond": {"key": "player_visible", "op": "eq", "value": true}},
+					{"type": "action", "name": "look_around", "action": {"add": {"suspicion": 1}}}
+				]
+			}
+		},
+		{"name": "forgotten_state", "tree": {}}
+	],
+	"transitions": [
+		{"from": "idle", "to": "alert", "when": {"key": "noise_level", "op": "gt", "value": 0.5}},
+		{"from": "alert", "to": "chase", "when": {"key": "player_visible", "op": "eq", "value": true}}
+	]
+}

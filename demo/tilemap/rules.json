@@ -1,0 +1,9 @@
+{
+	"terrains": ["grass", "sand", "water"],
+	"tiles": [
+		{"name": "grass_full", "peering": {"0": "grass", "1": "grass", "2": "grass", "3": "grass", "4": "grass", "5": "grass", "6": "grass", "7": "grass"}},
+		{"name": "sand_full", "peering": {"0": "sand", "1": "sand", "2": "sand", "3": "sand", "4": "sand", "5": "sand", "6": "sand", "7": "sand"}},
+		{"name": "water_full", "peering": {"0": "water", "1": "water", "2": "water", "3": "water", "4": "water", "5": "water", "6": "water", "7": "water"}},
+		{"name": "grass_to_sand_right", "peering": {"0": "grass", "1": "grass", "2": "grass", "3": "sand", "4": "grass", "5": "grass", "6": "grass", "7": "grass"}}
+	]
+}
