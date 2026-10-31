@@ -43,9 +43,9 @@ jobs:
           do
             folder="${pair%%:*}"
             name="${pair##*:}"
-            zip -qr "dist/GodotDevTools-${name}-${VERSION}.zip" "addons/${folder}"
+            zip -qrD "dist/GodotDevTools-${name}-${VERSION}.zip" "addons/${folder}"
           done
-          zip -qr "dist/GodotDevTools-Suite-${VERSION}.zip" addons/
+          zip -qrD "dist/GodotDevTools-Suite-${VERSION}.zip" addons/
           ls -la dist/
 
       - name: Create GitHub Release with the zips
