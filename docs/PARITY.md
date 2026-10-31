@@ -100,6 +100,11 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Random Table Fairness Tester: chi-square goodness of fit with p-values | rng_fairness core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Save File Bloat Auditor: per-key size and growth across sample saves | save_bloat core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Dialogue Variable Lint: condition reads vs effect writes in dialogue JSON | dialogue_vars core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Font Glyph Coverage Checker: translation characters against TTF/OTF cmap | font_glyphs core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Audio Loudness and Clipping Auditor: PCM WAV peak, RMS, clipping, DC offset, rate | audio_levels core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Audio Import Settings Auditor: loop/compression settings vs role and length | audio_import core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Texture Atlas Packing Planner: shelf packing estimate from sizes | atlas_planner core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Texture Filter Consistency Checker: pixel-art import settings and default filter | texture_filter core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |

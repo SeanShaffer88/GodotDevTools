@@ -80,6 +80,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Random Table Fairness Tester | Pearson chi-square goodness of fit of recorded outcome counts against intended weights, with p-values and small-sample warnings. | `addons/rng_fairness` |
 | Save File Bloat Auditor | JSON save size by key path, dominant keys, growth across ordered sample saves, total-size budget. | `addons/save_bloat` |
 | Dialogue Variable Lint | Dialogue condition reads versus effect writes in dialogue JSON; read-never-set, set-never-read and type mismatches, with an external-variable allow list. | `addons/dialogue_vars` |
+| Font Glyph Coverage Checker | Characters used per locale in translation CSV/PO files checked against a TTF/OTF cmap table (formats 4 and 12). | `addons/font_glyphs` |
+| Audio Loudness and Clipping Auditor | WAV peak/RMS dBFS, clipped samples, DC offset and sample-rate outliers from the PCM data itself. | `addons/audio_levels` |
+| Audio Import Settings Auditor | Audio `.import` loop and compression settings against clip role (music/sfx folder patterns) and WAV length. | `addons/audio_import` |
+| Texture Atlas Packing Planner | Shelf-packs sprite sizes (from PNG headers or a JSON list) into atlas pages; page count, waste, oversize sprites. | `addons/atlas_planner` |
+| Texture Filter Consistency Checker | Pixel-art texture imports (by folder pattern) checked for mipmaps and lossy compression, plus the project default canvas filter. | `addons/texture_filter` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -217,6 +222,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `rng_fairness/cli/rft_cli.gd` | `--input` `--alpha` `--fail-on` |
 | `save_bloat/cli/sba_cli.gd` | `--dir` `--max-bytes` `--dominant-share` `--growth-factor` `--fail-on` |
 | `dialogue_vars/cli/dvl_cli.gd` | `--dir` `--external` `--fail-on` |
+| `font_glyphs/cli/fgc_cli.gd` | `--font` `--strings` `--fail-on` |
+| `audio_levels/cli/ala_cli.gd` | `--dir` `--expected-rate` `--quiet-db` `--max-samples` `--fail-on` |
+| `audio_import/cli/aia_cli.gd` | `--dir` `--music-pattern` `--sfx-pattern` `--max-wav-seconds` `--fail-on` |
+| `atlas_planner/cli/atp_cli.gd` | `--input` `--page-size` `--padding` `--max-pages` `--max-waste` `--fail-on` |
+| `texture_filter/cli/tfc_cli.gd` | `--dir` `--pixel-pattern` `--project` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 

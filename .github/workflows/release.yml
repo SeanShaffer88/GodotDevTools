@@ -112,7 +112,12 @@ jobs:
             wave_budget:WaveBudget \
             rng_fairness:RNGFairness \
             save_bloat:SaveBloat \
-            dialogue_vars:DialogueVars
+            dialogue_vars:DialogueVars \
+            font_glyphs:FontGlyphs \
+            audio_levels:AudioLevels \
+            audio_import:AudioImport \
+            atlas_planner:AtlasPlanner \
+            texture_filter:TextureFilter
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

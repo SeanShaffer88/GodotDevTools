@@ -95,11 +95,11 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 
 ## Expansion - rendering, audio and assets
 
-- [ ] **Font Glyph Coverage Checker** — characters used by translations against a font's cmap table.
-- [ ] **Audio Loudness and Clipping Auditor** — WAV peak, RMS and clipped samples per file.
-- [ ] **Audio Import Settings Auditor** — loop flags and compression mode against clip length and role.
-- [ ] **Texture Atlas Packing Planner** — shelf-pack sprite sizes into atlas pages; waste and page count.
-- [ ] **Texture Filter Consistency Checker** — pixel-art folders with filtering or mipmaps on, and the reverse.
+- [ ] **Font Glyph Coverage Checker** (in progress) — `addons/font_glyphs`: characters used by translations against a font's cmap table. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Audio Loudness and Clipping Auditor** (in progress) — `addons/audio_levels`: WAV peak, RMS and clipped samples per file. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Audio Import Settings Auditor** (in progress) — `addons/audio_import`: loop flags and compression mode against clip length and role. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Texture Atlas Packing Planner** (in progress) — `addons/atlas_planner`: shelf-pack sprite sizes into atlas pages; waste and page count. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Texture Filter Consistency Checker** (in progress) — `addons/texture_filter`: pixel-art folders with filtering or mipmaps on, and the reverse. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Mesh Statistics Report** — vertex, index and primitive counts from glTF JSON against budgets.
 - [ ] **3D Light and Shadow Cost Estimator** — shadow-casting lights and omni/spot counts per scene.
 - [ ] **Environment Feature Cost Matrix** — WorldEnvironment features enabled per scene against target tiers.
