@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Known limitations
+    url: https://github.com/SeanShaffer88/GodotDevTools#limitations-and-known-issues
+    about: Several "it doesn't do X" reports are already documented limitations - check the list first.
+  - name: Contributing guide (architecture rules, gate, releases)
+    url: https://github.com/SeanShaffer88/GodotDevTools/blob/main/CONTRIBUTING.md
+    about: How the frozen core/ui/cli layout works and what a change needs before it can merge.

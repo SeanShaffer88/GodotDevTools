@@ -1,5 +1,7 @@
 # GodotDevTools
 
+[![Tests](https://github.com/SeanShaffer88/GodotDevTools/actions/workflows/tests.yml/badge.svg)](https://github.com/SeanShaffer88/GodotDevTools/actions/workflows/tests.yml)
+
 Nine tools for developers who build games with Godot 4: visual regression testing, a game-state time machine, a responsive UI previewer, an asset health dashboard, a dialogue and quest debugger, a multiplayer network simulator, natural-language scene search, an automated accessibility checker, and a build and export doctor.
 
 ## TL;DR
@@ -35,12 +37,12 @@ No placeholder images are used in the meantime.
 
 ## Requirements
 
-- Godot **4.3** (verified). Other Godot 4.x versions are expected to work - the APIs used (`Image`, `ConfigFile`, `RegEx`, `DirAccess`) are stable across 4.x - but this is **to be confirmed** by a test run.
+- Godot **4.3** and **4.5** (both verified - the full test gate runs headless on 4.3-stable and 4.5-stable in CI on every push and pull request). Other Godot 4.x versions are expected to work - the APIs used (`Image`, `ConfigFile`, `RegEx`, `DirAccess`) are stable across 4.x - but this is **to be confirmed** by a test run.
 - No third-party dependencies. No network access is used at any point.
 
 ## Install
 
-For one tool: copy its `addons/<tool>` folder into your project's `addons/` folder and enable it under Project -> Project Settings -> Plugins. Ready-made zips are in this repo's root: `GodotDevTools-<Tool>-v1.0.0.zip` per tool and `GodotDevTools-Suite-v1.0.0.zip` with all nine - unzip into your project root.
+For one tool: copy its `addons/<tool>` folder into your project's `addons/` folder and enable it under Project -> Project Settings -> Plugins. Ready-made zips are attached to each [GitHub Release](https://github.com/SeanShaffer88/GodotDevTools/releases): `GodotDevTools-<Tool>-v<version>.zip` per tool and `GodotDevTools-Suite-v<version>.zip` with all nine - unzip into your project root.
 
 For all nine: copy all nine `addons/` folders (or unzip the suite zip), then enable the plugins you want. Each tool works on its own; none depends on another.
 
@@ -48,8 +50,10 @@ For all nine: copy all nine `addons/` folders (or unzip the suite zip), then ena
 
 ### In the editor
 
-Each tool adds a dock on the right side of the editor with a **Run check** button, a results list, and a `?` help button that explains the tool in plain words, offline. Two tools also add runtime pieces you place in your game while testing:
+Each tool adds a dock on the right side of the editor with a **Run check** button, a results list, and a `?` help button that explains the tool in plain words, offline. Three tools also add pieces beyond the check:
 
+- **Visual Regression**: the dock's Capture section is the one-click shutter - list scene paths (empty = the main scene), press **Capture now**, and every scene is saved as `<scene>__<width>x<height>.png` in the capture folder at each standard resolution, ready for the compare run. Needs the editor's renderer; never runs headless.
+- **Dialogue and Quest**: the dock draws the selected dialogue's branch graph - layered boxes with arrows for choices, `[if]` tags on conditional choices, orange for flagged nodes and a red dashed ghost box for every choice that points at a missing node.
 - **Time Machine**: add `addons/time_machine/runtime/gstm_node.gd` to a scene, register Callables that return your game's state as a Dictionary and Callables that restore it, and it records every physics frame. `rewind_to(frame)` restores a snapshot; sessions save to JSON so a bug report carries its exact cause.
 - **Network Simulator**: route test packets through `addons/network_sim/runtime/mns_proxy.gd` and set its latency / jitter / loss in the inspector; delivery arrives via its `message_delivered` signal.
 
@@ -67,7 +71,7 @@ Each CLI's full option list is in its header comment.
 
 ## Downloads
 
-The v1.0.0 release carries the installable zips: [GodotDevTools v1.0.0](https://github.com/SeanShaffer88/GodotDevTools/releases/tag/v1.0.0) — `GodotDevTools-Suite-v1.0.0.zip` with all nine addons, or one zip per tool. The same zips are also in this repo's root for convenience.
+Each release carries the installable zips - see [GodotDevTools releases](https://github.com/SeanShaffer88/GodotDevTools/releases): `GodotDevTools-Suite-v<version>.zip` with all nine addons, or one zip per tool. Pushing a `v*` tag runs the full test gate and then builds and attaches the zips automatically (`.github/workflows/release.yml`), so a release is never published with a red gate.
 
 ## Command-line reference
 
@@ -113,7 +117,7 @@ The Dialogue and Quest Debugger reads JSON files with `dialogues` and/or `quests
 sh tests/run_tests.sh /path/to/godot
 ```
 
-The gate imports the project, runs the per-tool suites (checks counted in QUALITY.md), and exercises the CLIs including the exit-code-2 CI gates on the fixture. Current status: see `QUALITY.md` - the gate is green on Godot 4.3.stable.
+The gate imports the project, runs the per-tool suites (checks counted in QUALITY.md), and exercises the CLIs including the exit-code-2 CI gates on the fixture. The same gate runs automatically on every push and pull request (`.github/workflows/tests.yml`) on Godot 4.3-stable - the verified version - and on 4.5-stable as experimental evidence. Current status: see `QUALITY.md`.
 
 ## Troubleshooting
 
@@ -128,10 +132,10 @@ Everything runs locally, in the editor or a headless Godot process. The tools re
 
 ## Limitations and known issues
 
-- **Visual Regression** compares captures you supply (baseline vs current folders) and the editor dock does not yet press the shutter for you: capturing from a running scene across resolutions is done with Godot's viewport screenshot in your own test scene; the compare, highlight, baseline approval and CI gate are the tool's job. (A one-click capture runner is the top roadmap item.)
+- **Visual Regression** compares captures you supply (baseline vs current folders); the dock's one-click capture runner instantiates each listed scene in an offscreen viewport at the standard resolutions. The capture pass needs a renderer, so it works in the editor or a running game, never in a headless process - CI compares and gates on captures you commit or produce in a real window.
 - **Responsive UI Previewer** reads control rectangles from scene text; layouts computed entirely in code at run time are evaluated from their saved rectangles only.
 - **Asset Health** measures PNG dimensions from the file header and other formats through Godot's image loader; unused detection follows written `res://` references, so run-time-built path strings are a known blind spot.
-- **Dialogue and Quest Debugger** covers the documented JSON format; proprietary dialogue formats need converting to it first. The graph is presented as branch/dependency lists with full simulation; a drawn node-graph view is a roadmap item.
+- **Dialogue and Quest Debugger** covers the documented JSON format; proprietary dialogue formats need converting to it first. The dock draws one dialogue at a time as a layered branch graph and lists every problem; quest dependencies remain a list (a drawn quest graph is a possible next step).
 - **Network Simulator** models the network on a tick clock (deterministic and seeded) rather than shaping real sockets; it tests game logic against bad networks, it is not a firewall tool.
 - **Scene Search** parsing is rule-based by design (offline, explainable, no AI service): it stems simple plurals and drops grammar words, and results always state why they matched.
 - **Accessibility Checker** checks what can be known statically; colour-only information and reading order still need a human pass - it flags suspects for that pass.

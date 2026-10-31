@@ -10,7 +10,9 @@ Copy `addons/dialogue_quest` into your project's `addons/` folder, then enable *
 
 ## In the editor
 
-Dialogue/quest JSON files anywhere in the project are found automatically. Run lists branches pointing at missing nodes, unreachable writing, unmarked dead ends and quest dependency problems. The core's simulate(dialogue, picks, state) plays a conversation: it evaluates each choice's condition against the state you give it and applies effects, so you can see exactly which branches open.
+Dialogue/quest JSON files anywhere in the project are found automatically. **Run check** lists branches pointing at missing nodes, unreachable writing, unmarked dead ends and quest dependency problems, and fills the drawn branch graph below the dialogue picker: boxes are nodes (green outline = start, blue = marked ending, orange = carries a warning from the report, red dashed = a choice target that does not exist), arrows are choices, and `[if]` on an arrow means the choice has a condition. The layout is deterministic - layers are breadth-first depth from the start, unreachable nodes park below the deepest layer.
+
+The core's simulate(dialogue, picks, state) plays a conversation: it evaluates each choice's condition against the state you give it and applies effects, so you can see exactly which branches open.
 
 Every control in the dock has a tooltip; the `?` button repeats this help inside the editor, offline.
 
