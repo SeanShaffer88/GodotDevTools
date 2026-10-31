@@ -5,6 +5,20 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Roadmap expanded from 50 to 110 proposed tools and components: sixty new entries across editor productivity, gameplay balance, rendering/audio/assets, testing/CI, shipping, and optional shared components (report schema, exporters, dispatcher, CI action, native accelerator research).
+- Particle Budget Inspector (`particle_budget`): static per-scene particle capacity with instanced children followed, against scene, emitter, CPU-emitter and preprocess budgets; dock, CLI, fixture and 17-check suite.
+- Object Pool Advisor (`pool_advisor`): scores `instantiate()` sites as pool candidates, merges optional recorded spawn counts, and ships a runtime spawn counter node; dock, CLI, fixture and 18-check suite.
+
+### Changed
+
+- README, AI_USAGE, QUALITY and PROJECT_RULES describe the suite without a fixed tool count so new addons do not require count edits.
+
+### Fixed
+
+- Dialogue and Quest Debugger file discovery now skips `reports/` and `visual_reports/`, so a second gate run in the same checkout no longer reads its own report as dialogue data.
+
 ## [1.1.0] - 2026-10-30
 
 ### Added

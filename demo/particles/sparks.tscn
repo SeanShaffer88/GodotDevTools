@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[node name="Sparks" type="Node2D"]
+
+[node name="Burst" type="GPUParticles2D" parent="."]
+amount = 600
+one_shot = true
+emitting = false
+explosiveness = 1.0

@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -155,4 +155,10 @@ test -s reports/test_priority/test_priority.json
 echo "== test priority dependency graph smoke =="
 "$GODOT" --headless --path . --script res://addons/test_priority/cli/priority_cli.gd -- --first=res://demo/test_priority/graph_mapping.json --second=res://demo/test_priority/graph_changes.json --graph=res://demo/test_priority/graph.json --fail-on=unmapped_path
 grep -q 'test_sdm.gd' reports/test_priority/test_priority.json
+gate "particle budget detects the over-budget campfire" \
+  res://addons/particle_budget/cli/pbi_cli.gd -- --dir=res://demo/particles --max-scene=3000 --fail-on=scene_budget
+test -s reports/particle_budget/particle_budget.json
+gate "pool advisor detects the per-frame bullet" \
+  res://addons/pool_advisor/cli/opa_cli.gd -- --dir=res://demo/pooling --counts=res://demo/pooling/counts.json --fail-on=pool_candidate,high_spawn_rate
+grep -q 'bullet.tscn' reports/pool_advisor/pool_advisor.json
 echo "ALL GATE CHECKS PASSED"

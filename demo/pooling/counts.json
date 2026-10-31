@@ -1,0 +1,7 @@
+{
+  "seconds": 60.0,
+  "scenes": {
+    "res://demo/pooling/bullet.tscn": {"spawned": 900, "freed": 897},
+    "res://demo/pooling/crate.tscn": {"spawned": 4, "freed": 0}
+  }
+}
