@@ -1,0 +1,11 @@
+{
+  "enemy_lifetime": {"grunt": 8, "brute": 20},
+  "waves": [
+    {"id": "w1", "duration": 30, "groups": [{"enemy": "grunt", "count": 15, "interval": 2.0, "start": 0}]},
+    {"id": "w2", "duration": 30, "groups": [
+      {"enemy": "grunt", "count": 60, "interval": 0.2, "start": 0},
+      {"enemy": "brute", "count": 5, "interval": 6.0, "start": 2}
+    ]},
+    {"id": "w3", "duration": 10, "groups": [{"enemy": "swarmling", "count": 10, "interval": 1.5, "start": 0}]}
+  ]
+}

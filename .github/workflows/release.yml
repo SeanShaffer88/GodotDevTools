@@ -107,7 +107,12 @@ jobs:
             difficulty_curve:DifficultyCurve \
             damage_sandbox:DamageSandbox \
             xp_curve:XPCurve \
-            crafting_graph:CraftingGraph
+            crafting_graph:CraftingGraph \
+            achievements:Achievements \
+            wave_budget:WaveBudget \
+            rng_fairness:RNGFairness \
+            save_bloat:SaveBloat \
+            dialogue_vars:DialogueVars
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

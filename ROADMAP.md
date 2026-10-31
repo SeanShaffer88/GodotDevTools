@@ -87,11 +87,11 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 - [ ] **Damage Formula Sandbox** (in progress) — `addons/damage_sandbox`: evaluate formulas over stat grids; flag negatives, overflows and non-monotonic results. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **XP Curve Planner** (in progress) — `addons/xp_curve`: time-to-level from XP tables and earn rates; flag walls and skips. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Crafting and Inventory Graph Validator** (in progress) — `addons/crafting_graph`: unobtainable items, recipe cycles, dead-end materials. Godot 4.3 headless suite and CLI gate passed; editor session pending.
-- [ ] **Achievement Reachability Checker** — unlock conditions against declared events and stats.
-- [ ] **Wave Spawner Budget Planner** — wave definitions against concurrent-enemy and spawn-rate budgets.
-- [ ] **Random Table Fairness Tester** — chi-square goodness of fit for weighted tables over seeded draws.
-- [ ] **Save File Bloat Auditor** — save size by key path, growth across sample saves.
-- [ ] **Dialogue Variable Lint** — variables read but never set, and set but never read, in dialogue data.
+- [ ] **Achievement Reachability Checker** (in progress) — `addons/achievements`: unlock conditions against declared events and stats. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Wave Spawner Budget Planner** (in progress) — `addons/wave_budget`: wave definitions against concurrent-enemy and spawn-rate budgets. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Random Table Fairness Tester** (in progress) — `addons/rng_fairness`: chi-square goodness of fit for weighted tables over seeded draws. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Save File Bloat Auditor** (in progress) — `addons/save_bloat`: save size by key path, growth across sample saves. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Dialogue Variable Lint** (in progress) — `addons/dialogue_vars`: variables read but never set, and set but never read, in dialogue data. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 
 ## Expansion - rendering, audio and assets
 

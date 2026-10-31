@@ -75,6 +75,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Damage Formula Sandbox | Evaluates a formula over a stat grid with Godot's Expression class; flags negative, overflowing, non-finite and non-monotonic results. | `addons/damage_sandbox` |
 | XP Curve Planner | Minutes per level from an XP table (or formula) and earn rates by level band; flags grind walls and shrinking requirements. | `addons/xp_curve` |
 | Crafting and Inventory Graph Validator | Fixpoint reachability over recipes from base items: unobtainable goals, missing inputs, self-bootstrapping recipes, dead-end items. | `addons/crafting_graph` |
+| Achievement Reachability Checker | Unlock conditions checked against declared events and capped stats; unknown references, unreachable thresholds, cycles and blocked meta-achievements. | `addons/achievements` |
+| Wave Spawner Budget Planner | Timeline simulation of wave spawn groups: peak enemies alive, spawns per second, overruns past wave duration. | `addons/wave_budget` |
+| Random Table Fairness Tester | Pearson chi-square goodness of fit of recorded outcome counts against intended weights, with p-values and small-sample warnings. | `addons/rng_fairness` |
+| Save File Bloat Auditor | JSON save size by key path, dominant keys, growth across ordered sample saves, total-size budget. | `addons/save_bloat` |
+| Dialogue Variable Lint | Dialogue condition reads versus effect writes in dialogue JSON; read-never-set, set-never-read and type mismatches, with an external-variable allow list. | `addons/dialogue_vars` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -207,6 +212,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `damage_sandbox/cli/dfs_cli.gd` | `--input` `--max-combinations` `--fail-on` |
 | `xp_curve/cli/xpc_cli.gd` | `--input` `--wall-factor` `--fail-on` |
 | `crafting_graph/cli/cgv_cli.gd` | `--input` `--fail-on` |
+| `achievements/cli/ach_cli.gd` | `--input` `--fail-on` |
+| `wave_budget/cli/wsb_cli.gd` | `--input` `--max-alive` `--max-spawn-rate` `--default-lifetime` `--fail-on` |
+| `rng_fairness/cli/rft_cli.gd` | `--input` `--alpha` `--fail-on` |
+| `save_bloat/cli/sba_cli.gd` | `--dir` `--max-bytes` `--dominant-share` `--growth-factor` `--fail-on` |
+| `dialogue_vars/cli/dvl_cli.gd` | `--dir` `--external` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 
