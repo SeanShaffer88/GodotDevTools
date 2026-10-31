@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/SeanShaffer88/GodotDevTools/actions/workflows/tests.yml/badge.svg)](https://github.com/SeanShaffer88/GodotDevTools/actions/workflows/tests.yml)
 
-Forty tools for developers who build games with Godot 4: visual regression testing, a game-state time machine, a responsive UI previewer, an asset health dashboard, a dialogue and quest debugger, a multiplayer network simulator, natural-language scene search, an automated accessibility checker, a build and export doctor, a draw-call and batching profiler, a save-game schema migrator, a physics collision matrix visualizer, procedural animation solvers, an audio mixing sandbox, a memory leak and orphan hunter, an input matrix and rebinding suite, a shader analyzer, a signal flow spy, a localization matrix, a behaviour tree and state machine debugger, a camera shake and framing orchestrator, a deterministic seed and replay runner, a level whiteboxing suite, a cross-platform filesystem mock, a tilemap rule generator, a headless test runner, a thermal and battery emulation dock, a prefab instance guard, a GDScript documentation generator, and a scene dependency map.
+Forty Godot 4 addons cover testing, performance, content, workflow and release checks. The table below links each addon to its purpose and folder. Many tools are static analyzers, simulations or estimates rather than runtime measurements; consult each addon README for its scope and limitations.
 
 The [roadmap](ROADMAP.md) tracks 50 proposed tools and their implementation status. The [Demo-to-Release Content Guard](addons/release_guard/README.md) and [Naming and Folder Convention Enforcer](addons/naming_conventions/README.md) are under development, alongside the [Subtitle Timing and Readability Auditor](addons/subtitle_audit/README.md), [Player Telemetry Schema Validator](addons/telemetry_schema/README.md), [Performance Regression Gate](addons/performance_gate/README.md), [Feature Flag and Rollout Simulator](addons/flag_simulator/README.md), and [Build Size Attribution Explorer](addons/build_size/README.md).
 
@@ -10,7 +10,7 @@ The [checklist runner](addons/cert_check/README.md), [state coverage tracker](ad
 
 ## TL;DR
 
-Think of this as a workshop wall for a Godot project. Each tool is a separate instrument that hangs on the same wall: you can take down just one and use it in your own game project, or hang all forty. Each one looks at your game the way a careful tester would - comparing pictures against approved ones, replaying the exact buttons that caused a bug, trying your menus on phone screens, weighing your textures, walking your dialogue, shaking your network, searching your scenes in plain words, checking that every player can read and reach everything, checking your export settings before release day, counting your draw calls, migrating your old saves, mapping your collision layers, solving your animation rigs, mixing your audio on paper, hunting your leaks, laying out your input bindings, reading your shaders, spying on your signals, completing your translations, tracing your behaviour trees, orchestrating your cameras, replaying your seeds, snapping your blockouts, mocking your filesystems, generating your tile rules, running your tests headless, estimating your thermal load, guarding your prefab instances, and documenting your code. Every tool also runs from the command line, so it can guard a build automatically.
+Think of this as a workshop wall for a Godot project. Each tool is a separate instrument that hangs on the same wall: you can take down just one and use it in your own game project, or hang all forty. Each one looks at your game the way a careful tester would - comparing pictures against approved ones, replaying the exact buttons that caused a bug, trying your menus on phone screens, weighing your textures, walking your dialogue, shaking your network, searching your scenes in plain words, flagging accessibility issues for human review, checking your export settings before release day, estimating draw-call breakers, migrating your old saves, mapping your collision layers, solving your animation rigs, mixing your audio on paper, hunting your leaks, laying out your input bindings, reading your shaders, spying on your signals, checking translation coverage, tracing your behaviour trees, orchestrating your cameras, replaying your seeds, snapping your blockouts, mocking your filesystems, generating your tile rules, running your tests headless, estimating your thermal load, guarding your prefab instances, and documenting your code. Each tool also has a headless CLI; available checks and gate options vary.
 
 AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a pasteable project prompt plus the exact file map, inspection order, and full CLI reference with defaults and exit codes.
 
@@ -47,7 +47,7 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Mobile Thermal and Battery Drain Emulation Dock | Documented-estimate RC thermal model: time-to-throttle, frame-budget misses and battery hours, for comparing workload changes on the same guessed hardware. | `addons/thermal_sim` |
 | Smart Prefab and Variant Instance Manager | Classify prefab instance overrides (dead vs hiding), generate rollback plans, and write only with an explicit --apply. | `addons/prefab_guard` |
 | Automated Documentation Generator for GDScript | Parse ## doc comments, signals, exports and functions into Markdown and dependency-free HTML; report undocumented public API. | `addons/doc_gen` |
-| Scene Dependency Map | Browse static scene, script and resource links; flag missing references, cycles, long chains and potentially unused assets. | `addons/scene_dependency` |
+| Scene Dependency Map | Browse static references and preview change impact or rename candidates; flag missing links, cycles, long chains and potentially unused assets. | `addons/scene_dependency` |
 | Demo-to-Release Content Guard | Review explicit development and placeholder markers before release. | `addons/release_guard` |
 | Naming and Folder Convention Enforcer | Audit file, folder, node, signal and literal group names with configurable patterns. | `addons/naming_conventions` |
 | Subtitle Timing and Readability Auditor | Check JSON, SRT and WebVTT timing and readability heuristics. | `addons/subtitle_audit` |
@@ -74,14 +74,14 @@ No placeholder images are used in the meantime.
 
 ## Requirements
 
-- Godot **4.3** and **4.5** (the prior 29-tool gate passed on both; the new Scene Dependency Map tests still need a Godot run). Other Godot 4.x versions are expected to work - the APIs used (`Image`, `ConfigFile`, `RegEx`, `DirAccess`) are stable across 4.x - but this is **to be confirmed** by a test run.
+- Godot **4.3** is the verified version. The headless CI gate also passed on **4.5**, which remains an experimental CI target. Other Godot versions are unverified.
 - No third-party dependencies. No network access is used at any point.
 
 ## Install
 
-For one tool: copy its `addons/<tool>` folder into your project's `addons/` folder and enable it under Project -> Project Settings -> Plugins. Ready-made zips are attached to each [GitHub Release](https://github.com/SeanShaffer88/GodotDevTools/releases): `GodotDevTools-<Tool>-v<version>.zip` per tool and `GodotDevTools-Suite-v<version>.zip` with all forty - unzip into your project root.
+For one tool: copy its `addons/<tool>` folder into your project's `addons/` folder and enable it under Project -> Project Settings -> Plugins. Check the assets on the [GitHub Releases](https://github.com/SeanShaffer88/GodotDevTools/releases) page before downloading: older releases do not contain every current addon. Unzip an addon or suite archive into your project root.
 
-For all forty: copy all forty `addons/` folders (or unzip the suite zip), then enable the plugins you want. Each tool works on its own; none depends on another.
+For all forty: copy all forty `addons/` folders from this checkout (or use a suite release that includes them), then enable the plugins you want. Each tool works on its own; none depends on another.
 
 ## How to use
 
@@ -108,7 +108,7 @@ For authoritative options, consult each addon README and CLI script.
 
 ## Downloads
 
-Each release carries the installable zips - see [GodotDevTools releases](https://github.com/SeanShaffer88/GodotDevTools/releases): `GodotDevTools-Suite-v<version>.zip` with all forty addons, or one zip per tool. Dispatching the release workflow on main or pushing a `v*` tag runs the full test gate and then builds and attaches the zips automatically (`.github/workflows/release.yml`), so a release is never published with a red gate.
+The published [v1.0.0 release](https://github.com/SeanShaffer88/GodotDevTools/releases/tag/v1.0.0) contains nine individual addon zips and a suite zip for those nine, not the current forty. The repository contains the newer addons; v1.1.0 is prepared but not yet published. The release workflow is configured to gate and package 40 individual zips plus a suite for a future release. Dispatch on main or a `v*` tag starts the gate before packaging (`.github/workflows/release.yml`).
 
 ## Command-line reference
 
@@ -145,7 +145,7 @@ Most CLIs write JSON and Markdown reports and support `--out` and `--fail-on`; o
 | `thermal_sim/cli/thm_cli.gd` | `--workload=<json>` `--fail-on=errors,config_error,thermal_throttle,battery_drain_high,frame_budget_exceeded,missing_file` |
 | `prefab_guard/cli/pfg_cli.gd` | `--scene=<tscn>` `--apply` (writes rollback ops) `--fail-on=errors,drifted_property,default_drift,prefab_missing,missing_file` |
 | `doc_gen/cli/dcg_cli.gd` | writes `api.md` + `api.html` next to the report `--fail-on=errors,undocumented` |
-| `scene_dependency/cli/sdm_cli.gd` | `--dir`, repeatable `--root`, `--fail-on=missing_dependency,cycle,long_chain,unused_candidate,unresolved_uid,no_roots` |
+| `scene_dependency/cli/sdm_cli.gd` | `--dir`, repeatable `--root`, `--impact`, `--rename-to`, `--fail-on` |
 | `release_guard/cli/rg_cli.gd` | `--dir` `--rules` `--fail-on` |
 | `naming_conventions/cli/nc_cli.gd` | `--dir` `--pattern` `--symbols` `--node-pattern` `--signal-pattern` `--group-pattern` `--fail-on` |
 | `subtitle_audit/cli/sub_cli.gd` | `--input` `--require-speaker` `--fail-on` |
@@ -186,7 +186,7 @@ The Dialogue and Quest Debugger reads JSON files with `dialogues` and/or `quests
 sh tests/run_tests.sh /path/to/godot
 ```
 
-The gate imports the project, runs the per-tool suites (checks counted in QUALITY.md), and exercises the CLIs including the exit-code-2 CI gates on the fixture. The same gate runs automatically on every push and pull request (`.github/workflows/tests.yml`) on Godot 4.3-stable - the verified version - and on 4.5-stable as experimental evidence. Current status: see `QUALITY.md`.
+The gate imports the project, runs the per-tool suites (checks counted in QUALITY.md), and exercises the CLIs including the exit-code-2 CI gates on the fixture. The same gate runs automatically on pushes to main and pull requests (`.github/workflows/tests.yml`) on Godot 4.3-stable - the verified version - and on 4.5-stable as experimental evidence. Current status: see `QUALITY.md`.
 
 ## Troubleshooting
 

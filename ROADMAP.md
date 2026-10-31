@@ -30,12 +30,12 @@ This roadmap captures proposed tools, not a promise that every design is already
 
 ## Content and workflow
 
-- [ ] **Scene Change Impact Analyzer** (in progress) — reverse dependency walk added to Scene Dependency Map; Godot CI and editor verification pending.
+- [ ] **Scene Change Impact Analyzer** (in progress) — reverse dependency walk added to Scene Dependency Map; Godot 4.3/4.5 CI passed; hands-on editor verification pending.
 - [ ] **Scene Merge Conflict Assistant** — explain scene conflicts by node and property without silently rewriting files.
-- [ ] **Resource Rename and Reference Assistant** (in progress) — read-only direct reference and transitive impact preview added; no automated rename, Godot CI and editor verification pending.
-- [ ] **Asset Import Preset Auditor** (in progress) — optional importer-specific preset checks added to Asset Health; Godot CI and editor verification pending.
+- [ ] **Resource Rename and Reference Assistant** (in progress) — read-only direct reference and transitive impact preview added; no automated rename, Godot 4.3/4.5 CI passed; hands-on editor verification pending.
+- [ ] **Asset Import Preset Auditor** (in progress) — optional importer-specific preset checks added to Asset Health; Godot 4.3/4.5 CI passed; hands-on editor verification pending.
 - [ ] **Project Cleanup Workbench** — collect unused candidates, duplicates and stale imports for review.
-- [ ] **Naming and Folder Convention Enforcer** (in progress) — file/folder checks passed Godot 4.3/4.5 CI in PR #5; opt-in static node, signal and group checks added, pending CI and hands-on editor verification.
+- [ ] **Naming and Folder Convention Enforcer** (in progress) — file/folder checks passed Godot 4.3/4.5 CI in PR #5; opt-in static node, signal and group checks added, Godot 4.3/4.5 CI passed, hands-on editor verification pending.
 - [ ] **Scene Review Snapshot Generator** — generate reproducible scene inventories and diffs.
 - [ ] **Editor Action Macro Recorder** — record and preview repeatable editor actions with undo support.
 - [ ] **Node Property Drift Monitor** — compare node properties against team baselines.
@@ -46,20 +46,20 @@ This roadmap captures proposed tools, not a promise that every design is already
 - [ ] **Gameplay Scenario Test Builder** — compose repeatable actions and assertions.
 - [ ] **Crash and Error Reproduction Packager** — bundle approved logs, settings and reproduction information.
 - [ ] **Save Corruption and Recovery Tester** — inject invalid saves and verify recovery behavior.
-- [ ] **State Transition Coverage Tracker** (in progress) — model and trace comparison passed Godot 4.3/4.5 CI in PR #11; explicit bounded runtime recording and optional continuity checks added, pending CI and a hands-on game/editor session.
-- [ ] **Regression Test Prioritizer** (in progress) — exact-path mapping passed Godot 4.3/4.5 CI in PR #11; optional reverse dependency graph propagation added, pending CI and hands-on editor verification.
+- [ ] **State Transition Coverage Tracker** (in progress) — model and trace comparison passed Godot 4.3/4.5 CI in PR #11; explicit bounded runtime recording and optional continuity checks added, Godot 4.3/4.5 CI passed; a hands-on game/editor session remains.
+- [ ] **Regression Test Prioritizer** (in progress) — exact-path mapping passed Godot 4.3/4.5 CI in PR #11; optional reverse dependency graph propagation added, Godot 4.3/4.5 CI passed, hands-on editor verification pending.
 - [ ] **Property-Based Gameplay Tester** — generate bounded input sequences to check invariants.
 - [ ] **Resource Load Failure Simulator** — test fallbacks for missing, invalid or delayed resources.
 - [ ] **Pause, Focus, and Lifecycle Tester** — exercise pause, focus, resize and suspend/resume.
-- [ ] **Screenshot Baseline Review Queue** (in progress) — fingerprinted local review metadata and decision history added to visual regression; Godot CI and hands-on review pending. Baseline promotion remains manual.
+- [ ] **Screenshot Baseline Review Queue** (in progress) — fingerprinted local review metadata and decision history added to visual regression; Godot 4.3/4.5 CI passed; hands-on review pending. Baseline promotion remains manual.
 - [ ] **Performance Regression Gate** (in progress) — scalar baseline comparison with absolute/relative noise tolerances passed Godot 4.3/4.5 CI in PR #8; hands-on editor verification pending.
 
 ## Shipping, accessibility and live operations
 
 - [ ] **Controller Glyph and Prompt Validator** — check device-specific prompts for input actions.
 - [ ] **Color-Vision and Contrast Previewer** — preview color-vision differences and color-only cues.
-- [ ] **Subtitle Timing and Readability Auditor** (in progress) — JSON cue checks passed Godot 4.3/4.5 CI in PR #6; SRT/WebVTT subset import added, pending CI. Hands-on editor, safe-area and rendered-layout checks remain future work.
-- [ ] **Platform Certification Checklist Runner** (in progress) — compare a user-defined checklist with recorded results; no certification claim. Godot tests and editor verification pending.
+- [ ] **Subtitle Timing and Readability Auditor** (in progress) — JSON cue checks passed Godot 4.3/4.5 CI in PR #6; SRT/WebVTT subset import passed Godot 4.3/4.5 CI. Hands-on editor, safe-area and rendered-layout checks remain future work.
+- [ ] **Platform Certification Checklist Runner** (in progress) — compare a user-defined checklist with recorded results; no certification claim. Godot 4.3/4.5 CI passed; hands-on editor verification pending.
 - [ ] **Privacy and Permissions Auditor** — inventory permissions, collection points and endpoints for review.
 - [ ] **Offline and Poor-Connection Test Harness** — simulate outages, timeouts and interrupted requests.
 - [ ] **Build Size Attribution Explorer** (in progress) — actual staged-directory file sizes and budgets passed Godot 4.3/4.5 CI in PR #10; hands-on editor verification pending. Archive-internal source attribution remains future work.
