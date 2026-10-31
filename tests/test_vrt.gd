@@ -29,6 +29,7 @@ func _kinds(issues: Array) -> Array:
 const Compare := preload("res://addons/visual_regression/core/vrt_compare.gd")
 const Baselines := preload("res://addons/visual_regression/core/vrt_baselines.gd")
 const Capture := preload("res://addons/visual_regression/core/vrt_capture.gd")
+const Review := preload("res://addons/visual_regression/core/vrt_review.gd")
 
 
 func _img(color: Color) -> Image:
@@ -86,4 +87,27 @@ func _init() -> void:
     _check("capture: failure carries a plain-words fix",
         (rep["issues"] as Array).size() == 1 and str((rep["issues"] as Array)[0]["fix"]) != "",
         str(rep["issues"]))
+    var review = Review.new()
+    var queue: Dictionary = review.build(suite, "res://demo/visual/baselines", "res://demo/visual/current")
+    _check("review queue includes changed and new captures", queue["items"].size() == 2)
+    var before := JSON.stringify(queue)
+    var decision: Dictionary = review.decide(queue, "menu__320x240.png", "approved", "Reviewer", "Looks good", "2026-01-01T00:00:00Z")
+    _check("review decision records metadata", decision["ok"] and decision["queue"]["items"][1]["status"] == "approved")
+    _check("review history retains reviewer and hashes", decision["queue"]["items"][1]["history"][0]["reviewer"] == "Reviewer" and not str(decision["queue"]["items"][1]["history"][0]["capture_sha256"]).is_empty())
+    _check("input queue is unchanged", JSON.stringify(queue) == before)
+    var second: Dictionary = review.decide(decision["queue"], "menu__320x240.png", "rejected", "Reviewer 2", "Revisit", "2026-01-02T00:00:00Z")
+    _check("later decision appends history", second["ok"] and second["queue"]["items"][1]["history"].size() == 2)
+    _check("reviewer is required", not review.decide(queue, "menu__320x240.png", "approved", " ", "", "now")["ok"])
+    _check("invalid item names rejected", not review.decide(queue, "../menu__320x240.png", "approved", "r", "", "now")["ok"])
+    var stale: Dictionary = queue.duplicate(true)
+    stale["items"][1]["capture_sha256"] = "changed"
+    _check("stale capture cannot be reviewed", not review.decide(stale, "menu__320x240.png", "approved", "r", "", "now")["ok"])
+    var changed_base: Dictionary = queue.duplicate(true)
+    changed_base["items"][1]["baseline_sha256"] = "changed"
+    _check("stale baseline cannot be reviewed", not review.decide(changed_base, "menu__320x240.png", "approved", "r", "", "now")["ok"])
+    var missing: Dictionary = review.decide(queue, "extra__320x240.png", "approved", "r", "new image", "now")
+    _check("new capture can be reviewed without baseline", missing["ok"])
+    var blocked: Dictionary = queue.duplicate(true)
+    blocked["items"][1]["status"] = "blocked"
+    _check("blocked item cannot be reviewed", not review.decide(blocked, "menu__320x240.png", "approved", "r", "", "now")["ok"])
     _finish("VRT TESTS")

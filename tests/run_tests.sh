@@ -31,6 +31,11 @@ echo "== CLI smoke: network sim, clean channel exits 0 =="
 gate "visual regression must exit 2 on the changed fixture pair" \
   res://addons/visual_regression/cli/vrt_cli.gd -- --baseline=res://demo/visual/baselines --current=res://demo/visual/current --fail-on=visual_diff
 test -s visual_reports/menu__320x240.highlight.png
+# Review queue records decisions separately and does not update baselines.
+"$GODOT" --headless --path . --script res://addons/visual_regression/cli/vrt_cli.gd -- --baseline=res://demo/visual/baselines --current=res://demo/visual/current --review-queue
+test -s visual_reports/review_queue.json
+"$GODOT" --headless --path . --script res://addons/visual_regression/cli/vrt_review_cli.gd -- --queue=res://visual_reports/review_queue.json --out=res://visual_reports/review_decided.json --name=menu__320x240.png --decision=approved --reviewer=ci
+grep -q '"reviewer": "ci"' visual_reports/review_decided.json
 gate "asset health must exit 2 on duplicates" \
   res://addons/asset_health/cli/ahd_cli.gd -- --fail-on=duplicate
 gate "asset health flags texture budget and preset mismatch" \

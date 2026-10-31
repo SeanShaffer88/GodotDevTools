@@ -6,6 +6,7 @@
 extends SceneTree
 
 const Baselines := preload("res://addons/visual_regression/core/vrt_baselines.gd")
+const Review := preload("res://addons/visual_regression/core/vrt_review.gd")
 const Compare := preload("res://addons/visual_regression/core/vrt_compare.gd")
 
 
@@ -31,6 +32,11 @@ func _init() -> void:
     for c in result["comparisons"]:
         if c.get("verdict", "") == "fail" and c.has("highlight"):
             (c["highlight"] as Image).save_png(out_dir.path_join(str(c["name"]).get_basename() + ".highlight.png"))
+    if args.has("--review-queue"):
+        var queue: Dictionary = Review.new().build(result, baseline_dir, current_dir)
+        if not _write(out_dir.path_join("review_queue.json"), JSON.stringify(queue, "  ")):
+            quit(1)
+            return
     _emit(op, result, args, "res://visual_reports", ["visual_diff", "missing_capture", "missing_baseline"])
 
 func _write(path: String, content: String) -> bool:
