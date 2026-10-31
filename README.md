@@ -2,15 +2,15 @@
 
 [![Tests](https://github.com/SeanShaffer88/GodotDevTools/actions/workflows/tests.yml/badge.svg)](https://github.com/SeanShaffer88/GodotDevTools/actions/workflows/tests.yml)
 
-Nine tools for developers who build games with Godot 4: visual regression testing, a game-state time machine, a responsive UI previewer, an asset health dashboard, a dialogue and quest debugger, a multiplayer network simulator, natural-language scene search, an automated accessibility checker, and a build and export doctor.
+Twenty-nine tools for developers who build games with Godot 4: visual regression testing, a game-state time machine, a responsive UI previewer, an asset health dashboard, a dialogue and quest debugger, a multiplayer network simulator, natural-language scene search, an automated accessibility checker, a build and export doctor, a draw-call and batching profiler, a save-game schema migrator, a physics collision matrix visualizer, procedural animation solvers, an audio mixing sandbox, a memory leak and orphan hunter, an input matrix and rebinding suite, a shader analyzer, a signal flow spy, a localization matrix, a behaviour tree and state machine debugger, a camera shake and framing orchestrator, a deterministic seed and replay runner, a level whiteboxing suite, a cross-platform filesystem mock, a tilemap rule generator, a headless test runner, a thermal and battery emulation dock, a prefab instance guard, and a GDScript documentation generator.
 
 ## TL;DR
 
-Think of this as a workshop wall for a Godot project. Each tool is a separate instrument that hangs on the same wall: you can take down just one and use it in your own game project, or hang all nine. Each one looks at your game the way a careful tester would - comparing pictures against approved ones, replaying the exact buttons that caused a bug, trying your menus on phone screens, weighing your textures, walking your dialogue, shaking your network, searching your scenes in plain words, checking that every player can read and reach everything, and checking your export settings before release day. Every tool also runs from the command line, so it can guard a build automatically.
+Think of this as a workshop wall for a Godot project. Each tool is a separate instrument that hangs on the same wall: you can take down just one and use it in your own game project, or hang all twenty-nine. Each one looks at your game the way a careful tester would - comparing pictures against approved ones, replaying the exact buttons that caused a bug, trying your menus on phone screens, weighing your textures, walking your dialogue, shaking your network, searching your scenes in plain words, checking that every player can read and reach everything, checking your export settings before release day, counting your draw calls, migrating your old saves, mapping your collision layers, solving your animation rigs, mixing your audio on paper, hunting your leaks, laying out your input bindings, reading your shaders, spying on your signals, completing your translations, tracing your behaviour trees, orchestrating your cameras, replaying your seeds, snapping your blockouts, mocking your filesystems, generating your tile rules, running your tests headless, estimating your thermal load, guarding your prefab instances, and documenting your code. Every tool also runs from the command line, so it can guard a build automatically.
 
 AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a pasteable project prompt plus the exact file map, inspection order, and full CLI reference with defaults and exit codes.
 
-## The nine tools
+## The twenty-nine tools
 
 | Tool | What it does | Addon folder |
 |---|---|---|
@@ -23,6 +23,26 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Natural-Language Scene Search | Search project content with queries like "find enemies that use a patrol state" or "show scenes with a door interaction", using project metadata and code indexing. | `addons/scene_search` |
 | Automated Accessibility Checker | Detect tiny text, low contrast, missing keyboard navigation, and controls that rely only on colour. | `addons/accessibility` |
 | Build and Export Doctor | Diagnose export failures and configuration mistakes, explain likely causes, and suggest targeted fixes before a release build. | `addons/export_doctor` |
+| Draw Call and Batching Profiler | Find 2D draw-call breakers in scene text: material switches, z-index interleaving and per-light render passes. Estimates, confirmed against the live profiler monitors. | `addons/batch_profiler` |
+| Hot-Reloadable Schema and Save-Game Migrator | Version saves and migrate them forward through registered rename/move/default/delete steps; the registry re-reads from disk every run. | `addons/schema_migrator` |
+| Physics Collision Matrix Visualizer | Build the who-collides-with-whom matrix from layer names and scene masks; flag all-vs-all bodies and redundant raycast layers; count real contacts in play. | `addons/collision_matrix` |
+| Procedural Animation Rigging Helper | Two-bone IK, FABRIK, look-at, squash-and-stretch and foot-placement solvers (2D), validated from a rig config and drivable from a live rig node. | `addons/proc_anim` |
+| Audio Bus and Dynamic Mixing Sandbox | Simulate ducking, reverb zones and voice budgets from pure data on a 10 ms clock; catch ducking loops, missing buses and stuck zones before shipping. | `addons/audio_sandbox` |
+| Memory Leak and Orphan Node Hunter | Static scan for remove_child-without-free, RefCounted reference circles and signal holds; the runtime watcher proves which detached nodes never free. | `addons/leak_hunter` |
+| Multi-Platform Input Matrix and Rebinding Suite | Action-by-device matrix from the live InputMap or JSON: binding collisions, gamepad coverage gaps, generated remap-menu data, in-game rebinding with user:// saves. | `addons/input_matrix` |
+| Shader Doctor | Static analysis of .gdshader files: redundant texture fetches, fetches in loops, branch density, dead uniforms - each with a concrete mobile-friendly rewrite. | `addons/shader_doctor` |
+| Signal Flow and Event Bus Spy | Record signal sessions in game, then analyze: emitter-to-listener latency, dropped emissions, cascade depth, recursion and runaway emitters. | `addons/signal_spy` |
+| Localization Matrix and In-Context Previewer | Key-by-locale completeness from CSV/PO tables, overflow-risk lengths, plural-rule checks, orphan tr() keys. Preview data, no network, no machine translation. | `addons/l10n_matrix` |
+| Behaviour Tree and State Machine Debugger | Validate and run JSON behaviour definitions (selector/sequence trees, guarded transitions, blackboards) with a full decision trace; the runtime agent shares the interpreter. | `addons/bt_debugger` |
+| Camera Shake, Transition and Framing Orchestrator | Seeded deterministic shake, ease-curve transitions and deadzone framing maths with config validation; the runtime rig applies the same functions to a live Camera2D. | `addons/camera_orch` |
+| Deterministic Seed and Replay Runner | Record seed, PRNG consumption and event hash chains in game; verify a log by replaying a hand-rolled LCG to pinpoint the first divergence of a determinism bug. | `addons/seed_replay` |
+| Level Whiteboxing and Snapping Suite | Grid/rotation snapping and slope maths, plus a headless scene audit for off-grid blockout props and ramps steeper than the controller can climb. | `addons/whitebox` |
+| Cross-Platform Virtual Filesystem Mock | Resolve file operations against linux/windows/android/ios rules (case, sandbox, read-only roots, reserved names, length) and audit scripts for platform-isms. | `addons/vfs_mock` |
+| Tilemap Rule and Autotile Generator | Validate Godot 4 terrain peering rule sets (asymmetric edges, missing transitions, corner conflicts) and generate the transition tile specs they need. | `addons/tilemap_rules` |
+| CI and Headless Test Runner | Discover and classify test files (harness or GUT, detected not depended on), plan headless commands, JUnit XML out, --check-only triage into errors vs warnings. | `addons/test_runner` |
+| Mobile Thermal and Battery Drain Emulation Dock | Documented-estimate RC thermal model: time-to-throttle, frame-budget misses and battery hours, for comparing workload changes on the same guessed hardware. | `addons/thermal_sim` |
+| Smart Prefab and Variant Instance Manager | Classify prefab instance overrides (dead vs hiding), generate rollback plans, and write only with an explicit --apply. | `addons/prefab_guard` |
+| Automated Documentation Generator for GDScript | Parse ## doc comments, signals, exports and functions into Markdown and dependency-free HTML; report undocumented public API. | `addons/doc_gen` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -44,9 +64,9 @@ No placeholder images are used in the meantime.
 
 ## Install
 
-For one tool: copy its `addons/<tool>` folder into your project's `addons/` folder and enable it under Project -> Project Settings -> Plugins. Ready-made zips are attached to each [GitHub Release](https://github.com/SeanShaffer88/GodotDevTools/releases): `GodotDevTools-<Tool>-v<version>.zip` per tool and `GodotDevTools-Suite-v<version>.zip` with all nine - unzip into your project root.
+For one tool: copy its `addons/<tool>` folder into your project's `addons/` folder and enable it under Project -> Project Settings -> Plugins. Ready-made zips are attached to each [GitHub Release](https://github.com/SeanShaffer88/GodotDevTools/releases): `GodotDevTools-<Tool>-v<version>.zip` per tool and `GodotDevTools-Suite-v<version>.zip` with all twenty-nine - unzip into your project root.
 
-For all nine: copy all nine `addons/` folders (or unzip the suite zip), then enable the plugins you want. Each tool works on its own; none depends on another.
+For all twenty-nine: copy all twenty-nine `addons/` folders (or unzip the suite zip), then enable the plugins you want. Each tool works on its own; none depends on another.
 
 ## How to use
 
@@ -73,7 +93,7 @@ Each CLI's full option list is in its header comment.
 
 ## Downloads
 
-Each release carries the installable zips - see [GodotDevTools releases](https://github.com/SeanShaffer88/GodotDevTools/releases): `GodotDevTools-Suite-v<version>.zip` with all nine addons, or one zip per tool. Pushing a `v*` tag runs the full test gate and then builds and attaches the zips automatically (`.github/workflows/release.yml`), so a release is never published with a red gate.
+Each release carries the installable zips - see [GodotDevTools releases](https://github.com/SeanShaffer88/GodotDevTools/releases): `GodotDevTools-Suite-v<version>.zip` with all twenty-nine addons, or one zip per tool. Pushing a `v*` tag runs the full test gate and then builds and attaches the zips automatically (`.github/workflows/release.yml`), so a release is never published with a red gate.
 
 ## Command-line reference
 
@@ -90,6 +110,26 @@ Every CLI writes a JSON and a Markdown report (`--out=<dir>`, `--format=json,md`
 | `scene_search/cli/nlss_cli.gd` | `--query="<plain words>"` |
 | `accessibility/cli/a11y_cli.gd` | `--fail-on=errors,tiny_text,low_contrast,no_keyboard_focus` |
 | `export_doctor/cli/bed_cli.gd` | `--fail-on=errors` |
+| `batch_profiler/cli/dbp_cli.gd` | `--fail-on=errors,material_switch,z_interleave,light_pass` |
+| `schema_migrator/cli/smg_cli.gd` | `--registry=<json>` `--save=<json>` `--fail-on=errors,unmigratable,missing_field,missing_file,bad_json` |
+| `collision_matrix/cli/cmv_cli.gd` | `--fail-on=errors,all_vs_all,redundant_raycast_layer,unused_layer,dead_mask` |
+| `proc_anim/cli/par_cli.gd` | `--config=<json>` `--fail-on=errors,solver_error,missing_file` |
+| `audio_sandbox/cli/aud_cli.gd` | `--config=<json>` `--fail-on=errors,duck_loop,missing_bus,zone_stuck,missing_file` |
+| `leak_hunter/cli/mlh_cli.gd` | `--fail-on=errors,refcount_cycle,orphan_risk,signal_hold` |
+| `input_matrix/cli/imx_cli.gd` | `--from=<json>` (default: live InputMap) `--fail-on=errors,binding_collision,no_gamepad,missing_file` |
+| `shader_doctor/cli/shd_cli.gd` | `--fail-on=errors,redundant_fetch,fetch_in_loop,unused_uniform,branch_heavy,fetch_heavy` |
+| `signal_spy/cli/sgs_cli.gd` | `--session=<json>` `--fail-on=errors,runaway,recursive_signal,orphan_handle,out_of_order,deep_cascade,missing_file,bad_json` |
+| `l10n_matrix/cli/lmx_cli.gd` | `--fail-on=errors,missing_translation,untranslated_call,plural_mismatch,length_risk` |
+| `bt_debugger/cli/btd_cli.gd` | `--def=<json>` `--fail-on=errors,missing_state,unreachable_state,no_entry,runaway_machine,missing_file,bad_json` |
+| `camera_orch/cli/cor_cli.gd` | `--config=<json>` `--fail-on=errors,config_error,missing_file` |
+| `seed_replay/cli/sdr_cli.gd` | `--log=<json>` `--fail-on=errors,mismatch,chain_break` |
+| `whitebox/cli/wbx_cli.gd` | `--scene=<tscn>` `--grid=<json>` `--fail-on=errors,off_grid,steep_slope,missing_file` |
+| `vfs_mock/cli/vfm_cli.gd` | `--requests=<json>` (default: self-check the real tree) `--fail-on=errors,case_collision,case_mismatch,sandbox_escape,permission_denied,reserved_name,forbidden_char,too_long,path_traversal,backslash_path,drive_letter` |
+| `tilemap_rules/cli/tmr_cli.gd` | `--config=<json>` `--fail-on=errors,asymmetric_rule,missing_transition,corner_conflict` |
+| `test_runner/cli/ctr_cli.gd` | `--dirs=<a,b>` `--check` `--junit=<xml>` `--fail-on=errors,no_tests_found,no_finish,script_error,unclassified` |
+| `thermal_sim/cli/thm_cli.gd` | `--workload=<json>` `--fail-on=errors,config_error,thermal_throttle,battery_drain_high,frame_budget_exceeded,missing_file` |
+| `prefab_guard/cli/pfg_cli.gd` | `--scene=<tscn>` `--apply` (writes rollback ops) `--fail-on=errors,drifted_property,default_drift,prefab_missing,missing_file` |
+| `doc_gen/cli/dcg_cli.gd` | writes `api.md` + `api.html` next to the report `--fail-on=errors,undocumented` |
 
 ## This repo's layout
 
@@ -99,7 +139,7 @@ addons/<tool>/            one folder per tool, independently installable
   core/                   the check itself (no editor APIs)
   ui/                     the editor dock
   cli/                    the headless command-line runner
-  runtime/                (time_machine, network_sim) in-game test nodes
+  runtime/                (time_machine, network_sim, collision_matrix, proc_anim, leak_hunter, input_matrix, signal_spy, bt_debugger, camera_orch, seed_replay) in-game nodes
 demo/                     a fixture project with a deliberate problem per tool
 tests/                    one suite per tool + run_tests.sh, the full gate
 docs/PARITY.md            capability matrix, scored from test evidence
@@ -108,7 +148,7 @@ PROJECT_RULES.md          project rule sheet
 AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 ```
 
-The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, and an export preset pointing at an icon that does not exist.
+The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 
 ## Dialogue and quest data format
 
@@ -143,6 +183,15 @@ Everything runs locally, in the editor or a headless Godot process. The tools re
 - **Scene Search** parsing is rule-based by design (offline, explainable, no AI service): it stems simple plurals and drops grammar words, and results always state why they matched.
 - **Accessibility Checker** checks what can be known statically; colour-only information and reading order still need a human pass - it flags suspects for that pass.
 - **Export Doctor** checks configuration and loadability; it does not run a full export (that remains the release step), and the templates check looks in the standard per-user templates folder.
+- **Draw-Call Profiler** and **Thermal Dock** produce documented estimates from scene text and workload data, not GPU or device measurements - use them to rank and compare changes, then confirm on real hardware.
+- **Shader Doctor** analyzes `.gdshader` text statically; it does not compile shaders or time them on a GPU, and visual-shader graphs are covered through the shading language Godot generates from them.
+- **Localization Matrix** does no machine translation and no network calls, per project rule; the in-context half is preview data (completeness, length risk, plural forms) rendered next to the source strings.
+- **Leak Hunter** static findings are suspects, not proof; the runtime watcher (detach + weakref sweep) confirms which detached nodes never free in a live session.
+- **VFS Mock** models four platform profiles as data and resolves against your real file listing; no platform actually boots, and export-time packing behaviour stays the export step's job.
+- **Tilemap Rule Generator** outputs transition specs as data; applying them to a TileSet stays a deliberate human step.
+- **Test Runner** detects GUT suites from file text but never depends on GUT; this repo's own suite remains `tests/run_tests.sh`.
+- **Whitebox** snapping of live editor selections is dock-side work (Partially Verified in `docs/PARITY.md`); the headless half audits scene text against the grid and slope rules.
+- **Prefab Guard** writes to scene files only with an explicit `--apply`; otherwise it reports plans, because scene files are source code.
 - Editor dock interaction is verified by code inspection and a headless editor import; a hands-on editor session on Windows is still owed - see `QUALITY.md`.
 
 ## License
