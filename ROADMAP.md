@@ -135,12 +135,12 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 ## Expansion - shared components, runtimes and native crates (optional; no tool may depend on them)
 
 - [ ] **Report Schema** (in progress) — `addons/report_schema`: a documented JSON Schema for tool reports plus a validator. Godot 4.3 headless suite and CLI gate passed; editor session pending.
-- [ ] **Suite CLI Dispatcher** — one entry script that lists tools and runs any tool CLI by name.
+- [ ] **Suite CLI Dispatcher** (in progress) — `addons/suite_dispatcher`: one entry script that lists tools and runs any tool CLI by name. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **SARIF Exporter** (in progress) — `addons/sarif_export`: convert tool reports to SARIF 2.1.0 for code-scanning views. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **JUnit Exporter** (in progress) — `addons/junit_export`: convert any tool report to JUnit XML for CI test views. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Static HTML Dashboard** (in progress) — `addons/html_dashboard`: one offline HTML page summarizing every report in a folder. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Report Diff** (in progress) — `addons/report_diff`: new, fixed and unchanged findings between two runs of a report. Godot 4.3 headless suite and CLI gate passed; editor session pending.
-- [ ] **Finding Suppression Baseline** — accepted findings with written justification, applied to reports.
-- [ ] **Pre-commit Hook Installer** — opt-in git hook that runs chosen CLIs on staged files.
-- [ ] **Reusable CI Action** — composite GitHub Action that downloads Godot and runs chosen gates.
-- [ ] **Native Accelerator Crate (research)** — optional Rust gdext crate for hashing and scan hot paths, with GDScript fallbacks; build and platform support must be verified before any claim.
+- [ ] **Finding Suppression Baseline** (in progress) — `addons/suppressions`: accepted findings with written justification, applied to reports. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Pre-commit Hook Installer** (in progress) — `addons/precommit`: opt-in git hook that runs chosen CLIs on staged files. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Reusable CI Action** (in progress) — `.github/actions/godot-dev-tools`: composite action that downloads Godot, imports the project and runs dispatcher commands; exercised by this repo's `action-smoke` CI job.
+- [ ] **Native Accelerator Crate (research)** — research note in `docs/native-accelerator.md`: measured GDScript hot paths; recommendation is not to build yet; no crate built (crates.io unreachable here), every native-speed claim unverified.

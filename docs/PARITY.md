@@ -135,6 +135,9 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | JUnit Exporter: reports to JUnit XML | junit_export core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Static HTML Dashboard: offline single-page report summary | html_dashboard core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Report Diff: new/fixed/unchanged findings between two runs | report_diff core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Finding Suppression Baseline: justified, expiring suppressions over reports | suppressions core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Suite CLI Dispatcher: tool discovery and pass-through runner | suite_dispatcher core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Pre-commit Hook Installer: generated POSIX hook, guarded install/uninstall | precommit core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |

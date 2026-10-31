@@ -86,3 +86,23 @@ jobs:
             reports/
             visual_reports/
           if-no-files-found: ignore
+
+  action-smoke:
+    name: Reusable action smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Run the GodotDevTools action on the demo fixtures
+        uses: ./.github/actions/godot-dev-tools
+        with:
+          godot-version: 4.3-stable
+          commands: |
+            list
+            run node_paths --dir=res://demo/code_health
+            run report_schema
+
+      - name: The action wrote reports
+        run: test -s reports/node_paths/node_paths.json && test -s reports/report_schema/report.schema.json
+
