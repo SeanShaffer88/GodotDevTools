@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -161,4 +161,19 @@ test -s reports/particle_budget/particle_budget.json
 gate "pool advisor detects the per-frame bullet" \
   res://addons/pool_advisor/cli/opa_cli.gd -- --dir=res://demo/pooling --counts=res://demo/pooling/counts.json --fail-on=pool_candidate,high_spawn_rate
 grep -q 'bullet.tscn' reports/pool_advisor/pool_advisor.json
+gate "node path detector finds the missing muzzle" \
+  res://addons/node_paths/cli/npb_cli.gd -- --dir=res://demo/code_health --fail-on=broken_path
+test -s reports/node_paths/node_paths.json
+gate "unused symbol finder reports the never-fired signal" \
+  res://addons/unused_symbols/cli/usf_cli.gd -- --dir=res://demo/code_health --fail-on=never_emitted
+test -s reports/unused_symbols/unused_symbols.json
+gate "type coverage gate fails below 90 percent" \
+  res://addons/type_coverage/cli/tcm_cli.gd -- --dir=res://demo/code_health --min-percent=90 --fail-on=project_below_threshold
+test -s reports/type_coverage/type_coverage.json
+gate "complexity reporter flags the nested decision function" \
+  res://addons/script_complexity/cli/scx_cli.gd -- --dir=res://demo/code_health --fail-on=complex_function,deep_nesting
+test -s reports/script_complexity/script_complexity.json
+gate "duplicate detector finds the copied scoring loop" \
+  res://addons/duplicate_code/cli/dup_cli.gd -- --dir=res://demo/code_health --fail-on=duplicate_block
+test -s reports/duplicate_code/duplicate_code.json
 echo "ALL GATE CHECKS PASSED"

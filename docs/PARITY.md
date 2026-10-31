@@ -80,6 +80,11 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Screenshot review queue: fingerprints and recorded decisions | visual_regression core + CLI + dock | Unverified (Godot tests added; local editable metadata only; no automatic baseline promotion) |
 | Particle Budget Inspector: static emitter capacity per scene with instance chains | particle_budget core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Object Pool Advisor: spawn-site scoring plus optional runtime spawn counts | pool_advisor core + CLI + dock + runtime node | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Node Path Breakage Detector: static $/get_node/% resolution against owning scenes | node_paths core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Unused Signal and Method Finder: word-reference counting across scripts and scene connections | unused_symbols core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Typed GDScript Coverage Meter: per-file and project typed share with threshold gate | type_coverage core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Script Complexity Reporter: per-function complexity, length and nesting | script_complexity core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Duplicate Code Detector: normalized line-window clone groups | duplicate_code core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |

@@ -92,7 +92,12 @@ jobs:
             visual_regression:VisualRegression \
             whitebox:Whitebox \
             particle_budget:ParticleBudget \
-            pool_advisor:PoolAdvisor
+            pool_advisor:PoolAdvisor \
+            node_paths:NodePaths \
+            unused_symbols:UnusedSymbols \
+            type_coverage:TypeCoverage \
+            script_complexity:ScriptComplexity \
+            duplicate_code:DuplicateCode
           do
             folder="${pair%%:*}"
             name="${pair##*:}"
