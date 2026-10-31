@@ -33,13 +33,33 @@ jobs:
           for pair in \
             accessibility:Accessibility \
             asset_health:AssetHealth \
+            audio_sandbox:AudioSandbox \
+            batch_profiler:BatchProfiler \
+            bt_debugger:BTDebugger \
+            camera_orch:CameraOrch \
+            collision_matrix:CollisionMatrix \
             dialogue_quest:DialogueQuest \
+            doc_gen:DocGen \
             export_doctor:ExportDoctor \
+            input_matrix:InputMatrix \
+            l10n_matrix:L10nMatrix \
+            leak_hunter:LeakHunter \
             network_sim:NetworkSim \
+            prefab_guard:PrefabGuard \
+            proc_anim:ProcAnim \
             responsive_ui:ResponsiveUI \
             scene_search:SceneSearch \
+            schema_migrator:SchemaMigrator \
+            seed_replay:SeedReplay \
+            shader_doctor:ShaderDoctor \
+            signal_spy:SignalSpy \
+            test_runner:TestRunner \
+            thermal_sim:ThermalSim \
+            tilemap_rules:TilemapRules \
             time_machine:TimeMachine \
-            visual_regression:VisualRegression
+            vfs_mock:VFSMock \
+            visual_regression:VisualRegression \
+            whitebox:Whitebox
           do
             folder="${pair%%:*}"
             name="${pair##*:}"
