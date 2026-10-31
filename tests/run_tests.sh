@@ -109,6 +109,10 @@ test -s reports/naming_conventions/naming_conventions.json
 gate "subtitle auditor detects overlapping fixture cues" \
   res://addons/subtitle_audit/cli/sub_cli.gd -- --input=res://demo/subtitles/cues.json --fail-on=overlap
 test -s reports/subtitle_audit/subtitle_audit.json
+gate "subtitle auditor detects SRT overlap" \
+  res://addons/subtitle_audit/cli/sub_cli.gd -- --input=res://demo/subtitles/overlap.srt --fail-on=overlap
+gate "subtitle auditor detects WebVTT overlap" \
+  res://addons/subtitle_audit/cli/sub_cli.gd -- --input=res://demo/subtitles/overlap.vtt --fail-on=overlap
 gate "telemetry validator detects the sensitive sample" \
   res://addons/telemetry_schema/cli/tel_cli.gd -- --schema=res://demo/telemetry/schema.json --samples=res://demo/telemetry/events.json --fail-on=sensitive_field
 test -s reports/telemetry_schema/telemetry_schema.json

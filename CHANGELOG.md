@@ -7,6 +7,8 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Added SRT and WebVTT subtitle import to the existing readability audit, with malformed-file rejection and fixture gates.
+
 - Added optional Scene Dependency Map graph input to Regression Test Prioritizer, with transitive impact evidence and cycle-safe traversal.
 
 - Added opt-in bounded state-transition recording, trace truncation warnings, and optional continuity checks to the State Transition Coverage Tracker.
