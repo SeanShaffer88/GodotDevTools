@@ -1,0 +1,30 @@
+{
+	"buses": [
+		{"name": "Master"},
+		{"name": "Music", "send": "Master"},
+		{"name": "SFX", "send": "Master"},
+		{"name": "VO", "send": "Master"}
+	],
+	"ducks": [
+		{"trigger": "VO", "target": "Music", "db": -8.0, "attack_ms": 40, "release_ms": 400},
+		{"trigger": "SFX", "target": "VO", "db": -3.0, "attack_ms": 20, "release_ms": 200},
+		{"trigger": "Music", "target": "SFX", "db": -2.0, "attack_ms": 100, "release_ms": 500}
+	],
+	"zones": [
+		{"name": "cave", "bus": "SFX"}
+	],
+	"voices": {
+		"max": 3,
+		"priority": {"VO": 3, "SFX": 2, "Music": 1}
+	},
+	"events": [
+		{"t_ms": 0, "type": "voice_start", "bus": "Music"},
+		{"t_ms": 100, "type": "duck_on", "bus": "VO"},
+		{"t_ms": 200, "type": "voice_start", "bus": "VO"},
+		{"t_ms": 300, "type": "voice_start", "bus": "SFX"},
+		{"t_ms": 400, "type": "voice_start", "bus": "SFX"},
+		{"t_ms": 600, "type": "zone_enter", "bus": "SFX"},
+		{"t_ms": 900, "type": "duck_off", "bus": "VO"},
+		{"t_ms": 1200, "type": "voice_stop", "bus": "SFX"}
+	]
+}

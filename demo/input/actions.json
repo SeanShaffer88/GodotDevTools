@@ -1,0 +1,17 @@
+{
+	"jump": [
+		{"device": "keyboard", "id": "Space"},
+		{"device": "joypad", "id": "button_0"}
+	],
+	"dash": [
+		{"device": "keyboard", "id": "Space"},
+		{"device": "joypad", "id": "button_1"}
+	],
+	"fire": [
+		{"device": "mouse", "id": "button_1"}
+	],
+	"pause": [
+		{"device": "keyboard", "id": "Escape"},
+		{"device": "joypad", "id": "button_6"}
+	]
+}

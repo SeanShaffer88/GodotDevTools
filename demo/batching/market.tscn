@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2"]
+blend_mode = 2
+
+[node name="Market" type="Node2D"]
+
+[node name="StallA" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_1")
+z_index = 0
+
+[node name="StallB" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_2")
+z_index = 1
+
+[node name="StallC" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_1")
+z_index = 0
+
+[node name="Lantern" type="PointLight2D" parent="."]

@@ -1,0 +1,20 @@
+{
+	"name": "player",
+	"current_version": 3,
+	"fields": {
+		"2": ["health", "position"],
+		"3": ["health", "position", "inventory"]
+	},
+	"migrations": [
+		{
+			"from": 1,
+			"to": 2,
+			"ops": [
+				{"op": "rename", "from": "hp", "to": "health"},
+				{"op": "move", "from": "pos", "to": "position"},
+				{"op": "default", "field": "stamina", "value": 100},
+				{"op": "delete", "field": "legacy_flag"}
+			]
+		}
+	]
+}
