@@ -7,6 +7,8 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Added static change-impact analysis and read-only rename previews to Scene Dependency Map.
+
 - Added opt-in static scene node, signal and group naming checks to the naming conventions addon.
 
 - Added SRT and WebVTT subtitle import to the existing readability audit, with malformed-file rejection and fixture gates.

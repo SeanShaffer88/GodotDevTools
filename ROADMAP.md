@@ -30,9 +30,9 @@ This roadmap captures proposed tools, not a promise that every design is already
 
 ## Content and workflow
 
-- [ ] **Scene Change Impact Analyzer** — estimate downstream impact of changes to shared resources.
+- [ ] **Scene Change Impact Analyzer** (in progress) — reverse dependency walk added to Scene Dependency Map; Godot CI and editor verification pending.
 - [ ] **Scene Merge Conflict Assistant** — explain scene conflicts by node and property without silently rewriting files.
-- [ ] **Resource Rename and Reference Assistant** — preview moves and affected references.
+- [ ] **Resource Rename and Reference Assistant** (in progress) — read-only direct reference and transitive impact preview added; no automated rename, Godot CI and editor verification pending.
 - [ ] **Asset Import Preset Auditor** — compare import settings to team-defined presets.
 - [ ] **Project Cleanup Workbench** — collect unused candidates, duplicates and stale imports for review.
 - [ ] **Naming and Folder Convention Enforcer** (in progress) — file/folder checks passed Godot 4.3/4.5 CI in PR #5; opt-in static node, signal and group checks added, pending CI and hands-on editor verification.
