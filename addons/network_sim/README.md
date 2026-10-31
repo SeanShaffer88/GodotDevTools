@@ -2,7 +2,7 @@
 
 Add configurable latency, packet loss and disconnects to local multiplayer testing, with tools to inspect synchronisation issues.
 
-Part of the **GodotDevTools** suite. Godot 4.3, no third-party dependencies, no network use. MIT licensed.
+Part of the **GodotDevTools** suite. Godot 4.3/4.5 (CI-verified), no third-party dependencies, no network use. MIT licensed.
 
 ## Install
 

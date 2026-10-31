@@ -1,6 +1,6 @@
 # GodotDevTools - Capability Parity
 
-Scored from the test gate on Godot 4.3.stable. "Verified" = a test check or CLI gate run proves it on the fixture. "Partially Verified" = core logic verified headless; the editor-side experience still owes a hands-on session.
+Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "Verified" = a test check or CLI gate run proves it on the fixture. "Partially Verified" = core logic verified headless; the editor-side experience still owes a hands-on session.
 
 | Capability | Where | Status |
 |---|---|---|

@@ -2,7 +2,7 @@
 
 Record inputs and state snapshots so you can rewind a bug, inspect variables, and replay the exact sequence that caused it. Includes an in-game recorder node.
 
-Part of the **GodotDevTools** suite. Godot 4.3, no third-party dependencies, no network use. MIT licensed.
+Part of the **GodotDevTools** suite. Godot 4.3/4.5 (CI-verified), no third-party dependencies, no network use. MIT licensed.
 
 ## Install
 

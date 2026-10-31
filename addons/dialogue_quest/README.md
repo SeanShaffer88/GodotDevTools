@@ -2,7 +2,7 @@
 
 Show dialogue branches and quest dependencies as a graph, simulate choices, and inspect which conditions activate.
 
-Part of the **GodotDevTools** suite. Godot 4.3, no third-party dependencies, no network use. MIT licensed.
+Part of the **GodotDevTools** suite. Godot 4.3/4.5 (CI-verified), no third-party dependencies, no network use. MIT licensed.
 
 ## Install
 

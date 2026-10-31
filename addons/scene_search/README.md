@@ -2,7 +2,7 @@
 
 Search project content with queries like 'find enemies that use a patrol state' or 'show scenes with a door interaction', using project metadata and code indexing.
 
-Part of the **GodotDevTools** suite. Godot 4.3, no third-party dependencies, no network use. MIT licensed.
+Part of the **GodotDevTools** suite. Godot 4.3/4.5 (CI-verified), no third-party dependencies, no network use. MIT licensed.
 
 ## Install
 
