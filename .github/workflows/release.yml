@@ -160,7 +160,11 @@ jobs:
             load_profiler:LoadProfiler \
             physics_jitter:PhysicsJitter \
             controller_course:ControllerCourse \
-            hitbox_timeline:HitboxTimeline
+            hitbox_timeline:HitboxTimeline \
+            navmesh_lab:NavmeshLab \
+            spawn_validator:SpawnPoints \
+            interaction_reach:InteractionReach \
+            world_bounds:WorldBounds
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

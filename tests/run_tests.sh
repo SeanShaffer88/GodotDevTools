@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -311,4 +311,12 @@ gate "controller course flags the unreachable wall" \
   res://addons/controller_course/cli/cct_cli.gd -- --input=res://demo/runtime_perf/controller.json --fail-on=unreachable_ledge
 gate "hitbox timeline flags the sweep left active" \
   res://addons/hitbox_timeline/cli/hht_cli.gd -- --dir=res://demo/runtime_perf --fail-on=stays_active
+gate "navmesh lab flags the unreachable treasure" \
+  res://addons/navmesh_lab/cli/nml_cli.gd -- --nav=res://demo/gameplay/nav.tres --targets=res://demo/gameplay/targets.json --fail-on=unreachable_target
+gate "spawn validator flags the spawn inside the pillar" \
+  res://addons/spawn_validator/cli/spv_cli.gd -- --scene=res://demo/gameplay/arena.tscn --fail-on=blocked_spawn
+gate "interaction checker flags the unreachable chest" \
+  res://addons/interaction_reach/cli/irc_cli.gd -- --scene=res://demo/gameplay/arena.tscn --nav=res://demo/gameplay/nav.tres --start=50,50 --fail-on=unreachable_interactable
+gate "world bounds auditor flags the missing kill floor" \
+  res://addons/world_bounds/cli/wba_cli.gd -- --scene=res://demo/gameplay/arena.tscn --fail-on=missing_kill_floor
 echo "ALL GATE CHECKS PASSED"

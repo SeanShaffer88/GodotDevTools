@@ -17,16 +17,16 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 
 ## Physics, navigation and gameplay
 
-- [ ] **Navigation Mesh Diagnostic Lab** — identify disconnected regions, bottlenecks and unreachable targets.
+- [ ] **Navigation Mesh Diagnostic Lab** (in progress) — `addons/navmesh_lab`: identify disconnected regions, bottlenecks and unreachable targets. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Character Controller Test Course** (in progress) — `addons/controller_course`: exercise slopes, stairs, ledges, coyote time and jump height. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Physics Jitter and Tunneling Detector** (in progress) — `addons/physics_jitter`: surface fast bodies, conflicting transforms and unstable settings. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Hitbox and Hurtbox Timeline Viewer** (in progress) — `addons/hitbox_timeline`: inspect combat volumes alongside animation frames. Godot 4.3 headless suite and CLI gate passed; editor session pending.
-- [ ] **Spawn Point and Encounter Validator** — check blocked, unsafe or unreachable spawns.
+- [ ] **Spawn Point and Encounter Validator** (in progress) — `addons/spawn_validator`: check blocked, unsafe or unreachable spawns. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **AI Perception Debugger** — visualize sight, hearing, occlusion and detection decisions.
 - [ ] **Gameplay Ability Simulator** — exercise costs, cooldowns, stacking and interrupts.
 - [ ] **Procedural Generation Constraint Tester** — verify seeded layouts against connectivity and placement constraints.
-- [ ] **World Boundary and Out-of-Bounds Auditor** — find possible escape routes and exposed kill zones.
-- [ ] **Interaction Reachability Checker** — test whether interactables can be reached and activated.
+- [ ] **World Boundary and Out-of-Bounds Auditor** (in progress) — `addons/world_bounds`: find possible escape routes and exposed kill zones. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Interaction Reachability Checker** (in progress) — `addons/interaction_reach`: test whether interactables can be reached and activated. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 
 ## Content and workflow
 

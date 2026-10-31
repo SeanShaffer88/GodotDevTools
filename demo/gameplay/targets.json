@@ -1,0 +1,5 @@
+{"agent_radius": 8, "start": [50, 50], "targets": [
+  {"id": "corridor_end", "pos": [690, 145]},
+  {"id": "treasure_room", "pos": [1000, 100]},
+  {"id": "floating_coin", "pos": [600, 600]}
+]}
