@@ -27,6 +27,7 @@ func _kinds(issues: Array) -> Array:
     return out
 
 const Graph := preload("res://addons/dialogue_quest/core/dqd_graph.gd")
+const Layout := preload("res://addons/dialogue_quest/core/dqd_layout.gd")
 
 
 func _init() -> void:
@@ -54,4 +55,29 @@ func _init() -> void:
     _check("simulate paying reaches the ending and applies effects", s3["visited"] == ["intro", "guard", "paid"] and bool(s3["state"].get("gold_paid", false)), str(s3))
     var s4: Dictionary = op.simulate("tavern", [0, 0], {"met_guard": true, "gold": 2})
     _check("simulate broke: Pay choice is closed, Walk away taken", s4["visited"] == ["intro", "guard", "bye"], str(s4))
+    var lay = Layout.new()
+    var view: Dictionary = lay.layout_dialogue(op, "tavern", r["issues"])
+    var by_id: Dictionary = {}
+    for n in view["nodes"]:
+        by_id[str(n["id"])] = n
+    _check("layout: start node sits in layer 0", int(by_id["intro"]["layer"]) == 0, str(view["nodes"]))
+    _check("layout: first choices sit in layer 1",
+        int(by_id["guard"]["layer"]) == 1 and int(by_id["bye"]["layer"]) == 1, str(by_id))
+    _check("layout: paid follows guard in layer 2", int(by_id["paid"]["layer"]) == 2, str(by_id["paid"]))
+    _check("layout: unreachable secret_room parked below the deepest layer, flagged",
+        (by_id["secret_room"]["flags"] as Array).has("unreachable_node")
+            and int(by_id["secret_room"]["layer"]) == 3, str(by_id["secret_room"]))
+    _check("layout: missing target drawn as a ghost one layer past its source",
+        bool(by_id["ghost_node"]["ghost"]) and int(by_id["ghost_node"]["layer"]) == 1,
+        str(by_id["ghost_node"]))
+    var broken_count := 0
+    for e in view["edges"]:
+        if bool(e["broken"]):
+            broken_count += 1
+    _check("layout: all five branches drawn, exactly one broken",
+        (view["edges"] as Array).size() == 5 and broken_count == 1, str(view["edges"]))
+    _check("layout: content size covers the deepest node",
+        (view["content_size"] as Vector2).x > (by_id["secret_room"]["rect"] as Rect2).position.x
+            and (view["content_size"] as Vector2).y > (by_id["guard"]["rect"] as Rect2).position.y,
+        str(view["content_size"]))
     _finish("DQD TESTS")
