@@ -147,7 +147,10 @@ jobs:
             sarif_export:SARIFExport \
             junit_export:JUnitExport \
             html_dashboard:HTMLDashboard \
-            report_diff:ReportDiff
+            report_diff:ReportDiff \
+            suppressions:Suppressions \
+            suite_dispatcher:SuiteDispatcher \
+            precommit:Precommit
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

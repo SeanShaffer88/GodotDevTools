@@ -1,0 +1,6 @@
+[
+  {"tool": "asset_health", "kind": "oversized_texture", "path": "res://art/big.png", "justification": "Title screen backdrop; streamed once.", "expires": "2027-06-30"},
+  {"tool": "node_paths", "kind": "broken_path", "path": "res://player.gd", "message_contains": "Muzzle", "justification": "Muzzle node is added by the weapon at runtime.", "expires": "2026-01-31"},
+  {"tool": "asset_health", "kind": "duplicate", "path": "res://art/hero_copy.png", "justification": "Kept for the localization team."},
+  {"tool": "node_paths", "kind": "scan_error", "path": "res://locked.tscn", "justification": ""}
+]

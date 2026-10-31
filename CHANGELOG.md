@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Finding Suppression Baseline (`suppressions`): Accepted findings with written justifications and expiry dates applied to a reports folder; remaining findings re-emitted for gating. Dock, CLI, fixture and test suite.
+- Suite CLI Dispatcher (`suite_dispatcher`): Lists every installed tool CLI and runs any of them by name (or all with defaults) in a child process, passing options and exit codes through. Dock, CLI, fixture and test suite.
+- Pre-commit Hook Installer (`precommit`): Generates an opt-in git pre-commit hook running chosen tool CLIs; installs or removes only hooks it wrote. Dock, CLI, fixture and test suite.
+- Reusable composite GitHub Action (`.github/actions/godot-dev-tools`) running dispatcher commands, with an `action-smoke` CI job that exercises it.
+- Native accelerator research note (`docs/native-accelerator.md`) with measured GDScript hot paths; no native code added.
 - Report Schema (`report_schema`): Documented JSON Schema for tool reports (summary + issues with severity/kind/message) and a validator for report folders. Dock, CLI, fixture and test suite.
 - SARIF Exporter (`sarif_export`): Converts every tool report in a folder into one SARIF 2.1.0 log (one run per tool) for code-scanning views. Dock, CLI, fixture and test suite.
 - JUnit Exporter (`junit_export`): Converts tool reports into JUnit XML: one suite per tool, one test case per finding kind, failures carrying each finding. Dock, CLI, fixture and test suite.

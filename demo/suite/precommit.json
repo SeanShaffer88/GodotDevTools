@@ -1,0 +1,4 @@
+[
+  {"tool": "node_paths", "args": "--fail-on=broken_path"},
+  {"tool": "scene_lint", "args": "--fail-on=rule_violation"}
+]

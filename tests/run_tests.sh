@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -283,4 +283,12 @@ gate "dashboard notes the skipped report" \
 test -s reports/html_dashboard/dashboard.html
 gate "report diff gates on new findings" \
   res://addons/report_diff/cli/rdf_cli.gd -- --before=res://demo/suite/before --after=res://demo/suite/after --fail-on=new_finding
+gate "suppression baseline gates on what remains" \
+  res://addons/suppressions/cli/fsb_cli.gd -- --reports=res://demo/suite/after --suppressions=res://demo/suite/suppressions.json --today=2026-10-31 --fail-on=unsuppressed_finding
+echo "== suite dispatcher runs a tool and keeps its exit code =="
+if "$GODOT" --headless --path . --script res://addons/suite_dispatcher/cli/gdt_cli.gd -- run node_paths --dir=res://demo/code_health --fail-on=broken_path; then echo "FAIL: expected exit 2"; exit 1; else [ $? -eq 2 ] || { echo "FAIL: expected exit 2"; exit 1; }; fi
+"$GODOT" --headless --path . --script res://addons/suite_dispatcher/cli/gdt_cli.gd -- list | grep -q "mutation_tester"
+echo "== precommit hook preview =="
+"$GODOT" --headless --path . --script res://addons/precommit/cli/pch_cli.gd -- --config=res://demo/suite/precommit.json
+grep -q "npb_cli.gd" reports/precommit/pre-commit
 echo "ALL GATE CHECKS PASSED"

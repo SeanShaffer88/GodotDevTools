@@ -1,0 +1,57 @@
+name: GodotDevTools gates
+description: Download a Godot build, import the project, and run GodotDevTools CLIs through the suite dispatcher. Fails when any command exits non-zero.
+inputs:
+  godot-version:
+    description: Godot release tag to download, e.g. 4.3-stable.
+    required: false
+    default: 4.3-stable
+  project-path:
+    description: Folder containing project.godot (with the GodotDevTools addons installed).
+    required: false
+    default: .
+  commands:
+    description: One dispatcher command per line, e.g. "run node_paths --fail-on=broken_path".
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Cache Godot
+      id: cache
+      uses: actions/cache@v6
+      with:
+        path: ${{ runner.temp }}/godot-${{ inputs.godot-version }}
+        key: gdt-godot-${{ inputs.godot-version }}-${{ runner.os }}
+    - name: Download Godot
+      if: steps.cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        set -euo pipefail
+        dir="${{ runner.temp }}/godot-${{ inputs.godot-version }}"
+        mkdir -p "$dir"
+        curl -fsSL -o "$dir/godot.zip" "https://github.com/godotengine/godot/releases/download/${{ inputs.godot-version }}/Godot_v${{ inputs.godot-version }}_linux.x86_64.zip"
+        unzip -q "$dir/godot.zip" -d "$dir"
+        rm "$dir/godot.zip"
+        chmod +x "$dir/Godot_v${{ inputs.godot-version }}_linux.x86_64"
+    - name: Import project
+      shell: bash
+      run: |
+        "${{ runner.temp }}/godot-${{ inputs.godot-version }}/Godot_v${{ inputs.godot-version }}_linux.x86_64" --headless --path "${{ inputs.project-path }}" --import --quit-after 5 || true
+    - name: Run GodotDevTools commands
+      shell: bash
+      env:
+        GDT_COMMANDS: ${{ inputs.commands }}
+      run: |
+        set -uo pipefail
+        godot="${{ runner.temp }}/godot-${{ inputs.godot-version }}/Godot_v${{ inputs.godot-version }}_linux.x86_64"
+        status=0
+        while IFS= read -r line; do
+          [ -z "${line// }" ] && continue
+          echo "::group::gdt $line"
+          # shellcheck disable=SC2086
+          if ! "$godot" --headless --path "${{ inputs.project-path }}" --script res://addons/suite_dispatcher/cli/gdt_cli.gd -- $line; then
+            echo "::error title=GodotDevTools::'$line' failed"
+            status=1
+          fi
+          echo "::endgroup::"
+        done <<< "$GDT_COMMANDS"
+        exit "$status"
