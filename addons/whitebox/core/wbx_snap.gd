@@ -18,7 +18,7 @@ var tolerance: float = 0.02
 
 
 func snap_position(pos: Vector3, grid_step: float = -1.0, subdivide: int = -1) -> Vector3:
-    var step := grid_step if grid_step > 0.0 else grid / float(subdivide if subdivide > 0 else subdivisions)
+    var step := (grid_step if grid_step > 0.0 else grid) / float(maxi(subdivide if subdivide > 0 else subdivisions, 1))
     step = maxf(step, 0.000001)
     return Vector3(roundf(pos.x / step) * step, roundf(pos.y / step) * step, roundf(pos.z / step) * step)
 
