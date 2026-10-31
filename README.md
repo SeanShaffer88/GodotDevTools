@@ -8,6 +8,8 @@ Nine tools for developers who build games with Godot 4: visual regression testin
 
 Think of this as a workshop wall for a Godot project. Each tool is a separate instrument that hangs on the same wall: you can take down just one and use it in your own game project, or hang all nine. Each one looks at your game the way a careful tester would - comparing pictures against approved ones, replaying the exact buttons that caused a bug, trying your menus on phone screens, weighing your textures, walking your dialogue, shaking your network, searching your scenes in plain words, checking that every player can read and reach everything, and checking your export settings before release day. Every tool also runs from the command line, so it can guard a build automatically.
 
+AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a pasteable project prompt plus the exact file map, inspection order, and full CLI reference with defaults and exit codes.
+
 ## The nine tools
 
 | Tool | What it does | Addon folder |
@@ -103,6 +105,7 @@ tests/                    one suite per tool + run_tests.sh, the full gate
 docs/PARITY.md            capability matrix, scored from test evidence
 QUALITY.md                quality scorecard
 PROJECT_RULES.md          project rule sheet
+AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 ```
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, and an export preset pointing at an icon that does not exist.
