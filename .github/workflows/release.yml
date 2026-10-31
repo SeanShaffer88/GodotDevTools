@@ -44,6 +44,7 @@ jobs:
             input_matrix:InputMatrix \
             l10n_matrix:L10nMatrix \
             leak_hunter:LeakHunter \
+            naming_conventions:NamingConventions \
             network_sim:NetworkSim \
             prefab_guard:PrefabGuard \
             proc_anim:ProcAnim \
