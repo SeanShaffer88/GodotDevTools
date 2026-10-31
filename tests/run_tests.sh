@@ -100,6 +100,11 @@ test -s reports/doc_gen/api.html
 gate "scene dependency map detects the unused fixture" \
   res://addons/scene_dependency/cli/sdm_cli.gd -- --dir=res://demo/dependencies --root=res://demo/dependencies/main.tscn --fail-on=unused_candidate
 test -s reports/scene_dependency/scene_dependency.json
+echo "== scene dependency change and rename preview =="
+"$GODOT" --headless --path . --script res://addons/scene_dependency/cli/sdm_cli.gd -- --dir=res://demo/dependencies --root=res://demo/dependencies/main.tscn --impact=res://demo/dependencies/material.tres --rename-to=res://demo/dependencies/new_material.tres
+grep -q 'direct_references' reports/scene_dependency/scene_dependency.json
+gate "scene dependency rejects identical rename destination" \
+  res://addons/scene_dependency/cli/sdm_cli.gd -- --dir=res://demo/dependencies --root=res://demo/dependencies/main.tscn --impact=res://demo/dependencies/material.tres --rename-to=res://demo/dependencies/material.tres --fail-on=same_destination
 gate "release guard detects the placeholder fixture" \
   res://addons/release_guard/cli/rg_cli.gd -- --dir=res://demo/release_guard --fail-on=placeholder
 test -s reports/release_guard/release_guard.json

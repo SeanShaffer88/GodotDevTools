@@ -6,12 +6,22 @@ func _init() -> void:
     var args := OS.get_cmdline_user_args()
     var scan_dir := "res://"
     var roots: Array = []
+    var changed := ""
+    var destination := ""
     for arg in args:
         if arg.begins_with("--dir="): scan_dir = arg.trim_prefix("--dir=")
         elif arg.begins_with("--root="): roots.append(arg.trim_prefix("--root="))
+        elif arg.begins_with("--impact="): changed = arg.trim_prefix("--impact=")
+        elif arg.begins_with("--rename-to="): destination = arg.trim_prefix("--rename-to=")
     var op = Core.new()
     var result: Dictionary = op.run(scan_dir, roots)
-    _emit(op, result, args, "res://reports/scene_dependency", ["missing_dependency", "cycle", "long_chain", "unused_candidate", "unresolved_uid", "no_roots"])
+    if destination != "" and changed == "":
+        printerr("--rename-to requires --impact")
+        quit(1)
+        return
+    if changed != "":
+        op.attach_preview(result, changed, destination)
+    _emit(op, result, args, "res://reports/scene_dependency", ["missing_dependency", "cycle", "long_chain", "unused_candidate", "unresolved_uid", "no_roots", "impact_outside_scan", "invalid_impact_path", "invalid_destination", "same_destination", "destination_exists"])
 
 func _write(path: String, content: String) -> bool:
     var f := FileAccess.open(path, FileAccess.WRITE)

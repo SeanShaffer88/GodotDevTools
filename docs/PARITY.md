@@ -74,6 +74,7 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Test prioritizer: exact path-to-test mappings | test_priority core + CLI + dock | Verified on fixture in PR #11; hands-on editor session pending |
 | Test prioritizer: optional dependency-graph impact propagation and evidence | test_priority core + CLI + dock | Unverified (Godot tests added; static graph may miss dynamic dependencies; editor session pending) |
 | Subtitle audit: SRT and WebVTT subset import | subtitle_audit core + CLI + dock | Unverified (Godot tests added; rendered layout and editor verification pending) |
+| Scene Dependency Map: change impact and rename preview | scene_dependency core + CLI + dock | Unverified (Godot tests added; static reference candidates only, no automatic changes) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |
