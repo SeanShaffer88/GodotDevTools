@@ -65,6 +65,26 @@ godot --headless --path . --script res://addons/scene_search/cli/nlss_cli.gd -- 
 
 Each CLI's full option list is in its header comment.
 
+## Downloads
+
+The v1.0.0 release carries the installable zips: [GodotDevTools v1.0.0](https://github.com/SeanShaffer88/GodotDevTools/releases/tag/v1.0.0) — `GodotDevTools-Suite-v1.0.0.zip` with all nine addons, or one zip per tool. The same zips are also in this repo's root for convenience.
+
+## Command-line reference
+
+Every CLI writes a JSON and a Markdown report (`--out=<dir>`, `--format=json,md`), prints a summary plus every finding, and exits `0` normally or `2` when a `--fail-on` gate trips (`3` when the scan itself fails, where supported). The full, authoritative option list is in each CLI script's header comment; the main options are:
+
+| CLI | Main options |
+|---|---|
+| `visual_regression/cli/vrt_cli.gd` | `--baseline=<dir>` `--current=<dir>` `--tolerance=<0-255>` `--fail-fraction=<f>` `--fail-on=visual_diff,missing_capture,missing_baseline` |
+| `time_machine/cli/gstm_cli.gd` | `--session=<json>` `--fail-on=errors` |
+| `responsive_ui/cli/ruip_cli.gd` | `--fail-on=issues` |
+| `asset_health/cli/ahd_cli.gd` | `--big-texture=<px>` `--fail-on=oversized_texture,duplicate,unused,import_inconsistent,slow_load` |
+| `dialogue_quest/cli/dqd_cli.gd` | `--file=<json>` `--simulate=<dialogue>:<pick,pick,...>` `--state=<json>` `--fail-on=issues,missing_target,bad_start` |
+| `network_sim/cli/mns_cli.gd` | `--latency=<ticks>` `--jitter=<ticks>` `--loss=<0..1>` `--disconnect=<from>-<to>` `--ticks=<n>` `--fail-on=issues,packet_loss` |
+| `scene_search/cli/nlss_cli.gd` | `--query="<plain words>"` |
+| `accessibility/cli/a11y_cli.gd` | `--fail-on=errors,tiny_text,low_contrast,no_keyboard_focus` |
+| `export_doctor/cli/bed_cli.gd` | `--fail-on=errors` |
+
 ## This repo's layout
 
 ```
