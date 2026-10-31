@@ -57,7 +57,25 @@ jobs:
         run: '".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64" --headless --version'
 
       - name: Run full gate
-        run: sh tests/run_tests.sh ".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64"
+        shell: bash
+        run: |
+          set +e
+          sh tests/run_tests.sh ".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64" 2>&1 | tee gate.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            {
+              echo '### Gate failure (last 100 lines)'
+              echo '```'
+              tail -100 gate.log
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+            message=$(tail -100 gate.log)
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=Gate failure::$message"
+          fi
+          exit "$status"
 
       - name: Upload reports
         if: always()
