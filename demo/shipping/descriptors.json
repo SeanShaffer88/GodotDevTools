@@ -1,0 +1,13 @@
+{
+  "questions": [
+    {"id": "violence", "text": "Depictions of violence", "options": ["none", "fantasy", "realistic"], "evidence_required": true},
+    {"id": "language", "text": "Strong language", "options": ["none", "mild", "strong"]},
+    {"id": "purchases", "text": "In-game purchases", "options": ["none", "cosmetic", "random items"], "evidence_required": true},
+    {"id": "online", "text": "Unmoderated user interaction", "options": ["no", "yes"]}
+  ],
+  "answers": {
+    "violence": {"value": "fantasy", "evidence": "res://demo/rendering/street.tscn", "reviewer": "QA", "date": "2026-10-01"},
+    "language": {"value": "moderate", "reviewer": "QA", "date": "2026-10-01"},
+    "purchases": {"value": "cosmetic", "reviewer": "QA", "date": "2025-01-15"}
+  }
+}

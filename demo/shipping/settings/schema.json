@@ -1,0 +1,7 @@
+{"fields": {
+  "audio/master_volume": {"type": "float", "min": 0.0, "max": 1.0, "default": 0.8},
+  "audio/music_volume": {"type": "float", "min": 0.0, "max": 1.0, "default": 0.6},
+  "video/fullscreen": {"type": "bool", "default": false},
+  "video/resolution": {"type": "string", "enum": ["1280x720", "1920x1080", "2560x1440"], "default": "1920x1080"},
+  "gameplay/difficulty": {"type": "int", "min": 0, "max": 3, "default": 1}
+}}

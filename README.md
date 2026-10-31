@@ -105,6 +105,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Version Consistency Checker | Project `config/version` against version strings in export presets (Android, Windows, macOS, iOS, web). | `addons/version_consistency` |
 | Third-Party Notice Collector | License files gathered per addon/vendor folder into a notices report; missing licenses and copyleft licenses flagged for review. | `addons/third_party_notices` |
 | Release Notes Generator | Conventional-commit subjects grouped into draft release notes (breaking, added, fixed, performance, other). | `addons/release_notes` |
+| Content Descriptor Checklist | User-defined content questionnaire with recorded answers: unanswered, invalid, missing evidence, stale reviews. No rating claim. | `addons/content_descriptor` |
+| Patch Delta Estimator | Two staged builds compared file by file (MD5): added, removed and changed bytes, monolithic pack warnings, delta budget. | `addons/patch_delta` |
+| Settings File Validator | Player settings files (ConfigFile or JSON) against a schema: unknown keys, wrong types, out-of-range and disallowed values. | `addons/settings_validator` |
+| Accessibility Options Coverage | Keyword evidence in scripts, scenes and data that expected accessibility options exist (subtitles, remapping, text size, colour-blind modes, reduced motion, mono audio, hold/toggle). | `addons/a11y_options` |
+| Handheld Readiness Checklist | Stretch mode, text size scaled to a target screen height, actions without gamepad bindings, and buttons that cannot take focus. | `addons/handheld_readiness` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -267,6 +272,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `version_consistency/cli/vcc_cli.gd` | `--project` `--presets` `--expected` `--fail-on` |
 | `third_party_notices/cli/tpn_cli.gd` | `--dir` `--fail-on` |
 | `release_notes/cli/rln_cli.gd` | `--commits` `--version` `--include-other` `--fail-on` |
+| `content_descriptor/cli/cdc_cli.gd` | `--input` `--max-age-days` `--today` `--fail-on` |
+| `patch_delta/cli/pde_cli.gd` | `--old` `--new` `--max-delta` `--fail-on` |
+| `settings_validator/cli/ssv_cli.gd` | `--dir` `--schema` `--fail-on` |
+| `a11y_options/cli/aoc_cli.gd` | `--dir` `--expect` `--fail-on` |
+| `handheld_readiness/cli/hrc_cli.gd` | `--dir` `--project` `--target-height` `--min-text-px` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 
