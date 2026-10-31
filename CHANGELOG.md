@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Input Sequence Fuzzer (`input_fuzzer`): Seeded, bounded press/hold/release sequences generated from the InputMap; a runtime node replays them frame by frame. Dock, CLI, fixture and test suite.
+- GDScript Warning Baseline (`warning_baseline`): Static per-file counts of UNUSED_VARIABLE, UNUSED_PARAMETER and UNREACHABLE_CODE patterns, ratcheted against a committed baseline. Dock, CLI, fixture and test suite.
+- Scene Load Smoke Tester (`scene_smoke`): Loads and instantiates every scene headless; load/instantiate failures, missing dependencies, unknown node types. Dock, CLI, fixture and test suite.
+- Micro-Benchmark Harness (`bench_harness`): Times `bench_*` methods with warm-up and repetitions; median, p95, spread; output is Performance Regression Gate input. Dock, CLI, fixture and test suite.
+- GDScript Mutation Tester (`mutation_tester`): Operator mutants of one script, each run against its test in an isolated temporary project; surviving mutants show untested behaviour. Dock, CLI, fixture and test suite.
 - Flaky Test Detector (`flaky_tests`): Test-run histories (JUnit XML folders or JSON): same-commit pass/fail flips, flip rates and always-failing tests. Dock, CLI, fixture and test suite.
 - Golden Data Snapshot Tester (`golden_snapshot`): JSON outputs compared with approved goldens by JSON path (changed, added, removed, type changes) with a float tolerance. Dock, CLI, fixture and test suite.
 - Error Log Grouper (`log_grouper`): Godot log errors and warnings grouped by normalized signature (numbers and quoted names masked) with counts and first location. Dock, CLI, fixture and test suite.

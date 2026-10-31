@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -237,4 +237,16 @@ gate "log budget catches new errors" \
   res://addons/log_budget/cli/lbg_cli.gd -- --log=res://demo/ci/logs/run.log --baseline=res://demo/ci/logs/baseline.json --fail-on=error_budget
 gate "trace diff finds the divergence" \
   res://addons/trace_diff/cli/sdt_cli.gd -- --first=res://demo/ci/traces/run_a.json --second=res://demo/ci/traces/run_b.json --fail-on=divergence
+gate "input fuzzer reports the unbound dash" \
+  res://addons/input_fuzzer/cli/isf_cli.gd -- --project=res://demo/ci/input_actions.godot --fail-on=unbound_action
+grep -q '"sequences"' reports/input_fuzzer/input_fuzzer.json
+gate "warning baseline catches the new unused variable" \
+  res://addons/warning_baseline/cli/gwb_cli.gd -- --dir=res://demo/ci/warnings --baseline=res://demo/ci/warnings/baseline.json --fail-on=warning_increase
+gate "scene smoke test flags the legacy node type" \
+  res://addons/scene_smoke/cli/sst_cli.gd -- --dir=res://demo/ci/smoke --fail-on=unknown_type
+echo "== bench harness output feeds the performance gate =="
+"$GODOT" --headless --path . --script res://addons/bench_harness/cli/mbh_cli.gd -- --script=res://demo/ci/bench/bench_math.gd --iterations=5 --warmup=1
+grep -q '"bench_math.bench_sum_array"' reports/bench_harness/bench_harness.json
+gate "mutation tester finds surviving boundary mutants" \
+  res://addons/mutation_tester/cli/gmt_cli.gd -- --target=res://demo/ci/mutation/clamp_health.gd --test=res://demo/ci/mutation/test_clamp_health.gd --fail-on=survived_mutant
 echo "ALL GATE CHECKS PASSED"
