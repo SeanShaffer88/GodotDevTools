@@ -1,6 +1,6 @@
 # GodotDevTools - Quality Scorecard
 
-The new Scene Dependency Map suite and CLI gate are added but not yet verified in Godot. The following describes the last verified baseline, before that addition.
+The current forty-suite gate passed headless CI on Godot 4.3 and 4.5 on main (run 41168830957). Editor docks and runtime nodes still require hands-on verification. The historical check-count breakdown below describes the earlier twenty-nine-suite baseline.
 
 Gate: `sh tests/run_tests.sh <godot-binary>` - **292/292 test checks passed, 0 failed** across the twenty-nine suites (VRT 16, GSTM 12, RUIP 8, AHD 10, DQD 22, MNS 12, NLSS 9, A11Y 8, BED 7, DBP 8, SMG 9, CMV 8, PAR 9, AUD 8, MLH 7, IMX 9, SHD 9, SGS 10, LMX 10, BTD 10, COR 12, SDR 10, WBX 10, VFM 11, TMR 8, CTR 11, THM 11, PFG 8, DCG 10), plus every CLI smoke and exit-code-2 gate assertion in the same run. The gate runs automatically in CI (`.github/workflows/tests.yml`) on pushes to main and pull requests, green on both Godot 4.3.stable and 4.5.stable headless (Linux).
 

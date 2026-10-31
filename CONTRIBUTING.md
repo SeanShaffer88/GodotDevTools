@@ -63,7 +63,7 @@ Releases are cut from tags, not from hand-made zips:
 1. Update `CHANGELOG.md`: rename `[Unreleased]` to the new version + date,
    start a fresh empty `[Unreleased]`.
 2. Bump `version` in every `addons/*/plugin.cfg` being released.
-3. Tag and push: `git tag v1.2.0 && git push origin v1.2.0`.
+3. Merge the release-preparation changes into `main`. Dispatch the release workflow on `main` with the tag, for example `gh workflow run release.yml --ref main -f tag=v1.2.0`. The workflow creates the tag and release only after the gate passes. A manually pushed `v*` tag also triggers the workflow.
 4. The release workflow re-runs the full gate, then builds
    `GodotDevTools-<Tool>-v1.2.0.zip` per tool plus
    `GodotDevTools-Suite-v1.2.0.zip` and attaches them to a GitHub Release.

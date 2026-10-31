@@ -13,7 +13,7 @@ and documentation disagree, the code wins and the docs get fixed.
 ## The prompt (copy everything inside the box)
 
 ```text
-You are working with GodotDevTools: thirty independent developer tools for
+You are working with GodotDevTools: forty independent developer tools for
 Godot 4 games, in a repo that is itself a Godot demo/test project. Everything
 is offline, deterministic, MIT-licensed GDScript with no third-party
 dependencies. The previous 29-tool baseline passed CI on Godot 4.3-stable and 4.5-stable;
@@ -77,8 +77,8 @@ RULES THAT MUST NOT BREAK
 
 ## Where the tools are
 
-Twenty-nine addons, one folder each, no cross-dependencies. The original nine
-are mapped below; see the [root README](README.md) for all thirty.
+Forty addons, one folder each, no cross-dependencies. The original nine
+are mapped below; see the [root README](README.md) for all forty.
 
 | Tool (plugin name) | Core - the operation | Dock | CLI | Runtime |
 |---|---|---|---|---|
@@ -235,7 +235,7 @@ through it; set latency/jitter/loss in the inspector; deliveries arrive on its
 The pattern is: run a CLI, treat exit 2 as failure, archive the reports.
 This repo's own [.github/workflows/tests.yml](.github/workflows/tests.yml) is
 the worked example - it runs [tests/run_tests.sh](tests/run_tests.sh) (import
-check, thirty suites, CLI smokes, and exit-code-2 gate assertions) headless on
+check, forty suites, CLI smokes, and exit-code-2 gate assertions) headless on
 Godot 4.3-stable and 4.5-stable on pushes to main and pull requests, and uploads
 `reports/` + `visual_reports/` as artifacts. A minimal game-project pipeline:
 
