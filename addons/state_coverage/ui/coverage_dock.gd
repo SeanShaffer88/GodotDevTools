@@ -4,6 +4,7 @@ const Core := preload("res://addons/state_coverage/core/coverage_audit.gd")
 var _first: LineEdit
 var _second: LineEdit
 var _output: RichTextLabel
+var _continuity: CheckBox
 
 func _init() -> void:
     name = "State Transition Coverage Tracker"
@@ -16,6 +17,10 @@ func _init() -> void:
     _second.text = "res://demo/state_coverage/trace.json"
     _second.tooltip_text = "Second input JSON path; see addon README for format."
     add_child(_second)
+    _continuity = CheckBox.new()
+    _continuity.text = "Check trace continuity"
+    _continuity.tooltip_text = "Check adjacent transitions unless a reset marks a new sequence."
+    add_child(_continuity)
     var button := Button.new()
     button.text = "Run check"
     button.tooltip_text = "Analyze the input files without changing them."
@@ -28,4 +33,4 @@ func _init() -> void:
 
 func _on_run() -> void:
     var op = Core.new()
-    _output.text = op.to_markdown(op.run(_first.text, _second.text))
+    _output.text = op.to_markdown(op.run(_first.text, _second.text, _continuity.button_pressed))

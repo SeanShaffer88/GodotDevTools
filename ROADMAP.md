@@ -46,7 +46,7 @@ This roadmap captures proposed tools, not a promise that every design is already
 - [ ] **Gameplay Scenario Test Builder** — compose repeatable actions and assertions.
 - [ ] **Crash and Error Reproduction Packager** — bundle approved logs, settings and reproduction information.
 - [ ] **Save Corruption and Recovery Tester** — inject invalid saves and verify recovery behavior.
-- [ ] **State Transition Coverage Tracker** (in progress) — compare supplied model and trace; runtime instrumentation, Godot tests and editor verification pending.
+- [ ] **State Transition Coverage Tracker** (in progress) — model and trace comparison passed Godot 4.3/4.5 CI in PR #11; explicit bounded runtime recording and optional continuity checks added, pending CI and a hands-on game/editor session.
 - [ ] **Regression Test Prioritizer** (in progress) — rank exact-path mappings; dependency inference, Godot tests and editor verification pending.
 - [ ] **Property-Based Gameplay Tester** — generate bounded input sequences to check invariants.
 - [ ] **Resource Load Failure Simulator** — test fallbacks for missing, invalid or delayed resources.

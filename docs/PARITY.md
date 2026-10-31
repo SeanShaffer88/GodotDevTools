@@ -68,7 +68,8 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Feature Flag and Rollout Simulator: offline cohort, prerequisites and defaults | flag_simulator core + CLI + dock | Unverified (Godot tests and editor session pending; no production service integration) |
 | Build Size Attribution Explorer: staged-directory size inventory and budgets | build_size core + CLI + dock | Unverified (Godot tests and editor session pending; archive internals are not attributed) |
 | Checklist runner: user-defined requirements and recorded results | cert_check core + CLI + dock | Unverified (Godot tests and editor session pending; no certification claim) |
-| State transition coverage: model and trace comparison | state_coverage core + CLI + dock | Unverified (Godot tests and editor session pending; no runtime instrumentation) |
+| State transition coverage: model and trace comparison | state_coverage core + CLI + dock | Verified on fixture in PR #11; optional continuity and truncated-trace handling pending CI |
+| State transition coverage: explicit bounded runtime recording | state_coverage core + runtime node | Unverified (headless tests added; real-game and editor session pending; transitions must be recorded explicitly) |
 | Test prioritizer: exact path-to-test mappings | test_priority core + CLI + dock | Unverified (Godot tests and editor session pending; no dependency inference) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
