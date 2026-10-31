@@ -46,6 +46,7 @@ jobs:
             leak_hunter:LeakHunter \
             naming_conventions:NamingConventions \
             network_sim:NetworkSim \
+            performance_gate:PerformanceGate \
             prefab_guard:PrefabGuard \
             proc_anim:ProcAnim \
             release_guard:ReleaseGuard \

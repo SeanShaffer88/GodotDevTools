@@ -1,0 +1,1 @@
+{"metrics":{"frame_ms":{"value":16.0,"unit":"ms","direction":"higher_is_worse","tolerance_pct":5,"tolerance_abs":0.5},"fps":{"value":60,"unit":"fps","direction":"lower_is_worse","tolerance_pct":5}}}

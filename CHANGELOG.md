@@ -7,6 +7,8 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Started Performance Regression Gate with baseline comparison, noise tolerances, a dock, headless CLI and fixtures.
+
 - Started Player Telemetry Schema Validator with offline sample validation, explicit sensitive-field checks, dock, CLI and fixtures.
 
 - Started Subtitle Timing and Readability Auditor with a JSON cue checker, dock, CLI and fixture tests.
