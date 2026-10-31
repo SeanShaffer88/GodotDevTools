@@ -7,6 +7,8 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Started the Naming and Folder Convention Enforcer with a read-only file/folder regex audit, dock, CLI and fixture tests.
+
 - Added a 50-tool roadmap and an initial Demo-to-Release Content Guard addon for reviewing development markers.
 
 - Scene Dependency Map addon: browsable static dependency map, missing/cycle/chain checks, unused candidates and headless reports.

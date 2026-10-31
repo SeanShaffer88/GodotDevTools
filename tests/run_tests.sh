@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -103,4 +103,7 @@ test -s reports/scene_dependency/scene_dependency.json
 gate "release guard detects the placeholder fixture" \
   res://addons/release_guard/cli/rg_cli.gd -- --dir=res://demo/release_guard --fail-on=placeholder
 test -s reports/release_guard/release_guard.json
+gate "naming audit detects the inconsistent fixture" \
+  res://addons/naming_conventions/cli/nc_cli.gd -- --dir=res://demo/naming --fail-on=file_name,directory_name
+test -s reports/naming_conventions/naming_conventions.json
 echo "ALL GATE CHECKS PASSED"

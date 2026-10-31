@@ -35,7 +35,7 @@ This roadmap captures proposed tools, not a promise that every design is already
 - [ ] **Resource Rename and Reference Assistant** — preview moves and affected references.
 - [ ] **Asset Import Preset Auditor** — compare import settings to team-defined presets.
 - [ ] **Project Cleanup Workbench** — collect unused candidates, duplicates and stale imports for review.
-- [ ] **Naming and Folder Convention Enforcer** — apply configurable project naming rules.
+- [ ] **Naming and Folder Convention Enforcer** (in progress) — initial file/folder regex audit added; Godot tests and editor verification pending. Node, signal and group rules remain future work.
 - [ ] **Scene Review Snapshot Generator** — generate reproducible scene inventories and diffs.
 - [ ] **Editor Action Macro Recorder** — record and preview repeatable editor actions with undo support.
 - [ ] **Node Property Drift Monitor** — compare node properties against team baselines.
@@ -63,6 +63,6 @@ This roadmap captures proposed tools, not a promise that every design is already
 - [ ] **Privacy and Permissions Auditor** — inventory permissions, collection points and endpoints for review.
 - [ ] **Offline and Poor-Connection Test Harness** — simulate outages, timeouts and interrupted requests.
 - [ ] **Build Size Attribution Explorer** — attribute exported build size to assets and categories.
-- [ ] **Demo-to-Release Content Guard** (in progress) — flag configurable placeholder and development markers for review; initial static scanner implemented, Godot verification pending.
+- [ ] **Demo-to-Release Content Guard** (in progress) — flag configurable placeholder and development markers for review; initial static scanner passed the Godot 4.3/4.5 CI gate in PR #4; hands-on editor verification remains.
 - [ ] **Feature Flag and Rollout Simulator** — test flag combinations and unavailable configuration.
 - [ ] **Player Telemetry Schema Validator** — check event names, payload fields and privacy rules against a local schema.
