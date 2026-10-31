@@ -2,15 +2,15 @@
 
 [![Tests](https://github.com/SeanShaffer88/GodotDevTools/actions/workflows/tests.yml/badge.svg)](https://github.com/SeanShaffer88/GodotDevTools/actions/workflows/tests.yml)
 
-Twenty-nine tools for developers who build games with Godot 4: visual regression testing, a game-state time machine, a responsive UI previewer, an asset health dashboard, a dialogue and quest debugger, a multiplayer network simulator, natural-language scene search, an automated accessibility checker, a build and export doctor, a draw-call and batching profiler, a save-game schema migrator, a physics collision matrix visualizer, procedural animation solvers, an audio mixing sandbox, a memory leak and orphan hunter, an input matrix and rebinding suite, a shader analyzer, a signal flow spy, a localization matrix, a behaviour tree and state machine debugger, a camera shake and framing orchestrator, a deterministic seed and replay runner, a level whiteboxing suite, a cross-platform filesystem mock, a tilemap rule generator, a headless test runner, a thermal and battery emulation dock, a prefab instance guard, and a GDScript documentation generator.
+Thirty tools for developers who build games with Godot 4: visual regression testing, a game-state time machine, a responsive UI previewer, an asset health dashboard, a dialogue and quest debugger, a multiplayer network simulator, natural-language scene search, an automated accessibility checker, a build and export doctor, a draw-call and batching profiler, a save-game schema migrator, a physics collision matrix visualizer, procedural animation solvers, an audio mixing sandbox, a memory leak and orphan hunter, an input matrix and rebinding suite, a shader analyzer, a signal flow spy, a localization matrix, a behaviour tree and state machine debugger, a camera shake and framing orchestrator, a deterministic seed and replay runner, a level whiteboxing suite, a cross-platform filesystem mock, a tilemap rule generator, a headless test runner, a thermal and battery emulation dock, a prefab instance guard, a GDScript documentation generator, and a scene dependency map.
 
 ## TL;DR
 
-Think of this as a workshop wall for a Godot project. Each tool is a separate instrument that hangs on the same wall: you can take down just one and use it in your own game project, or hang all twenty-nine. Each one looks at your game the way a careful tester would - comparing pictures against approved ones, replaying the exact buttons that caused a bug, trying your menus on phone screens, weighing your textures, walking your dialogue, shaking your network, searching your scenes in plain words, checking that every player can read and reach everything, checking your export settings before release day, counting your draw calls, migrating your old saves, mapping your collision layers, solving your animation rigs, mixing your audio on paper, hunting your leaks, laying out your input bindings, reading your shaders, spying on your signals, completing your translations, tracing your behaviour trees, orchestrating your cameras, replaying your seeds, snapping your blockouts, mocking your filesystems, generating your tile rules, running your tests headless, estimating your thermal load, guarding your prefab instances, and documenting your code. Every tool also runs from the command line, so it can guard a build automatically.
+Think of this as a workshop wall for a Godot project. Each tool is a separate instrument that hangs on the same wall: you can take down just one and use it in your own game project, or hang all thirty. Each one looks at your game the way a careful tester would - comparing pictures against approved ones, replaying the exact buttons that caused a bug, trying your menus on phone screens, weighing your textures, walking your dialogue, shaking your network, searching your scenes in plain words, checking that every player can read and reach everything, checking your export settings before release day, counting your draw calls, migrating your old saves, mapping your collision layers, solving your animation rigs, mixing your audio on paper, hunting your leaks, laying out your input bindings, reading your shaders, spying on your signals, completing your translations, tracing your behaviour trees, orchestrating your cameras, replaying your seeds, snapping your blockouts, mocking your filesystems, generating your tile rules, running your tests headless, estimating your thermal load, guarding your prefab instances, and documenting your code. Every tool also runs from the command line, so it can guard a build automatically.
 
 AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a pasteable project prompt plus the exact file map, inspection order, and full CLI reference with defaults and exit codes.
 
-## The twenty-nine tools
+## The thirty tools
 
 | Tool | What it does | Addon folder |
 |---|---|---|
@@ -43,6 +43,7 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Mobile Thermal and Battery Drain Emulation Dock | Documented-estimate RC thermal model: time-to-throttle, frame-budget misses and battery hours, for comparing workload changes on the same guessed hardware. | `addons/thermal_sim` |
 | Smart Prefab and Variant Instance Manager | Classify prefab instance overrides (dead vs hiding), generate rollback plans, and write only with an explicit --apply. | `addons/prefab_guard` |
 | Automated Documentation Generator for GDScript | Parse ## doc comments, signals, exports and functions into Markdown and dependency-free HTML; report undocumented public API. | `addons/doc_gen` |
+| Scene Dependency Map | Browse static scene, script and resource links; flag missing references, cycles, long chains and potentially unused assets. | `addons/scene_dependency` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -59,14 +60,14 @@ No placeholder images are used in the meantime.
 
 ## Requirements
 
-- Godot **4.3** and **4.5** (both verified - the full test gate runs headless on 4.3-stable and 4.5-stable in CI on every push and pull request). Other Godot 4.x versions are expected to work - the APIs used (`Image`, `ConfigFile`, `RegEx`, `DirAccess`) are stable across 4.x - but this is **to be confirmed** by a test run.
+- Godot **4.3** and **4.5** (the prior 29-tool gate passed on both; the new Scene Dependency Map tests still need a Godot run). Other Godot 4.x versions are expected to work - the APIs used (`Image`, `ConfigFile`, `RegEx`, `DirAccess`) are stable across 4.x - but this is **to be confirmed** by a test run.
 - No third-party dependencies. No network access is used at any point.
 
 ## Install
 
-For one tool: copy its `addons/<tool>` folder into your project's `addons/` folder and enable it under Project -> Project Settings -> Plugins. Ready-made zips are attached to each [GitHub Release](https://github.com/SeanShaffer88/GodotDevTools/releases): `GodotDevTools-<Tool>-v<version>.zip` per tool and `GodotDevTools-Suite-v<version>.zip` with all twenty-nine - unzip into your project root.
+For one tool: copy its `addons/<tool>` folder into your project's `addons/` folder and enable it under Project -> Project Settings -> Plugins. Ready-made zips are attached to each [GitHub Release](https://github.com/SeanShaffer88/GodotDevTools/releases): `GodotDevTools-<Tool>-v<version>.zip` per tool and `GodotDevTools-Suite-v<version>.zip` with all thirty - unzip into your project root.
 
-For all twenty-nine: copy all twenty-nine `addons/` folders (or unzip the suite zip), then enable the plugins you want. Each tool works on its own; none depends on another.
+For all thirty: copy all thirty `addons/` folders (or unzip the suite zip), then enable the plugins you want. Each tool works on its own; none depends on another.
 
 ## How to use
 
@@ -93,7 +94,7 @@ Each CLI's full option list is in its header comment.
 
 ## Downloads
 
-Each release carries the installable zips - see [GodotDevTools releases](https://github.com/SeanShaffer88/GodotDevTools/releases): `GodotDevTools-Suite-v<version>.zip` with all twenty-nine addons, or one zip per tool. Pushing a `v*` tag runs the full test gate and then builds and attaches the zips automatically (`.github/workflows/release.yml`), so a release is never published with a red gate.
+Each release carries the installable zips - see [GodotDevTools releases](https://github.com/SeanShaffer88/GodotDevTools/releases): `GodotDevTools-Suite-v<version>.zip` with all thirty addons, or one zip per tool. Pushing a `v*` tag runs the full test gate and then builds and attaches the zips automatically (`.github/workflows/release.yml`), so a release is never published with a red gate.
 
 ## Command-line reference
 
@@ -130,6 +131,7 @@ Every CLI writes a JSON and a Markdown report (`--out=<dir>`, `--format=json,md`
 | `thermal_sim/cli/thm_cli.gd` | `--workload=<json>` `--fail-on=errors,config_error,thermal_throttle,battery_drain_high,frame_budget_exceeded,missing_file` |
 | `prefab_guard/cli/pfg_cli.gd` | `--scene=<tscn>` `--apply` (writes rollback ops) `--fail-on=errors,drifted_property,default_drift,prefab_missing,missing_file` |
 | `doc_gen/cli/dcg_cli.gd` | writes `api.md` + `api.html` next to the report `--fail-on=errors,undocumented` |
+| `scene_dependency/cli/sdm_cli.gd` | `--dir`, repeatable `--root`, `--fail-on=missing_dependency,cycle,long_chain,unused_candidate,unresolved_uid,no_roots` |
 
 ## This repo's layout
 

@@ -48,6 +48,7 @@ jobs:
             prefab_guard:PrefabGuard \
             proc_anim:ProcAnim \
             responsive_ui:ResponsiveUI \
+            scene_dependency:SceneDependency \
             scene_search:SceneSearch \
             schema_migrator:SchemaMigrator \
             seed_replay:SeedReplay \

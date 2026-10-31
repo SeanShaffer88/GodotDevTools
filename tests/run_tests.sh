@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -96,4 +96,8 @@ gate "doc generator must exit 2 on undocumented API" \
   res://addons/doc_gen/cli/dcg_cli.gd -- --fail-on=undocumented
 test -s reports/doc_gen/api.md
 test -s reports/doc_gen/api.html
+
+gate "scene dependency map detects the unused fixture" \
+  res://addons/scene_dependency/cli/sdm_cli.gd -- --dir=res://demo/dependencies --root=res://demo/dependencies/main.tscn --fail-on=unused_candidate
+test -s reports/scene_dependency/scene_dependency.json
 echo "ALL GATE CHECKS PASSED"
