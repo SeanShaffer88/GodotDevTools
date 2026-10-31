@@ -60,7 +60,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          sh tests/run_tests.sh ".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64" 2>&1 | tee gate.log
+          timeout 180s sh tests/run_tests.sh ".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64" 2>&1 | tee gate.log
           status=${PIPESTATUS[0]}
           if [ "$status" -ne 0 ]; then
             {
