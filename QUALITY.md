@@ -12,7 +12,7 @@ Gate: `sh tests/run_tests.sh <godot-binary>` - **104/104 test checks passed, 0 f
 | Safety / privacy | 5 | Fully offline; reads the project, writes only reports the user asked for; destructive-sounding actions (baseline approval, deleting unused files) are never performed automatically - approval is an explicit copy, deletion is only ever a suggestion. |
 | Performance | 3 | Fixture scans are instant; large-project timing is Unverified (recorded in PROJECT_RULES budgets). |
 
-Overall: gate green = shippable as v1.0.0 with the limitations stated in README.md. No dimension is a Fail.
+Overall: gate green = shippable, with the limitations stated in README.md; unreleased additions on the way to the next version are tracked in CHANGELOG.md. No dimension is a Fail.
 
 ## Verification status
 

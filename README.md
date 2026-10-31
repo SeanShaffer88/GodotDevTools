@@ -50,7 +50,7 @@ For all nine: copy all nine `addons/` folders (or unzip the suite zip), then ena
 
 ### In the editor
 
-Each tool adds a dock on the right side of the editor with a **Run check** button, a results list, and a `?` help button that explains the tool in plain words, offline. Three tools also add pieces beyond the check:
+Each tool adds a dock on the right side of the editor with a **Run check** button, a results list, and a `?` help button that explains the tool in plain words, offline. Four tools also add pieces beyond the check:
 
 - **Visual Regression**: the dock's Capture section is the one-click shutter - list scene paths (empty = the main scene), press **Capture now**, and every scene is saved as `<scene>__<width>x<height>.png` in the capture folder at each standard resolution, ready for the compare run. Needs the editor's renderer; never runs headless.
 - **Dialogue and Quest**: the dock draws the selected dialogue's branch graph - layered boxes with arrows for choices, `[if]` tags on conditional choices, orange for flagged nodes and a red dashed ghost box for every choice that points at a missing node.
