@@ -36,6 +36,7 @@ jobs:
             audio_sandbox:AudioSandbox \
             batch_profiler:BatchProfiler \
             bt_debugger:BTDebugger \
+            build_size:BuildSize \
             camera_orch:CameraOrch \
             collision_matrix:CollisionMatrix \
             dialogue_quest:DialogueQuest \

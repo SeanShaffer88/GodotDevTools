@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -119,4 +119,7 @@ gate "flag simulator detects unknown prerequisites" \
   res://addons/flag_simulator/cli/flag_cli.gd -- --config=res://demo/flags/flags.json --fail-on=errors
 test -s reports/flag_simulator/flag_simulator.json
 "$GODOT" --headless --path . --script res://addons/flag_simulator/cli/flag_cli.gd -- --config=res://demo/flags/clean.json --unavailable
+gate "build size explorer detects an over-budget file" \
+  res://addons/build_size/cli/bs_cli.gd -- --dir=res://demo/build_size --max-file=1 --fail-on=file_budget
+test -s reports/build_size/build_size.json
 echo "ALL GATE CHECKS PASSED"
