@@ -27,6 +27,8 @@ func analyze(texts: Dictionary, options: Dictionary = {}) -> Dictionary:
     var counts := {}
     var paths: Array = texts.keys()
     paths.sort()
+    # Compile each pattern once; compiling per line dominated large scans.
+    var compiled: Array = PATTERNS.map(func(p): return RegEx.create_from_string(p[1]))
     for path in paths:
         if texts[path] == null:
             issues.append(_issue("error", "scan_error", str(path), 0, "Cannot read file.", "Check file permissions and retry."))
@@ -36,8 +38,10 @@ func analyze(texts: Dictionary, options: Dictionary = {}) -> Dictionary:
             var line: String = lines[index]
             if line.strip_edges().begins_with("#"):
                 continue
-            for p in PATTERNS:
-                for m in RegEx.create_from_string(p[1]).search_all(line):
+            for pi in PATTERNS.size():
+                var p: Array = PATTERNS[pi]
+                var re: RegEx = compiled[pi]
+                for m: RegExMatch in re.search_all(line):
                     var what := m.get_string(1) if m.get_group_count() >= 1 and m.get_string(1) != "" else m.get_string()
                     var key := "%s|%s|%s" % [p[0], path, what] if p[0] != "network_endpoint" else "%s|%s" % [p[0], what]
                     if seen.has(key):

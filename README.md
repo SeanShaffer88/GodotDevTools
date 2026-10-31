@@ -387,7 +387,7 @@ Everything runs locally, in the editor or a headless Godot process. The tools re
 
 ## Audit and credits
 
-See [AUDIT.md](AUDIT.md) for the security, privacy and quality audit, [CREDITS.md](CREDITS.md) for attribution, and [DESCRIPTION.md](DESCRIPTION.md) for the project blurb.
+See [AUDIT.md](AUDIT.md) for the security, privacy and quality audit, [CREDITS.md](CREDITS.md) for attribution, and [DESCRIPTION.md](DESCRIPTION.md) for the project blurb. Large-project timings are in [docs/performance.md](docs/performance.md).
 
 ## Limitations and known issues
 

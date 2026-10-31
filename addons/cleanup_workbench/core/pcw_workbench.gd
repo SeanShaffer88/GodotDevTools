@@ -20,12 +20,13 @@ func run(input: String = "res://", options: Dictionary = {}) -> Dictionary:
     var files: Array = []
     var empties: Array = []
     _all(input, files, empties)
-    var refs := ""
+    var texts := PackedStringArray()
     var ref_files: Array = []
     _all(str(opts["root"]), ref_files, [])
     for f in ref_files:
         if str(f).get_extension() in TEXT_EXTS:
-            refs += FileAccess.get_file_as_string(f) + "\n"
+            texts.append(FileAccess.get_file_as_string(f))
+    var refs := "\n".join(texts)
     var info := {}
     for f in files:
         var uid := ""
@@ -62,6 +63,7 @@ func evaluate(info: Dictionary, refs: String, empties: Array = []) -> Dictionary
     var paths: Array = info.keys()
     paths.sort()
     var by_md5 := {}
+    var known := _references(refs)
     for p in paths:
         var ext := str(p).get_extension().to_lower()
         if ext in ["import", "uid"]:
@@ -77,7 +79,7 @@ func evaluate(info: Dictionary, refs: String, empties: Array = []) -> Dictionary
                 by_md5[md5] = []
             by_md5[md5].append(p)
         var uid := str(info[p].get("uid", ""))
-        if not refs.contains(str(p)) and (uid == "" or not refs.contains(uid)):
+        if not known.has(str(p)) and (uid == "" or not known.has(uid)):
             issues.append(_issue("info", "unused_candidate", str(p), 0, "No text file references this path or its UID.", "Confirm it is not loaded by a path built at runtime, then remove it (and its sidecars)."))
     for md5 in by_md5.keys():
         var group: Array = by_md5[md5]
@@ -86,6 +88,16 @@ func evaluate(info: Dictionary, refs: String, empties: Array = []) -> Dictionary
     for e in empties:
         issues.append(_issue("info", "empty_folder", str(e), 0, "Empty folder.", "Remove it."))
     return _finish({"files": paths.size()}, issues)
+
+
+## Every res:// path and uid:// id written in the reference text, as a set.
+## One regex pass replaces a substring search of the whole text per asset,
+## which was quadratic on large projects.
+func _references(refs: String) -> Dictionary:
+    var known := {}
+    for m in RegEx.create_from_string("(?:res|uid)://[^\"'\\n\\r\\t)\\]]+").search_all(refs):
+        known[m.get_string().strip_edges()] = true
+    return known
 
 
 func _walk(path: String, out: Array) -> void:

@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp smc pcw ssg npd aeh gsb crp scr pbt rlf pfl ppa ocn eam; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp smc pcw ssg npd aeh gsb crp scr pbt rlf pfl ppa ocn eam docks; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done

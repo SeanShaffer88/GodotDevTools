@@ -5,6 +5,16 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Dock smoke suite (`tests/test_docks.gd`, part of the gate): builds all 133 editor docks outside the editor, checks that every interactive control has a tooltip, and presses each run action on its demo input.
+- Large-project benchmark (`tests/bench/`): a deterministic synthetic-project generator and a timer for the 39 project-wide scanners. Results are in docs/performance.md.
+
+### Performance
+
+- Cleanup Workbench builds its reference set with one regex pass instead of searching the whole project text once per asset: 18.1 s down to 0.27 s on a 4,623-file project, with identical findings.
+- Privacy Auditor compiles each pattern once per scan instead of once per line: 6.2 s down to 1.9 s, with identical findings.
+
 ## [1.2.0] - 2026-10-31
 
 ### Added
