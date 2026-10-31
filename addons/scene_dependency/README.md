@@ -13,3 +13,17 @@ godot --headless --path . --script res://addons/scene_dependency/cli/sdm_cli.gd 
 The scan recognizes quoted `res://` and resolvable `uid://` paths in text scenes, resources, GDScript, C# and shaders. Binary assets are nodes but not parsed for outgoing links. Literal references in comments may be included; dynamically constructed paths, class-name dependencies, editor-only references, and generated assets may be missed. Unreachable files are **candidates only**, never proof that deletion is safe. Supply all game entry points; if any configured root is outside the scanned inventory or unresolved, unused findings are suppressed. References to existing files outside the scan are not traversed. Long-chain warnings describe DFS traversal paths, not a complete enumeration of all possible paths. Never delete assets based on this report alone.
 
 The tree view, core and CLI do not modify assets. Godot import is required for UID resolution. The visual dock still needs hands-on editor verification.
+
+## Change impact and rename preview
+
+The dock accepts an optional changed resource path and an optional rename destination. The CLI equivalents are `--impact=res://path` and `--rename-to=res://new_path` (requires `--impact`). For example:
+
+```sh
+godot --headless --path . --script res://addons/scene_dependency/cli/sdm_cli.gd -- \
+  --dir=res://demo/dependencies --root=res://demo/dependencies/main.tscn \
+  --impact=res://demo/dependencies/material.tres --rename-to=res://demo/dependencies/new_material.tres
+```
+
+Impact walks the graph backward to show transitive dependents and one shortest chain per file, even with cycles. Rename preview lists direct reference **candidates** and impacted dependents, checks for an existing or invalid destination, and **never moves or rewrites anything**. Use `--fail-on=impact_outside_scan,invalid_impact_path,invalid_destination,same_destination,destination_exists` if desired. Review the JSON or Markdown report before making changes manually.
+
+The same static-scan limits apply: dynamic references, unscanned directories, binary resource internals, `project.godot` configuration references, editor-only uses, and UID semantics can be missed or misrepresented. A direct edge can come from a resolved UID and does not necessarily require a path rewrite. Destination collision checks depend on the current filesystem and scan. These previews are not a safe automatic rename plan. New functionality requires Godot CI and hands-on editor verification.

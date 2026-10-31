@@ -122,6 +122,65 @@ func analyze(files: Dictionary, roots: Array, chain_limit: int = 8) -> Dictionar
             _visit(path, adjacency, state, chain, issues, maxi(chain_limit, 2))
     return {"summary": {"nodes": nodes.size(), "edges": edges.size(), "roots": roots.size(), "reachable": reachable.size(), "issues": issues.size()}, "nodes": nodes, "edges": edges, "roots": roots, "issues": issues}
 
+## Reverse-walk static edges. Chains run from the changed path to each dependent.
+func impact(graph: Dictionary, changed: String) -> Dictionary:
+    var issues: Array = []
+    var impacted: Array = []
+    if changed.is_empty() or not changed.begins_with("res://"):
+        issues.append(_issue("error", "invalid_impact_path", changed, "Impact path must be a res:// resource path.", "Choose a project resource path."))
+        return {"changed": changed, "affected": impacted, "issues": issues}
+    var reverse := {}
+    for edge in graph.get("edges", []):
+        var target := str(edge["to"])
+        if not reverse.has(target):
+            reverse[target] = []
+        if edge["from"] not in reverse[target]:
+            reverse[target].append(edge["from"])
+    for target in reverse:
+        reverse[target].sort()
+    if changed not in graph.get("nodes", []):
+        issues.append(_issue("warning", "impact_outside_scan", changed, "Changed path was not found in the scanned inventory; results may be incomplete.", "Scan the containing directory and inspect dynamic references."))
+    var chains := {}
+    chains[changed] = [changed]
+    var queue: Array = [changed]
+    var cursor := 0
+    while cursor < queue.size():
+        var current: String = queue[cursor]
+        cursor += 1
+        for dependent in reverse.get(current, []):
+            if not chains.has(dependent):
+                chains[dependent] = chains[current].duplicate()
+                chains[dependent].append(dependent)
+                queue.append(dependent)
+                impacted.append({"path": dependent, "chain": chains[dependent]})
+    impacted.sort_custom(func(a, b): return a["path"] < b["path"])
+    return {"changed": changed, "affected": impacted, "issues": issues}
+
+## Preview only: references may be UIDs or static candidates, not guaranteed rewrites.
+func preview_rename(graph: Dictionary, source: String, destination: String) -> Dictionary:
+    var report := impact(graph, source)
+    var issues: Array = report["issues"]
+    if not destination.begins_with("res://") or destination == "res://" or "/../" in destination or destination.ends_with("/..") or "/./" in destination or destination.ends_with("/.") or destination.ends_with("/") or "\\" in destination:
+        issues.append(_issue("error", "invalid_destination", destination, "Destination must be a canonical res:// file path.", "Choose a project file path without traversal segments."))
+    elif source == destination:
+        issues.append(_issue("error", "same_destination", destination, "Source and destination are identical.", "Choose a different path."))
+    elif FileAccess.file_exists(destination) or DirAccess.dir_exists_absolute(ProjectSettings.globalize_path(destination)) or destination in graph.get("nodes", []):
+        issues.append(_issue("warning", "destination_exists", destination, "Destination already exists.", "Choose a free destination before renaming."))
+    var direct: Array = []
+    for edge in graph.get("edges", []):
+        if str(edge["to"]) == source and edge["from"] not in direct:
+            direct.append(edge["from"])
+    direct.sort()
+    return {"source": source, "destination": destination, "direct_references": direct, "affected": report["affected"], "issues": issues}
+
+## Augment one scan without editing any files. At most one operation is requested.
+func attach_preview(graph: Dictionary, changed: String, destination: String = "") -> void:
+    var preview := preview_rename(graph, changed, destination) if destination != "" else impact(graph, changed)
+    graph["rename_preview" if destination != "" else "impact"] = preview
+    for issue in preview["issues"]:
+        graph["issues"].append(issue)
+    graph["summary"]["issues"] = graph["issues"].size()
+
 func _visit(node: String, adjacency: Dictionary, state: Dictionary, chain: Array, issues: Array, limit: int) -> void:
     state[node] = 1
     chain.append(node)
@@ -151,6 +210,14 @@ func to_markdown(result: Dictionary) -> String:
     lines.append_array(["", "## Dependencies"])
     for edge in result["edges"]:
         lines.append("- `%s` → `%s`" % [edge["from"], edge["to"]])
+    if result.has("impact") or result.has("rename_preview"):
+        var preview: Dictionary = result.get("rename_preview", result.get("impact", {}))
+        lines.append_array(["", "## Change / rename preview"])
+        if result.has("rename_preview"):
+            lines.append("- Destination: `" + str(preview["destination"]) + "`")
+            lines.append("- Direct reference candidates: " + str(preview["direct_references"]))
+        for row in preview["affected"]:
+            lines.append("- `%s`: %s" % [row["path"], " → ".join(row["chain"])])
     lines.append_array(["", "## Findings"])
     for issue in result["issues"]:
         lines.append("- **%s** `%s`: %s %s" % [issue["kind"], issue["path"], issue["message"], issue["fix"]])
