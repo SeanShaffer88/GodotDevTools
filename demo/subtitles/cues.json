@@ -1,0 +1,6 @@
+{
+  "cues": [
+    {"start": 0.0, "end": 2.0, "text": "Welcome to the station.", "speaker": "Guide"},
+    {"start": 1.5, "end": 2.0, "text": "Please watch your step as you exit the train.", "speaker": "Guide"}
+  ]
+}
