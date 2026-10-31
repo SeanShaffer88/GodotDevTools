@@ -5,6 +5,8 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-30
+
 ### Added
 
 - Added fingerprinted screenshot review queues and explicit reviewer decision history to Visual Regression Testing.

@@ -1,7 +1,7 @@
 # GodotDevTools - Project Rules
 
 Prompt in force: The Elite Software Master Prompt v1.1 - Annex A (Godot / game tooling)
-Purpose in one line: Thirty Godot 4 editor plugins + headless CLIs for developer testing and project health, each built on a single core operation.
+Purpose in one line: Forty Godot 4 editor plugins + headless CLIs for developer testing and project health, each built on a single core operation.
 Frozen foundation: for every tool, `addons/<tool>/core/` holds the one operation; the editor dock, the CLI and the tests call it and add no checking logic of their own. Module layout per tool: core / ui / cli (+ runtime where a tool has an in-game piece). No tool depends on another tool.
 Build: none (interpreted GDScript) - Full gate: `sh tests/run_tests.sh <godot-binary>` - Test corpus: `demo/` fixture project + `tests/test_*.gd`
 Budgets: each scan should finish in seconds on a mid-size project (Unverified beyond the fixture); no network use, ever; deterministic seeded randomness in the network simulator so CI reproduces the same bad network.
