@@ -385,6 +385,10 @@ The gate imports the project, runs the per-tool suites (checks counted in QUALIT
 
 Everything runs locally, in the editor or a headless Godot process. The tools read your project files and write only the reports you ask for, into your project. Nothing is uploaded, tracked, or sent anywhere. There are no accounts and no update checks.
 
+## Audit and credits
+
+See [AUDIT.md](AUDIT.md) for the security, privacy and quality audit, [CREDITS.md](CREDITS.md) for attribution, and [DESCRIPTION.md](DESCRIPTION.md) for the project blurb.
+
 ## Limitations and known issues
 
 - **Visual Regression** compares captures you supply (baseline vs current folders); the dock's one-click capture runner instantiates each listed scene in an offscreen viewport at the standard resolutions. The capture pass needs a renderer, so it works in the editor or a running game, never in a headless process - CI compares and gates on captures you commit or produce in a real window.

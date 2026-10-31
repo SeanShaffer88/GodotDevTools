@@ -29,6 +29,7 @@ func _init() -> void:
     var applied: Dictionary = op.run("res://demo/macros/center_labels.json", {"scene": "user://gdt_macro_menu.tscn", "apply": true})
     check("apply writes the copy", applied["summary"]["applied"] and not FileAccess.get_file_as_string("user://gdt_macro_menu.tscn").contains("horizontal_alignment = 2"))
     check("recorded vectors survive JSON", op._value(JSON.parse_string(JSON.stringify(op.to_json_step({"node": ".", "property": "position", "value": Vector2(3, 4)})["value"]))) == Vector2(3, 4))
+    check("object values in a macro are refused", op._value({"var": "Object(Node,\"name\":\"x\")"}) == null)
     check("malformed step rejected", op.validate({"steps": [{"property": "x"}]})[0]["kind"] == "bad_macro")
     check("missing input is reported", op.run("res://definitely_missing.json")["issues"][0]["kind"] == "bad_macro")
     var r: Dictionary = op.run("res://demo/macros/center_labels.json", {"scene": "res://demo/workflow/drift/menu.tscn"})

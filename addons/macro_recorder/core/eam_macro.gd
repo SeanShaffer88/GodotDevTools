@@ -56,7 +56,12 @@ func to_json_step(step: Dictionary) -> Dictionary:
 
 func _value(v: Variant) -> Variant:
     if typeof(v) == TYPE_DICTIONARY and v.has("var"):
-        return str_to_var(str(v["var"]))
+        var text := str(v["var"])
+        # str_to_var builds live engine objects from Object(...) text; a macro
+        # file must never instantiate classes, so such values are refused.
+        if text.contains("Object("):
+            return null
+        return str_to_var(text)
     return v
 
 
