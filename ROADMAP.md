@@ -37,7 +37,7 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 - [ ] **Project Cleanup Workbench** (in progress) — `addons/cleanup_workbench`: collect unused candidates, duplicates and stale imports for review. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Naming and Folder Convention Enforcer** (in progress) — file/folder checks passed Godot 4.3/4.5 CI in PR #5; opt-in static node, signal and group checks added, Godot 4.3/4.5 CI passed, hands-on editor verification pending.
 - [ ] **Scene Review Snapshot Generator** (in progress) — `addons/scene_snapshot`: generate reproducible scene inventories and diffs. Godot 4.3 headless suite and CLI gate passed; editor session pending.
-- [ ] **Editor Action Macro Recorder** — record and preview repeatable editor actions with undo support.
+- [ ] **Editor Action Macro Recorder** (in progress) — `addons/macro_recorder`: record and preview repeatable editor actions with undo support. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Node Property Drift Monitor** (in progress) — `addons/property_drift`: compare node properties against team baselines. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Art-to-Engine Handoff Validator** (in progress) — `addons/art_handoff`: check model scale, orientation, materials, animation and collisions. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 
@@ -50,7 +50,7 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 - [ ] **Regression Test Prioritizer** (in progress) — exact-path mapping passed Godot 4.3/4.5 CI in PR #11; optional reverse dependency graph propagation added, Godot 4.3/4.5 CI passed, hands-on editor verification pending.
 - [ ] **Property-Based Gameplay Tester** (in progress) — `addons/property_tests`: generate bounded input sequences to check invariants. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Resource Load Failure Simulator** (in progress) — `addons/load_failure`: test fallbacks for missing, invalid or delayed resources. Godot 4.3 headless suite and CLI gate passed; editor session pending.
-- [ ] **Pause, Focus, and Lifecycle Tester** — exercise pause, focus, resize and suspend/resume.
+- [ ] **Pause, Focus, and Lifecycle Tester** (in progress) — `addons/lifecycle`: exercise pause, focus, resize and suspend/resume. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Screenshot Baseline Review Queue** (in progress) — fingerprinted local review metadata and decision history added to visual regression; Godot 4.3/4.5 CI passed; hands-on review pending. Baseline promotion remains manual.
 - [ ] **Performance Regression Gate** (in progress) — scalar baseline comparison with absolute/relative noise tolerances passed Godot 4.3/4.5 CI in PR #8; hands-on editor verification pending.
 
@@ -60,8 +60,8 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 - [ ] **Color-Vision and Contrast Previewer** (in progress) — `addons/colorvision`: preview color-vision differences and color-only cues. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Subtitle Timing and Readability Auditor** (in progress) — JSON cue checks passed Godot 4.3/4.5 CI in PR #6; SRT/WebVTT subset import passed Godot 4.3/4.5 CI. Hands-on editor, safe-area and rendered-layout checks remain future work.
 - [ ] **Platform Certification Checklist Runner** (in progress) — compare a user-defined checklist with recorded results; no certification claim. Godot 4.3/4.5 CI passed; hands-on editor verification pending.
-- [ ] **Privacy and Permissions Auditor** — inventory permissions, collection points and endpoints for review.
-- [ ] **Offline and Poor-Connection Test Harness** — simulate outages, timeouts and interrupted requests.
+- [ ] **Privacy and Permissions Auditor** (in progress) — `addons/privacy_audit`: inventory permissions, collection points and endpoints for review. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Offline and Poor-Connection Test Harness** (in progress) — `addons/offline_harness`: simulate outages, timeouts and interrupted requests. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Build Size Attribution Explorer** (in progress) — actual staged-directory file sizes and budgets passed Godot 4.3/4.5 CI in PR #10; hands-on editor verification pending. Archive-internal source attribution remains future work.
 - [ ] **Demo-to-Release Content Guard** (in progress) — flag configurable placeholder and development markers for review; initial static scanner passed the Godot 4.3/4.5 CI gate in PR #4; hands-on editor verification remains.
 - [ ] **Feature Flag and Rollout Simulator** (in progress) — offline deterministic rollout and prerequisite simulation passed Godot 4.3/4.5 CI in PR #9; hands-on editor verification pending.

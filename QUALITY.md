@@ -16,6 +16,10 @@ Gate: `sh tests/run_tests.sh <godot-binary>` - **292/292 test checks passed, 0 f
 
 Overall: gate green = shippable, with the limitations stated in README.md; unreleased additions on the way to the next version are tracked in CHANGELOG.md. No dimension is a Fail.
 
+## Expansion status (2026-10-31)
+
+133 addons, one test suite each. The full gate (`sh tests/run_tests.sh`) passes headless on Godot 4.3-stable in this environment: every suite, CLI smoke test and exit-code-2 gate. The 93 addons added in the expansion (stacked PRs #21 to #40) each have fixture-driven checks and a CLI gate. CI ran on Godot 4.3 and 4.5 for each PR; see each PR for its result. Their docks and runtime nodes have the same status as before: Partially Verified until a hands-on editor session.
+
 ## Verification status
 
 - Verified: all core operations (including `vrt_capture.gd` pure parts, `dqd_layout.gd`, and the twenty expansion cores), CLI reports and CI gates, on Godot 4.3.stable **and 4.5.stable** headless (Linux) - the CI workflow runs the full gate on both on pushes to main and pull requests.

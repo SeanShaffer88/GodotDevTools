@@ -167,6 +167,10 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Save Corruption and Recovery Tester: mutated saves against a loader | save_corruption core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Property-Based Gameplay Tester: generation, checking and shrinking | property_tests core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Resource Load Failure Simulator: static failure-path analysis of loads | load_failure core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Pause, Focus, and Lifecycle Tester: pause behaviour and lifecycle handling | lifecycle core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Privacy and Permissions Auditor: data-touching API inventory | privacy_audit core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Offline and Poor-Connection Test Harness: static checks plus seeded fault-injecting HTTP node | offline_harness core + CLI + dock + runtime node | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Editor Action Macro Recorder: recorded property macros with preview and explicit apply | macro_recorder core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |

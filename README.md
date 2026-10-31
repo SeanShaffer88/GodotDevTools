@@ -4,9 +4,9 @@
 
 Independent Godot 4 addons cover testing, performance, content, workflow and release checks. The table below links each addon to its purpose and folder. Many tools are static analyzers, simulations or estimates rather than runtime measurements; consult each addon README for its scope and limitations.
 
-The [roadmap](ROADMAP.md) tracks 50 proposed tools and their implementation status. The [Demo-to-Release Content Guard](addons/release_guard/README.md) and [Naming and Folder Convention Enforcer](addons/naming_conventions/README.md) are under development, alongside the [Subtitle Timing and Readability Auditor](addons/subtitle_audit/README.md), [Player Telemetry Schema Validator](addons/telemetry_schema/README.md), [Performance Regression Gate](addons/performance_gate/README.md), [Feature Flag and Rollout Simulator](addons/flag_simulator/README.md), and [Build Size Attribution Explorer](addons/build_size/README.md).
+The [roadmap](ROADMAP.md) tracks 110 entries. Every entry except the native-accelerator research note has an initial implementation here, with a core, dock, headless CLI, fixture, test suite and CLI gate. Entries stay unchecked ("in progress") until a hands-on editor session verifies their docks; the roadmap and each addon README describe what is verified.
 
-The [checklist runner](addons/cert_check/README.md), [state coverage tracker](addons/state_coverage/README.md), and [test prioritizer](addons/test_priority/README.md) have headless CI coverage; hands-on editor verification is still pending.
+Shared, optional components consume tool reports without any tool depending on them: the [Report Schema](addons/report_schema/README.md), [SARIF](addons/sarif_export/README.md) and [JUnit](addons/junit_export/README.md) exporters, the [HTML dashboard](addons/html_dashboard/README.md), [Report Diff](addons/report_diff/README.md), the [Finding Suppression Baseline](addons/suppressions/README.md), the [Suite CLI Dispatcher](addons/suite_dispatcher/README.md), the [pre-commit hook installer](addons/precommit/README.md) and a [reusable CI action](.github/actions/godot-dev-tools/README.md).
 
 ## TL;DR
 
@@ -147,6 +147,10 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Save Corruption and Recovery Tester | Corrupted variants of a sample JSON save (truncated, empty, wrong root, wrong types, missing keys, extreme numbers) fed to your loader; accepted-invalid and no-fallback cases reported. | `addons/save_corruption` |
 | Property-Based Gameplay Tester | Seeded random and edge inputs for pure static functions, properties as expressions, failures shrunk to minimal counterexamples. | `addons/property_tests` |
 | Resource Load Failure Simulator | Runtime `load()` results used without null checks, chained `load().instantiate()`, missing literal paths, threaded loads without status checks. | `addons/load_failure` |
+| Pause, Focus, and Lifecycle Tester | Effective process mode per scripted node while paused (pause menus that freeze themselves, gameplay that keeps running), missing focus/suspend handling, wall-clock timing. | `addons/lifecycle` |
+| Privacy and Permissions Auditor | Inventory of network endpoints and APIs, device identifiers, clipboard, microphone/camera use and external links, for a privacy review. | `addons/privacy_audit` |
+| Offline and Poor-Connection Test Harness | Static: HTTP requests without timeouts and completion handlers that ignore result codes. Runtime: drop-in HTTP node applying seeded offline/timeout/slow/error faults. | `addons/offline_harness` |
+| Editor Action Macro Recorder | Records Inspector property edits as JSON macros (node paths or selectors); previews changes on any scene; applies only with an explicit --apply. | `addons/macro_recorder` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -351,6 +355,10 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `save_corruption/cli/scr_cli.gd` | `--save` `--loader` `--allow-null` `--fail-on` |
 | `property_tests/cli/pbt_cli.gd` | `--input` `--runs` `--fail-on` |
 | `load_failure/cli/rlf_cli.gd` | `--dir` `--fail-on` |
+| `lifecycle/cli/pfl_cli.gd` | `--dir` `--fail-on` |
+| `privacy_audit/cli/ppa_cli.gd` | `--dir` `--fail-on` |
+| `offline_harness/cli/ocn_cli.gd` | `--dir` `--profile` `--fail-on` |
+| `macro_recorder/cli/eam_cli.gd` | `--macro` `--scene` `--apply` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 

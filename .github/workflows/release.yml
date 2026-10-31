@@ -179,7 +179,11 @@ jobs:
             crash_packager:CrashPackager \
             save_corruption:SaveCorruption \
             property_tests:PropertyTests \
-            load_failure:LoadFailures
+            load_failure:LoadFailures \
+            lifecycle:Lifecycle \
+            privacy_audit:PrivacyAudit \
+            offline_harness:OfflineHarness \
+            macro_recorder:MacroRecorder
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

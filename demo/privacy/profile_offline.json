@@ -1,0 +1,5 @@
+{"seed": 3, "rules": [
+  {"match": "api.example.com/scores", "fault": "offline"},
+  {"match": "api.example.com/news", "fault": "timeout", "rate": 0.5},
+  {"match": "*", "fault": "slow", "delay_ms": 1500, "rate": 0.25}
+]}

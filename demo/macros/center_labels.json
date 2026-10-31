@@ -1,0 +1,5 @@
+{"name": "Center labels and enlarge title", "steps": [
+  {"selector": {"type": "Label"}, "property": "horizontal_alignment", "value": 1},
+  {"selector": {"name_pattern": "^Label0$"}, "property": "theme_override_font_sizes/font_size", "value": 32},
+  {"node": "Missing/Node", "property": "visible", "value": false}
+]}
