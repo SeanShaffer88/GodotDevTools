@@ -1,0 +1,5 @@
+extends Node
+
+
+func mark_dirty() -> void:
+    Audio.set_process(true)

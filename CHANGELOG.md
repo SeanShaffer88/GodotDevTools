@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Export Variable Range Auditor (`export_ranges`): Scene-stored and default values of `@export_range` properties checked against their limits (honouring or_greater/or_less); optional list of unhinted numeric exports. Dock, CLI, fixture and test suite.
+- Autoload Dependency Graph (`autoload_graph`): Autoload-to-autoload references from project settings and scripts: cycles, missing scripts, and `_init`/`_enter_tree`/`_ready` use of autoloads declared later. Dock, CLI, fixture and test suite.
+- Resource UID Integrity Checker (`uid_integrity`): `uid://` references in ext_resources and scripts checked against declared UIDs (scene/resource headers, .import and .uid files): stale, duplicate and unknown UIDs. Dock, CLI, fixture and test suite.
+- Project Settings Drift Report (`settings_drift`): Key-by-key diff of `project.godot` against a committed baseline, with ignore patterns. Dock, CLI, fixture and test suite.
+- Scene Lint Rule Engine (`scene_lint`): User-defined JSON rules over scene text: required child types, forbidden/required properties, node-name patterns; physics bodies need shapes by default. Dock, CLI, fixture and test suite.
 - Node Path Breakage Detector (`node_paths`): Resolve `$Path`, `get_node("...")` and `%Unique` strings against every scene tree that uses the script, following instanced scenes. Dock, CLI, fixture and test suite.
 - Unused Signal and Method Finder (`unused_symbols`): Find signals never emitted or connected and functions referenced nowhere in scripts or scene connections. Dock, CLI, fixture and test suite.
 - Typed GDScript Coverage Meter (`type_coverage`): Share of variables, parameters and return values with static types, per file and project, with a minimum-percentage gate. Dock, CLI, fixture and test suite.

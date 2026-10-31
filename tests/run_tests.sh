@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -176,4 +176,15 @@ test -s reports/script_complexity/script_complexity.json
 gate "duplicate detector finds the copied scoring loop" \
   res://addons/duplicate_code/cli/dup_cli.gd -- --dir=res://demo/code_health --fail-on=duplicate_block
 test -s reports/duplicate_code/duplicate_code.json
+gate "export range auditor flags the overfilled health" \
+  res://addons/export_ranges/cli/era_cli.gd -- --dir=res://demo/export_ranges --fail-on=out_of_range
+test -s reports/export_ranges/export_ranges.json
+gate "autoload graph flags the early Events reference" \
+  res://addons/autoload_graph/cli/alg_cli.gd -- --project=res://demo/autoloads/autoloads.godot --fail-on=init_order
+gate "uid checker flags the stale reference" \
+  res://addons/uid_integrity/cli/uid_cli.gd -- --dir=res://demo/uids --fail-on=uid_mismatch
+gate "settings drift reports the changed fps cap" \
+  res://addons/settings_drift/cli/psd_cli.gd -- --project=res://demo/settings_drift/current.cfg --baseline=res://demo/settings_drift/baseline.cfg --fail-on=setting_changed
+gate "scene lint flags the hero without a collision shape" \
+  res://addons/scene_lint/cli/slr_cli.gd -- --dir=res://demo/scene_lint --fail-on=rule_violation
 echo "ALL GATE CHECKS PASSED"

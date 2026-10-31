@@ -1,0 +1,12 @@
+; Autoload fixture (not the real project file)
+; Script fixtures use .gd.txt so Godot does not try to compile references to autoloads this project does not register.
+[application]
+
+config/name="Fixture"
+
+[autoload]
+
+Audio="*res://demo/autoloads/audio.gd.txt"
+Save="*res://demo/autoloads/save.gd.txt"
+Events="*res://demo/autoloads/events.gd.txt"
+Ghost="*res://demo/autoloads/ghost.gd.txt"
