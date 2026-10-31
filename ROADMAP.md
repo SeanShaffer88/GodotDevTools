@@ -4,11 +4,11 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 
 ## Performance and rendering
 
-- [ ] **Frame-Time Spike Investigator** — correlate frame spikes with scene changes, node counts, physics and markers.
+- [ ] **Frame-Time Spike Investigator** (in progress) — `addons/frame_spikes`: correlate frame spikes with scene changes, node counts, physics and markers. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **GPU Budget and Overdraw Analyzer** (in progress) — `addons/overdraw`: highlight overdraw and estimate fill-rate pressure at target resolutions. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Texture Memory and Streaming Planner** (in progress) — Asset Health now totals source-side uncompressed estimates with an optional budget; platform-specific formats, actual streaming and hardware verification remain future work.
 - [ ] **Shader Variant Budget Manager** (in progress) — `addons/shader_variants`: inventory shader variants and flag compilation and memory risks. Godot 4.3 headless suite and CLI gate passed; editor session pending.
-- [ ] **Startup and Scene-Load Profiler** — break down startup and transition costs.
+- [ ] **Startup and Scene-Load Profiler** (in progress) — `addons/load_profiler`: break down startup and transition costs. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Object Pool Advisor** (in progress) — `addons/pool_advisor`: scores instantiate() sites (per-frame, repeating, looped, self-freeing) and merges optional recorded spawn counts from a runtime counter; Godot 4.3 headless suite passed, editor and live-game sessions pending.
 - [ ] **LOD and Visibility Range Planner** (in progress) — `addons/lod_planner`: flag missing LODs and problematic visibility distances. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Particle Budget Inspector** (in progress) — `addons/particle_budget`: static per-scene capacity (amount x amount_ratio, instanced children followed) against scene/emitter/CPU/preprocess budgets; Godot 4.3 headless suite passed, editor session pending.
@@ -18,9 +18,9 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 ## Physics, navigation and gameplay
 
 - [ ] **Navigation Mesh Diagnostic Lab** — identify disconnected regions, bottlenecks and unreachable targets.
-- [ ] **Character Controller Test Course** — exercise slopes, stairs, ledges, coyote time and jump height.
-- [ ] **Physics Jitter and Tunneling Detector** — surface fast bodies, conflicting transforms and unstable settings.
-- [ ] **Hitbox and Hurtbox Timeline Viewer** — inspect combat volumes alongside animation frames.
+- [ ] **Character Controller Test Course** (in progress) — `addons/controller_course`: exercise slopes, stairs, ledges, coyote time and jump height. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Physics Jitter and Tunneling Detector** (in progress) — `addons/physics_jitter`: surface fast bodies, conflicting transforms and unstable settings. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Hitbox and Hurtbox Timeline Viewer** (in progress) — `addons/hitbox_timeline`: inspect combat volumes alongside animation frames. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Spawn Point and Encounter Validator** — check blocked, unsafe or unreachable spawns.
 - [ ] **AI Perception Debugger** — visualize sight, hearing, occlusion and detection decisions.
 - [ ] **Gameplay Ability Simulator** — exercise costs, cooldowns, stacking and interrupts.

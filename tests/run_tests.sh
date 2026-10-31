@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -301,4 +301,14 @@ gate "render matrix flags VoxelGI under Compatibility" \
   res://addons/render_compat/cli/rcm_cli.gd -- --dir=res://demo/perf_static --renderer=gl_compatibility --fail-on=unsupported_feature
 gate "overdraw analyzer flags the layered menu" \
   res://addons/overdraw/cli/gbo_cli.gd -- --dir=res://demo/perf_static --fail-on=overdraw_budget
+gate "spike investigator finds the level-load spike" \
+  res://addons/frame_spikes/cli/fts_cli.gd -- --input=res://demo/runtime_perf/frames.json --fail-on=frame_spike
+gate "load profiler flags loads over a zero budget" \
+  res://addons/load_profiler/cli/slp_cli.gd -- --dir=res://demo/runtime_perf --max-load-ms=0 --fail-on=slow_load
+gate "physics detector flags the tunneling bullet" \
+  res://addons/physics_jitter/cli/pjt_cli.gd -- --dir=res://demo/runtime_perf --project=res://demo/runtime_perf/physics_project.godot --fail-on=tunneling_risk
+gate "controller course flags the unreachable wall" \
+  res://addons/controller_course/cli/cct_cli.gd -- --input=res://demo/runtime_perf/controller.json --fail-on=unreachable_ledge
+gate "hitbox timeline flags the sweep left active" \
+  res://addons/hitbox_timeline/cli/hht_cli.gd -- --dir=res://demo/runtime_perf --fail-on=stays_active
 echo "ALL GATE CHECKS PASSED"

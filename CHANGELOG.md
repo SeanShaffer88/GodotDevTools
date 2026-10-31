@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Frame-Time Spike Investigator (`frame_spikes`): Spikes in recorded per-frame timings correlated with markers, node-count jumps and physics time; runtime recorder node included. Dock, CLI, fixture and test suite.
+- Startup and Scene-Load Profiler (`load_profiler`): Measured load and instantiate time per scene (cache bypassed), dependency and node counts, against budgets. Dock, CLI, fixture and test suite.
+- Physics Jitter and Tunneling Detector (`physics_jitter`): Small rigid bodies without CCD, scripts writing rigid-body transforms, move_and_slide in _process, low physics tick rate. Dock, CLI, fixture and test suite.
+- Character Controller Test Course (`controller_course`): Platformer tuning (gravity, jump velocity, speed, coyote time, floor angle) against course obstacles via kinematics: unreachable ledges, unjumpable gaps, too-steep slopes. Dock, CLI, fixture and test suite.
+- Hitbox and Hurtbox Timeline Viewer (`hitbox_timeline`): Active windows of hitbox/hurtbox shapes from animation `disabled`/`monitoring` tracks; windows left open, shorter than a physics frame, and invulnerability windows. Dock, CLI, fixture and test suite.
 - Shader Variant Budget Manager (`shader_variants`): Distinct BaseMaterial3D feature combinations (each a separate generated shader) plus #ifdef combinations in .gdshader files, against a budget. Dock, CLI, fixture and test suite.
 - LOD and Visibility Range Planner (`lod_planner`): Invalid visibility ranges, heavy instanced glTF/GLB meshes without visibility ranges, and imports with LOD generation off. Dock, CLI, fixture and test suite.
 - Animation Performance Auditor (`anim_audit`): Animation resources in scenes and .tres: constant tracks, redundant interior keys, duplicate-time keys, track budgets. Dock, CLI, fixture and test suite.

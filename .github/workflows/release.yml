@@ -155,7 +155,12 @@ jobs:
             lod_planner:LODPlanner \
             anim_audit:AnimAudit \
             render_compat:RenderCompat \
-            overdraw:Overdraw
+            overdraw:Overdraw \
+            frame_spikes:FrameSpikes \
+            load_profiler:LoadProfiler \
+            physics_jitter:PhysicsJitter \
+            controller_course:ControllerCourse \
+            hitbox_timeline:HitboxTimeline
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

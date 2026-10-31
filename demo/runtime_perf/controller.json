@@ -1,0 +1,12 @@
+{
+  "physics_fps": 60,
+  "controller": {"gravity": 980, "jump_velocity": 420, "max_speed": 220, "coyote_time": 0.1, "jump_buffer": 0.1, "floor_max_angle_deg": 45},
+  "course": [
+    {"id": "step", "type": "ledge", "height": 64},
+    {"id": "wall", "type": "ledge", "height": 128},
+    {"id": "pit", "type": "gap", "width": 160},
+    {"id": "canyon", "type": "gap", "width": 260},
+    {"id": "ramp", "type": "slope", "angle_deg": 30},
+    {"id": "cliff_path", "type": "slope", "angle_deg": 52}
+  ]
+}
