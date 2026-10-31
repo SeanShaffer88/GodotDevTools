@@ -1,0 +1,69 @@
+name: Tests
+
+# Full gate from tests/run_tests.sh, run headless on Linux.
+# Godot 4.3-stable is the verified version (see PROJECT_RULES.md / QUALITY.md);
+# newer 4.x runs are marked experimental so they gather evidence without
+# claiming support until they have passed.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    name: Gate on Godot ${{ matrix.godot }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - godot: 4.3-stable
+            experimental: false
+          - godot: 4.5-stable
+            experimental: true
+    continue-on-error: ${{ matrix.experimental }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Cache Godot ${{ matrix.godot }}
+        id: godot-cache
+        uses: actions/cache@v4
+        with:
+          path: .godot-bin
+          key: godot-${{ matrix.godot }}-linux-x86_64
+
+      - name: Download Godot ${{ matrix.godot }}
+        if: steps.godot-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .godot-bin
+          curl -fsSL -o .godot-bin/godot.zip \
+            "https://github.com/godotengine/godot/releases/download/${{ matrix.godot }}/Godot_v${{ matrix.godot }}_linux.x86_64.zip"
+          unzip -q .godot-bin/godot.zip -d .godot-bin
+          rm .godot-bin/godot.zip
+          chmod +x ".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64"
+
+      - name: Show Godot version
+        run: '".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64" --headless --version'
+
+      - name: Run full gate
+        run: sh tests/run_tests.sh ".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64"
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports-godot-${{ matrix.godot }}
+          path: |
+            reports/
+            visual_reports/
+          if-no-files-found: ignore
