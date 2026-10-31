@@ -58,11 +58,11 @@ This roadmap captures proposed tools, not a promise that every design is already
 
 - [ ] **Controller Glyph and Prompt Validator** — check device-specific prompts for input actions.
 - [ ] **Color-Vision and Contrast Previewer** — preview color-vision differences and color-only cues.
-- [ ] **Subtitle Timing and Readability Auditor** (in progress) — JSON cue timing, reading speed, line length and optional speaker checks added; Godot execution and editor verification pending. Safe-area and rendered-layout checks remain future work.
+- [ ] **Subtitle Timing and Readability Auditor** (in progress) — JSON cue timing, reading speed, line length and optional speaker checks passed Godot 4.3/4.5 CI in PR #6; hands-on editor verification pending. Safe-area and rendered-layout checks remain future work.
 - [ ] **Platform Certification Checklist Runner** — track configurable platform-release requirements.
 - [ ] **Privacy and Permissions Auditor** — inventory permissions, collection points and endpoints for review.
 - [ ] **Offline and Poor-Connection Test Harness** — simulate outages, timeouts and interrupted requests.
 - [ ] **Build Size Attribution Explorer** — attribute exported build size to assets and categories.
 - [ ] **Demo-to-Release Content Guard** (in progress) — flag configurable placeholder and development markers for review; initial static scanner passed the Godot 4.3/4.5 CI gate in PR #4; hands-on editor verification remains.
 - [ ] **Feature Flag and Rollout Simulator** — test flag combinations and unavailable configuration.
-- [ ] **Player Telemetry Schema Validator** — check event names, payload fields and privacy rules against a local schema.
+- [ ] **Player Telemetry Schema Validator** (in progress) — local event and field checks plus explicit sensitive-field review added; Godot tests and editor verification pending.

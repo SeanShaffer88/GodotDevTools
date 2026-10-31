@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -109,4 +109,7 @@ test -s reports/naming_conventions/naming_conventions.json
 gate "subtitle auditor detects overlapping fixture cues" \
   res://addons/subtitle_audit/cli/sub_cli.gd -- --input=res://demo/subtitles/cues.json --fail-on=overlap
 test -s reports/subtitle_audit/subtitle_audit.json
+gate "telemetry validator detects the sensitive sample" \
+  res://addons/telemetry_schema/cli/tel_cli.gd -- --schema=res://demo/telemetry/schema.json --samples=res://demo/telemetry/events.json --fail-on=sensitive_field
+test -s reports/telemetry_schema/telemetry_schema.json
 echo "ALL GATE CHECKS PASSED"

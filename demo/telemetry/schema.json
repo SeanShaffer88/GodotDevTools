@@ -1,0 +1,11 @@
+{
+  "events": {
+    "level_end": {
+      "fields": {
+        "level": {"type": "string", "required": true},
+        "duration": {"type": "number", "required": true},
+        "player_email": {"type": "string", "sensitive": true}
+      }
+    }
+  }
+}
