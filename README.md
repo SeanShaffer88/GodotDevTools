@@ -201,7 +201,7 @@ For authoritative options, consult each addon README and CLI script.
 
 ## Downloads
 
-The published [v1.0.0 release](https://github.com/SeanShaffer88/GodotDevTools/releases/tag/v1.0.0) contains nine individual addon zips and a suite zip for those nine, not the current set. The repository contains the newer addons; v1.1.0 is prepared but not yet published. The release workflow is configured to gate and package one zip per addon plus a suite for a future release. Dispatch on main or a `v*` tag starts the gate before packaging (`.github/workflows/release.yml`).
+The published [v1.0.0 release](https://github.com/SeanShaffer88/GodotDevTools/releases/tag/v1.0.0) contains nine individual addon zips and a suite zip for those nine, not the current set. The [v1.2.0 release](https://github.com/SeanShaffer88/GodotDevTools/releases/tag/v1.2.0) carries all 133 addons, one zip each plus a suite zip; v1.1.0 was prepared but never published separately, and its changes ship in v1.2.0. The release workflow is configured to gate and package one zip per addon plus a suite for a future release. Dispatch on main or a `v*` tag starts the gate before packaging (`.github/workflows/release.yml`).
 
 ## Command-line reference
 

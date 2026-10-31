@@ -5,6 +5,8 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-31
+
 ### Added
 
 - AUDIT.md (security, privacy and quality audit with evidence labels), CREDITS.md and DESCRIPTION.md.
