@@ -57,6 +57,7 @@ jobs:
             shader_doctor:ShaderDoctor \
             signal_spy:SignalSpy \
             subtitle_audit:SubtitleAudit \
+            telemetry_schema:TelemetrySchema \
             test_runner:TestRunner \
             thermal_sim:ThermalSim \
             tilemap_rules:TilemapRules \

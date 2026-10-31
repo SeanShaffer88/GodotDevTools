@@ -7,6 +7,8 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Started Player Telemetry Schema Validator with offline sample validation, explicit sensitive-field checks, dock, CLI and fixtures.
+
 - Started Subtitle Timing and Readability Auditor with a JSON cue checker, dock, CLI and fixture tests.
 
 - Started the Naming and Folder Convention Enforcer with a read-only file/folder regex audit, dock, CLI and fixture tests.
