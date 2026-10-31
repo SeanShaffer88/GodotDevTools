@@ -6,7 +6,7 @@ This roadmap captures proposed tools, not a promise that every design is already
 
 - [ ] **Frame-Time Spike Investigator** — correlate frame spikes with scene changes, node counts, physics and markers.
 - [ ] **GPU Budget and Overdraw Analyzer** — highlight overdraw and estimate fill-rate pressure at target resolutions.
-- [ ] **Texture Memory and Streaming Planner** — estimate memory by platform and suggest compression, mipmaps and streaming.
+- [ ] **Texture Memory and Streaming Planner** (in progress) — Asset Health now totals source-side uncompressed estimates with an optional budget; platform-specific formats, actual streaming and hardware verification remain future work.
 - [ ] **Shader Variant Budget Manager** — inventory shader variants and flag compilation and memory risks.
 - [ ] **Startup and Scene-Load Profiler** — break down startup and transition costs.
 - [ ] **Object Pool Advisor** — find frequently spawned/freed objects and suggest pool candidates.
@@ -33,7 +33,7 @@ This roadmap captures proposed tools, not a promise that every design is already
 - [ ] **Scene Change Impact Analyzer** (in progress) — reverse dependency walk added to Scene Dependency Map; Godot CI and editor verification pending.
 - [ ] **Scene Merge Conflict Assistant** — explain scene conflicts by node and property without silently rewriting files.
 - [ ] **Resource Rename and Reference Assistant** (in progress) — read-only direct reference and transitive impact preview added; no automated rename, Godot CI and editor verification pending.
-- [ ] **Asset Import Preset Auditor** — compare import settings to team-defined presets.
+- [ ] **Asset Import Preset Auditor** (in progress) — optional importer-specific preset checks added to Asset Health; Godot CI and editor verification pending.
 - [ ] **Project Cleanup Workbench** — collect unused candidates, duplicates and stale imports for review.
 - [ ] **Naming and Folder Convention Enforcer** (in progress) — file/folder checks passed Godot 4.3/4.5 CI in PR #5; opt-in static node, signal and group checks added, pending CI and hands-on editor verification.
 - [ ] **Scene Review Snapshot Generator** — generate reproducible scene inventories and diffs.

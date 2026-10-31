@@ -33,6 +33,9 @@ gate "visual regression must exit 2 on the changed fixture pair" \
 test -s visual_reports/menu__320x240.highlight.png
 gate "asset health must exit 2 on duplicates" \
   res://addons/asset_health/cli/ahd_cli.gd -- --fail-on=duplicate
+gate "asset health flags texture budget and preset mismatch" \
+  res://addons/asset_health/cli/ahd_cli.gd -- --preset=res://demo/import_preset/rules.json --texture-budget=1 --fail-on=texture_budget,preset_mismatch
+grep -q 'texture_estimate_bytes' reports/asset_health/asset_health.json
 gate "dialogue debugger must exit 2 on missing target" \
   res://addons/dialogue_quest/cli/dqd_cli.gd -- --fail-on=missing_target
 gate "accessibility must exit 2 on errors" \

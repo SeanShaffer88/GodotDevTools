@@ -79,7 +79,47 @@ func _parse_import(path: String) -> Dictionary:
     return out
 
 
-func scan() -> Dictionary:
+## Compare imported asset metadata against explicit importer-specific rules.
+func check_import_preset(import_paths: Array, preset: Dictionary) -> Array:
+    var issues: Array = []
+    if typeof(preset.get("importers")) != TYPE_DICTIONARY or preset["importers"].is_empty():
+        return [{"severity": "error", "kind": "preset_invalid", "path": "preset", "message": "Preset must define a nonempty importers object.", "fix": "Define importer names and expected parameter objects."}]
+    var rules: Dictionary = preset["importers"]
+    for importer in rules:
+        if typeof(rules[importer]) != TYPE_DICTIONARY or rules[importer].is_empty():
+            issues.append({"severity": "error", "kind": "preset_invalid", "path": str(importer), "message": "Importer rule must be a nonempty parameter object.", "fix": "Provide expected import parameters."})
+    if not issues.is_empty():
+        return issues
+    var matched := 0
+    for path in import_paths:
+        var cfg := ConfigFile.new()
+        if cfg.load(str(path)) != OK:
+            issues.append({"severity": "error", "kind": "preset_read_error", "path": str(path), "message": "Cannot parse import metadata.", "fix": "Reimport the asset or repair the metadata."})
+            continue
+        var importer := str(cfg.get_value("remap", "importer", ""))
+        if not rules.has(importer):
+            continue
+        matched += 1
+        for key in rules[importer]:
+            if not cfg.has_section_key("params", str(key)):
+                issues.append({"severity": "warning", "kind": "preset_missing", "path": str(path), "message": "Expected import setting '%s' is missing." % key, "fix": "Review the preset and asset import settings."})
+            else:
+                var actual = cfg.get_value("params", str(key))
+                var expected = rules[importer][key]
+                if not _preset_equal(actual, expected):
+                    issues.append({"severity": "warning", "kind": "preset_mismatch", "path": str(path), "message": "Import setting '%s' differs: expected %s, got %s." % [key, str(expected), str(actual)], "fix": "Review the intended preset and reimport if appropriate."})
+    if matched == 0:
+        issues.append({"severity": "warning", "kind": "preset_no_match", "path": "preset", "message": "No import metadata matched a configured importer.", "fix": "Check the preset importer names and project import state."})
+    return issues
+
+func _preset_equal(actual, expected) -> bool:
+    var a := typeof(actual)
+    var b := typeof(expected)
+    if a in [TYPE_INT, TYPE_FLOAT] and b in [TYPE_INT, TYPE_FLOAT]:
+        return float(actual) == float(expected)
+    return a == b and actual == expected
+
+func scan(preset_path: String = "", vram_budget: int = 0) -> Dictionary:
     var files: Array[String] = []
     _walk("res://", files)
     files.sort()
@@ -179,7 +219,25 @@ func scan() -> Dictionary:
                 issues.append({"severity": "warning", "kind": "import_inconsistent", "path": "",
                     "message": "Import setting '%s' for .%s files is inconsistent: %s. Files that look alike in the editor can behave differently in game." % [k, ext, ", ".join(parts)],
                     "fix": "Pick one setting for all .%s files of this kind and reimport." % ext})
-    return {"summary": {"files": files.size(), "bytes": total_bytes, "textures": textures.size(),
+    var texture_estimate := 0
+    for texture in textures:
+        texture_estimate += int(texture["vram"])
+    if vram_budget < 0:
+        issues.append({"severity": "error", "kind": "invalid_budget", "path": "", "message": "Texture budget cannot be negative.", "fix": "Use zero to disable or a positive byte budget."})
+    elif vram_budget > 0 and texture_estimate > vram_budget:
+        issues.append({"severity": "warning", "kind": "texture_budget", "path": "", "message": "Estimated uncompressed source texture total is %d bytes, exceeding the %d-byte budget." % [texture_estimate, vram_budget], "fix": "Review source dimensions and target-specific compression; verify actual device memory."})
+    if preset_path != "":
+        var preset_file := FileAccess.open(preset_path, FileAccess.READ)
+        var parser := JSON.new()
+        if preset_file == null or parser.parse(preset_file.get_as_text()) != OK or typeof(parser.data) != TYPE_DICTIONARY:
+            issues.append({"severity": "error", "kind": "preset_invalid", "path": preset_path, "message": "Cannot read preset JSON object.", "fix": "Provide a readable importer preset JSON file."})
+        else:
+            var import_paths: Array = []
+            for path in files:
+                if path.get_extension().to_lower() == "import":
+                    import_paths.append(path)
+            issues.append_array(check_import_preset(import_paths, parser.data))
+    return {"summary": {"files": files.size(), "bytes": total_bytes, "textures": textures.size(), "texture_estimate_bytes": texture_estimate,
             "issues": issues.size(),
             "duplicates": issues.filter(func(i): return i["kind"] == "duplicate").size(),
             "unused": issues.filter(func(i): return i["kind"] == "unused").size(),
@@ -196,6 +254,7 @@ func to_markdown(result: Dictionary) -> String:
     var lines: Array[String] = ["# Asset Health Report", "",
         "%d files, %.1f MB total, %d textures. %d problems: %d duplicates, %d unused, %d oversized." % [
             s["files"], float(s["bytes"]) / 1048576.0, s["textures"], s["issues"], s["duplicates"], s["unused"], s["oversized"]], ""]
+    lines.append("Estimated uncompressed source texture total: %d bytes (not actual device memory)." % s.get("texture_estimate_bytes", 0))
     for i in result["issues"]:
         lines.append("- [%s] %s" % [i["severity"], i["message"]])
     return "\n".join(lines) + "\n"

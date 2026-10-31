@@ -25,3 +25,17 @@ Run the CLI with no options once for a default report; each CLI writes JSON + Ma
 ## How it works
 
 The work lives in one core operation under `core/` with no editor-only APIs, so the editor dock, the CLI and the tests all run exactly the same check. The dock and CLI add no logic of their own.
+
+## Import presets and texture planning
+
+Optionally compare `.import` metadata against a local JSON preset, and set a texture estimate budget:
+
+```sh
+godot --headless --path . --script res://addons/asset_health/cli/ahd_cli.gd -- \
+  --preset=res://demo/import_preset/rules.json --texture-budget=1048576 \
+  --fail-on=preset_mismatch,preset_missing,texture_budget
+```
+
+Preset format: `{"importers":{"texture":{"mipmaps/generate":true,"compress/mode":0}}}`. Each importer maps to expected Godot `[params]` values; unlisted importers and settings are not checked. Missing settings, mismatches, unreadable metadata and presets matching no importer are reported. Configure platform/project-specific rules yourself; the tool does not prescribe engine import settings or modify assets. `.import` metadata must already exist (run an editor import first). The dock exposes optional preset path and budget fields.
+
+`--texture-budget` is in bytes; zero disables it. The report totals existing source-dimension estimates (four bytes per pixel with an approximate mipmap factor when enabled). This is **not measured GPU or resident memory**: actual imported formats, platform compression, size limits, streaming, resource sharing and runtime lifetime are not modeled. Use it for rough source-side comparison only, then validate on target hardware. New preset and aggregate-budget checks need Godot CI and hands-on editor verification.
