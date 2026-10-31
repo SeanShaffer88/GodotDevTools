@@ -43,13 +43,13 @@ This roadmap captures 110 proposed tools and components, not a promise that ever
 
 ## Testing and reliability
 
-- [ ] **Gameplay Scenario Test Builder** — compose repeatable actions and assertions.
-- [ ] **Crash and Error Reproduction Packager** — bundle approved logs, settings and reproduction information.
-- [ ] **Save Corruption and Recovery Tester** — inject invalid saves and verify recovery behavior.
+- [ ] **Gameplay Scenario Test Builder** (in progress) — `addons/scenario_tests`: compose repeatable actions and assertions. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Crash and Error Reproduction Packager** (in progress) — `addons/crash_packager`: bundle approved logs, settings and reproduction information. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Save Corruption and Recovery Tester** (in progress) — `addons/save_corruption`: inject invalid saves and verify recovery behavior. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **State Transition Coverage Tracker** (in progress) — model and trace comparison passed Godot 4.3/4.5 CI in PR #11; explicit bounded runtime recording and optional continuity checks added, Godot 4.3/4.5 CI passed; a hands-on game/editor session remains.
 - [ ] **Regression Test Prioritizer** (in progress) — exact-path mapping passed Godot 4.3/4.5 CI in PR #11; optional reverse dependency graph propagation added, Godot 4.3/4.5 CI passed, hands-on editor verification pending.
-- [ ] **Property-Based Gameplay Tester** — generate bounded input sequences to check invariants.
-- [ ] **Resource Load Failure Simulator** — test fallbacks for missing, invalid or delayed resources.
+- [ ] **Property-Based Gameplay Tester** (in progress) — `addons/property_tests`: generate bounded input sequences to check invariants. Godot 4.3 headless suite and CLI gate passed; editor session pending.
+- [ ] **Resource Load Failure Simulator** (in progress) — `addons/load_failure`: test fallbacks for missing, invalid or delayed resources. Godot 4.3 headless suite and CLI gate passed; editor session pending.
 - [ ] **Pause, Focus, and Lifecycle Tester** — exercise pause, focus, resize and suspend/resume.
 - [ ] **Screenshot Baseline Review Queue** (in progress) — fingerprinted local review metadata and decision history added to visual regression; Godot 4.3/4.5 CI passed; hands-on review pending. Baseline promotion remains manual.
 - [ ] **Performance Regression Gate** (in progress) — scalar baseline comparison with absolute/relative noise tolerances passed Godot 4.3/4.5 CI in PR #8; hands-on editor verification pending.
