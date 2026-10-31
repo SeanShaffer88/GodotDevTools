@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Flaky Test Detector (`flaky_tests`): Test-run histories (JUnit XML folders or JSON): same-commit pass/fail flips, flip rates and always-failing tests. Dock, CLI, fixture and test suite.
+- Golden Data Snapshot Tester (`golden_snapshot`): JSON outputs compared with approved goldens by JSON path (changed, added, removed, type changes) with a float tolerance. Dock, CLI, fixture and test suite.
+- Error Log Grouper (`log_grouper`): Godot log errors and warnings grouped by normalized signature (numbers and quoted names masked) with counts and first location. Dock, CLI, fixture and test suite.
+- Log Warning Budget Gate (`log_budget`): Error/warning counts and new message signatures in a captured log against a committed baseline. Dock, CLI, fixture and test suite.
+- State Trace Determinism Diff (`trace_diff`): Two recorded per-frame state traces compared key by key; first divergent frame, diverging keys, length mismatch. Dock, CLI, fixture and test suite.
 - Mesh Statistics Report (`mesh_stats`): Triangles, vertices, primitives and materials per glTF/GLB file from accessor counts, against budgets. Dock, CLI, fixture and test suite.
 - 3D Light and Shadow Cost Estimator (`light_cost`): Omni, spot and directional lights per scene (instanced scenes followed), shadow casters, against budgets and renderer limits. Dock, CLI, fixture and test suite.
 - Environment Feature Cost Matrix (`env_cost`): Environment features enabled per scene/resource (SDFGI, SSR, SSAO, SSIL, volumetric fog, glow...) with relative cost tiers and Compatibility-renderer support. Dock, CLI, fixture and test suite.

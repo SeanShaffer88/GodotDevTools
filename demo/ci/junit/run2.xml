@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="suite" tests="4" properties="commit=abc123">
+    <properties><property name="commit" value="abc123"/></properties>
+    <testcase classname="suite" name="test_save" time="0.01"></testcase>
+    <testcase classname="suite" name="test_net" time="0.01"><failure message="assertion failed"/></testcase>
+    <testcase classname="suite" name="test_ui" time="0.01"><failure message="assertion failed"/></testcase>
+    <testcase classname="suite" name="test_ai" time="0.01"></testcase>
+  </testsuite>
+</testsuites>

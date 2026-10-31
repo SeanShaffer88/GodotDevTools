@@ -1,0 +1,18 @@
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
+ERROR: Condition "p_index < 0" is true. Returning: nullptr
+   at: get_child (scene/main/node.cpp:1689)
+ERROR: Condition "p_index < 0" is true. Returning: nullptr
+   at: get_child (scene/main/node.cpp:1689)
+SCRIPT ERROR: Invalid get index 'hp' (on base: 'Nil').
+          at: _on_hit (res://game/enemy.gd:42)
+SCRIPT ERROR: Invalid get index 'hp' (on base: 'Nil').
+          at: _on_hit (res://game/enemy.gd:42)
+SCRIPT ERROR: Invalid get index 'hp' (on base: 'Nil').
+          at: _on_hit (res://game/enemy.gd:42)
+WARNING: Texture 'res://art/hero_42.png' is larger than 4096 px.
+   at: _load (core/io/resource_loader.cpp:300)
+WARNING: Texture 'res://art/boss_7.png' is larger than 4096 px.
+   at: _load (core/io/resource_loader.cpp:300)
+USER WARNING: Save slot 3 missing, using defaults
+   at: push_warning (core/variant/variant_utility.cpp:1112)
+Level loaded in 812 ms

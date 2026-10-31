@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -227,4 +227,14 @@ gate "palette checker flags the off-palette accent" \
   res://addons/palette_check/cli/pcc_cli.gd -- --dir=res://demo/rendering --palette=res://demo/rendering/palette.json --fail-on=off_palette
 gate "theme auditor flags font-size sprawl" \
   res://addons/theme_audit/cli/tra_cli.gd -- --dir=res://demo/rendering --fail-on=font_size_sprawl
+gate "flaky detector finds the network test" \
+  res://addons/flaky_tests/cli/flk_cli.gd -- --input=res://demo/ci/junit --fail-on=flaky_same_commit
+gate "golden tester flags the changed score" \
+  res://addons/golden_snapshot/cli/gst_cli.gd -- --current=res://demo/ci/golden/actual --golden=res://demo/ci/golden/expected --fail-on=changed_value
+gate "log grouper reports error groups" \
+  res://addons/log_grouper/cli/lgr_cli.gd -- --log=res://demo/ci/logs/run.log --fail-on=error_group
+gate "log budget catches new errors" \
+  res://addons/log_budget/cli/lbg_cli.gd -- --log=res://demo/ci/logs/run.log --baseline=res://demo/ci/logs/baseline.json --fail-on=error_budget
+gate "trace diff finds the divergence" \
+  res://addons/trace_diff/cli/sdt_cli.gd -- --first=res://demo/ci/traces/run_a.json --second=res://demo/ci/traces/run_b.json --fail-on=divergence
 echo "ALL GATE CHECKS PASSED"

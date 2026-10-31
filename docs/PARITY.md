@@ -110,6 +110,11 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Environment Feature Cost Matrix: enabled features, cost tiers, Compatibility support | env_cost core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Colour Palette Consistency Checker: CIE76 delta E against a palette | palette_check core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Theme Resource Auditor: override sprawl, font-size scale, unused variations | theme_audit core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Flaky Test Detector: JUnit/JSON run history analysis | flaky_tests core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Golden Data Snapshot Tester: path-level JSON diffs against goldens | golden_snapshot core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Error Log Grouper: normalized signature grouping of Godot logs | log_grouper core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| Log Warning Budget Gate: counts and new signatures vs baseline | log_budget core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
+| State Trace Determinism Diff: first divergence between two traces | trace_diff core + CLI + dock | Partially Verified (headless suite and CLI gate pass on Godot 4.3; editor session pending) |
 | Every tool: editor dock with tooltips + offline help | ui/ docks | Partially Verified (headless import passes; hands-on editor session owed) |
 | Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |
