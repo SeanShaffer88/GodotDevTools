@@ -1,0 +1,9 @@
+feat(ui): add pause menu remapping
+fix: crash when loading empty save
+fix(audio): music stops after alt-tab
+perf: cache pathfinding grid
+feat!: new save format (old saves are migrated)
+docs: update README
+Merge branch 'main' into feature/x
+tweak some numbers
+refactor(ai): split behaviour tree runner

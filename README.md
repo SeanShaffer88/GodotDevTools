@@ -100,6 +100,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Scene Load Smoke Tester | Loads and instantiates every scene headless; load/instantiate failures, missing dependencies, unknown node types. | `addons/scene_smoke` |
 | Micro-Benchmark Harness | Times `bench_*` methods with warm-up and repetitions; median, p95, spread; output is Performance Regression Gate input. | `addons/bench_harness` |
 | GDScript Mutation Tester | Operator mutants of one script, each run against its test in an isolated temporary project; surviving mutants show untested behaviour. | `addons/mutation_tester` |
+| Store Asset Validator | Store images (PNG/JPEG headers) against a user-written profile: missing files, wrong sizes, screenshot counts. | `addons/store_assets` |
+| Android Permissions Reviewer | Permissions requested by each Android export preset; sensitive ones flagged for review, optional justification file. | `addons/android_permissions` |
+| Version Consistency Checker | Project `config/version` against version strings in export presets (Android, Windows, macOS, iOS, web). | `addons/version_consistency` |
+| Third-Party Notice Collector | License files gathered per addon/vendor folder into a notices report; missing licenses and copyleft licenses flagged for review. | `addons/third_party_notices` |
+| Release Notes Generator | Conventional-commit subjects grouped into draft release notes (breaking, added, fixed, performance, other). | `addons/release_notes` |
 
 Each addon folder has its own README with install steps, editor use, command-line options and limits.
 
@@ -257,6 +262,11 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `scene_smoke/cli/sst_cli.gd` | `--dir` `--fail-on` |
 | `bench_harness/cli/mbh_cli.gd` | `--script` `--iterations` `--warmup` `--max-cv` `--fail-on` |
 | `mutation_tester/cli/gmt_cli.gd` | `--target` `--test` `--max-mutants` `--timeout` `--fail-on` |
+| `store_assets/cli/sav_cli.gd` | `--profile` `--fail-on` |
+| `android_permissions/cli/apr_cli.gd` | `--presets` `--justifications` `--fail-on` |
+| `version_consistency/cli/vcc_cli.gd` | `--project` `--presets` `--expected` `--fail-on` |
+| `third_party_notices/cli/tpn_cli.gd` | `--dir` `--fail-on` |
+| `release_notes/cli/rln_cli.gd` | `--commits` `--version` `--include-other` `--fail-on` |
 
 The root of this repo is itself a Godot project: open it, enable the plugins, and run any dock against the `demo/` fixture, which deliberately contains a changed screenshot pair, a rewindable session, an overflowing HUD with tiny low-contrast text and a keyboard-unreachable button, a 3000x2000 texture, a duplicated and an unused asset, inconsistent import settings, a dialogue with a missing branch target and an unreachable room, quests with a missing requirement and a dependency circle, a patrol enemy and a door interaction to search for, an export preset pointing at an icon that does not exist, and one deliberate problem per new tool: an interleaved market scene, a save no registered path can migrate, an all-vs-all collision body, a rig chain that cannot reach its target, a mix layout with a ducking loop, scripts that orphan nodes and circle references, Space bound to two actions, a shader that double-fetches, a signal session with a runaway emitter, a missing translation with a wrong plural rule, a behaviour transition to a state nobody defines, a camera config naming an ease that does not exist, a seed log with one tampered PRNG value, a blockout crate off the grid and a ramp too steep to climb, two files one letter-case apart, a tilemap rule that runs one way only, a test file that never quits, a workload that throttles a low-end estimate, a prefab instance carrying a dead override, and a script with undocumented public API.
 

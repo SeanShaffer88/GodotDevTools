@@ -1,0 +1,5 @@
+; Version fixture (not the real project file)
+[application]
+
+config/name="Shipping Fixture"
+config/version="1.2.0"

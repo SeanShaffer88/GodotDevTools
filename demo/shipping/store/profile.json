@@ -1,0 +1,5 @@
+{"assets": [
+  {"id": "icon", "path": "res://demo/shipping/store/icon.png", "width": 512, "height": 512},
+  {"id": "screenshots", "folder": "res://demo/shipping/store/screens", "sizes": [[1920, 1080], [1280, 720]], "min_count": 3, "max_count": 10},
+  {"id": "header", "path": "res://demo/shipping/store/header.png", "width": 920, "height": 430}
+]}
