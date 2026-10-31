@@ -1,0 +1,6 @@
+keys,en
+HINT_JUMP,Press [action:jump] to jump
+HINT_FIRE,Press [action:fire] to shoot
+HINT_DASH,Press [action:dash] to dash
+HINT_ROLL,Press [action:roll] to roll
+HINT_MOVE,Hold [action:move_left] to walk

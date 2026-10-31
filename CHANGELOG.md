@@ -7,6 +7,11 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- AI Perception Debugger (`ai_perception`): 2D sight (range, field of view, wall occlusion) and hearing (range x noise, walls muffle) per agent-target pair with a decision trace and expectations. Dock, CLI, fixture and test suite.
+- Gameplay Ability Simulator (`ability_sim`): Priority-rotation simulation of abilities with costs, cooldowns, cast times and regenerating resources: casts, DPS, idle and wasted resource time. Dock, CLI, fixture and test suite.
+- Procedural Generation Constraint Tester (`procgen_constraints`): Generated text-grid maps checked by flood fill: reachable exit, key before door, isolated floor pockets, dead-end share; failure rate across seeds. Dock, CLI, fixture and test suite.
+- Controller Glyph and Prompt Validator (`controller_glyphs`): Action tokens in prompt text checked against the InputMap, per-device bindings, and glyph images in per-device folders. Dock, CLI, fixture and test suite.
+- Color-Vision and Contrast Previewer (`colorvision`): Palette colours simulated for protanopia, deuteranopia and tritanopia (Machado 2009, full severity); pairs below a delta E threshold flagged, simulated colours listed. Dock, CLI, fixture and test suite.
 - Navigation Mesh Diagnostic Lab (`navmesh_lab`): Baked NavigationPolygon analysis: disconnected regions, passages narrower than the agent, unreachable and off-mesh targets. Dock, CLI, fixture and test suite.
 - Spawn Point and Encounter Validator (`spawn_validator`): 2D spawn markers (group or name) checked against static collision shapes, minimum spacing and an optional navmesh. Dock, CLI, fixture and test suite.
 - Interaction Reachability Checker (`interaction_reach`): Interactable trigger areas (group or name) checked against navmesh reachable from the player start. Dock, CLI, fixture and test suite.

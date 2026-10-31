@@ -1,0 +1,16 @@
+{
+  "walls": [[300, -100, 300, 100]],
+  "agents": [
+    {"id": "guard", "pos": [0, 0], "facing_deg": 0, "fov_deg": 90, "sight_range": 500, "hearing_range": 250},
+    {"id": "sentry", "pos": [600, 300], "facing_deg": 180, "fov_deg": 60, "sight_range": 400, "hearing_range": 100}
+  ],
+  "targets": [
+    {"id": "player_hidden", "pos": [400, 0], "noise": 1.0},
+    {"id": "player_open", "pos": [200, 150], "noise": 0.5}
+  ],
+  "expect": [
+    {"agent": "guard", "target": "player_hidden", "sees": false},
+    {"agent": "guard", "target": "player_open", "sees": true},
+    {"agent": "sentry", "target": "player_open", "sees": true}
+  ]
+}
