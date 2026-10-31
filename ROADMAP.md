@@ -35,7 +35,7 @@ This roadmap captures proposed tools, not a promise that every design is already
 - [ ] **Resource Rename and Reference Assistant** — preview moves and affected references.
 - [ ] **Asset Import Preset Auditor** — compare import settings to team-defined presets.
 - [ ] **Project Cleanup Workbench** — collect unused candidates, duplicates and stale imports for review.
-- [ ] **Naming and Folder Convention Enforcer** (in progress) — initial file/folder regex audit passed Godot 4.3/4.5 CI in PR #5; hands-on editor verification pending. Node, signal and group rules remain future work.
+- [ ] **Naming and Folder Convention Enforcer** (in progress) — file/folder checks passed Godot 4.3/4.5 CI in PR #5; opt-in static node, signal and group checks added, pending CI and hands-on editor verification.
 - [ ] **Scene Review Snapshot Generator** — generate reproducible scene inventories and diffs.
 - [ ] **Editor Action Macro Recorder** — record and preview repeatable editor actions with undo support.
 - [ ] **Node Property Drift Monitor** — compare node properties against team baselines.

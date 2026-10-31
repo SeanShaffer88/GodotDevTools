@@ -61,7 +61,8 @@ Scored from the test gate on Godot 4.3.stable and 4.5.stable (both CI-green). "V
 | Prefab instance override classification (dead vs hiding), rollback plans, scene writes only under explicit --apply | prefab_guard core + CLI | Verified (apply path fixture-checked; scenes are source code, so writes are opt-in) |
 | ## doc comment, signal, export and function parsing to Markdown + dependency-free HTML; undocumented-public-API flagging | doc_gen core + CLI | Verified |
 | Scene Dependency Map: literal-reference graph, roots, missing references, cycles, long chains and unused candidates | scene_dependency core + dock + CLI | Unverified (new tests added; static analysis misses dynamic and binary dependencies; hands-on editor session owed) |
-| Naming and Folder Convention Enforcer: configurable file and directory naming audit | naming_conventions core + CLI + dock | Unverified (Godot tests and editor session pending; no node, signal or group checks yet) |
+| Naming and Folder Convention Enforcer: configurable file and directory naming audit | naming_conventions core + CLI + dock | Verified on fixture in PR #5; editor session pending |
+| Naming Conventions: static scene node, signal and group naming audit | naming_conventions core + CLI + dock | Unverified (Godot tests added; text heuristics, editor session pending) |
 | Subtitle timing and readability: JSON cue audit | subtitle_audit core + CLI + dock | Unverified (Godot execution and editor session pending; no rendered layout or audio sync checks) |
 | Player Telemetry Schema Validator: local event and field validation | telemetry_schema core + CLI + dock | Unverified (Godot tests and editor session pending; no runtime traffic or automatic privacy detection) |
 | Performance Regression Gate: scalar baseline comparison and noise tolerances | performance_gate core + CLI + dock | Unverified (Godot tests and editor session pending; benchmarks must be captured separately) |
