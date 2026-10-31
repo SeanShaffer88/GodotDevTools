@@ -106,6 +106,8 @@ test -s reports/release_guard/release_guard.json
 gate "naming audit detects the inconsistent fixture" \
   res://addons/naming_conventions/cli/nc_cli.gd -- --dir=res://demo/naming --fail-on=file_name,directory_name
 test -s reports/naming_conventions/naming_conventions.json
+gate "naming audit detects bad symbols" \
+  res://addons/naming_conventions/cli/nc_cli.gd -- --dir=res://demo/naming_symbols --symbols --fail-on=node_name,signal_name,group_name
 gate "subtitle auditor detects overlapping fixture cues" \
   res://addons/subtitle_audit/cli/sub_cli.gd -- --input=res://demo/subtitles/cues.json --fail-on=overlap
 test -s reports/subtitle_audit/subtitle_audit.json
