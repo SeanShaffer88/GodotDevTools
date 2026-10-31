@@ -5,6 +5,8 @@ extends VBoxContainer
 const Scanner := preload("res://addons/asset_health/core/ahd_scanner.gd")
 
 var _results: RichTextLabel
+var _preset: LineEdit
+var _budget: LineEdit
 
 
 func _init() -> void:
@@ -14,6 +16,14 @@ func _init() -> void:
     title.text = "Asset Health Dashboard"
     title.tooltip_text = "Find oversized textures, duplicate files, unused resources, import-setting inconsistencies and assets that may hurt loading times."
     add_child(title)
+    _preset = LineEdit.new()
+    _preset.placeholder_text = "Optional import preset JSON path"
+    _preset.tooltip_text = "Compare importer parameters against this local preset."
+    add_child(_preset)
+    _budget = LineEdit.new()
+    _budget.placeholder_text = "Optional texture budget in bytes"
+    _budget.tooltip_text = "Budget for an uncompressed source-dimension estimate, not measured GPU memory."
+    add_child(_budget)
     var run_btn := Button.new()
     run_btn.text = "Run check"
     run_btn.tooltip_text = "Run the Asset Health Dashboard check on this project and list the results below."
@@ -36,6 +46,9 @@ const HELP_TEXT := "Run scans every file in the project: textures over 2048x2048
 
 
 func _on_run() -> void:
+    if not _budget.text.is_empty() and not _budget.text.is_valid_int():
+        _results.text = "Texture budget must be an integer number of bytes."
+        return
     var result: Dictionary = _run_check()
     var lines: Array[String] = []
     var s: Dictionary = result.get("summary", {})
@@ -55,4 +68,4 @@ func _on_run() -> void:
 
 func _run_check() -> Dictionary:
     var op = Scanner.new()
-    return op.scan()
+    return op.scan(_preset.text.strip_edges(), int(_budget.text) if not _budget.text.is_empty() else 0)

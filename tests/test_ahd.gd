@@ -49,6 +49,22 @@ func _init() -> void:
         if i["kind"] == "unused" and str(i["path"]).contains("orphan"): unused_text = i["message"]
     _check("duplicate report names both copies", dup_text.contains("hero.png") and dup_text.contains("hero_copy.png"), dup_text)
     _check("used texture is not flagged unused", not _paths_of_kind(r["issues"], "unused").has("res://demo/assets/hero.png"))
+    var preset := {"importers": {"texture": {"mipmaps/generate": true, "compress/mode": 0}}}
+    var preset_issues: Array = op.check_import_preset(["res://demo/import_preset/sample.cfg"], preset)
+    _check("preset finds wrong mipmap setting", _kinds(preset_issues).has("preset_mismatch"))
+    _check("matching numeric parameter accepted", preset_issues.size() == 1)
+    var matching := {"importers": {"texture": {"mipmaps/generate": false, "compress/mode": 0.0}}}
+    _check("matching import settings pass", op.check_import_preset(["res://demo/import_preset/sample.cfg"], matching).is_empty())
+    _check("missing setting flagged", _kinds(op.check_import_preset(["res://demo/import_preset/sample.cfg"], {"importers": {"texture": {"does/not_exist": true}}})).has("preset_missing"))
+    _check("unmatched importer flagged", _kinds(op.check_import_preset(["res://demo/import_preset/sample.cfg"], {"importers": {"audio": {"x": true}}})).has("preset_no_match"))
+    _check("invalid preset rejected", _kinds(op.check_import_preset([], {})).has("preset_invalid"))
+    _check("unreadable import flagged", _kinds(op.check_import_preset(["res://missing_import_metadata.cfg"], matching)).has("preset_read_error"))
+    _check("texture total reported", int(r["summary"]["texture_estimate_bytes"]) > 0)
+    var with_options: Dictionary = op.scan("res://demo/import_preset/rules.json", 1)
+    _check("texture budget flagged", _kinds(with_options["issues"]).has("texture_budget"))
+    _check("preset applies to real project imports", _kinds(with_options["issues"]).has("preset_mismatch"))
+    _check("negative budget rejected", _kinds(op.scan("", -1)["issues"]).has("invalid_budget"))
+    _check("malformed preset file flagged", _kinds(op.scan("res://missing_import_preset.json")["issues"]).has("preset_invalid"))
     _finish("AHD TESTS")
 
 
