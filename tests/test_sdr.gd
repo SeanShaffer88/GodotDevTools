@@ -34,6 +34,18 @@ func _init() -> void:
     var seq1: Array = op.lcg_sequence(12345, 8)
     var seq2: Array = op.lcg_sequence(12345, 8)
     _check("LCG replays identically from a seed", seq1 == seq2)
+    var node = load("res://addons/seed_replay/runtime/sdr_rng.gd").new()
+    var rolls: Array = []
+    for pass_index in 2:
+        node.reseed(42)
+        var r: Array = []
+        for i in 20:
+            r.append(node.randi_range(1, 6))
+            r.append(snappedf(node.randf_range(-1.0, 1.0), 0.000001))
+        rolls.append(r)
+    _check("runtime node: randi_range/randf_range replay from the seed", rolls[0] == rolls[1], str(rolls[0].slice(0, 6)) + " vs " + str(rolls[1].slice(0, 6)))
+    _check("runtime node: ranged draws use the recorded LCG", node.run_log()["prng"].size() == 40)
+    node.free()
     _check("LCG values stay in unit range", float(seq1[0]) >= 0.0 and float(seq1[0]) < 1.0)
     _check("LCG matches the reference first value", absf(float(seq1[0]) - 0.655154049) < 0.0000001, str(seq1[0]))
     _check("FNV-1a of empty text is the offset basis", op.fnv1a("") == 2166136261)

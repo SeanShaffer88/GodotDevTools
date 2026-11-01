@@ -13,6 +13,24 @@ func _init() -> void:
             out = arg.trim_prefix("--out=")
         elif arg.begins_with("--fail-on="):
             fail_on = Array(arg.trim_prefix("--fail-on=").split(","))
+        elif arg.begins_with("--font="):
+            options["font"] = arg.trim_prefix("--font=")
+        elif arg.begins_with("--font-size=") or arg.begins_with("--max-lines="):
+            var key := "font_size" if arg.begins_with("--font-size=") else "max_lines"
+            var raw := arg.get_slice("=", 1)
+            if not raw.is_valid_int():
+                printerr("Invalid %s" % key)
+                quit(1)
+                return
+            options[key] = int(raw)
+        elif arg.begins_with("--layout-width=") or arg.begins_with("--safe-area="):
+            var key := "layout_width" if arg.begins_with("--layout-width=") else "safe_area"
+            var raw := arg.get_slice("=", 1)
+            if not raw.is_valid_float():
+                printerr("Invalid %s" % key)
+                quit(1)
+                return
+            options[key] = float(raw)
         elif arg == "--require-speaker":
             options["require_speaker"] = true
     var op = Audit.new()

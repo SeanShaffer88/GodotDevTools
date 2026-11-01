@@ -87,6 +87,49 @@ jobs:
             visual_reports/
           if-no-files-found: ignore
 
+  sessions:
+    name: Editor and live-game sessions (Godot 4.3, Xvfb)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Cache Godot 4.3-stable
+        id: godot-cache
+        uses: actions/cache@v6
+        with:
+          path: .godot-bin
+          key: godot-4.3-stable-linux-x86_64
+
+      - name: Download Godot 4.3-stable
+        if: steps.godot-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .godot-bin
+          curl -fsSL -o .godot-bin/godot.zip \
+            "https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip"
+          unzip -q .godot-bin/godot.zip -d .godot-bin
+          rm .godot-bin/godot.zip
+          chmod +x ".godot-bin/Godot_v4.3-stable_linux.x86_64"
+
+      - name: Install virtual display and software OpenGL
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri libglx-mesa0 >/dev/null
+
+      - name: Live game session (runtime nodes)
+        run: sh tests/game/run_live_game.sh "$PWD/.godot-bin/Godot_v4.3-stable_linux.x86_64"
+
+      - name: Editor session (every dock, real clicks)
+        run: sh tests/editor/run_editor_session.sh "$PWD/.godot-bin/Godot_v4.3-stable_linux.x86_64" "$RUNNER_TEMP/edsess"
+
+      - name: Upload session evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: session-evidence
+          path: |
+            reports/live_game/
+            ${{ runner.temp }}/edsess/reports/editor_verify/
+          if-no-files-found: ignore
+
   action-smoke:
     name: Reusable action smoke test
     runs-on: ubuntu-latest

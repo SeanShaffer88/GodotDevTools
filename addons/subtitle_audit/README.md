@@ -15,4 +15,12 @@ The scanner checks malformed cues and timing, empty text, duration below one sec
 
 The CLI writes JSON and Markdown to `res://reports/subtitle_audit` (`--out` overrides it). `--fail-on` accepts comma-separated finding kinds or `issues`; a selected warning exits 2. Invalid input, invalid timings/options or report-write failures exit 1; otherwise exit 0. The default `--input` is the demo JSON fixture.
 
-This is not a full SRT or WebVTT implementation: it does not interpret styling, markup, layout metadata, audio or speaker identity. Character counts are heuristics, not measured comprehension or rendered width. It does not check font, wrapping, safe areas, localization conventions, or sync to media. It never modifies the source. The previous JSON audit passed Godot 4.3/4.5 CI; the new timed-text import and hands-on dock session still need verification.
+## Rendered layout (opt-in)
+
+Add `--font-size=32 --layout-width=1920 --safe-area=0.9 --max-lines=2` (and optionally `--font=res://fonts/ui.ttf`; the engine fallback font is used otherwise) to lay every cue out with Godot's own line breaker: `TextParagraph`, which is the TextServer path `Label` uses. The box is the safe-area fraction of the layout width. Two findings can result:
+- `layout_overflow`: a cue wraps to more lines than allowed.
+- `layout_clipped`: a single word is wider than the box.
+
+Explicit line breaks always count. The line counts match a `Label` rendered in a real window (checked in `tests/game/live_game.gd`). The check does not cover your own subtitle panel's padding, outline, theme or scaling, so set the width and safe area to match it.
+
+This is not a full SRT or WebVTT implementation. It does not interpret styling, markup, layout metadata, audio or speaker identity. Character-per-second counts are heuristics, not measured comprehension. Localization conventions and sync to media are not checked. The tool never modifies the source.

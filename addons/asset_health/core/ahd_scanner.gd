@@ -67,6 +67,87 @@ func estimated_vram_bytes(size: Vector2i, mipmaps: bool) -> int:
     return bytes
 
 
+## Per-platform GPU memory estimate for one texture from its import settings,
+## following Godot 4's texture importer (compress/mode 0 lossless, 1 lossy,
+## 2 VRAM compressed, 3 VRAM uncompressed, 4 Basis Universal):
+## - lossless, lossy and VRAM uncompressed upload as RGBA8 (4 bytes/pixel);
+## - VRAM compressed: desktop BC1 without alpha / BC3 with alpha (BC7 when
+##   compress/high_quality), mobile ETC2 RGB8 / ETC2 RGBA8 (ASTC 4x4 when
+##   high_quality); normal maps BC5 / ETC2 RG11;
+## - Basis Universal is transcoded at load to the same block formats.
+## Block formats round each side up to 4 pixels; process/size_limit scales the
+## largest side down; mipmaps add a third. These are estimates from the
+## import settings, not measured device memory.
+func platform_vram(size: Vector2i, params: Dictionary, has_alpha: bool) -> Dictionary:
+    var dims := size
+    var limit := int(params.get("process/size_limit", 0))
+    if limit > 0 and maxi(dims.x, dims.y) > limit:
+        var scale := float(limit) / float(maxi(dims.x, dims.y))
+        dims = Vector2i(maxi(1, int(dims.x * scale)), maxi(1, int(dims.y * scale)))
+    var mode := int(params.get("compress/mode", 0))
+    var hq := bool(params.get("compress/high_quality", false))
+    var normal := int(params.get("compress/normal_map", 0)) == 1
+    var mip := bool(params.get("mipmaps/generate", false))
+    var out := {}
+    for platform in ["desktop", "mobile"]:
+        var fmt := "RGBA8"
+        var bpp := 4.0
+        if mode == 2 or mode == 4:
+            if normal:
+                fmt = "BC5" if platform == "desktop" else "ETC2_RG11"
+                bpp = 1.0
+            elif hq:
+                fmt = "BC7" if platform == "desktop" else "ASTC_4x4"
+                bpp = 1.0
+            elif has_alpha:
+                fmt = "BC3" if platform == "desktop" else "ETC2_RGBA8"
+                bpp = 1.0
+            else:
+                fmt = "BC1" if platform == "desktop" else "ETC2_RGB8"
+                bpp = 0.5
+        var w := dims.x
+        var h := dims.y
+        if fmt != "RGBA8":
+            w = (w + 3) / 4 * 4
+            h = (h + 3) / 4 * 4
+        var bytes := float(w * h) * bpp
+        if mip:
+            bytes *= 4.0 / 3.0
+        out[platform] = {"format": fmt, "bytes": int(ceil(bytes))}
+    return out
+
+
+## True when a PNG declares alpha (color type 4/6 or a tRNS chunk). Other
+## formats: JPEG never has alpha; anything else is assumed to (larger estimate).
+func has_alpha(path: String) -> bool:
+    var ext := path.get_extension().to_lower()
+    if ext in ["jpg", "jpeg"]:
+        return false
+    if ext != "png":
+        return true
+    var f := FileAccess.open(path, FileAccess.READ)
+    if f == null or f.get_length() < 33:
+        return true
+    f.big_endian = true
+    f.seek(25)
+    var color_type := f.get_8()
+    if color_type == 4 or color_type == 6:
+        f.close()
+        return true
+    f.seek(33)
+    while f.get_position() + 8 <= f.get_length():
+        var length := int(f.get_32())
+        var kind := f.get_buffer(4).get_string_from_ascii()
+        if kind == "tRNS":
+            f.close()
+            return true
+        if kind == "IDAT" or kind == "IEND":
+            break
+        f.seek(f.get_position() + length + 4)
+    f.close()
+    return false
+
+
 func _parse_import(path: String) -> Dictionary:
     var cfg := ConfigFile.new()
     var out: Dictionary = {}
@@ -119,7 +200,7 @@ func _preset_equal(actual, expected) -> bool:
         return float(actual) == float(expected)
     return a == b and actual == expected
 
-func scan(preset_path: String = "", vram_budget: int = 0) -> Dictionary:
+func scan(preset_path: String = "", vram_budget: int = 0, platform_budgets: Dictionary = {}) -> Dictionary:
     var files: Array[String] = []
     _walk("res://", files)
     files.sort()
@@ -127,6 +208,8 @@ func scan(preset_path: String = "", vram_budget: int = 0) -> Dictionary:
     var by_hash: Dictionary = {}
     var total_bytes := 0
     var textures: Array = []
+    var desktop_total := 0
+    var mobile_total := 0
     var import_by_ext: Dictionary = {} ## ext -> {setting_key: {value_string: [paths]}}
     # Reference sweep: every res:// literal in text files counts as a use.
     var referenced: Dictionary = {}
@@ -164,11 +247,16 @@ func scan(preset_path: String = "", vram_budget: int = 0) -> Dictionary:
             if dims.x > 0:
                 var mip := true
                 var imp_path := path + ".import"
+                var imp_params: Dictionary = {}
                 if FileAccess.file_exists(imp_path):
-                    var imp := _parse_import(imp_path)
-                    mip = bool(imp.get("mipmaps/generate", true))
+                    imp_params = _parse_import(imp_path)
+                    mip = bool(imp_params.get("mipmaps/generate", true))
                 var vram := estimated_vram_bytes(dims, mip)
-                textures.append({"path": path, "size": dims, "bytes": size, "vram": vram})
+                var plat := platform_vram(dims, imp_params, has_alpha(path))
+                desktop_total += int(plat["desktop"]["bytes"])
+                mobile_total += int(plat["mobile"]["bytes"])
+                textures.append({"path": path, "size": dims, "bytes": size, "vram": vram,
+                    "desktop": plat["desktop"], "mobile": plat["mobile"]})
                 if dims.x * dims.y > big_texture_pixels:
                     issues.append({"severity": "warning", "kind": "oversized_texture", "path": path,
                         "message": "%s is %dx%d - about %.1f MB of video memory%s. Big textures load slowly and can exceed phone limits." % [
@@ -237,7 +325,15 @@ func scan(preset_path: String = "", vram_budget: int = 0) -> Dictionary:
                 if path.get_extension().to_lower() == "import":
                     import_paths.append(path)
             issues.append_array(check_import_preset(import_paths, parser.data))
+    for platform in platform_budgets:
+        var budget := int(platform_budgets[platform])
+        var total := desktop_total if platform == "desktop" else mobile_total
+        if platform not in ["desktop", "mobile"] or budget < 0:
+            issues.append({"severity": "error", "kind": "invalid_budget", "path": "", "message": "Platform budget '%s' is invalid." % platform, "fix": "Use desktop or mobile with a non-negative byte budget."})
+        elif budget > 0 and total > budget:
+            issues.append({"severity": "warning", "kind": "platform_texture_budget", "path": "", "message": "Estimated %s GPU texture total is %d bytes, over the %d-byte budget." % [platform, total, budget], "fix": "Lower process/size_limit, use VRAM compression, or disable mipmaps on UI textures; verify on target hardware."})
     return {"summary": {"files": files.size(), "bytes": total_bytes, "textures": textures.size(), "texture_estimate_bytes": texture_estimate,
+            "texture_desktop_bytes": desktop_total, "texture_mobile_bytes": mobile_total,
             "issues": issues.size(),
             "duplicates": issues.filter(func(i): return i["kind"] == "duplicate").size(),
             "unused": issues.filter(func(i): return i["kind"] == "unused").size(),
@@ -255,6 +351,7 @@ func to_markdown(result: Dictionary) -> String:
         "%d files, %.1f MB total, %d textures. %d problems: %d duplicates, %d unused, %d oversized." % [
             s["files"], float(s["bytes"]) / 1048576.0, s["textures"], s["issues"], s["duplicates"], s["unused"], s["oversized"]], ""]
     lines.append("Estimated uncompressed source texture total: %d bytes (not actual device memory)." % s.get("texture_estimate_bytes", 0))
+    lines.append("Estimated GPU texture memory from import settings: desktop %d bytes, mobile %d bytes (estimates, not measured)." % [s.get("texture_desktop_bytes", 0), s.get("texture_mobile_bytes", 0)])
     for i in result["issues"]:
         lines.append("- [%s] %s" % [i["severity"], i["message"]])
     return "\n".join(lines) + "\n"

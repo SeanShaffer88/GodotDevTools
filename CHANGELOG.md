@@ -7,8 +7,18 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Real-editor session (`tests/editor/run_editor_session.sh`): runs the windowed editor under Xvfb, clicks every dock's run button with real mouse events, takes a screenshot of each dock, and drives Macro Recorder's preview and recording. All 133 docks pass. It runs in CI in the new `sessions` job.
+- Live-game session (`tests/game/run_live_game.sh`): drives all 16 runtime nodes in a windowed game with real frames, physics and input events, and checks the subtitle layout against a rendered Label. All 20 checks pass. It runs in CI.
+- Asset Health: per-platform GPU texture estimates from import settings (desktop BC1/BC3/BC7/BC5, mobile ETC2/ASTC; size limits, block rounding and mipmaps are applied), plus `--desktop-budget` and `--mobile-budget`.
+- Subtitle Auditor: opt-in rendered-layout check that wraps each cue with the engine's TextParagraph inside a safe-area box. New findings: `layout_overflow` and `layout_clipped`.
+- Build Size Explorer: attribution inside Godot packs, for format 2 (4.0-4.3) and format 3 (4.4+) packs, standalone or embedded in an executable. Per-file budgets apply to the packed files.
 - Dock smoke suite (`tests/test_docks.gd`, part of the gate): builds all 133 editor docks outside the editor, checks that every interactive control has a tooltip, and presses each run action on its demo input.
 - Large-project benchmark (`tests/bench/`): a deterministic synthetic-project generator and a timer for the 39 project-wide scanners. Results are in docs/performance.md.
+
+### Fixed
+
+- Seed Replay runtime node: `randi_range` and `randf_range` called the engine's unseeded global `randf()`, so seeded replays diverged. They now use the node's recorded generator. Found by the live-game session; a regression test is added.
+- Pool Advisor runtime counter: an unknown field name now raises a warning and is ignored, instead of causing a script error.
 
 ### Performance
 

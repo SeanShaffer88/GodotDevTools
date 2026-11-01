@@ -42,13 +42,15 @@ func randf() -> float:
 
 
 func randf_range(from: float, to: float) -> float:
-    return lerpf(from, to, randf())
+    # self. is required: a bare randf() resolves to the engine's global,
+    # unseeded randf(), which silently breaks replay.
+    return lerpf(from, to, self.randf())
 
 
 func randi_range(from: int, to: int) -> int:
     if to <= from:
         return from
-    return from + int(randf() * float(to - from + 1)) % (to - from + 1)
+    return from + int(self.randf() * float(to - from + 1)) % (to - from + 1)
 
 
 ## Add an event to the hash chain: kind plus any data worth pinning

@@ -4,7 +4,7 @@
 
 Independent Godot 4 addons cover testing, performance, content, workflow and release checks. The table below links each addon to its purpose and folder. Many tools are static analyzers, simulations or estimates rather than runtime measurements; consult each addon README for its scope and limitations.
 
-The [roadmap](ROADMAP.md) tracks 110 entries. Every entry except the native-accelerator research note has an initial implementation here, with a core, dock, headless CLI, fixture, test suite and CLI gate. Entries stay unchecked ("in progress") until a hands-on editor session verifies their docks; the roadmap and each addon README describe what is verified.
+The [roadmap](ROADMAP.md) tracks 110 entries, and all of them are checked. Each tool has a core, an editor dock, a headless CLI, a fixture, a test suite and a CLI gate. Each dock passes a real-editor session and each runtime node passes a live game session, and both sessions run in CI. The native-accelerator entry is a research note that ends in a recorded decision not to build. See [QUALITY.md](QUALITY.md) for the evidence.
 
 Shared, optional components consume tool reports without any tool depending on them: the [Report Schema](addons/report_schema/README.md), [SARIF](addons/sarif_export/README.md) and [JUnit](addons/junit_export/README.md) exporters, the [HTML dashboard](addons/html_dashboard/README.md), [Report Diff](addons/report_diff/README.md), the [Finding Suppression Baseline](addons/suppressions/README.md), the [Suite CLI Dispatcher](addons/suite_dispatcher/README.md), the [pre-commit hook installer](addons/precommit/README.md) and a [reusable CI action](.github/actions/godot-dev-tools/README.md).
 
@@ -408,7 +408,7 @@ See [AUDIT.md](AUDIT.md) for the security, privacy and quality audit, [CREDITS.m
 - **Test Runner** detects GUT suites from file text but never depends on GUT; this repo's own suite remains `tests/run_tests.sh`.
 - **Whitebox** snapping of live editor selections is dock-side work (Partially Verified in `docs/PARITY.md`); the headless half audits scene text against the grid and slope rules.
 - **Prefab Guard** writes to scene files only with an explicit `--apply`; otherwise it reports plans, because scene files are source code.
-- Editor dock interaction is verified by code inspection and a headless editor import; a hands-on editor session on Windows is still owed - see `QUALITY.md`.
+- Every editor dock is clicked in a real Godot 4.3 editor and every runtime node runs in a live game. These sessions run in CI on Linux under Xvfb with software OpenGL. Hands-on use on Windows with a GPU is still owed; see `QUALITY.md`.
 
 ## License
 
