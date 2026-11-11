@@ -4,6 +4,21 @@
 ## Search is keyword + problem-phrase matching, ranked and explained.
 extends RefCounted
 
+# Normalize only a small, documented set of common problem words. This is not
+# semantic search; in particular, substrings inside unrelated words are ignored.
+const WORD_ALIASES := {
+	"lagging": "lag", "laggy": "lag", "slower": "slow", "slowdown": "slow",
+	"crashed": "crash", "crashing": "crash", "leaking": "leak",
+	"tested": "test", "testing": "test", "exporting": "export",
+}
+const STOP_WORDS := {
+	"a": true, "an": true, "and": true, "are": true, "can": true, "do": true, "does": true,
+	"find": true, "for": true, "from": true, "help": true, "how": true, "i": true, "in": true,
+	"is": true, "it": true, "me": true, "my": true, "of": true, "on": true, "or": true,
+	"please": true, "show": true, "so": true, "the": true, "to": true, "what": true,
+	"when": true, "where": true, "why": true, "with": true, "you": true, "your": true,
+}
+
 const PROBLEM_TOOLS := {
 	"lag": ["frame_spikes", "overdraw", "batch_profiler", "load_profiler", "thermal_sim"],
 	"slow": ["frame_spikes", "overdraw", "batch_profiler", "load_profiler"],
@@ -50,28 +65,62 @@ func build_catalog(addons_dir: String = "res://addons") -> Array:
 		out.append({"id": name, "title": title, "description": desc, "folder": "addons/" + name})
 	return out
 
+# Keep whole words, recognizing a few common English plural forms without
+# making short words such as "ui" match substrings such as "build".
+func _normalize_word(word: String) -> String:
+	if WORD_ALIASES.has(word):
+		return str(WORD_ALIASES[word])
+	if word.length() > 4 and word.ends_with("ies"):
+		return word.left(word.length() - 3) + "y"
+	if word.length() > 4 and (word.ends_with("ches") or word.ends_with("shes") or word.ends_with("sses") or word.ends_with("xes") or word.ends_with("zes")):
+		return word.left(word.length() - 2)
+	if word.length() > 3 and word != "physics" and word.ends_with("s") and not word.ends_with("ss") and not word.ends_with("us") and not word.ends_with("is"):
+		return word.left(word.length() - 1)
+	return word
+
+func _words(text: String, tokenizer: RegEx, filter_stop_words: bool) -> Array[String]:
+	var words: Array[String] = []
+	for match_result in tokenizer.search_all(text.to_lower()):
+		var word: String = match_result.get_string()
+		if word.length() < 2 or (filter_stop_words and STOP_WORDS.has(word)):
+			continue
+		word = _normalize_word(word)
+		if not words.has(word):
+			words.append(word)
+	return words
+
 func search(catalog: Array, query: String) -> Dictionary:
 	var issues: Array = []
-	var q := query.strip_edges().to_lower()
-	if q == "":
+	if query.strip_edges() == "":
 		return _fail("res://addons", "Search query is empty.", "Type a problem, e.g. 'my game lags on mobile'.", "bad_input")
+	var tokenizer := RegEx.new()
+	if tokenizer.compile("[\\p{L}\\p{N}]+") != OK:
+		return _fail("res://addons", "Could not initialize search tokenization.", "Check that Godot's RegEx module is available.")
+	var query_words := _words(query, tokenizer, true)
 	var scored: Array = []
 	for entry in catalog:
 		var score := 0
 		var why: Array = []
-		var hay := (str(entry.get("title", "")) + " " + str(entry.get("description", "")) + " " + str(entry.get("id", ""))).to_lower()
-		for word in q.split(" ", false):
-			if word.length() >= 3 and hay.contains(word):
-				score += 2
-				why.append("matches '" + word + "'")
+		var title_words := _words(str(entry.get("title", "")) + " " + str(entry.get("id", "")), tokenizer, false)
+		var description_words := _words(str(entry.get("description", "")), tokenizer, false)
+		for word in query_words:
+			if title_words.has(word):
+				score += 3
+				why.append("matches '" + word + "' in title or id")
+			elif description_words.has(word):
+				score += 1
+				why.append("matches '" + word + "' in description")
 		for phrase in PROBLEM_TOOLS.keys():
-			if q.contains(phrase):
-				if Array(PROBLEM_TOOLS[phrase]).has(str(entry.get("id", ""))):
-					score += 5
-					why.append("recommended for '" + phrase + "'")
+			if query_words.has(phrase) and Array(PROBLEM_TOOLS[phrase]).has(str(entry.get("id", ""))):
+				score += 5
+				why.append("recommended for '" + phrase + "'")
 		if score > 0:
 			scored.append({"entry": entry, "score": score, "why": why})
-	scored.sort_custom(func(a, b): return int(a["score"]) > int(b["score"]))
+	scored.sort_custom(func(a, b):
+		if int(a["score"]) != int(b["score"]):
+			return int(a["score"]) > int(b["score"])
+		return str(a["entry"]["id"]) < str(b["entry"]["id"])
+	)
 	var results: Array = []
 	for s in scored.slice(0, 10):
 		var e: Dictionary = s["entry"]

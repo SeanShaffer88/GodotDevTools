@@ -34,6 +34,7 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Fixed
 
+- Tool Finder matches whole normalized words instead of arbitrary substrings, so queries such as `build` and `flag` no longer trigger unrelated `ui` or `lag` recommendations. Title/ID matches rank above description-only matches, repeated terms do not inflate scores, ties are sorted by ID, and catalog descriptions no longer hard-code a stale tool count or result limit.
 - MCP can select a trusted external project, advertises installed CLIs, ranks and explains keyword search, preserves JSON-RPC request IDs, ignores notifications, validates arguments, and bounds subprocess output and execution time. Regression tests cover fake and real Godot calls; subprocess isolation and cancellation are not guaranteed. See `mcp/README.md` for trust and protocol limits.
 - Release packaging uses a validated shared addon-name manifest, includes the MIT notice in each addon, and checks archives offline before publication. Asset Library metadata can now target the same release-tagged filenames; its existing untagged filenames remain available. `--out` is honored and `--check` detects stale metadata. Existing releases and submissions are unchanged.
 - Seed Replay runtime node: `randi_range` and `randf_range` called the engine's unseeded global `randf()`, so seeded replays diverged. They now use the node's recorded generator. Found by the live-game session; a regression test is added.

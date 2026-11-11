@@ -1284,7 +1284,7 @@
     {
       "id": "tool_finder",
       "title": "Tool Finder",
-      "description": "Search 138 tools by problem, not by name, and get the 3 best matches with reasons.",
+      "description": "Search the local addon catalog by problem and get ranked matches with reasons.",
       "version": "1.0.0",
       "folder": "addons/tool_finder",
       "readme": "addons/tool_finder/README.md",

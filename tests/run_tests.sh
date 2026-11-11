@@ -385,6 +385,18 @@ gate "macro preview reports the unmatched step" \
 echo "== CLI smoke: tool finder =="
 "$GODOT" --headless --path . --script res://addons/tool_finder/cli/tfd_cli.gd -- --query="my game lags on mobile"
 test -s reports/tool_finder/tool_finder.json
+# Remove old reports so a script error cannot leave a stale passing result.
+rm -f reports/tool_finder_build/tool_finder.json reports/tool_finder_flag/tool_finder.json
+"$GODOT" --headless --path . --script res://addons/tool_finder/cli/tfd_cli.gd -- --query="build" --out=res://reports/tool_finder_build
+grep -q '"id": "build_size"' reports/tool_finder_build/tool_finder.json
+if grep -Fq "recommended for 'ui'" reports/tool_finder_build/tool_finder.json; then
+  echo "FAIL: build must not trigger UI recommendations"; exit 1
+fi
+"$GODOT" --headless --path . --script res://addons/tool_finder/cli/tfd_cli.gd -- --query="flag" --out=res://reports/tool_finder_flag
+grep -q '"id": "flag_simulator"' reports/tool_finder_flag/tool_finder.json
+if grep -Fq "recommended for 'lag'" reports/tool_finder_flag/tool_finder.json; then
+  echo "FAIL: flag must not trigger lag recommendations"; exit 1
+fi
 gate "tool finder must exit 2 on no match" \
   res://addons/tool_finder/cli/tfd_cli.gd -- --query="zzzzqqqq" --fail-on=no_match
 echo "== CLI smoke: fix engine preview =="

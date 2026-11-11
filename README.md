@@ -92,7 +92,7 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Environment Feature Cost Matrix | Environment features enabled per scene/resource (SDFGI, SSR, SSAO, SSIL, volumetric fog, glow...) with relative cost tiers and Compatibility-renderer support. | `addons/env_cost` |
 | Colour Palette Consistency Checker | Colour literals in scenes, resources and scripts compared with an approved palette by CIE76 delta E. | `addons/palette_check` |
 | Theme Resource Auditor | Theme override counts per scene, distinct and near-duplicate font sizes, and theme type variations no scene uses. | `addons/theme_audit` |
-| Tool Finder | Search 138 tools by problem, not by name, and get ranked matches with reasons. | `addons/tool_finder` |
+| Tool Finder | Search installed addon metadata by problem and get ranked matches with reasons. | `addons/tool_finder` |
 | Fix Engine | Preview safe fixes from tool reports; apply only with explicit opt-in and a backup. | `addons/fix_engine` |
 | Suite Presets | Enable only the plugins you need: full suite, CI-only, mobile perf, content or testing packs. | `addons/suite_presets` |
 | Coverage Gate | Estimate GDScript coverage from test evidence and gate CI on a minimum percent (estimate, not measurement). | `addons/coverage_gate` |
