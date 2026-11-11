@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Test mounted-project smoke harness
+        run: python3 tests/test_docker_smoke.py
       - name: Build image
         shell: bash
         run: |
@@ -36,7 +38,9 @@ jobs:
             echo "::error title=Docker build failed (exit $status)::$message"
           fi
           exit "$status"
-      - name: Smoke test (help + list needs a project mount)
+      - name: Smoke test image help
         run: docker run --rm godot-dev-tools --help
+      - name: Smoke test a mounted project
+        run: python3 tests/docker_smoke.py --image godot-dev-tools
       - name: Standalone naming regressions (no Godot needed)
         run: python3 tests/test_standalone.py
