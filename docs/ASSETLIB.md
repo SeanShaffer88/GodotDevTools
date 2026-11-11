@@ -13,4 +13,6 @@
 3. Submit each tool at <https://godotengine.org/asset-library/> using its `assetlib/<tool>.json`.
 4. Add the Asset Library link to the tool README.
 
+The generated `zip` field describes the local archive name built by the checklist, using the addon folder and its plugin version. It is **not** the name used by the release workflow: `.github/workflows/release.yml` uses a mapped CamelCase tool name and the release tag, which can differ from the plugin version. For example, the three Android additions would be `GodotDevTools-AndroidExportAudit-vX.Y.Z.zip`, `GodotDevTools-AndroidTouchAudit-vX.Y.Z.zip`, and `GodotDevTools-AndroidLogcatTriage-vX.Y.Z.zip` for release `vX.Y.Z`. These are naming examples, not links to an existing release. Verify the actual release asset and URL when submitting.
+
 Status: generator + checklist done; first submissions pending (external review queue). itch.io mirrors are optional and use the same zips.

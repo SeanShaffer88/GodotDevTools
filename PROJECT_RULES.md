@@ -28,4 +28,4 @@ Known limitations live at: README.md "Limitations and known issues" - Decision l
 
 - 2026-11-11: For Android code commit `1678b02`, the Linux 4.3/4.5 and experimental 4.4/4.6 gates, Windows 4.3 gate, and general Linux/Windows editor sessions passed in CI. These do not establish Android hardware or store behavior. The first Docker build failed before smoke, with logs inaccessible in this environment; the workflow now surfaces a bounded failure annotation for diagnosis. See `docs/PARITY.md`.
 
-- 2026-11-11: The follow-up Docker CI diagnostic identified DNS resolution failures for Ubuntu package servers inside the default Docker build network. The Linux CI build now uses `docker build --network=host` for build-time downloads; runtime networking and exit-code handling are unchanged. See `docs/PARITY.md` for run evidence.
+- 2026-11-11: A Docker CI diagnostic identified DNS resolution failures for Ubuntu package servers during image build. A host-network build also failed to resolve those servers; the speculative network change was reverted. The underlying cause remains unresolved. See `docs/PARITY.md` for run evidence.

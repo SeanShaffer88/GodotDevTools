@@ -20,9 +20,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          # The hosted runner's Docker bridge can lose DNS; use its host network
-          # for build-time package downloads. This does not change image runtime.
-          docker build --network=host -t godot-dev-tools . 2>&1 | tee docker-build.log
+          docker build -t godot-dev-tools . 2>&1 | tee docker-build.log
           status=${PIPESTATUS[0]}
           if [ "$status" -ne 0 ]; then
             {
