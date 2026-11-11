@@ -165,8 +165,11 @@ class MCPTests(unittest.TestCase):
         result = self.run_raw(b"\n".join(lines) + b"\n")
         self.assertEqual(result.returncode, 0, result.stderr)
         responses = [json.loads(line) for line in result.stdout.splitlines()]
-        self.assertEqual([r["error"]["code"] for r in responses[:-1]],
-                         [-32700, -32600, -32600, -32600, -32602, -32700, -32700, -32700])
+        self.assertEqual([r["error"]["code"] for r in responses[:7]],
+                         [-32700, -32600, -32600, -32600, -32602, -32700, -32700])
+        # JSON nesting limits vary by Python version: the deep array may be
+        # rejected by the decoder or decoded and rejected as a non-request.
+        self.assertIn(responses[7]["error"]["code"], (-32700, -32600))
         self.assertEqual(responses[4]["id"], 7)
         self.assertEqual(responses[-1]["id"], "after")
         self.assertEqual(responses[-1]["result"], {})
