@@ -38,7 +38,7 @@ func build_catalog(addons_dir: String = "res://addons") -> Array:
 		var cfg := addons_dir.path_join(name).path_join("plugin.cfg")
 		if not FileAccess.file_exists(cfg):
 			continue
-		var title := name
+		var title: String = str(name)
 		var desc := ""
 		for line in FileAccess.get_file_as_string(cfg).split("\n"):
 			if line.begins_with("name="):

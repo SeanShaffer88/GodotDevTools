@@ -60,6 +60,30 @@ jobs:
       - name: Show Godot version
         run: '".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64" --headless --version'
 
+      # These suites exercise the new addons before the long full gate. A
+      # dependent GDScript parse/runtime error can otherwise leave SceneTree
+      # running indefinitely, so bound each invocation and surface its log.
+      - name: Preflight new addon suites
+        shell: bash
+        run: |
+          set +e
+          failed=0
+          for suite in tfd fxe spm cvg dka aoc; do
+            log="$RUNNER_TEMP/preflight-$suite.log"
+            timeout 30s ".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64" --headless --path . --script "res://tests/test_$suite.gd" > "$log" 2>&1
+            status=$?
+            cat "$log"
+            if [ "$status" -ne 0 ]; then
+              failed=1
+              message=$(tail -60 "$log")
+              message=${message//'%'/'%25'}
+              message=${message//$'\n'/'%0A'}
+              message=${message//$'\r'/'%0D'}
+              echo "::error title=Preflight $suite failed (exit $status)::$message"
+            fi
+          done
+          exit "$failed"
+
       - name: Run full gate
         shell: bash
         run: |
@@ -122,7 +146,19 @@ jobs:
         run: sh tests/game/run_live_game.sh "$PWD/.godot-bin/Godot_v4.3-stable_linux.x86_64"
 
       - name: Editor session (every dock, real clicks)
-        run: sh tests/editor/run_editor_session.sh "$PWD/.godot-bin/Godot_v4.3-stable_linux.x86_64" "$RUNNER_TEMP/edsess"
+        shell: bash
+        run: |
+          set +e
+          sh tests/editor/run_editor_session.sh "$PWD/.godot-bin/Godot_v4.3-stable_linux.x86_64" "$RUNNER_TEMP/edsess" 2>&1 | tee editor-session.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            message=$(tail -100 editor-session.log)
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=Editor session failed::$message"
+          fi
+          exit "$status"
 
       - name: Upload session evidence
         if: always()
