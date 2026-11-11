@@ -191,7 +191,7 @@ Scored from evidence that runs in CI. The test gate runs on Godot 4.3-stable and
 | Dock tooltip/focus/run-action audit | dock_a11y core + test_docks focus check | Gate and general editor session passed in CI; source audit is heuristic |
 | Windows gate + sessions | windows-gpu.yml | Passed on hosted CI; hardware-GPU and hands-on use still unverified |
 | MCP server (stdlib stdio) + VSCode SARIF | mcp/, editors/vscode/ | Initialization and tool-list smoke-tested; Godot-backed calls and VS Code integration unverified |
-| Docker image + standalone naming subset | Dockerfile, tools/gdt, tools/standalone | Image help and Python fixture tests passed; standalone/Godot CLI naming parity passed on Linux 4.3/4.5, experimental 4.4/4.6, and Windows 4.3 CI. Mounted-project Docker runs remain unverified. |
+| Docker image + standalone naming subset | Dockerfile, tools/gdt, tools/standalone | Image help and Python fixture tests passed; standalone/Godot CLI naming parity passed on Linux 4.3/4.5, experimental 4.4/4.6, and Windows 4.3 CI. A mounted-project smoke is configured in `tests/docker_smoke.py`; its assertions passed with a host stand-in and a minimal source-built Godot 4.3 template, not a real container. Check a CI run containing the new smoke step for Docker evidence. |
 | Asset Library metadata generation | tools/assetlib/ | Verified (generator output committed in assetlib/) |
 | Dogfood harness + false-positive log | tests/dogfood/, docs/DOGFOOD.md | Four scanners completed on pinned Brackeys and platformer projects in Godot 4.5 CI; sample review confirmed sidecar false positives. Full adjudication, a measured false-positive rate and production-scale dogfooding remain outstanding. |
 

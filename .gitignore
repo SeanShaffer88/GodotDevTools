@@ -4,3 +4,5 @@ visual_reports/
 *.zip
 .godot-bin/
 *.translation
+__pycache__/
+*.py[cod]
