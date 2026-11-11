@@ -1,0 +1,12 @@
+{
+  "asset_name": "Store Asset Validator",
+  "folder": "store_assets",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Check store icons, headers and screenshots against a profile you write: required files, exact or allowed sizes, and screenshot counts.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-store_assets-1.2.0.zip",
+  "readme": "addons/store_assets/README.md"
+}

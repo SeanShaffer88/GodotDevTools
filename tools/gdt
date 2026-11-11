@@ -1,0 +1,17 @@
+#!/bin/sh
+# gdt - GodotDevTools wrapper. Works inside the Docker image (godot in PATH)
+# and on any machine with a Godot binary (set GODOT_BIN).
+# Usage:
+#   gdt gate                          # full gate: sh tests/run_tests.sh
+#   gdt run <tool> [args...]          # run one tool CLI via suite_dispatcher
+#   gdt list                          # list tools
+#   gdt --help
+set -e
+GODOT="${GODOT_BIN:-godot}"
+case "${1:-}" in
+  gate) shift; exec sh tests/run_tests.sh "$GODOT" "$@" ;;
+  list) exec "$GODOT" --headless --path . --script res://addons/suite_dispatcher/cli/gdt_cli.gd -- list ;;
+  run) shift; tool="$1"; shift; exec "$GODOT" --headless --path . --script res://addons/suite_dispatcher/cli/gdt_cli.gd -- run "$tool" "$@" ;;
+  --help|-h|"") echo "gdt gate | gdt list | gdt run <tool> [args...]"; echo "Docker: docker build -t godot-dev-tools . && docker run --rm -v \$PWD:/work godot-dev-tools gate" ;;
+  *) echo "Unknown command: $1" >&2; exit 1 ;;
+esac

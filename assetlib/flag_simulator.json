@@ -1,0 +1,12 @@
+{
+  "asset_name": "Feature Flag and Rollout Simulator",
+  "folder": "flag_simulator",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Simulate offline feature flag rollouts and prerequisites.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-flag_simulator-1.1.0.zip",
+  "readme": "addons/flag_simulator/README.md"
+}

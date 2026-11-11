@@ -1,0 +1,12 @@
+{
+  "asset_name": "Smart Prefab and Variant Instance Manager",
+  "folder": "prefab_guard",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Classify prefab instance overrides, expose drift and generate rollback plans that only --apply ever writes.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-prefab_guard-1.1.0.zip",
+  "readme": "addons/prefab_guard/README.md"
+}

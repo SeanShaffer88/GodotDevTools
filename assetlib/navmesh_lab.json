@@ -1,0 +1,12 @@
+{
+  "asset_name": "Navigation Mesh Diagnostic Lab",
+  "folder": "navmesh_lab",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Find disconnected regions, narrow passages and unreachable or off-mesh targets in a baked 2D navigation polygon.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-navmesh_lab-1.2.0.zip",
+  "readme": "addons/navmesh_lab/README.md"
+}

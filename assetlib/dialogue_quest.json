@@ -1,0 +1,12 @@
+{
+  "asset_name": "Dialogue and Quest Debugger",
+  "folder": "dialogue_quest",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Show dialogue branches and quest dependencies as a graph, simulate choices, and inspect which conditions activate.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-dialogue_quest-1.1.0.zip",
+  "readme": "addons/dialogue_quest/README.md"
+}

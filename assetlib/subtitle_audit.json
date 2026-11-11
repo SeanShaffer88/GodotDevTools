@@ -1,0 +1,12 @@
+{
+  "asset_name": "Subtitle Timing and Readability Auditor",
+  "folder": "subtitle_audit",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Audit subtitle timing, reading speed and speaker labels.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-subtitle_audit-1.1.0.zip",
+  "readme": "addons/subtitle_audit/README.md"
+}

@@ -18,7 +18,7 @@ Overall: gate green = shippable, with the limitations stated in README.md; unrel
 
 ## Status (2026-10-31)
 
-There are 133 addons, each with its own test suite. All 110 roadmap entries are checked; see ROADMAP.md for what a check requires. CI runs three kinds of evidence on every PR:
+There are 138 addons, each with its own test suite. All 110 roadmap entries are checked; see ROADMAP.md for what a check requires. CI runs three kinds of evidence on every PR:
 
 - **Gate** (`sh tests/run_tests.sh`, on Godot 4.3 and 4.5): every suite, CLI smoke test and exit-code-2 gate, plus the dock smoke suite. The dock smoke suite builds all 133 docks, checks every control's tooltip and runs each dock's action.
 - **Real-editor session** (`tests/editor/run_editor_session.sh`, Godot 4.3, Xvfb, Mesa llvmpipe):
@@ -26,18 +26,20 @@ There are 133 addons, each with its own test suite. All 110 roadmap entries are 
   - a test plugin brings each dock to the front, clicks its run button with real mouse events, and checks that output appears;
   - it takes a screenshot of each dock;
   - for Macro Recorder, it opens a scene, clicks Preview, and records an Inspector edit.
-  All 133 docks pass.
+  All 133 pre-expansion docks passed in the historical run; the expanded 138-dock session has not yet passed.
 - **Live-game session** (`tests/game/run_live_game.sh`): the 16 runtime nodes run in a windowed game with real frames, physics and input events, for 19 checks. A further check confirms that the subtitle layout measure matches a rendered Label. All 20 checks pass.
   - The live session found a real defect: `seed_replay`'s `randi_range`/`randf_range` called the engine's unseeded global `randf()`, so seeded replays diverged. It is fixed and covered by a regression test.
 
 ## Verification status
 
-- Verified:
-  - all core operations, CLI reports and CI gates on Godot 4.3-stable and 4.5-stable (Linux);
-  - every editor dock in a real editor session;
-  - every runtime node in a live game session.
+- Verified in the historical baseline:
+  - the pre-expansion core operations, CLI reports and CI gates on Godot 4.3-stable and 4.5-stable (Linux);
+  - the 133 pre-expansion editor docks in a real editor session;
+  - the existing runtime nodes in a live game session.
+  The five new addons and the expanded gate are not yet verified.
   The two sessions run on Linux with software OpenGL; the clicks are synthetic mouse events delivered through the editor's own viewport.
 - Partially Verified:
-  - Four editor interactions are not automated: the capture runner's live viewport pass, the painted dialogue graph, the responsive-UI preview panes, and whitebox snapping of a live selection. Their docks do pass the editor session.
+  - The capture runner's live viewport pass and painted dialogue graph are not specifically automated; their general dock actions were exercised in the historical editor session.
+  - Responsive UI visual preview panes and whitebox live-selection snapping are not implemented.
   - Estimator outputs are estimates, not measurements: thermal_sim device constants, batch_profiler draw calls, and Asset Health's per-platform GPU texture memory. Their comparative use is tested; real-device truth is not claimable here.
-- Unverified: hands-on use on Windows with a GPU, timings on a real (non-synthetic) project, and Godot versions other than 4.3 and 4.5.
+- Unverified: the expanded suite and Windows workflow, hands-on use on Windows with a hardware GPU, timings on a real (non-synthetic) project, and Godot versions other than 4.3 and 4.5. See `docs/WINDOWS_GPU.md` and `docs/DOGFOOD.md`.

@@ -208,6 +208,19 @@ godot --headless --path . --script res://addons/network_sim/cli/mns_cli.gd -- \
   --latency=5 --jitter=1 --loss=0.1 --disconnect=60-90 --fail-on=packet_loss
 ```
 
+### Post-roadmap CLIs (2026-11-11)
+
+| CLI | Options |
+|---|---|
+| `tool_finder/cli/tfd_cli.gd` | `--query=<text>` `--out` `--fail-on=no_match` |
+| `fix_engine/cli/fxe_cli.gd` | `--report=<json>` `--apply` `--backup-dir` `--out` `--fail-on=no_safe_fix,apply_failed` |
+| `suite_presets/cli/spm_cli.gd` | `--preset=full,ci_only,mobile_perf,content,testing` `--project` `--apply` `--out` `--fail-on=unknown_preset` |
+| `coverage_gate/cli/cvg_cli.gd` | `--dir` `--tests` `--min-percent` `--out` `--fail-on=below_threshold` |
+| `dock_a11y/cli/dka_cli.gd` | `--dir` `--out` `--fail-on=missing_tooltip,missing_run_action,keyboard_focus_unverified` |
+| `a11y_options/cli/aoc_cli.gd` (updated) | adds `--cache=<file>` for incremental rescans |
+
+Non-GDScript entry points: Docker `gdt gate|list|run <tool>` (`tools/gdt`, `Dockerfile`), MCP `python3 mcp/mcp_server.py` (`run_<tool>` per catalog tool), standalone `python3 tools/standalone/standalone.py naming --dir=...`, docs catalog `python3 tools/docs_site/generate.py`, Asset Library `python3 tools/assetlib/generate_assetlib.py`, coverage trend `python3 tools/coverage/coverage_trend.py <report.json>`.
+
 ### In the editor
 
 Enable a plugin under **Project -> Project Settings -> Plugins**; its dock

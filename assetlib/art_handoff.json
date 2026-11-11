@@ -1,0 +1,12 @@
+{
+  "asset_name": "Art-to-Engine Handoff Validator",
+  "folder": "art_handoff",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Check glTF/GLB exports for unapplied scale, implausible sizes, default material and animation names, missing UVs and unknown import suffixes.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-art_handoff-1.2.0.zip",
+  "readme": "addons/art_handoff/README.md"
+}

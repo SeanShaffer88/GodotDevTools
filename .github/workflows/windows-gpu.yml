@@ -1,0 +1,107 @@
+name: Windows + GPU verification
+
+# Runs the full gate and windowed sessions on Windows. Hosted runners do not
+# guarantee a hardware GPU; a green CI run cannot replace hands-on GPU use.
+# See docs/WINDOWS_GPU.md for verification status.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-gpu-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate-windows:
+    name: Gate on Windows (Godot 4.3)
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Download Godot 4.3-stable (Windows)
+        shell: bash
+        run: |
+          mkdir -p .godot-bin
+          curl -fsSL -o .godot-bin/godot.zip "https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_win64.exe.zip"
+          unzip -q .godot-bin/godot.zip -d .godot-bin
+          rm .godot-bin/godot.zip
+          ls .godot-bin/
+      - name: Show Godot version
+        shell: bash
+        run: ".godot-bin/Godot_v4.3-stable_win64_console.exe --headless --version || .godot-bin/Godot_v4.3-stable_win64.exe --headless --version"
+      - name: Run full gate (Windows)
+        shell: bash
+        run: |
+          set +e
+          GODOT_BIN=$(ls .godot-bin/*console*.exe 2>/dev/null || ls .godot-bin/*.exe | head -n 1)
+          echo "Using $GODOT_BIN"
+          timeout 900 sh tests/run_tests.sh "$GODOT_BIN" 2>&1 | tee gate-windows.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            tail -100 gate-windows.log >> "$GITHUB_STEP_SUMMARY"
+            message=$(tail -20 gate-windows.log)
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=Windows gate failed (exit $status)::$message"
+          fi
+          exit "$status"
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: reports-windows-gpu
+          path: |
+            reports/
+            visual_reports/
+          if-no-files-found: ignore
+
+  sessions-windows:
+    name: Editor and live-game sessions on Windows (GPU)
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Download Godot 4.3-stable (Windows)
+        shell: bash
+        run: |
+          mkdir -p .godot-bin
+          curl -fsSL -o .godot-bin/godot.zip "https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_win64.exe.zip"
+          unzip -q .godot-bin/godot.zip -d .godot-bin
+          rm .godot-bin/godot.zip
+      - name: Live game session (runtime nodes, GPU)
+        shell: bash
+        run: |
+          GODOT_BIN=$(ls .godot-bin/*console*.exe 2>/dev/null || ls .godot-bin/*.exe | head -n 1)
+          "$GODOT_BIN" --headless --path . --import --quit-after 5 >/dev/null 2>&1 || true
+          timeout 600 "$GODOT_BIN" --path . --rendering-driver opengl3 res://tests/game/live_game.tscn
+          test -s reports/live_game/live_game.json
+      - name: Editor session (every dock, real clicks, GPU)
+        shell: bash
+        run: |
+          set +e
+          GODOT_BIN=$(ls .godot-bin/*console*.exe 2>/dev/null || ls .godot-bin/*.exe | head -n 1)
+          sh tests/editor/run_editor_session.sh "$GODOT_BIN" "$RUNNER_TEMP/edsess-windows" 2>&1 | tee editor-windows.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            message=$(tail -15 editor-windows.log)
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=Windows editor session failed (exit $status)::$message"
+          fi
+          exit "$status"
+      - name: Upload session evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: session-evidence-windows
+          path: |
+            reports/live_game/
+          if-no-files-found: ignore

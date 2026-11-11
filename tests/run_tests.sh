@@ -17,9 +17,21 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp smc pcw ssg npd aeh gsb crp scr pbt rlf pfl ppa ocn eam docks; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp smc pcw ssg npd aeh gsb crp scr pbt rlf pfl ppa ocn eam tfd fxe spm cvg dka docks; do
   echo "== test_$t =="
-  "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
+  # A GDScript error in _init can leave SceneTree alive forever. Fail the
+  # offending suite promptly rather than timing out the entire CI job.
+  if command -v timeout >/dev/null 2>&1; then
+    if timeout "${GDT_TEST_TIMEOUT:-60}s" "$GODOT" --headless --path . --script "res://tests/test_$t.gd"; then
+      :
+    else
+      status=$?
+      echo "FAIL: test_$t exited $status (timeout limit ${GDT_TEST_TIMEOUT:-60}s)"
+      exit "$status"
+    fi
+  else
+    "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
+  fi
 done
 echo "== CLI smoke: scene search =="
 "$GODOT" --headless --path . --script res://addons/scene_search/cli/nlss_cli.gd -- --query="show scenes with a door interaction"
@@ -85,8 +97,17 @@ gate "seed replay must exit 2 on the tampered log" \
   res://addons/seed_replay/cli/sdr_cli.gd -- --log=res://demo/seeds/tampered_log.json --fail-on=mismatch
 gate "whitebox must exit 2 on the off-grid fixture" \
   res://addons/whitebox/cli/wbx_cli.gd -- --fail-on=off_grid,steep_slope
-gate "vfs mock must exit 2 on the case collision" \
-  res://addons/vfs_mock/cli/vfm_cli.gd -- --fail-on=case_collision
+gate "vfs mock must exit 2 on a non-portable path" \
+  res://addons/vfs_mock/cli/vfm_cli.gd -- --fail-on=backslash_path
+# The checkout can only contain both fixtures on a case-sensitive filesystem.
+# The in-memory collision detector is tested on every platform in test_vfm.gd.
+case_fixture_count=$(find demo/vfs -maxdepth 1 -type f | awk '/\/(Save\.JSON|save\.json)$/ {n++} END {print n+0}')
+if [ "$case_fixture_count" -eq 2 ]; then
+  gate "vfs mock must exit 2 on the case collision" \
+    res://addons/vfs_mock/cli/vfm_cli.gd -- --fail-on=case_collision
+else
+  echo "SKIP: filesystem cannot represent both case-collision fixtures"
+fi
 gate "tilemap rules must exit 2 on the asymmetric rule" \
   res://addons/tilemap_rules/cli/tmr_cli.gd -- --fail-on=asymmetric_rule
 echo "== CLI smoke: test runner plans the real suite =="
@@ -360,4 +381,49 @@ gate "offline harness flags the unhandled score request" \
   res://addons/offline_harness/cli/ocn_cli.gd -- --dir=res://demo/privacy --fail-on=unhandled_result
 gate "macro preview reports the unmatched step" \
   res://addons/macro_recorder/cli/eam_cli.gd -- --macro=res://demo/macros/center_labels.json --scene=res://demo/workflow/drift/menu.tscn --fail-on=step_unmatched
+
+echo "== CLI smoke: tool finder =="
+"$GODOT" --headless --path . --script res://addons/tool_finder/cli/tfd_cli.gd -- --query="my game lags on mobile"
+test -s reports/tool_finder/tool_finder.json
+gate "tool finder must exit 2 on no match" \
+  res://addons/tool_finder/cli/tfd_cli.gd -- --query="zzzzqqqq" --fail-on=no_match
+echo "== CLI smoke: fix engine preview =="
+"$GODOT" --headless --path . --script res://addons/fix_engine/cli/fxe_cli.gd -- --report=res://demo/fix_engine/report.json
+test -s reports/fix_engine/fix_engine.json
+gate "fix engine must exit 2 on no_safe_fix" \
+  res://addons/fix_engine/cli/fxe_cli.gd -- --report=res://demo/fix_engine/report.json --fail-on=no_safe_fix
+echo "== CLI smoke: suite presets =="
+"$GODOT" --headless --path . --script res://addons/suite_presets/cli/spm_cli.gd -- --preset=mobile_perf
+test -s reports/suite_presets/suite_presets.json
+if "$GODOT" --headless --path . --script res://addons/suite_presets/cli/spm_cli.gd -- --preset=nope --fail-on=unknown_preset; then echo "FAIL: expected exit 1"; exit 1; else [ $? -eq 1 ] || { echo "FAIL: expected exit 1"; exit 1; }; fi
+# Exercise apply on a disposable file, including preservation of the original backup.
+mkdir -p reports/suite_presets/apply_test/addons/report_schema reports/suite_presets/apply_test/addons/tool_finder
+: > reports/suite_presets/apply_test/addons/report_schema/plugin.cfg
+: > reports/suite_presets/apply_test/addons/tool_finder/plugin.cfg
+preset_file="$PWD/reports/suite_presets/apply_test/project.godot"
+preset_arg="res://reports/suite_presets/apply_test/project.godot"
+printf '[editor_plugins]\r\n; keep comment\r\nenabled = PackedStringArray("old")\r\n[rendering]\r\n' > "$preset_file"
+rm -f "$preset_file.bak"
+cp "$preset_file" "$preset_file.expected"
+"$GODOT" --headless --path . --script res://addons/suite_presets/cli/spm_cli.gd -- --preset=ci_only --project="$preset_arg" --apply
+cmp "$preset_file.expected" "$preset_file.bak"
+grep -q 'report_schema' "$preset_file"
+if grep -q 'tool_finder' "$preset_file"; then echo "FAIL: non-preset addon enabled"; exit 1; fi
+cp "$preset_file" "$preset_file.applied"
+if "$GODOT" --headless --path . --script res://addons/suite_presets/cli/spm_cli.gd -- --preset=full --project="$preset_arg" --apply; then echo "FAIL: existing backup was overwritten"; exit 1; else [ $? -eq 1 ] || { echo "FAIL: expected backup refusal"; exit 1; }; fi
+cmp "$preset_file.expected" "$preset_file.bak"
+cmp "$preset_file.applied" "$preset_file"
+echo "== CLI smoke: coverage gate =="
+"$GODOT" --headless --path . --script res://addons/coverage_gate/cli/cvg_cli.gd -- --dir=res://demo/coverage_gate --tests=res://demo/coverage_gate_tests --min-percent=0
+test -s reports/coverage_gate/coverage_gate.json
+gate "coverage gate must exit 2 below threshold" \
+  res://addons/coverage_gate/cli/cvg_cli.gd -- --dir=res://demo/coverage_gate --tests=res://demo/coverage_gate_tests --min-percent=99 --fail-on=below_threshold
+echo "== CLI smoke: dock a11y =="
+"$GODOT" --headless --path . --script res://addons/dock_a11y/cli/dka_cli.gd -- --dir=res://demo/dock_a11y
+test -s reports/dock_a11y/dock_a11y.json
+gate "dock a11y must exit 2 on missing tooltip" \
+  res://addons/dock_a11y/cli/dka_cli.gd -- --dir=res://demo/dock_a11y --fail-on=missing_tooltip
+echo "== CLI smoke: a11y options incremental cache =="
+"$GODOT" --headless --path . --script res://addons/a11y_options/cli/aoc_cli.gd -- --dir=res://demo/shipping --cache=res://reports/a11y_options/cache.json
+test -s reports/a11y_options/cache.json
 echo "ALL GATE CHECKS PASSED"

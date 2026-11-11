@@ -27,9 +27,9 @@ func run(input: String = "res://addons", options: Dictionary = {}) -> Dictionary
                 if f.ends_with("_cli.gd") and cli == "":
                     cli = base.path_join("cli").path_join(f)
         var title := name
-        for line in FileAccess.get_file_as_string(base.path_join("plugin.cfg")).split("\n"):
-            if line.begins_with("name="):
-                title = line.trim_prefix("name=").trim_prefix("\"").trim_suffix("\"")
+        var config := ConfigFile.new()
+        if config.load(base.path_join("plugin.cfg")) == OK:
+            title = str(config.get_value("plugin", "name", name))
         if cli == "":
             issues.append(_issue("info", "missing_cli", base, 0, "%s has no cli/*_cli.gd." % title, "Only tools with a headless CLI can be dispatched."))
             continue

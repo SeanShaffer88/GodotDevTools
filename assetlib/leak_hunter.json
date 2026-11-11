@@ -1,0 +1,12 @@
+{
+  "asset_name": "Memory Leak and Orphan Node Hunter",
+  "folder": "leak_hunter",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Static scan for orphan-node patterns, RefCounted reference circles and signal holds; counts real orphans at runtime.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-leak_hunter-1.1.0.zip",
+  "readme": "addons/leak_hunter/README.md"
+}

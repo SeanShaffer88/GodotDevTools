@@ -1,0 +1,12 @@
+{
+  "asset_name": "Audio Import Settings Auditor",
+  "folder": "audio_import",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Check audio import settings against each clip's role and length: looping music, non-looping effects, long uncompressed WAVs.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-audio_import-1.2.0.zip",
+  "readme": "addons/audio_import/README.md"
+}

@@ -1,0 +1,1385 @@
+{
+  "count": 138,
+  "tools": [
+    {
+      "id": "a11y_options",
+      "title": "Accessibility Options Coverage",
+      "description": "Look for evidence of expected player accessibility options (subtitles, remapping, text size, colour-blind modes, reduced motion, mono audio, hold/toggle) in project files.",
+      "version": "1.2.0",
+      "folder": "addons/a11y_options",
+      "readme": "addons/a11y_options/README.md",
+      "cli": "addons/a11y_options/cli/aoc_cli.gd",
+      "summary": "Look for evidence of expected player accessibility options (subtitles, remapping, text size, colour-blind modes, reduced motion, mono audio, hold/toggle) in project files. Enable the addon in Project "
+    },
+    {
+      "id": "ability_sim",
+      "title": "Gameplay Ability Simulator",
+      "description": "Simulate an ability priority rotation with costs, cooldowns, cast times and resource regeneration; report casts, damage per second and starved time.",
+      "version": "1.2.0",
+      "folder": "addons/ability_sim",
+      "readme": "addons/ability_sim/README.md",
+      "cli": "addons/ability_sim/cli/gas_cli.gd",
+      "summary": "Simulate an ability priority rotation with costs, cooldowns, cast times and resource regeneration; report casts, damage per second and starved time. Enable the addon in Project Settings \u2192 Plugins and "
+    },
+    {
+      "id": "accessibility",
+      "title": "Automated Accessibility Checker",
+      "description": "Detect tiny text, low contrast, missing keyboard navigation and controls that rely only on colour.",
+      "version": "1.1.0",
+      "folder": "addons/accessibility",
+      "readme": "addons/accessibility/README.md",
+      "cli": "addons/accessibility/cli/a11y_cli.gd",
+      "summary": "Detect tiny text, low contrast, missing keyboard navigation and controls that rely only on colour."
+    },
+    {
+      "id": "achievements",
+      "title": "Achievement Reachability Checker",
+      "description": "Check achievement unlock conditions against the events and stats the game declares, including thresholds above stat caps and dependency cycles.",
+      "version": "1.2.0",
+      "folder": "addons/achievements",
+      "readme": "addons/achievements/README.md",
+      "cli": "addons/achievements/cli/ach_cli.gd",
+      "summary": "Check achievement unlock conditions against the events and stats the game declares, including thresholds above stat caps and dependency cycles. Enable the addon in Project Settings \u2192 Plugins and use *"
+    },
+    {
+      "id": "ai_perception",
+      "title": "AI Perception Debugger",
+      "description": "Evaluate sight and hearing for AI agents in a 2D scenario with walls, trace every decision, and check expected outcomes.",
+      "version": "1.2.0",
+      "folder": "addons/ai_perception",
+      "readme": "addons/ai_perception/README.md",
+      "cli": "addons/ai_perception/cli/aip_cli.gd",
+      "summary": "Evaluate sight and hearing for AI agents in a 2D scenario with walls, trace every decision, and check expected outcomes. Enable the addon in Project Settings \u2192 Plugins and use **Evaluate perception** "
+    },
+    {
+      "id": "android_permissions",
+      "title": "Android Permissions Reviewer",
+      "description": "List the permissions each Android export preset requests, flag commonly sensitive ones for review, and check each has a written justification.",
+      "version": "1.2.0",
+      "folder": "addons/android_permissions",
+      "readme": "addons/android_permissions/README.md",
+      "cli": "addons/android_permissions/cli/apr_cli.gd",
+      "summary": "List the permissions each Android export preset requests, flag commonly sensitive ones for review, and check each has a written justification. Enable the addon in Project Settings \u2192 Plugins and use **"
+    },
+    {
+      "id": "anim_audit",
+      "title": "Animation Performance Auditor",
+      "description": "Find constant animation tracks, redundant keys, duplicate keys at the same time and animations with too many tracks.",
+      "version": "1.2.0",
+      "folder": "addons/anim_audit",
+      "readme": "addons/anim_audit/README.md",
+      "cli": "addons/anim_audit/cli/apa_cli.gd",
+      "summary": "Find constant animation tracks, redundant keys, duplicate keys at the same time and animations with too many tracks. Enable the addon in Project Settings \u2192 Plugins and use **Audit animations** in the "
+    },
+    {
+      "id": "art_handoff",
+      "title": "Art-to-Engine Handoff Validator",
+      "description": "Check glTF/GLB exports for unapplied scale, implausible sizes, default material and animation names, missing UVs and unknown import suffixes.",
+      "version": "1.2.0",
+      "folder": "addons/art_handoff",
+      "readme": "addons/art_handoff/README.md",
+      "cli": "addons/art_handoff/cli/aeh_cli.gd",
+      "summary": "Check glTF/GLB exports for unapplied scale, implausible sizes, default material and animation names, missing UVs and unknown import suffixes. Enable the addon in Project Settings \u2192 Plugins and use **V"
+    },
+    {
+      "id": "asset_health",
+      "title": "Asset Health Dashboard",
+      "description": "Find oversized textures, duplicate files, unused resources, import-setting inconsistencies and assets that may hurt loading times.",
+      "version": "1.1.0",
+      "folder": "addons/asset_health",
+      "readme": "addons/asset_health/README.md",
+      "cli": "addons/asset_health/cli/ahd_cli.gd",
+      "summary": "Find oversized textures, duplicate files, unused resources, import-setting inconsistencies and assets that may hurt loading times."
+    },
+    {
+      "id": "atlas_planner",
+      "title": "Texture Atlas Packing Planner",
+      "description": "Shelf-pack sprite sizes into atlas pages and report page count, waste and sprites that cannot fit.",
+      "version": "1.2.0",
+      "folder": "addons/atlas_planner",
+      "readme": "addons/atlas_planner/README.md",
+      "cli": "addons/atlas_planner/cli/atp_cli.gd",
+      "summary": "Shelf-pack sprite sizes into atlas pages and report page count, waste and sprites that cannot fit. Enable the addon in Project Settings \u2192 Plugins and use **Plan atlas** in the **Atlas Planner** dock."
+    },
+    {
+      "id": "audio_import",
+      "title": "Audio Import Settings Auditor",
+      "description": "Check audio import settings against each clip's role and length: looping music, non-looping effects, long uncompressed WAVs.",
+      "version": "1.2.0",
+      "folder": "addons/audio_import",
+      "readme": "addons/audio_import/README.md",
+      "cli": "addons/audio_import/cli/aia_cli.gd",
+      "summary": "Check audio import settings against each clip's role and length: looping music, non-looping effects, long uncompressed WAVs. Enable the addon in Project Settings \u2192 Plugins and use **Audit audio import"
+    },
+    {
+      "id": "audio_levels",
+      "title": "Audio Loudness and Clipping Auditor",
+      "description": "Read WAV files sample by sample: peak and RMS level in dBFS, clipped samples, DC offset and sample-rate mismatches.",
+      "version": "1.2.0",
+      "folder": "addons/audio_levels",
+      "readme": "addons/audio_levels/README.md",
+      "cli": "addons/audio_levels/cli/ala_cli.gd",
+      "summary": "Read WAV files sample by sample: peak and RMS level in dBFS, clipped samples, DC offset and sample-rate mismatches. Enable the addon in Project Settings \u2192 Plugins and use **Measure audio levels** in t"
+    },
+    {
+      "id": "audio_sandbox",
+      "title": "Audio Bus and Dynamic Mixing Sandbox",
+      "description": "Simulate ducking, reverb zones and voice budgets from pure data and catch mixing designs that fight themselves.",
+      "version": "1.1.0",
+      "folder": "addons/audio_sandbox",
+      "readme": "addons/audio_sandbox/README.md",
+      "cli": "addons/audio_sandbox/cli/aud_cli.gd",
+      "summary": "Simulate ducking, reverb zones and voice budgets from pure data on a fixed 10 ms clock, and catch mixing designs that fight themselves."
+    },
+    {
+      "id": "autoload_graph",
+      "title": "Autoload Dependency Graph",
+      "description": "Map which autoloads reference which, flag reference cycles, missing scripts and early references to autoloads declared later.",
+      "version": "1.2.0",
+      "folder": "addons/autoload_graph",
+      "readme": "addons/autoload_graph/README.md",
+      "cli": "addons/autoload_graph/cli/alg_cli.gd",
+      "summary": "Map which autoloads reference which, flag reference cycles, missing scripts and early references to autoloads declared later. Enable the addon in Project Settings \u2192 Plugins and use **Map autoloads** i"
+    },
+    {
+      "id": "batch_profiler",
+      "title": "Draw Call and Batching Profiler",
+      "description": "Find 2D draw-call breakers: material switches, z-index interleaving and light passes in your scenes.",
+      "version": "1.1.0",
+      "folder": "addons/batch_profiler",
+      "readme": "addons/batch_profiler/README.md",
+      "cli": "addons/batch_profiler/cli/dbp_cli.gd",
+      "summary": "Find 2D draw-call breakers: material switches, z-index interleaving and light passes in your scenes."
+    },
+    {
+      "id": "bench_harness",
+      "title": "Micro-Benchmark Harness",
+      "description": "Time every bench_* method of a benchmark script with warm-up and repeated runs; write median/p95 results the Performance Regression Gate can read.",
+      "version": "1.2.0",
+      "folder": "addons/bench_harness",
+      "readme": "addons/bench_harness/README.md",
+      "cli": "addons/bench_harness/cli/mbh_cli.gd",
+      "summary": "Time every bench_* method of a benchmark script with warm-up and repeated runs; write median/p95 results the Performance Regression Gate can read. Enable the addon in Project Settings \u2192 Plugins and us"
+    },
+    {
+      "id": "bt_debugger",
+      "title": "Behaviour Tree and State Machine Debugger",
+      "description": "Validate and run JSON behaviour definitions with a full decision trace; live agents share the same interpreter.",
+      "version": "1.1.0",
+      "folder": "addons/bt_debugger",
+      "readme": "addons/bt_debugger/README.md",
+      "cli": "addons/bt_debugger/cli/btd_cli.gd",
+      "summary": "Validate and run JSON behaviour definitions (selector/sequence trees, guarded transitions, blackboards) with a full decision trace."
+    },
+    {
+      "id": "build_size",
+      "title": "Build Size Attribution Explorer",
+      "description": "Inspect actual file sizes in a staged build directory.",
+      "version": "1.1.0",
+      "folder": "addons/build_size",
+      "readme": "addons/build_size/README.md",
+      "cli": "addons/build_size/cli/bs_cli.gd",
+      "summary": "Inspect the actual on-disk sizes of files in an **unpacked/staged build directory**, grouped by top-level folder and file extension. Enable the addon and enter a directory in the dock, or run:"
+    },
+    {
+      "id": "camera_orch",
+      "title": "Camera Shake, Transition and Framing Orchestrator",
+      "description": "Seeded deterministic shake, ease-curve transitions and deadzone framing maths with config validation.",
+      "version": "1.1.0",
+      "folder": "addons/camera_orch",
+      "readme": "addons/camera_orch/README.md",
+      "cli": "addons/camera_orch/cli/cor_cli.gd",
+      "summary": "Seeded deterministic camera shake, ease-curve transitions and deadzone framing maths, with config validation and preview samples."
+    },
+    {
+      "id": "cert_check",
+      "title": "Platform Certification Checklist Runner",
+      "description": "Offline Platform Certification Checklist Runner checks.",
+      "version": "1.1.0",
+      "folder": "addons/cert_check",
+      "readme": "addons/cert_check/README.md",
+      "cli": "addons/cert_check/cli/cert_cli.gd",
+      "summary": "Compare a **user-maintained** requirements profile against recorded review results. This tool does not provide official platform requirements, execute compliance tests, verify evidence, or certify a g"
+    },
+    {
+      "id": "cleanup_workbench",
+      "title": "Project Cleanup Workbench",
+      "description": "Collect cleanup candidates for review: unreferenced assets, duplicate files, stale .import and .uid sidecars, empty folders. Never deletes.",
+      "version": "1.2.0",
+      "folder": "addons/cleanup_workbench",
+      "readme": "addons/cleanup_workbench/README.md",
+      "cli": "addons/cleanup_workbench/cli/pcw_cli.gd",
+      "summary": "Collect cleanup candidates for review: unreferenced assets, duplicate files, stale .import and .uid sidecars, empty folders. Never deletes. Enable the addon in Project Settings \u2192 Plugins and use **Col"
+    },
+    {
+      "id": "collision_matrix",
+      "title": "Physics Collision Matrix Visualizer",
+      "description": "See who collides with whom: build the layer and mask matrix, flag all-vs-all bodies and redundant raycast layers.",
+      "version": "1.1.0",
+      "folder": "addons/collision_matrix",
+      "readme": "addons/collision_matrix/README.md",
+      "cli": "addons/collision_matrix/cli/cmv_cli.gd",
+      "summary": "See who collides with whom: build the layer and mask matrix from Project Settings and scene text, and flag all-vs-all bodies, redundant raycast layers and bits nobody uses."
+    },
+    {
+      "id": "colorvision",
+      "title": "Color-Vision and Contrast Previewer",
+      "description": "Simulate protanopia, deuteranopia and tritanopia for a palette and flag colour pairs that become hard to tell apart.",
+      "version": "1.2.0",
+      "folder": "addons/colorvision",
+      "readme": "addons/colorvision/README.md",
+      "cli": "addons/colorvision/cli/cvp_cli.gd",
+      "summary": "Simulate protanopia, deuteranopia and tritanopia for a palette and flag colour pairs that become hard to tell apart. Enable the addon in Project Settings \u2192 Plugins and use **Simulate colour vision** i"
+    },
+    {
+      "id": "content_descriptor",
+      "title": "Content Descriptor Checklist",
+      "description": "Track your own content questionnaire: unanswered questions, answers outside the allowed options, missing evidence and stale reviews.",
+      "version": "1.2.0",
+      "folder": "addons/content_descriptor",
+      "readme": "addons/content_descriptor/README.md",
+      "cli": "addons/content_descriptor/cli/cdc_cli.gd",
+      "summary": "Track your own content questionnaire: unanswered questions, answers outside the allowed options, missing evidence and stale reviews. Enable the addon in Project Settings \u2192 Plugins and use **Check ques"
+    },
+    {
+      "id": "controller_course",
+      "title": "Character Controller Test Course",
+      "description": "Check a platformer controller's tuning against a course of ledges, gaps and slopes using projectile kinematics.",
+      "version": "1.2.0",
+      "folder": "addons/controller_course",
+      "readme": "addons/controller_course/README.md",
+      "cli": "addons/controller_course/cli/cct_cli.gd",
+      "summary": "Check a platformer controller's tuning against a course of ledges, gaps and slopes using projectile kinematics. Enable the addon in Project Settings \u2192 Plugins and use **Run the course** in the **Contr"
+    },
+    {
+      "id": "controller_glyphs",
+      "title": "Controller Glyph and Prompt Validator",
+      "description": "Check that every action referenced in prompt text exists, is bound for each device family, and has a glyph image for each device.",
+      "version": "1.2.0",
+      "folder": "addons/controller_glyphs",
+      "readme": "addons/controller_glyphs/README.md",
+      "cli": "addons/controller_glyphs/cli/cgp_cli.gd",
+      "summary": "Check that every action referenced in prompt text exists, is bound for each device family, and has a glyph image for each device. Enable the addon in Project Settings \u2192 Plugins and use **Validate prom"
+    },
+    {
+      "id": "coverage_gate",
+      "title": "Coverage Gate",
+      "description": "Estimate GDScript coverage from test evidence and gate CI on a minimum percent.",
+      "version": "1.0.0",
+      "folder": "addons/coverage_gate",
+      "readme": "addons/coverage_gate/README.md",
+      "cli": "addons/coverage_gate/cli/cvg_cli.gd",
+      "summary": "Estimate GDScript coverage from test evidence and gate CI on a minimum percent. Enable the addon, enter a folder, and select **Estimate coverage**."
+    },
+    {
+      "id": "crafting_graph",
+      "title": "Crafting and Inventory Graph Validator",
+      "description": "Find unobtainable goals, inputs nothing produces, recipes that can only bootstrap themselves, and dead-end items.",
+      "version": "1.2.0",
+      "folder": "addons/crafting_graph",
+      "readme": "addons/crafting_graph/README.md",
+      "cli": "addons/crafting_graph/cli/cgv_cli.gd",
+      "summary": "Find unobtainable goals, inputs nothing produces, recipes that can only bootstrap themselves, and dead-end items. Enable the addon in Project Settings \u2192 Plugins and use **Validate crafting** in the **"
+    },
+    {
+      "id": "crash_packager",
+      "title": "Crash and Error Reproduction Packager",
+      "description": "Bundle a redacted log, engine and system details and reproduction steps into one local package for a bug report. Nothing is uploaded.",
+      "version": "1.2.0",
+      "folder": "addons/crash_packager",
+      "readme": "addons/crash_packager/README.md",
+      "cli": "addons/crash_packager/cli/crp_cli.gd",
+      "summary": "Bundle a redacted log, engine and system details and reproduction steps into one local package for a bug report. Nothing is uploaded. Enable the addon in Project Settings \u2192 Plugins and use **Build pac"
+    },
+    {
+      "id": "damage_sandbox",
+      "title": "Damage Formula Sandbox",
+      "description": "Evaluate a damage formula over every combination of stat values and flag negatives, overflows and non-monotonic results.",
+      "version": "1.2.0",
+      "folder": "addons/damage_sandbox",
+      "readme": "addons/damage_sandbox/README.md",
+      "cli": "addons/damage_sandbox/cli/dfs_cli.gd",
+      "summary": "Evaluate a damage formula over every combination of stat values and flag negatives, overflows and non-monotonic results. Enable the addon in Project Settings \u2192 Plugins and use **Evaluate formula** in "
+    },
+    {
+      "id": "dialogue_quest",
+      "title": "Dialogue and Quest Debugger",
+      "description": "Show dialogue branches and quest dependencies as a graph, simulate choices, and inspect which conditions activate.",
+      "version": "1.1.0",
+      "folder": "addons/dialogue_quest",
+      "readme": "addons/dialogue_quest/README.md",
+      "cli": "addons/dialogue_quest/cli/dqd_cli.gd",
+      "summary": "Show dialogue branches and quest dependencies as a graph, simulate choices, and inspect which conditions activate."
+    },
+    {
+      "id": "dialogue_vars",
+      "title": "Dialogue Variable Lint",
+      "description": "Find dialogue variables that conditions read but nothing sets, and variables effects set but nothing reads.",
+      "version": "1.2.0",
+      "folder": "addons/dialogue_vars",
+      "readme": "addons/dialogue_vars/README.md",
+      "cli": "addons/dialogue_vars/cli/dvl_cli.gd",
+      "summary": "Find dialogue variables that conditions read but nothing sets, and variables effects set but nothing reads. Enable the addon in Project Settings \u2192 Plugins and use **Lint dialogue variables** in the **"
+    },
+    {
+      "id": "difficulty_curve",
+      "title": "Difficulty Curve Analyzer",
+      "description": "Compare enemy power with player power level by level and flag spikes, dips and impossible stretches.",
+      "version": "1.2.0",
+      "folder": "addons/difficulty_curve",
+      "readme": "addons/difficulty_curve/README.md",
+      "cli": "addons/difficulty_curve/cli/dca_cli.gd",
+      "summary": "Compare enemy power with player power level by level and flag spikes, dips and impossible stretches. Enable the addon in Project Settings \u2192 Plugins and use **Analyze difficulty** in the **Difficulty C"
+    },
+    {
+      "id": "doc_gen",
+      "title": "Automated Documentation Generator for GDScript",
+      "description": "Parse doc comments, signals, exports and functions into Markdown and HTML; report undocumented public API.",
+      "version": "1.1.0",
+      "folder": "addons/doc_gen",
+      "readme": "addons/doc_gen/README.md",
+      "cli": "addons/doc_gen/cli/dcg_cli.gd",
+      "summary": "Parse ## doc comments, signals, exports and functions from GDScript into Markdown and dependency-free HTML, reporting undocumented public API."
+    },
+    {
+      "id": "dock_a11y",
+      "title": "Dock Accessibility Audit",
+      "description": "Audit editor docks themselves: tooltips, keyboard focus, run action and help text.",
+      "version": "1.0.0",
+      "folder": "addons/dock_a11y",
+      "readme": "addons/dock_a11y/README.md",
+      "cli": "addons/dock_a11y/cli/dka_cli.gd",
+      "summary": "Audit the editor docks themselves \u2014 tooltips, keyboard focus, run action and help text \u2014 instead of only auditing games. Enable the addon, enter a folder, and select **Audit docks**."
+    },
+    {
+      "id": "duplicate_code",
+      "title": "Duplicate Code Detector",
+      "description": "Find repeated blocks of GDScript across files after normalizing whitespace and comments.",
+      "version": "1.2.0",
+      "folder": "addons/duplicate_code",
+      "readme": "addons/duplicate_code/README.md",
+      "cli": "addons/duplicate_code/cli/dup_cli.gd",
+      "summary": "Find repeated blocks of GDScript across files after normalizing whitespace and comments. Enable the addon in Project Settings \u2192 Plugins and use **Find duplicate code** in the **Duplicate Code** dock."
+    },
+    {
+      "id": "env_cost",
+      "title": "Environment Feature Cost Matrix",
+      "description": "List the post-processing and GI features each Environment enables, with relative cost tiers and renderer support.",
+      "version": "1.2.0",
+      "folder": "addons/env_cost",
+      "readme": "addons/env_cost/README.md",
+      "cli": "addons/env_cost/cli/ecm_cli.gd",
+      "summary": "List the post-processing and GI features each Environment enables, with relative cost tiers and renderer support. Enable the addon in Project Settings \u2192 Plugins and use **Build environment matrix** in"
+    },
+    {
+      "id": "export_doctor",
+      "title": "Build and Export Doctor",
+      "description": "Diagnose export failures and configuration mistakes, explain likely causes, and suggest targeted fixes before a release build.",
+      "version": "1.1.0",
+      "folder": "addons/export_doctor",
+      "readme": "addons/export_doctor/README.md",
+      "cli": "addons/export_doctor/cli/bed_cli.gd",
+      "summary": "Diagnose export failures and configuration mistakes, explain likely causes, and suggest targeted fixes before a release build."
+    },
+    {
+      "id": "export_ranges",
+      "title": "Export Variable Range Auditor",
+      "description": "Check @export_range limits against script defaults and the values scenes store, and list numeric exports with no range hint.",
+      "version": "1.2.0",
+      "folder": "addons/export_ranges",
+      "readme": "addons/export_ranges/README.md",
+      "cli": "addons/export_ranges/cli/era_cli.gd",
+      "summary": "Check @export_range limits against script defaults and the values scenes store, and list numeric exports with no range hint. Enable the addon in Project Settings \u2192 Plugins and use **Audit export range"
+    },
+    {
+      "id": "fix_engine",
+      "title": "Fix Engine",
+      "description": "Preview safe fixes from tool reports; apply only with explicit opt-in and a backup.",
+      "version": "1.0.0",
+      "folder": "addons/fix_engine",
+      "readme": "addons/fix_engine/README.md",
+      "cli": "addons/fix_engine/cli/fxe_cli.gd",
+      "summary": "Preview safe fixes from any tool report, and apply them only with explicit opt-in. Enable the addon, point the dock at a report JSON, and select **Preview fixes**."
+    },
+    {
+      "id": "flag_simulator",
+      "title": "Feature Flag and Rollout Simulator",
+      "description": "Simulate offline feature flag rollouts and prerequisites.",
+      "version": "1.1.0",
+      "folder": "addons/flag_simulator",
+      "readme": "addons/flag_simulator/README.md",
+      "cli": "addons/flag_simulator/cli/flag_cli.gd",
+      "summary": "Simulate flag combinations offline with a synthetic subject identifier. Enable the addon and run the dock, or use:"
+    },
+    {
+      "id": "flaky_tests",
+      "title": "Flaky Test Detector",
+      "description": "Read a history of test runs (JUnit XML or JSON) and find tests that both pass and fail on the same commit, flip often, or always fail.",
+      "version": "1.2.0",
+      "folder": "addons/flaky_tests",
+      "readme": "addons/flaky_tests/README.md",
+      "cli": "addons/flaky_tests/cli/flk_cli.gd",
+      "summary": "Read a history of test runs (JUnit XML or JSON) and find tests that both pass and fail on the same commit, flip often, or always fail. Enable the addon in Project Settings \u2192 Plugins and use **Find fla"
+    },
+    {
+      "id": "font_glyphs",
+      "title": "Font Glyph Coverage Checker",
+      "description": "Check every character used in translation CSV/PO files against a font's cmap table, per locale.",
+      "version": "1.2.0",
+      "folder": "addons/font_glyphs",
+      "readme": "addons/font_glyphs/README.md",
+      "cli": "addons/font_glyphs/cli/fgc_cli.gd",
+      "summary": "Check every character used in translation CSV/PO files against a font's cmap table, per locale. Enable the addon in Project Settings \u2192 Plugins and use **Check glyph coverage** in the **Font Glyphs** d"
+    },
+    {
+      "id": "frame_spikes",
+      "title": "Frame-Time Spike Investigator",
+      "description": "Find frame-time spikes in a recorded frame log and correlate each with markers, node-count jumps and physics time; includes a runtime recorder.",
+      "version": "1.2.0",
+      "folder": "addons/frame_spikes",
+      "readme": "addons/frame_spikes/README.md",
+      "cli": "addons/frame_spikes/cli/fts_cli.gd",
+      "summary": "Find frame-time spikes in a recorded frame log and correlate each with markers, node-count jumps and physics time; includes a runtime recorder. Enable the addon in Project Settings \u2192 Plugins and use *"
+    },
+    {
+      "id": "golden_snapshot",
+      "title": "Golden Data Snapshot Tester",
+      "description": "Compare JSON outputs with approved golden files and report differences by JSON path, with a float tolerance.",
+      "version": "1.2.0",
+      "folder": "addons/golden_snapshot",
+      "readme": "addons/golden_snapshot/README.md",
+      "cli": "addons/golden_snapshot/cli/gst_cli.gd",
+      "summary": "Compare JSON outputs with approved golden files and report differences by JSON path, with a float tolerance. Enable the addon in Project Settings \u2192 Plugins and use **Compare with goldens** in the **Go"
+    },
+    {
+      "id": "handheld_readiness",
+      "title": "Handheld Readiness Checklist",
+      "description": "Check a project for small handheld screens and gamepad-only play: stretch mode, text size at the target height, gamepad bindings and focusable buttons.",
+      "version": "1.2.0",
+      "folder": "addons/handheld_readiness",
+      "readme": "addons/handheld_readiness/README.md",
+      "cli": "addons/handheld_readiness/cli/hrc_cli.gd",
+      "summary": "Check a project for small handheld screens and gamepad-only play: stretch mode, text size at the target height, gamepad bindings and focusable buttons. Enable the addon in Project Settings \u2192 Plugins a"
+    },
+    {
+      "id": "hitbox_timeline",
+      "title": "Hitbox and Hurtbox Timeline Viewer",
+      "description": "Build per-animation timelines of when hitbox and hurtbox shapes are active from animation tracks, and flag windows left open or too short for physics to see.",
+      "version": "1.2.0",
+      "folder": "addons/hitbox_timeline",
+      "readme": "addons/hitbox_timeline/README.md",
+      "cli": "addons/hitbox_timeline/cli/hht_cli.gd",
+      "summary": "Build per-animation timelines of when hitbox and hurtbox shapes are active from animation tracks, and flag windows left open or too short for physics to see. Enable the addon in Project Settings \u2192 Plu"
+    },
+    {
+      "id": "html_dashboard",
+      "title": "Static HTML Dashboard",
+      "description": "Build one self-contained offline HTML page summarizing every tool report in a folder.",
+      "version": "1.2.0",
+      "folder": "addons/html_dashboard",
+      "readme": "addons/html_dashboard/README.md",
+      "cli": "addons/html_dashboard/cli/hdb_cli.gd",
+      "summary": "Build one self-contained offline HTML page summarizing every tool report in a folder. Enable the addon in Project Settings \u2192 Plugins and use **Build dashboard summary** in the **HTML Dashboard** dock."
+    },
+    {
+      "id": "input_fuzzer",
+      "title": "Input Sequence Fuzzer",
+      "description": "Generate seeded, bounded input-action sequences from the project's InputMap, and replay them in game with a runtime player node.",
+      "version": "1.2.0",
+      "folder": "addons/input_fuzzer",
+      "readme": "addons/input_fuzzer/README.md",
+      "cli": "addons/input_fuzzer/cli/isf_cli.gd",
+      "summary": "Generate seeded, bounded input-action sequences from the project's InputMap, and replay them in game with a runtime player node. Enable the addon in Project Settings \u2192 Plugins and use **Generate seque"
+    },
+    {
+      "id": "input_matrix",
+      "title": "Multi-Platform Input Matrix and Rebinding Suite",
+      "description": "Matrix of actions against devices, binding collisions, gamepad coverage gaps and generated remap-menu data.",
+      "version": "1.1.0",
+      "folder": "addons/input_matrix",
+      "readme": "addons/input_matrix/README.md",
+      "cli": "addons/input_matrix/cli/imx_cli.gd",
+      "summary": "Matrix of actions against keyboard, mouse, gamepad and touch, with binding collisions, coverage gaps and generated remap-menu data."
+    },
+    {
+      "id": "interaction_reach",
+      "title": "Interaction Reachability Checker",
+      "description": "Check that every interactable's trigger area overlaps navmesh the player can walk to from the start point.",
+      "version": "1.2.0",
+      "folder": "addons/interaction_reach",
+      "readme": "addons/interaction_reach/README.md",
+      "cli": "addons/interaction_reach/cli/irc_cli.gd",
+      "summary": "Check that every interactable's trigger area overlaps navmesh the player can walk to from the start point. Enable the addon in Project Settings \u2192 Plugins and use **Check interactions** in the **Intera"
+    },
+    {
+      "id": "junit_export",
+      "title": "JUnit Exporter",
+      "description": "Convert every tool report in a folder into one JUnit XML file so CI test views show tool findings as failures.",
+      "version": "1.2.0",
+      "folder": "addons/junit_export",
+      "readme": "addons/junit_export/README.md",
+      "cli": "addons/junit_export/cli/jux_cli.gd",
+      "summary": "Convert every tool report in a folder into one JUnit XML file so CI test views show tool findings as failures. Enable the addon in Project Settings \u2192 Plugins and use **Build JUnit summary** in the **J"
+    },
+    {
+      "id": "l10n_matrix",
+      "title": "Localization Matrix and In-Context Previewer",
+      "description": "Key-by-locale completeness, overflow-risk lengths, plural-rule checks and orphan translation keys.",
+      "version": "1.1.0",
+      "folder": "addons/l10n_matrix",
+      "readme": "addons/l10n_matrix/README.md",
+      "cli": "addons/l10n_matrix/cli/lmx_cli.gd",
+      "summary": "Key-by-locale completeness matrix, overflow-risk lengths, plural-rule checks, orphan tr() keys and unused table entries."
+    },
+    {
+      "id": "leak_hunter",
+      "title": "Memory Leak and Orphan Node Hunter",
+      "description": "Static scan for orphan-node patterns, RefCounted reference circles and signal holds; counts real orphans at runtime.",
+      "version": "1.1.0",
+      "folder": "addons/leak_hunter",
+      "readme": "addons/leak_hunter/README.md",
+      "cli": "addons/leak_hunter/cli/mlh_cli.gd",
+      "summary": "Static scan for orphan-node patterns, RefCounted reference circles and signal holds; the runtime watcher counts real orphans in a live session."
+    },
+    {
+      "id": "lifecycle",
+      "title": "Pause, Focus, and Lifecycle Tester",
+      "description": "Work out which scripted nodes keep running while the game is paused, catch pause menus that freeze themselves, and flag missing focus/suspend handling and wall-clock timers.",
+      "version": "1.2.0",
+      "folder": "addons/lifecycle",
+      "readme": "addons/lifecycle/README.md",
+      "cli": "addons/lifecycle/cli/pfl_cli.gd",
+      "summary": "Work out which scripted nodes keep running while the game is paused, catch pause menus that freeze themselves, and flag missing focus/suspend handling and wall-clock timers. Enable the addon in Projec"
+    },
+    {
+      "id": "light_cost",
+      "title": "3D Light and Shadow Cost Estimator",
+      "description": "Count 3D lights and shadow-casting lights per scene, following instanced scenes, against budgets.",
+      "version": "1.2.0",
+      "folder": "addons/light_cost",
+      "readme": "addons/light_cost/README.md",
+      "cli": "addons/light_cost/cli/lsc_cli.gd",
+      "summary": "Count 3D lights and shadow-casting lights per scene, following instanced scenes, against budgets. Enable the addon in Project Settings \u2192 Plugins and use **Estimate light cost** in the **Light Cost** d"
+    },
+    {
+      "id": "load_failure",
+      "title": "Resource Load Failure Simulator",
+      "description": "Find runtime load() calls whose result is used without a null check, chained load().instantiate() calls, missing literal paths and threaded loads without a status check.",
+      "version": "1.2.0",
+      "folder": "addons/load_failure",
+      "readme": "addons/load_failure/README.md",
+      "cli": "addons/load_failure/cli/rlf_cli.gd",
+      "summary": "Find runtime load() calls whose result is used without a null check, chained load().instantiate() calls, missing literal paths and threaded loads without a status check. Enable the addon in Project Se"
+    },
+    {
+      "id": "load_profiler",
+      "title": "Startup and Scene-Load Profiler",
+      "description": "Time how long each scene takes to load and instantiate in this process, with dependency and node counts, against budgets.",
+      "version": "1.2.0",
+      "folder": "addons/load_profiler",
+      "readme": "addons/load_profiler/README.md",
+      "cli": "addons/load_profiler/cli/slp_cli.gd",
+      "summary": "Time how long each scene takes to load and instantiate in this process, with dependency and node counts, against budgets. Enable the addon in Project Settings \u2192 Plugins and use **Profile scene loads**"
+    },
+    {
+      "id": "lod_planner",
+      "title": "LOD and Visibility Range Planner",
+      "description": "Find invalid visibility ranges, heavy instanced meshes with no visibility range, and glTF imports with LOD generation turned off.",
+      "version": "1.2.0",
+      "folder": "addons/lod_planner",
+      "readme": "addons/lod_planner/README.md",
+      "cli": "addons/lod_planner/cli/lod_cli.gd",
+      "summary": "Find invalid visibility ranges, heavy instanced meshes with no visibility range, and glTF imports with LOD generation turned off. Enable the addon in Project Settings \u2192 Plugins and use **Plan LODs** i"
+    },
+    {
+      "id": "log_budget",
+      "title": "Log Warning Budget Gate",
+      "description": "Gate a captured Godot log on error and warning counts and on signatures not present in a committed baseline.",
+      "version": "1.2.0",
+      "folder": "addons/log_budget",
+      "readme": "addons/log_budget/README.md",
+      "cli": "addons/log_budget/cli/lbg_cli.gd",
+      "summary": "Gate a captured Godot log on error and warning counts and on signatures not present in a committed baseline. Enable the addon in Project Settings \u2192 Plugins and use **Check log budget** in the **Log Bu"
+    },
+    {
+      "id": "log_grouper",
+      "title": "Error Log Grouper",
+      "description": "Group Godot error and warning lines from a captured log by normalized signature and count them.",
+      "version": "1.2.0",
+      "folder": "addons/log_grouper",
+      "readme": "addons/log_grouper/README.md",
+      "cli": "addons/log_grouper/cli/lgr_cli.gd",
+      "summary": "Group Godot error and warning lines from a captured log by normalized signature and count them. Enable the addon in Project Settings \u2192 Plugins and use **Group log messages** in the **Log Grouper** doc"
+    },
+    {
+      "id": "loot_sim",
+      "title": "Loot Table and Economy Simulator",
+      "description": "Simulate weighted loot tables with a fixed seed: drop odds, expected value per open, observed rates and worst-case droughts.",
+      "version": "1.2.0",
+      "folder": "addons/loot_sim",
+      "readme": "addons/loot_sim/README.md",
+      "cli": "addons/loot_sim/cli/lts_cli.gd",
+      "summary": "Simulate weighted loot tables with a fixed seed: drop odds, expected value per open, observed rates and worst-case droughts. Enable the addon in Project Settings \u2192 Plugins and use **Simulate loot** in"
+    },
+    {
+      "id": "macro_recorder",
+      "title": "Editor Action Macro Recorder",
+      "description": "Record Inspector property edits in the editor as a macro, preview what it would change in any scene, and apply it from the command line with an explicit flag.",
+      "version": "1.2.0",
+      "folder": "addons/macro_recorder",
+      "readme": "addons/macro_recorder/README.md",
+      "cli": "addons/macro_recorder/cli/eam_cli.gd",
+      "summary": "Record Inspector property edits in the editor as a macro, preview what it would change in any scene, and apply it from the command line with an explicit flag. Enable the addon in Project Settings \u2192 Pl"
+    },
+    {
+      "id": "merge_conflicts",
+      "title": "Scene Merge Conflict Assistant",
+      "description": "Find git conflict markers in scenes, resources and project files and explain each conflict by section, node and property. Never edits files.",
+      "version": "1.2.0",
+      "folder": "addons/merge_conflicts",
+      "readme": "addons/merge_conflicts/README.md",
+      "cli": "addons/merge_conflicts/cli/smc_cli.gd",
+      "summary": "Find git conflict markers in scenes, resources and project files and explain each conflict by section, node and property. Never edits files. Enable the addon in Project Settings \u2192 Plugins and use **Ex"
+    },
+    {
+      "id": "mesh_stats",
+      "title": "Mesh Statistics Report",
+      "description": "Read glTF/GLB files and report triangles, vertices, primitives and materials per file against budgets.",
+      "version": "1.2.0",
+      "folder": "addons/mesh_stats",
+      "readme": "addons/mesh_stats/README.md",
+      "cli": "addons/mesh_stats/cli/msr_cli.gd",
+      "summary": "Read glTF/GLB files and report triangles, vertices, primitives and materials per file against budgets. Enable the addon in Project Settings \u2192 Plugins and use **Report mesh stats** in the **Mesh Stats*"
+    },
+    {
+      "id": "mutation_tester",
+      "title": "GDScript Mutation Tester",
+      "description": "Mutate comparison and boolean operators in one GDScript file and run its test against each mutant in an isolated copy; report mutants the test does not catch.",
+      "version": "1.2.0",
+      "folder": "addons/mutation_tester",
+      "readme": "addons/mutation_tester/README.md",
+      "cli": "addons/mutation_tester/cli/gmt_cli.gd",
+      "summary": "Mutate comparison and boolean operators in one GDScript file and run its test against each mutant in an isolated copy; report mutants the test does not catch. Enable the addon in Project Settings \u2192 Pl"
+    },
+    {
+      "id": "naming_conventions",
+      "title": "Naming and Folder Convention Enforcer",
+      "description": "Audit file and folder names against a configurable pattern.",
+      "version": "1.1.0",
+      "folder": "addons/naming_conventions",
+      "readme": "addons/naming_conventions/README.md",
+      "cli": "addons/naming_conventions/cli/nc_cli.gd",
+      "summary": "A read-only audit of file basenames and directory names against a configurable Godot regular expression. Enable the addon in Project Settings \u2192 Plugins, enter a directory and pattern in the dock, and "
+    },
+    {
+      "id": "navmesh_lab",
+      "title": "Navigation Mesh Diagnostic Lab",
+      "description": "Find disconnected regions, narrow passages and unreachable or off-mesh targets in a baked 2D navigation polygon.",
+      "version": "1.2.0",
+      "folder": "addons/navmesh_lab",
+      "readme": "addons/navmesh_lab/README.md",
+      "cli": "addons/navmesh_lab/cli/nml_cli.gd",
+      "summary": "Find disconnected regions, narrow passages and unreachable or off-mesh targets in a baked 2D navigation polygon. Enable the addon in Project Settings \u2192 Plugins and use **Diagnose navmesh** in the **Na"
+    },
+    {
+      "id": "network_sim",
+      "title": "Multiplayer Network Simulator",
+      "description": "Add configurable latency, packet loss and disconnects to local multiplayer testing, with tools to inspect synchronisation issues.",
+      "version": "1.1.0",
+      "folder": "addons/network_sim",
+      "readme": "addons/network_sim/README.md",
+      "cli": "addons/network_sim/cli/mns_cli.gd",
+      "summary": "Add configurable latency, packet loss and disconnects to local multiplayer testing, with tools to inspect synchronisation issues."
+    },
+    {
+      "id": "node_paths",
+      "title": "Node Path Breakage Detector",
+      "description": "Check $Path, get_node() and %Unique references in scripts against the scenes the scripts are attached to.",
+      "version": "1.2.0",
+      "folder": "addons/node_paths",
+      "readme": "addons/node_paths/README.md",
+      "cli": "addons/node_paths/cli/npb_cli.gd",
+      "summary": "Check $Path, get_node() and %Unique references in scripts against the scenes the scripts are attached to. Enable the addon in Project Settings \u2192 Plugins and use **Check node paths** in the **Node Path"
+    },
+    {
+      "id": "offline_harness",
+      "title": "Offline and Poor-Connection Test Harness",
+      "description": "Find HTTP requests with no timeout or unchecked results, and simulate offline, timeout, slow and server-error responses in game with a seeded fault profile.",
+      "version": "1.2.0",
+      "folder": "addons/offline_harness",
+      "readme": "addons/offline_harness/README.md",
+      "cli": "addons/offline_harness/cli/ocn_cli.gd",
+      "summary": "Find HTTP requests with no timeout or unchecked results, and simulate offline, timeout, slow and server-error responses in game with a seeded fault profile. Enable the addon in Project Settings \u2192 Plug"
+    },
+    {
+      "id": "overdraw",
+      "title": "GPU Budget and Overdraw Analyzer",
+      "description": "Estimate 2D overdraw per scene from sprite and rect sizes clipped to the screen, and fill-rate at target resolutions.",
+      "version": "1.2.0",
+      "folder": "addons/overdraw",
+      "readme": "addons/overdraw/README.md",
+      "cli": "addons/overdraw/cli/gbo_cli.gd",
+      "summary": "Estimate 2D overdraw per scene from sprite and rect sizes clipped to the screen, and fill-rate at target resolutions. Enable the addon in Project Settings \u2192 Plugins and use **Estimate overdraw** in th"
+    },
+    {
+      "id": "palette_check",
+      "title": "Colour Palette Consistency Checker",
+      "description": "Compare every Color(...) and #hex colour in scenes, resources and scripts with an approved palette using CIE delta E.",
+      "version": "1.2.0",
+      "folder": "addons/palette_check",
+      "readme": "addons/palette_check/README.md",
+      "cli": "addons/palette_check/cli/pcc_cli.gd",
+      "summary": "Compare every Color(...) and #hex colour in scenes, resources and scripts with an approved palette using CIE delta E. Enable the addon in Project Settings \u2192 Plugins and use **Check palette** in the **"
+    },
+    {
+      "id": "particle_budget",
+      "title": "Particle Budget Inspector",
+      "description": "Total particle capacity per scene, including instanced children, against configurable budgets.",
+      "version": "1.2.0",
+      "folder": "addons/particle_budget",
+      "readme": "addons/particle_budget/README.md",
+      "cli": "addons/particle_budget/cli/pbi_cli.gd",
+      "summary": "Totals how many particles each scene could hold at once and flags emitters that blow a budget. Enable the addon in Project Settings \u2192 Plugins, set the scene and emitter budgets in the **Particle Budge"
+    },
+    {
+      "id": "patch_delta",
+      "title": "Patch Delta Estimator",
+      "description": "Compare two staged builds file by file (size and MD5) and estimate the bytes a patch must ship.",
+      "version": "1.2.0",
+      "folder": "addons/patch_delta",
+      "readme": "addons/patch_delta/README.md",
+      "cli": "addons/patch_delta/cli/pde_cli.gd",
+      "summary": "Compare two staged builds file by file (size and MD5) and estimate the bytes a patch must ship. Enable the addon in Project Settings \u2192 Plugins and use **Estimate patch** in the **Patch Delta** dock."
+    },
+    {
+      "id": "performance_gate",
+      "title": "Performance Regression Gate",
+      "description": "Compare benchmark measurements to reviewed baselines and noise tolerances.",
+      "version": "1.1.0",
+      "folder": "addons/performance_gate",
+      "readme": "addons/performance_gate/README.md",
+      "cli": "addons/performance_gate/cli/perf_cli.gd",
+      "summary": "Compare benchmark measurements against reviewed baselines. Enable the plugin and provide two JSON paths in the dock, or run:"
+    },
+    {
+      "id": "physics_jitter",
+      "title": "Physics Jitter and Tunneling Detector",
+      "description": "Find small rigid bodies without continuous collision detection, scripts that move rigid bodies directly, character movement in _process, and low physics tick rates.",
+      "version": "1.2.0",
+      "folder": "addons/physics_jitter",
+      "readme": "addons/physics_jitter/README.md",
+      "cli": "addons/physics_jitter/cli/pjt_cli.gd",
+      "summary": "Find small rigid bodies without continuous collision detection, scripts that move rigid bodies directly, character movement in _process, and low physics tick rates. Enable the addon in Project Setting"
+    },
+    {
+      "id": "pool_advisor",
+      "title": "Object Pool Advisor",
+      "description": "Find frequently spawned, short-lived scenes and rank them as object-pool candidates.",
+      "version": "1.2.0",
+      "folder": "addons/pool_advisor",
+      "readme": "addons/pool_advisor/README.md",
+      "cli": "addons/pool_advisor/cli/opa_cli.gd",
+      "summary": "Finds scenes that are spawned often and die young, and ranks them as object-pool candidates. Enable the addon in Project Settings \u2192 Plugins and press **Find pool candidates** in the **Pool Advisor** d"
+    },
+    {
+      "id": "precommit",
+      "title": "Pre-commit Hook Installer",
+      "description": "Generate an opt-in git pre-commit hook that runs chosen tool CLIs, and install or remove it without touching hooks it did not write.",
+      "version": "1.2.0",
+      "folder": "addons/precommit",
+      "readme": "addons/precommit/README.md",
+      "cli": "addons/precommit/cli/pch_cli.gd",
+      "summary": "Generate an opt-in git pre-commit hook that runs chosen tool CLIs, and install or remove it without touching hooks it did not write. Enable the addon in Project Settings \u2192 Plugins and use **Preview ho"
+    },
+    {
+      "id": "prefab_guard",
+      "title": "Smart Prefab and Variant Instance Manager",
+      "description": "Classify prefab instance overrides, expose drift and generate rollback plans that only --apply ever writes.",
+      "version": "1.1.0",
+      "folder": "addons/prefab_guard",
+      "readme": "addons/prefab_guard/README.md",
+      "cli": "addons/prefab_guard/cli/pfg_cli.gd",
+      "summary": "Classify prefab instance overrides, expose drift (dead and hiding), and generate rollback plans that only --apply ever writes."
+    },
+    {
+      "id": "privacy_audit",
+      "title": "Privacy and Permissions Auditor",
+      "description": "Inventory everything in a project that touches the network, device identifiers, the clipboard, the microphone or camera, or opens external links, for privacy review.",
+      "version": "1.2.0",
+      "folder": "addons/privacy_audit",
+      "readme": "addons/privacy_audit/README.md",
+      "cli": "addons/privacy_audit/cli/ppa_cli.gd",
+      "summary": "Inventory everything in a project that touches the network, device identifiers, the clipboard, the microphone or camera, or opens external links, for privacy review. Enable the addon in Project Settin"
+    },
+    {
+      "id": "proc_anim",
+      "title": "Procedural Animation Rigging Helper",
+      "description": "Two-bone IK, FABRIK, look-at, squash-and-stretch and foot-placement solvers, validated from a rig config.",
+      "version": "1.1.0",
+      "folder": "addons/proc_anim",
+      "readme": "addons/proc_anim/README.md",
+      "cli": "addons/proc_anim/cli/par_cli.gd",
+      "summary": "Two-bone IK, FABRIK, look-at, squash-and-stretch and foot-placement solvers, validated from a rig config and drivable from a live scene."
+    },
+    {
+      "id": "procgen_constraints",
+      "title": "Procedural Generation Constraint Tester",
+      "description": "Check generated grid layouts (one text map per seed) for an reachable exit, keys reachable before their doors, isolated pockets and dead-end share.",
+      "version": "1.2.0",
+      "folder": "addons/procgen_constraints",
+      "readme": "addons/procgen_constraints/README.md",
+      "cli": "addons/procgen_constraints/cli/pgc_cli.gd",
+      "summary": "Check generated grid layouts (one text map per seed) for an reachable exit, keys reachable before their doors, isolated pockets and dead-end share. Enable the addon in Project Settings \u2192 Plugins and u"
+    },
+    {
+      "id": "property_drift",
+      "title": "Node Property Drift Monitor",
+      "description": "Learn each node type's usual stored property values across scenes and flag the outliers that drift from the team convention, or check against a baseline file.",
+      "version": "1.2.0",
+      "folder": "addons/property_drift",
+      "readme": "addons/property_drift/README.md",
+      "cli": "addons/property_drift/cli/npd_cli.gd",
+      "summary": "Learn each node type's usual stored property values across scenes and flag the outliers that drift from the team convention, or check against a baseline file. Enable the addon in Project Settings \u2192 Pl"
+    },
+    {
+      "id": "property_tests",
+      "title": "Property-Based Gameplay Tester",
+      "description": "Generate many seeded inputs for pure GDScript functions, check stated properties, and shrink failures to a minimal counterexample.",
+      "version": "1.2.0",
+      "folder": "addons/property_tests",
+      "readme": "addons/property_tests/README.md",
+      "cli": "addons/property_tests/cli/pbt_cli.gd",
+      "summary": "Generate many seeded inputs for pure GDScript functions, check stated properties, and shrink failures to a minimal counterexample. Enable the addon in Project Settings \u2192 Plugins and use **Run property"
+    },
+    {
+      "id": "release_guard",
+      "title": "Demo-to-Release Content Guard",
+      "description": "Review configurable development markers before release.",
+      "version": "1.1.0",
+      "folder": "addons/release_guard",
+      "readme": "addons/release_guard/README.md",
+      "cli": "addons/release_guard/cli/rg_cli.gd",
+      "summary": "Review development content before a release. Enable the addon in Project Settings \u2192 Plugins and use **Scan development markers**. The dock scans text files under `res://` for the case-sensitive marker"
+    },
+    {
+      "id": "release_notes",
+      "title": "Release Notes Generator",
+      "description": "Group conventional-commit subjects into a draft changelog section: breaking changes, features, fixes, performance and other.",
+      "version": "1.2.0",
+      "folder": "addons/release_notes",
+      "readme": "addons/release_notes/README.md",
+      "cli": "addons/release_notes/cli/rln_cli.gd",
+      "summary": "Group conventional-commit subjects into a draft changelog section: breaking changes, features, fixes, performance and other. Enable the addon in Project Settings \u2192 Plugins and use **Draft release note"
+    },
+    {
+      "id": "render_compat",
+      "title": "Rendering Settings Compatibility Matrix",
+      "description": "List rendering nodes and environment features a project uses and flag those the chosen renderer does not implement, from an editable matrix.",
+      "version": "1.2.0",
+      "folder": "addons/render_compat",
+      "readme": "addons/render_compat/README.md",
+      "cli": "addons/render_compat/cli/rcm_cli.gd",
+      "summary": "List rendering nodes and environment features a project uses and flag those the chosen renderer does not implement, from an editable matrix. Enable the addon in Project Settings \u2192 Plugins and use **Ch"
+    },
+    {
+      "id": "report_diff",
+      "title": "Report Diff",
+      "description": "Compare two report folders and list new, fixed and unchanged findings, matching findings even when their line moved.",
+      "version": "1.2.0",
+      "folder": "addons/report_diff",
+      "readme": "addons/report_diff/README.md",
+      "cli": "addons/report_diff/cli/rdf_cli.gd",
+      "summary": "Compare two report folders and list new, fixed and unchanged findings, matching findings even when their line moved. Enable the addon in Project Settings \u2192 Plugins and use **Diff reports** in the **Re"
+    },
+    {
+      "id": "report_schema",
+      "title": "Report Schema",
+      "description": "The documented JSON shape every tool report follows, and a validator that checks report folders against it.",
+      "version": "1.2.0",
+      "folder": "addons/report_schema",
+      "readme": "addons/report_schema/README.md",
+      "cli": "addons/report_schema/cli/rsv_cli.gd",
+      "summary": "The documented JSON shape every tool report follows, and a validator that checks report folders against it. Enable the addon in Project Settings \u2192 Plugins and use **Validate reports** in the **Report "
+    },
+    {
+      "id": "responsive_ui",
+      "title": "Responsive UI Previewer",
+      "description": "Preview a UI across common screen sizes, aspect ratios, safe areas and stretch settings, directly inside the editor.",
+      "version": "1.1.0",
+      "folder": "addons/responsive_ui",
+      "readme": "addons/responsive_ui/README.md",
+      "cli": "addons/responsive_ui/cli/ruip_cli.gd",
+      "summary": "Preview a UI across common screen sizes, aspect ratios, safe areas and stretch settings, directly inside the editor."
+    },
+    {
+      "id": "rng_fairness",
+      "title": "Random Table Fairness Tester",
+      "description": "Chi-square goodness-of-fit test of recorded outcome counts against a weighted table's intended odds.",
+      "version": "1.2.0",
+      "folder": "addons/rng_fairness",
+      "readme": "addons/rng_fairness/README.md",
+      "cli": "addons/rng_fairness/cli/rft_cli.gd",
+      "summary": "Chi-square goodness-of-fit test of recorded outcome counts against a weighted table's intended odds. Enable the addon in Project Settings \u2192 Plugins and use **Test fairness** in the **RNG Fairness** do"
+    },
+    {
+      "id": "sarif_export",
+      "title": "SARIF Exporter",
+      "description": "Convert every tool report in a folder into one SARIF 2.1.0 log for code-scanning views.",
+      "version": "1.2.0",
+      "folder": "addons/sarif_export",
+      "readme": "addons/sarif_export/README.md",
+      "cli": "addons/sarif_export/cli/srf_cli.gd",
+      "summary": "Convert every tool report in a folder into one SARIF 2.1.0 log for code-scanning views. Enable the addon in Project Settings \u2192 Plugins and use **Build SARIF summary** in the **SARIF Export** dock."
+    },
+    {
+      "id": "save_bloat",
+      "title": "Save File Bloat Auditor",
+      "description": "Measure JSON save files by key, find keys that dominate the file, and track key growth across ordered sample saves.",
+      "version": "1.2.0",
+      "folder": "addons/save_bloat",
+      "readme": "addons/save_bloat/README.md",
+      "cli": "addons/save_bloat/cli/sba_cli.gd",
+      "summary": "Measure JSON save files by key, find keys that dominate the file, and track key growth across ordered sample saves. Enable the addon in Project Settings \u2192 Plugins and use **Audit saves** in the **Save"
+    },
+    {
+      "id": "save_corruption",
+      "title": "Save Corruption and Recovery Tester",
+      "description": "Feed systematically corrupted versions of a sample save to your loader and check it falls back safely instead of accepting bad data.",
+      "version": "1.2.0",
+      "folder": "addons/save_corruption",
+      "readme": "addons/save_corruption/README.md",
+      "cli": "addons/save_corruption/cli/scr_cli.gd",
+      "summary": "Feed systematically corrupted versions of a sample save to your loader and check it falls back safely instead of accepting bad data. Enable the addon in Project Settings \u2192 Plugins and use **Corrupt an"
+    },
+    {
+      "id": "scenario_tests",
+      "title": "Gameplay Scenario Test Builder",
+      "description": "Write repeatable gameplay scenarios as JSON steps (wait, press/release actions, call methods, set properties, assert values) and run them headless.",
+      "version": "1.2.0",
+      "folder": "addons/scenario_tests",
+      "readme": "addons/scenario_tests/README.md",
+      "cli": "addons/scenario_tests/cli/gsb_cli.gd",
+      "summary": "Write repeatable gameplay scenarios as JSON steps (wait, press/release actions, call methods, set properties, assert values) and run them headless. Enable the addon in Project Settings \u2192 Plugins and u"
+    },
+    {
+      "id": "scene_dependency",
+      "title": "Scene Dependency Map",
+      "description": "Visualize static dependencies and flag missing references, cycles and unused candidates.",
+      "version": "1.1.0",
+      "folder": "addons/scene_dependency",
+      "readme": "addons/scene_dependency/README.md",
+      "cli": "addons/scene_dependency/cli/sdm_cli.gd",
+      "summary": "A read-only static map of scene, script, shader, resource and asset references. Enable **Scene Dependency Map** in Project Settings \u2192 Plugins, then press **Scan dependencies** in the dock. Expand a fi"
+    },
+    {
+      "id": "scene_lint",
+      "title": "Scene Lint Rule Engine",
+      "description": "Check scenes against user-defined JSON rules: required child types, forbidden or required properties, and node-name patterns.",
+      "version": "1.2.0",
+      "folder": "addons/scene_lint",
+      "readme": "addons/scene_lint/README.md",
+      "cli": "addons/scene_lint/cli/slr_cli.gd",
+      "summary": "Check scenes against user-defined JSON rules: required child types, forbidden or required properties, and node-name patterns. Enable the addon in Project Settings \u2192 Plugins and use **Lint scenes** in "
+    },
+    {
+      "id": "scene_search",
+      "title": "Natural-Language Scene Search",
+      "description": "Search project content with queries like 'find enemies that use a patrol state' or 'show scenes with a door interaction', using project metadata and code indexing.",
+      "version": "1.1.0",
+      "folder": "addons/scene_search",
+      "readme": "addons/scene_search/README.md",
+      "cli": "addons/scene_search/cli/nlss_cli.gd",
+      "summary": "Search project content with queries like 'find enemies that use a patrol state' or 'show scenes with a door interaction', using project metadata and code indexing."
+    },
+    {
+      "id": "scene_smoke",
+      "title": "Scene Load Smoke Tester",
+      "description": "Load and instantiate every scene headless; report scenes that fail to load or instantiate, missing dependencies and node types that no longer exist.",
+      "version": "1.2.0",
+      "folder": "addons/scene_smoke",
+      "readme": "addons/scene_smoke/README.md",
+      "cli": "addons/scene_smoke/cli/sst_cli.gd",
+      "summary": "Load and instantiate every scene headless; report scenes that fail to load or instantiate, missing dependencies and node types that no longer exist. Enable the addon in Project Settings \u2192 Plugins and "
+    },
+    {
+      "id": "scene_snapshot",
+      "title": "Scene Review Snapshot Generator",
+      "description": "Write a reproducible inventory of a scene (nodes, types, scripts, instances, stored properties) and diff it against another scene or snapshot for review.",
+      "version": "1.2.0",
+      "folder": "addons/scene_snapshot",
+      "readme": "addons/scene_snapshot/README.md",
+      "cli": "addons/scene_snapshot/cli/ssg_cli.gd",
+      "summary": "Write a reproducible inventory of a scene (nodes, types, scripts, instances, stored properties) and diff it against another scene or snapshot for review. Enable the addon in Project Settings \u2192 Plugins"
+    },
+    {
+      "id": "schema_migrator",
+      "title": "Hot-Reloadable Schema and Save-Game Migrator",
+      "description": "Version save games and migrate old saves forward with registered rename, move, default and delete ops.",
+      "version": "1.1.0",
+      "folder": "addons/schema_migrator",
+      "readme": "addons/schema_migrator/README.md",
+      "cli": "addons/schema_migrator/cli/smg_cli.gd",
+      "summary": "Version save games and migrate old saves forward with registered rename, move, default and delete ops - the registry re-reads from disk every run, so schema edits apply without a restart."
+    },
+    {
+      "id": "script_complexity",
+      "title": "Script Complexity Reporter",
+      "description": "Per-function branch complexity, length and nesting depth for GDScript, with thresholds.",
+      "version": "1.2.0",
+      "folder": "addons/script_complexity",
+      "readme": "addons/script_complexity/README.md",
+      "cli": "addons/script_complexity/cli/scx_cli.gd",
+      "summary": "Per-function branch complexity, length and nesting depth for GDScript, with thresholds. Enable the addon in Project Settings \u2192 Plugins and use **Measure complexity** in the **Script Complexity** dock."
+    },
+    {
+      "id": "seed_replay",
+      "title": "Deterministic Seed and Replay Runner",
+      "description": "Verify run logs by replaying a deterministic PRNG and recomputing event hash chains to pinpoint first divergence.",
+      "version": "1.1.0",
+      "folder": "addons/seed_replay",
+      "readme": "addons/seed_replay/README.md",
+      "cli": "addons/seed_replay/cli/sdr_cli.gd",
+      "summary": "Verify run logs by replaying a hand-rolled deterministic PRNG and recomputing event hash chains - pinpoint the first divergence of a same-seed-different-outcome bug."
+    },
+    {
+      "id": "settings_drift",
+      "title": "Project Settings Drift Report",
+      "description": "Compare project.godot with a committed baseline, key by key, and report added, removed and changed settings.",
+      "version": "1.2.0",
+      "folder": "addons/settings_drift",
+      "readme": "addons/settings_drift/README.md",
+      "cli": "addons/settings_drift/cli/psd_cli.gd",
+      "summary": "Compare project.godot with a committed baseline, key by key, and report added, removed and changed settings. Enable the addon in Project Settings \u2192 Plugins and use **Compare with baseline** in the **S"
+    },
+    {
+      "id": "settings_validator",
+      "title": "Settings File Validator",
+      "description": "Validate player settings files (ConfigFile .cfg or JSON) against a schema of types, ranges, allowed values and defaults.",
+      "version": "1.2.0",
+      "folder": "addons/settings_validator",
+      "readme": "addons/settings_validator/README.md",
+      "cli": "addons/settings_validator/cli/ssv_cli.gd",
+      "summary": "Validate player settings files (ConfigFile .cfg or JSON) against a schema of types, ranges, allowed values and defaults. Enable the addon in Project Settings \u2192 Plugins and use **Validate settings** in"
+    },
+    {
+      "id": "shader_doctor",
+      "title": "Shader Doctor",
+      "description": "Static analysis of .gdshader files: redundant texture fetches, fetches in loops, branch density, dead uniforms.",
+      "version": "1.1.0",
+      "folder": "addons/shader_doctor",
+      "readme": "addons/shader_doctor/README.md",
+      "cli": "addons/shader_doctor/cli/shd_cli.gd",
+      "summary": "Static analysis of .gdshader files: redundant texture fetches, fetches in loops, branch density and dead uniforms, each with a concrete mobile-friendly rewrite."
+    },
+    {
+      "id": "shader_variants",
+      "title": "Shader Variant Budget Manager",
+      "description": "Count distinct material feature combinations (each compiles its own shader) and preprocessor branches in custom shaders, against a variant budget.",
+      "version": "1.2.0",
+      "folder": "addons/shader_variants",
+      "readme": "addons/shader_variants/README.md",
+      "cli": "addons/shader_variants/cli/svb_cli.gd",
+      "summary": "Count distinct material feature combinations (each compiles its own shader) and preprocessor branches in custom shaders, against a variant budget. Enable the addon in Project Settings \u2192 Plugins and us"
+    },
+    {
+      "id": "signal_spy",
+      "title": "Signal Flow and Event Bus Spy",
+      "description": "Analyze recorded signal sessions: latency, dropped emissions, cascades, recursion and runaway emitters.",
+      "version": "1.1.0",
+      "folder": "addons/signal_spy",
+      "readme": "addons/signal_spy/README.md",
+      "cli": "addons/signal_spy/cli/sgs_cli.gd",
+      "summary": "Analyze recorded signal sessions: emitter-to-listener latency, dropped emissions, cascade depth, recursion and runaway emitters."
+    },
+    {
+      "id": "spawn_validator",
+      "title": "Spawn Point and Encounter Validator",
+      "description": "Check 2D spawn points for being inside solid collision, too close together, or off the navigation mesh.",
+      "version": "1.2.0",
+      "folder": "addons/spawn_validator",
+      "readme": "addons/spawn_validator/README.md",
+      "cli": "addons/spawn_validator/cli/spv_cli.gd",
+      "summary": "Check 2D spawn points for being inside solid collision, too close together, or off the navigation mesh. Enable the addon in Project Settings \u2192 Plugins and use **Validate spawns** in the **Spawn Points"
+    },
+    {
+      "id": "state_coverage",
+      "title": "State Transition Coverage Tracker",
+      "description": "Offline State Transition Coverage Tracker checks.",
+      "version": "1.1.0",
+      "folder": "addons/state_coverage",
+      "readme": "addons/state_coverage/README.md",
+      "cli": "addons/state_coverage/cli/coverage_cli.gd",
+      "summary": "Compare a declared model with recorded transitions. Both JSON inputs have the shape `{\"transitions\":[{\"from\":\"idle\",\"to\":\"walk\"}]}`. Duplicate model edges are errors; uncovered and unexpected edges ar"
+    },
+    {
+      "id": "store_assets",
+      "title": "Store Asset Validator",
+      "description": "Check store icons, headers and screenshots against a profile you write: required files, exact or allowed sizes, and screenshot counts.",
+      "version": "1.2.0",
+      "folder": "addons/store_assets",
+      "readme": "addons/store_assets/README.md",
+      "cli": "addons/store_assets/cli/sav_cli.gd",
+      "summary": "Check store icons, headers and screenshots against a profile you write: required files, exact or allowed sizes, and screenshot counts. Enable the addon in Project Settings \u2192 Plugins and use **Validate"
+    },
+    {
+      "id": "subtitle_audit",
+      "title": "Subtitle Timing and Readability Auditor",
+      "description": "Audit subtitle timing, reading speed and speaker labels.",
+      "version": "1.1.0",
+      "folder": "addons/subtitle_audit",
+      "readme": "addons/subtitle_audit/README.md",
+      "cli": "addons/subtitle_audit/cli/sub_cli.gd",
+      "summary": "Review timed subtitles before shipping. Enable the plugin and enter a subtitle path in the dock, or run:"
+    },
+    {
+      "id": "suite_dispatcher",
+      "title": "Suite CLI Dispatcher",
+      "description": "One entry point that lists every installed tool CLI and runs any of them by name, passing options through and returning its exit code.",
+      "version": "1.2.0",
+      "folder": "addons/suite_dispatcher",
+      "readme": "addons/suite_dispatcher/README.md",
+      "cli": "addons/suite_dispatcher/cli/gdt_cli.gd",
+      "summary": "One entry point that lists every installed tool CLI and runs any of them by name, passing options through and returning its exit code. Enable the addon in Project Settings \u2192 Plugins and use **List too"
+    },
+    {
+      "id": "suite_presets",
+      "title": "Suite Presets",
+      "description": "Enable only the plugins you need: full suite, CI-only, mobile perf, content or testing packs.",
+      "version": "1.0.0",
+      "folder": "addons/suite_presets",
+      "readme": "addons/suite_presets/README.md",
+      "cli": "addons/suite_presets/cli/spm_cli.gd",
+      "summary": "Enable only the plugins you need. Enabling all 138 plugins slows editor startup and clutters the dock wall; presets fix that. Enable the addon, pick a preset in the dock, and select **Preview preset**"
+    },
+    {
+      "id": "suppressions",
+      "title": "Finding Suppression Baseline",
+      "description": "Apply a reviewed list of accepted findings, each with a written justification and optional expiry, to a reports folder; gate on what remains.",
+      "version": "1.2.0",
+      "folder": "addons/suppressions",
+      "readme": "addons/suppressions/README.md",
+      "cli": "addons/suppressions/cli/fsb_cli.gd",
+      "summary": "Apply a reviewed list of accepted findings, each with a written justification and optional expiry, to a reports folder; gate on what remains. Enable the addon in Project Settings \u2192 Plugins and use **A"
+    },
+    {
+      "id": "telemetry_schema",
+      "title": "Player Telemetry Schema Validator",
+      "description": "Validate local telemetry samples against an event schema.",
+      "version": "1.1.0",
+      "folder": "addons/telemetry_schema",
+      "readme": "addons/telemetry_schema/README.md",
+      "cli": "addons/telemetry_schema/cli/tel_cli.gd",
+      "summary": "Validate local, synthetic telemetry samples against a JSON event schema. Enable the plugin and enter schema and sample paths in the dock, or run:"
+    },
+    {
+      "id": "test_priority",
+      "title": "Regression Test Prioritizer",
+      "description": "Offline Regression Test Prioritizer checks.",
+      "version": "1.1.0",
+      "folder": "addons/test_priority",
+      "readme": "addons/test_priority/README.md",
+      "cli": "addons/test_priority/cli/priority_cli.gd",
+      "summary": "Rank tests by how many distinct changed paths reach their explicit mappings. Mapping shape: `{\"paths\":{\"res://src/player.gd\":[\"res://tests/test_player.gd\"]}}`; changed paths: `{\"changed\":[\"res://src/p"
+    },
+    {
+      "id": "test_runner",
+      "title": "CI and Headless Test Runner",
+      "description": "Discover and classify test files, plan headless commands, JUnit XML output and check-only triage.",
+      "version": "1.1.0",
+      "folder": "addons/test_runner",
+      "readme": "addons/test_runner/README.md",
+      "cli": "addons/test_runner/cli/ctr_cli.gd",
+      "summary": "Discover and classify test files, plan the exact headless commands, emit JUnit XML and triage --check-only output into errors versus warnings."
+    },
+    {
+      "id": "texture_filter",
+      "title": "Texture Filter Consistency Checker",
+      "description": "Check pixel-art textures for mipmaps and lossy compression, and the project's default canvas filter.",
+      "version": "1.2.0",
+      "folder": "addons/texture_filter",
+      "readme": "addons/texture_filter/README.md",
+      "cli": "addons/texture_filter/cli/tfc_cli.gd",
+      "summary": "Check pixel-art textures for mipmaps and lossy compression, and the project's default canvas filter. Enable the addon in Project Settings \u2192 Plugins and use **Check texture filters** in the **Texture F"
+    },
+    {
+      "id": "theme_audit",
+      "title": "Theme Resource Auditor",
+      "description": "Find theme-override sprawl in scenes, too many distinct font sizes, near-duplicate sizes and unused theme type variations.",
+      "version": "1.2.0",
+      "folder": "addons/theme_audit",
+      "readme": "addons/theme_audit/README.md",
+      "cli": "addons/theme_audit/cli/tra_cli.gd",
+      "summary": "Find theme-override sprawl in scenes, too many distinct font sizes, near-duplicate sizes and unused theme type variations. Enable the addon in Project Settings \u2192 Plugins and use **Audit themes** in th"
+    },
+    {
+      "id": "thermal_sim",
+      "title": "Mobile Thermal and Battery Drain Emulation Dock",
+      "description": "Documented-estimate RC thermal model, frame-budget and battery-hours comparisons across workload changes.",
+      "version": "1.1.0",
+      "folder": "addons/thermal_sim",
+      "readme": "addons/thermal_sim/README.md",
+      "cli": "addons/thermal_sim/cli/thm_cli.gd",
+      "summary": "Documented-estimate RC thermal model with frame-budget and battery-hours comparisons across workload changes and estimated device profiles."
+    },
+    {
+      "id": "third_party_notices",
+      "title": "Third-Party Notice Collector",
+      "description": "Gather license files from addon and vendor folders into one notices report, flag folders without a license and copyleft licenses for review.",
+      "version": "1.2.0",
+      "folder": "addons/third_party_notices",
+      "readme": "addons/third_party_notices/README.md",
+      "cli": "addons/third_party_notices/cli/tpn_cli.gd",
+      "summary": "Gather license files from addon and vendor folders into one notices report, flag folders without a license and copyleft licenses for review. Enable the addon in Project Settings \u2192 Plugins and use **Co"
+    },
+    {
+      "id": "tilemap_rules",
+      "title": "Tilemap Rule and Autotile Generator",
+      "description": "Validate terrain peering rule sets and generate the transition tile specs they need.",
+      "version": "1.1.0",
+      "folder": "addons/tilemap_rules",
+      "readme": "addons/tilemap_rules/README.md",
+      "cli": "addons/tilemap_rules/cli/tmr_cli.gd",
+      "summary": "Validate Godot 4 terrain peering rule sets (asymmetric edges, missing transitions, corner conflicts) and generate the transition tile specs they need."
+    },
+    {
+      "id": "time_machine",
+      "title": "Game-State Time Machine",
+      "description": "Record inputs and state snapshots so you can rewind a bug, inspect variables, and replay the exact sequence that caused it. Includes an in-game recorder node.",
+      "version": "1.1.0",
+      "folder": "addons/time_machine",
+      "readme": "addons/time_machine/README.md",
+      "cli": "addons/time_machine/cli/gstm_cli.gd",
+      "summary": "Record inputs and state snapshots so you can rewind a bug, inspect variables, and replay the exact sequence that caused it. Includes an in-game recorder node."
+    },
+    {
+      "id": "tool_finder",
+      "title": "Tool Finder",
+      "description": "Search 138 tools by problem, not by name, and get the 3 best matches with reasons.",
+      "version": "1.0.0",
+      "folder": "addons/tool_finder",
+      "readme": "addons/tool_finder/README.md",
+      "cli": "addons/tool_finder/cli/tfd_cli.gd",
+      "summary": "Search the suite by **problem**, not by tool name. Enable the addon, type a plain-words problem in the dock, and select **Find tools**."
+    },
+    {
+      "id": "trace_diff",
+      "title": "State Trace Determinism Diff",
+      "description": "Compare two recorded per-frame state traces and report the first frame and keys where they diverge.",
+      "version": "1.2.0",
+      "folder": "addons/trace_diff",
+      "readme": "addons/trace_diff/README.md",
+      "cli": "addons/trace_diff/cli/sdt_cli.gd",
+      "summary": "Compare two recorded per-frame state traces and report the first frame and keys where they diverge. Enable the addon in Project Settings \u2192 Plugins and use **Diff traces** in the **Trace Diff** dock."
+    },
+    {
+      "id": "type_coverage",
+      "title": "Typed GDScript Coverage Meter",
+      "description": "Measure how much GDScript is statically typed (variables, parameters, returns) and gate on a minimum.",
+      "version": "1.2.0",
+      "folder": "addons/type_coverage",
+      "readme": "addons/type_coverage/README.md",
+      "cli": "addons/type_coverage/cli/tcm_cli.gd",
+      "summary": "Measure how much GDScript is statically typed (variables, parameters, returns) and gate on a minimum. Enable the addon in Project Settings \u2192 Plugins and use **Measure type coverage** in the **Type Cov"
+    },
+    {
+      "id": "uid_integrity",
+      "title": "Resource UID Integrity Checker",
+      "description": "Check uid:// references in scenes, resources and scripts against the UIDs files declare.",
+      "version": "1.2.0",
+      "folder": "addons/uid_integrity",
+      "readme": "addons/uid_integrity/README.md",
+      "cli": "addons/uid_integrity/cli/uid_cli.gd",
+      "summary": "Check uid:// references in scenes, resources and scripts against the UIDs files declare. Enable the addon in Project Settings \u2192 Plugins and use **Check UIDs** in the **UID Integrity** dock."
+    },
+    {
+      "id": "unused_symbols",
+      "title": "Unused Signal and Method Finder",
+      "description": "Find declared signals that are never emitted or connected, and functions nothing references.",
+      "version": "1.2.0",
+      "folder": "addons/unused_symbols",
+      "readme": "addons/unused_symbols/README.md",
+      "cli": "addons/unused_symbols/cli/usf_cli.gd",
+      "summary": "Find declared signals that are never emitted or connected, and functions nothing references. Enable the addon in Project Settings \u2192 Plugins and use **Find unused symbols** in the **Unused Symbols** do"
+    },
+    {
+      "id": "version_consistency",
+      "title": "Version Consistency Checker",
+      "description": "Compare the project version with every version string in the export presets and report mismatches.",
+      "version": "1.2.0",
+      "folder": "addons/version_consistency",
+      "readme": "addons/version_consistency/README.md",
+      "cli": "addons/version_consistency/cli/vcc_cli.gd",
+      "summary": "Compare the project version with every version string in the export presets and report mismatches. Enable the addon in Project Settings \u2192 Plugins and use **Check versions** in the **Version Check** do"
+    },
+    {
+      "id": "vfs_mock",
+      "title": "Cross-Platform Virtual Filesystem Mock",
+      "description": "Resolve file ops against linux, windows, android and ios rules; audit scripts for platform-specific path literals.",
+      "version": "1.1.0",
+      "folder": "addons/vfs_mock",
+      "readme": "addons/vfs_mock/README.md",
+      "cli": "addons/vfs_mock/cli/vfm_cli.gd",
+      "summary": "Resolve file operations against linux, windows, android and ios filesystem rules, and audit scripts for platform-specific path literals."
+    },
+    {
+      "id": "visual_regression",
+      "title": "Visual Regression Testing",
+      "description": "Capture scene screenshots across resolutions and compare them with approved baselines, highlighting pixel-level differences.",
+      "version": "1.1.0",
+      "folder": "addons/visual_regression",
+      "readme": "addons/visual_regression/README.md",
+      "cli": "addons/visual_regression/cli/vrt_cli.gd",
+      "summary": "Capture scene screenshots across resolutions and compare them with approved baselines, highlighting pixel-level differences."
+    },
+    {
+      "id": "warning_baseline",
+      "title": "GDScript Warning Baseline",
+      "description": "Count common GDScript warning patterns per file (unused variables and parameters, unreachable code) and ratchet them against a baseline.",
+      "version": "1.2.0",
+      "folder": "addons/warning_baseline",
+      "readme": "addons/warning_baseline/README.md",
+      "cli": "addons/warning_baseline/cli/gwb_cli.gd",
+      "summary": "Count common GDScript warning patterns per file (unused variables and parameters, unreachable code) and ratchet them against a baseline. Enable the addon in Project Settings \u2192 Plugins and use **Compar"
+    },
+    {
+      "id": "wave_budget",
+      "title": "Wave Spawner Budget Planner",
+      "description": "Simulate wave definitions on a timeline and flag peaks of enemies alive and spawns per second above budget.",
+      "version": "1.2.0",
+      "folder": "addons/wave_budget",
+      "readme": "addons/wave_budget/README.md",
+      "cli": "addons/wave_budget/cli/wsb_cli.gd",
+      "summary": "Simulate wave definitions on a timeline and flag peaks of enemies alive and spawns per second above budget. Enable the addon in Project Settings \u2192 Plugins and use **Plan waves** in the **Wave Budget**"
+    },
+    {
+      "id": "whitebox",
+      "title": "Level Whiteboxing and Snapping Suite",
+      "description": "Grid snapping and slope maths plus a scene scan for off-grid blockout props and unwalkable ramps.",
+      "version": "1.1.0",
+      "folder": "addons/whitebox",
+      "readme": "addons/whitebox/README.md",
+      "cli": "addons/whitebox/cli/wbx_cli.gd",
+      "summary": "Grid snapping and slope maths plus a headless scene scan for off-grid blockout props and ramps too steep to climb."
+    },
+    {
+      "id": "world_bounds",
+      "title": "World Boundary and Out-of-Bounds Auditor",
+      "description": "Find 2D levels with no kill floor or world boundary below the geometry, open sides, and kill zones overlapping walkable floor.",
+      "version": "1.2.0",
+      "folder": "addons/world_bounds",
+      "readme": "addons/world_bounds/README.md",
+      "cli": "addons/world_bounds/cli/wba_cli.gd",
+      "summary": "Find 2D levels with no kill floor or world boundary below the geometry, open sides, and kill zones overlapping walkable floor. Enable the addon in Project Settings \u2192 Plugins and use **Audit world boun"
+    },
+    {
+      "id": "xp_curve",
+      "title": "XP Curve Planner",
+      "description": "Turn an XP table and earn rates into minutes per level; flag walls, shrinking requirements and total time.",
+      "version": "1.2.0",
+      "folder": "addons/xp_curve",
+      "readme": "addons/xp_curve/README.md",
+      "cli": "addons/xp_curve/cli/xpc_cli.gd",
+      "summary": "Turn an XP table and earn rates into minutes per level; flag walls, shrinking requirements and total time. Enable the addon in Project Settings \u2192 Plugins and use **Plan XP curve** in the **XP Curve** "
+    }
+  ]
+}

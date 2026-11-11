@@ -1,0 +1,12 @@
+{
+  "asset_name": "Unused Signal and Method Finder",
+  "folder": "unused_symbols",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Find declared signals that are never emitted or connected, and functions nothing references.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-unused_symbols-1.2.0.zip",
+  "readme": "addons/unused_symbols/README.md"
+}

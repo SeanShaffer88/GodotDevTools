@@ -1,0 +1,12 @@
+{
+  "asset_name": "Particle Budget Inspector",
+  "folder": "particle_budget",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Total particle capacity per scene, including instanced children, against configurable budgets.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-particle_budget-1.2.0.zip",
+  "readme": "addons/particle_budget/README.md"
+}

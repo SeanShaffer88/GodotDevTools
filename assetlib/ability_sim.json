@@ -1,0 +1,12 @@
+{
+  "asset_name": "Gameplay Ability Simulator",
+  "folder": "ability_sim",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Simulate an ability priority rotation with costs, cooldowns, cast times and resource regeneration; report casts, damage per second and starved time.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-ability_sim-1.2.0.zip",
+  "readme": "addons/ability_sim/README.md"
+}

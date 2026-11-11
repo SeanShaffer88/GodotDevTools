@@ -1,0 +1,12 @@
+{
+  "asset_name": "Tool Finder",
+  "folder": "tool_finder",
+  "version": "1.0.0",
+  "author": "Sean Shaffer",
+  "description": "Search 138 tools by problem, not by name, and get the 3 best matches with reasons.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-tool_finder-1.0.0.zip",
+  "readme": "addons/tool_finder/README.md"
+}

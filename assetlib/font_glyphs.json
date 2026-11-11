@@ -1,0 +1,12 @@
+{
+  "asset_name": "Font Glyph Coverage Checker",
+  "folder": "font_glyphs",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Check every character used in translation CSV/PO files against a font's cmap table, per locale.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-font_glyphs-1.2.0.zip",
+  "readme": "addons/font_glyphs/README.md"
+}

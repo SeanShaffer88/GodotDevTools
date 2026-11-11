@@ -19,7 +19,7 @@ godot --headless --path . --script res://addons/a11y_options/cli/aoc_cli.gd -- \
   --dir=res://demo/shipping --fail-on=option_not_found
 ```
 
-Options: `--dir=<path>` (default `res://`), `--out=<dir>` (default `res://reports/a11y_options`), `--expect` (JSON file replacing the built-in expected-options list), `--fail-on=<kinds>` (finding kinds above, `issues`, or `errors`). Writes `a11y_options.json` and `a11y_options.md`.
+Options: `--dir=<path>` (default `res://`), `--out=<dir>` (default `res://reports/a11y_options`), `--expect` (JSON file replacing the built-in expected-options list), `--cache=<file>` (incremental per-file evidence cache), `--fail-on=<kinds>` (finding kinds above, `issues`, or `errors`). Writes `a11y_options.json` and `a11y_options.md`. The core compiles each expression once and searches whole files with multiline anchors. Cached results use content hashes, are invalidated when expectations change, and preserve evidence from unchanged files.
 
 Exit codes: 2 when a `--fail-on` kind is found; 1 for unreadable input, an invalid argument or a report-write failure; otherwise 0.
 

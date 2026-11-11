@@ -1,0 +1,12 @@
+{
+  "asset_name": "Flaky Test Detector",
+  "folder": "flaky_tests",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Read a history of test runs (JUnit XML or JSON) and find tests that both pass and fail on the same commit, flip often, or always fail.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-flaky_tests-1.2.0.zip",
+  "readme": "addons/flaky_tests/README.md"
+}

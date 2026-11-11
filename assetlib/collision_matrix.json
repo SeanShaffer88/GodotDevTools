@@ -1,0 +1,12 @@
+{
+  "asset_name": "Physics Collision Matrix Visualizer",
+  "folder": "collision_matrix",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "See who collides with whom: build the layer and mask matrix, flag all-vs-all bodies and redundant raycast layers.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-collision_matrix-1.1.0.zip",
+  "readme": "addons/collision_matrix/README.md"
+}

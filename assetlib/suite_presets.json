@@ -1,0 +1,12 @@
+{
+  "asset_name": "Suite Presets",
+  "folder": "suite_presets",
+  "version": "1.0.0",
+  "author": "Sean Shaffer",
+  "description": "Enable only the plugins you need: full suite, CI-only, mobile perf, content or testing packs.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-suite_presets-1.0.0.zip",
+  "readme": "addons/suite_presets/README.md"
+}

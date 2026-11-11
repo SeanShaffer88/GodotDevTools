@@ -1,0 +1,12 @@
+{
+  "asset_name": "Report Diff",
+  "folder": "report_diff",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Compare two report folders and list new, fixed and unchanged findings, matching findings even when their line moved.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-report_diff-1.2.0.zip",
+  "readme": "addons/report_diff/README.md"
+}

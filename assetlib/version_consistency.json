@@ -1,0 +1,12 @@
+{
+  "asset_name": "Version Consistency Checker",
+  "folder": "version_consistency",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Compare the project version with every version string in the export presets and report mismatches.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-version_consistency-1.2.0.zip",
+  "readme": "addons/version_consistency/README.md"
+}

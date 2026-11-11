@@ -1,0 +1,12 @@
+{
+  "asset_name": "Hitbox and Hurtbox Timeline Viewer",
+  "folder": "hitbox_timeline",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Build per-animation timelines of when hitbox and hurtbox shapes are active from animation tracks, and flag windows left open or too short for physics to see.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-hitbox_timeline-1.2.0.zip",
+  "readme": "addons/hitbox_timeline/README.md"
+}

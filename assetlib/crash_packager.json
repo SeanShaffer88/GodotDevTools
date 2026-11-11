@@ -1,0 +1,12 @@
+{
+  "asset_name": "Crash and Error Reproduction Packager",
+  "folder": "crash_packager",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Bundle a redacted log, engine and system details and reproduction steps into one local package for a bug report. Nothing is uploaded.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-crash_packager-1.2.0.zip",
+  "readme": "addons/crash_packager/README.md"
+}

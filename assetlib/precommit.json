@@ -1,0 +1,12 @@
+{
+  "asset_name": "Pre-commit Hook Installer",
+  "folder": "precommit",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Generate an opt-in git pre-commit hook that runs chosen tool CLIs, and install or remove it without touching hooks it did not write.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-precommit-1.2.0.zip",
+  "readme": "addons/precommit/README.md"
+}

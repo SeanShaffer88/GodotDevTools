@@ -1,0 +1,12 @@
+{
+  "asset_name": "Third-Party Notice Collector",
+  "folder": "third_party_notices",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Gather license files from addon and vendor folders into one notices report, flag folders without a license and copyleft licenses for review.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-third_party_notices-1.2.0.zip",
+  "readme": "addons/third_party_notices/README.md"
+}

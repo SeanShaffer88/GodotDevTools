@@ -1,0 +1,12 @@
+{
+  "asset_name": "Accessibility Options Coverage",
+  "folder": "a11y_options",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Look for evidence of expected player accessibility options (subtitles, remapping, text size, colour-blind modes, reduced motion, mono audio, hold/toggle) in project files.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-a11y_options-1.2.0.zip",
+  "readme": "addons/a11y_options/README.md"
+}

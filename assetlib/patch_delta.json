@@ -1,0 +1,12 @@
+{
+  "asset_name": "Patch Delta Estimator",
+  "folder": "patch_delta",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Compare two staged builds file by file (size and MD5) and estimate the bytes a patch must ship.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-patch_delta-1.2.0.zip",
+  "readme": "addons/patch_delta/README.md"
+}

@@ -1,10 +1,10 @@
 # GodotDevTools
 
 **Short (repo tagline, under 350 characters):**
-133 independent, offline Godot 4 addons that catch performance, content, accessibility, testing and shipping problems before players do. Each addon has an editor dock, a headless CLI with JSON and Markdown reports, and a CI gate.
+138 independent, offline Godot 4 addons that catch performance, content, accessibility, testing and shipping problems before players do. Each addon has an editor dock, a headless CLI with JSON and Markdown reports, and a CI gate.
 
 **Long:**
-GodotDevTools is a suite of independent Godot 4 editor addons. Install only the ones you need. Every tool follows one contract: a pure core that reads your project, a thin editor dock with tooltips and offline help, and a headless CLI. The CLI writes JSON and Markdown reports and exits with code 2 when a `--fail-on` finding appears, so any tool can gate a pull request. The suite also includes a reusable GitHub Action.
+GodotDevTools is a suite of independent Godot 4 editor addons. Search them by problem with the Tool Finder, enable only the packs you need with Suite Presets, run them in Docker or via MCP, and gate CI on coverage estimates. Install only the ones you need. Every tool follows one contract: a pure core that reads your project, a thin editor dock with tooltips and offline help, and a headless CLI. The CLI writes JSON and Markdown reports and exits with code 2 when a `--fail-on` finding appears, so any tool can gate a pull request. The suite also includes a reusable GitHub Action.
 
 The tools cover:
 - Performance and rendering budgets

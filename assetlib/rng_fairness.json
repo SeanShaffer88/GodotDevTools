@@ -1,0 +1,12 @@
+{
+  "asset_name": "Random Table Fairness Tester",
+  "folder": "rng_fairness",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Chi-square goodness-of-fit test of recorded outcome counts against a weighted table's intended odds.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-rng_fairness-1.2.0.zip",
+  "readme": "addons/rng_fairness/README.md"
+}

@@ -1,0 +1,3 @@
+{
+  "presets": ["full", "ci_only", "mobile_perf", "content", "testing"]
+}

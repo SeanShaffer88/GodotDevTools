@@ -1,0 +1,12 @@
+{
+  "asset_name": "Scene Lint Rule Engine",
+  "folder": "scene_lint",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Check scenes against user-defined JSON rules: required child types, forbidden or required properties, and node-name patterns.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-scene_lint-1.2.0.zip",
+  "readme": "addons/scene_lint/README.md"
+}

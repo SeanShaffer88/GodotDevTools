@@ -1,0 +1,12 @@
+{
+  "asset_name": "Micro-Benchmark Harness",
+  "folder": "bench_harness",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Time every bench_* method of a benchmark script with warm-up and repeated runs; write median/p95 results the Performance Regression Gate can read.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-bench_harness-1.2.0.zip",
+  "readme": "addons/bench_harness/README.md"
+}

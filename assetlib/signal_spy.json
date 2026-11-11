@@ -1,0 +1,12 @@
+{
+  "asset_name": "Signal Flow and Event Bus Spy",
+  "folder": "signal_spy",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Analyze recorded signal sessions: latency, dropped emissions, cascades, recursion and runaway emitters.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-signal_spy-1.1.0.zip",
+  "readme": "addons/signal_spy/README.md"
+}

@@ -1,0 +1,12 @@
+{
+  "asset_name": "XP Curve Planner",
+  "folder": "xp_curve",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Turn an XP table and earn rates into minutes per level; flag walls, shrinking requirements and total time.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-xp_curve-1.2.0.zip",
+  "readme": "addons/xp_curve/README.md"
+}

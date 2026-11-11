@@ -1,0 +1,12 @@
+{
+  "asset_name": "Localization Matrix and In-Context Previewer",
+  "folder": "l10n_matrix",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Key-by-locale completeness, overflow-risk lengths, plural-rule checks and orphan translation keys.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-l10n_matrix-1.1.0.zip",
+  "readme": "addons/l10n_matrix/README.md"
+}

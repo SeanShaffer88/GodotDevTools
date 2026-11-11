@@ -1,0 +1,12 @@
+{
+  "asset_name": "World Boundary and Out-of-Bounds Auditor",
+  "folder": "world_bounds",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Find 2D levels with no kill floor or world boundary below the geometry, open sides, and kill zones overlapping walkable floor.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-world_bounds-1.2.0.zip",
+  "readme": "addons/world_bounds/README.md"
+}

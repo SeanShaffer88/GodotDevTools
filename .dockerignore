@@ -1,0 +1,6 @@
+.git
+.godot-bin
+reports
+visual_reports
+*.zip
+.godot

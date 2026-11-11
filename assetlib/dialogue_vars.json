@@ -1,0 +1,12 @@
+{
+  "asset_name": "Dialogue Variable Lint",
+  "folder": "dialogue_vars",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Find dialogue variables that conditions read but nothing sets, and variables effects set but nothing reads.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-dialogue_vars-1.2.0.zip",
+  "readme": "addons/dialogue_vars/README.md"
+}

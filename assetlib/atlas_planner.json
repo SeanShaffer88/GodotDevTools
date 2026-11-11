@@ -1,0 +1,12 @@
+{
+  "asset_name": "Texture Atlas Packing Planner",
+  "folder": "atlas_planner",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Shelf-pack sprite sizes into atlas pages and report page count, waste and sprites that cannot fit.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-atlas_planner-1.2.0.zip",
+  "readme": "addons/atlas_planner/README.md"
+}

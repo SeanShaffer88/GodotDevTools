@@ -1,0 +1,12 @@
+{
+  "asset_name": "Startup and Scene-Load Profiler",
+  "folder": "load_profiler",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Time how long each scene takes to load and instantiate in this process, with dependency and node counts, against budgets.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-load_profiler-1.2.0.zip",
+  "readme": "addons/load_profiler/README.md"
+}

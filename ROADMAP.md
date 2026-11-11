@@ -1,6 +1,6 @@
 # Development roadmap
 
-This roadmap captures 110 tools and components. All 110 are implemented; the shared research item ended in a recorded decision not to build. Work proceeds incrementally: each addon needs a pure core, thin editor dock and headless CLI, fixture-driven tests, documentation and honest limitations. A checked item means its core passes its headless suite and CLI gate in CI on Godot 4.3 and 4.5, its dock passes a real-editor session (`tests/editor/run_editor_session.sh`), and any runtime node passes a live game session (`tests/game/run_live_game.sh`); both sessions run in CI. See each addon README and CI for verification status. Priorities may change as requirements are refined.
+This roadmap captures 110 original tools and components plus five post-roadmap additions below. The original entries were checked against the historical CI gate; the additions remain unchecked until the expanded CI and editor sessions pass. The shared research item ended in a recorded decision not to build. Each addon needs a pure core, thin editor dock and headless CLI, fixture-driven tests, documentation and honest limitations. A checked item means its core passes its headless suite and CLI gate on Godot 4.3 and 4.5, its dock passes a real-editor session (`tests/editor/run_editor_session.sh`), and any runtime node passes a live game session (`tests/game/run_live_game.sh`). See each addon README and CI for verification status.
 
 ## Performance and rendering
 
@@ -144,3 +144,11 @@ This roadmap captures 110 tools and components. All 110 are implemented; the sha
 - [x] **Pre-commit Hook Installer** — `addons/precommit`: opt-in git hook that runs chosen CLIs on staged files. Headless suite and CLI gate pass on Godot 4.3 and 4.5; dock driven in a real editor session (`tests/editor`).
 - [x] **Reusable CI Action** — `.github/actions/godot-dev-tools`: composite action that downloads Godot, imports the project and runs dispatcher commands; exercised on every PR by the `action-smoke` CI job.
 - [x] **Native Accelerator Crate (research)** — research note in `docs/native-accelerator.md` (complete): measured GDScript hot paths; decision recorded not to build a native crate yet, since no tool may depend on native code and the measured scans are within budget (see `docs/performance.md`). Revisit only if a scan exceeds budget on a real project.
+
+## Post-roadmap additions (2026-11-11)
+
+- [ ] **Tool Finder** — `addons/tool_finder`: problem-first search over the catalog; expanded gate and editor verification pending.
+- [ ] **Fix Engine** — `addons/fix_engine`: opt-in fixes from reports; expanded gate, apply safety, and editor verification pending.
+- [ ] **Suite Presets** — `addons/suite_presets`: plugin profiles; expanded gate and editor verification pending.
+- [ ] **Coverage Gate** — `addons/coverage_gate`: function-name evidence estimate, not line coverage; expanded gate and editor verification pending.
+- [ ] **Dock Accessibility Audit** — `addons/dock_a11y`: heuristic audit of docks; expanded gate and editor verification pending.

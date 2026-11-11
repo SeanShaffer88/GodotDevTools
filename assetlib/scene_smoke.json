@@ -1,0 +1,12 @@
+{
+  "asset_name": "Scene Load Smoke Tester",
+  "folder": "scene_smoke",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Load and instantiate every scene headless; report scenes that fail to load or instantiate, missing dependencies and node types that no longer exist.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-scene_smoke-1.2.0.zip",
+  "readme": "addons/scene_smoke/README.md"
+}

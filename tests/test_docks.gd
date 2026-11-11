@@ -34,6 +34,15 @@ func _initialize() -> void:
 	var probe := VBoxContainer.new()
 	probe.add_child(Button.new())
 	check("tooltip check catches an untipped button", _untipped(probe).size() == 1)
+	var probe2 := Button.new()
+	probe2.focus_mode = Control.FOCUS_NONE
+	check("focus check catches an unfocusable button", _unfocusable(probe2).size() == 1)
+	probe2.free()
+	var spin_probe := SpinBox.new()
+	check("focus check accepts a focusable SpinBox editor", _unfocusable(spin_probe).is_empty())
+	spin_probe.get_line_edit().focus_mode = Control.FOCUS_NONE
+	check("focus check catches an unfocusable SpinBox editor", _unfocusable(spin_probe).size() == 1)
+	spin_probe.free()
 	probe.free()
 	check("found a dock for every addon (%d docks, %d addons)" % [docks, addons.size()], docks == addons.size())
 	print("%d passed, %d failed" % [passes, failures])
@@ -49,6 +58,8 @@ func _smoke(addon: String, path: String) -> void:
 	root.add_child(dock)
 	var untipped := _untipped(dock)
 	check("%s: every interactive control has a tooltip%s" % [addon, "" if untipped.is_empty() else " (missing: %s)" % ", ".join(untipped)], untipped.is_empty())
+	var unfocusable := _unfocusable(dock)
+	check("%s: every interactive control is keyboard-focusable%s" % [addon, "" if unfocusable.is_empty() else " (unfocusable: %s)" % ", ".join(unfocusable)], unfocusable.is_empty())
 	if addon in EDITOR_ONLY_ACTIONS:
 		print("SKIP  %s: run action needs the editor; constructed only" % addon)
 	elif dock.has_method("_on_run"):
@@ -60,6 +71,20 @@ func _smoke(addon: String, path: String) -> void:
 		check("%s: dock has a run action" % addon, false)
 	root.remove_child(dock)
 	dock.free()
+
+
+func _unfocusable(node: Node) -> Array:
+	var out: Array = []
+	# SpinBox delegates keyboard editing to an internal LineEdit; its own
+	# Control may correctly use FOCUS_NONE even though the field accepts Tab.
+	if node is SpinBox:
+		if (node as SpinBox).get_line_edit().focus_mode == Control.FOCUS_NONE:
+			out.append("SpinBox '%s' (editor)" % node.name)
+	elif (node is BaseButton or node is LineEdit or node is Range or node is TextEdit or node is ItemList or node is Tree) and node is Control and (node as Control).focus_mode == Control.FOCUS_NONE:
+		out.append("%s '%s'" % [node.get_class(), node.text if "text" in node else node.name])
+	for child in node.get_children():
+		out.append_array(_unfocusable(child))
+	return out
 
 
 func _untipped(node: Node) -> Array:

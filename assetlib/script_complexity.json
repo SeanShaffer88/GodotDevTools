@@ -1,0 +1,12 @@
+{
+  "asset_name": "Script Complexity Reporter",
+  "folder": "script_complexity",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Per-function branch complexity, length and nesting depth for GDScript, with thresholds.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-script_complexity-1.2.0.zip",
+  "readme": "addons/script_complexity/README.md"
+}

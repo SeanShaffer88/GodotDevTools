@@ -1,0 +1,12 @@
+{
+  "asset_name": "Controller Glyph and Prompt Validator",
+  "folder": "controller_glyphs",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Check that every action referenced in prompt text exists, is bound for each device family, and has a glyph image for each device.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-controller_glyphs-1.2.0.zip",
+  "readme": "addons/controller_glyphs/README.md"
+}

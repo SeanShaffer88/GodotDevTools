@@ -1,0 +1,12 @@
+{
+  "asset_name": "Texture Filter Consistency Checker",
+  "folder": "texture_filter",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Check pixel-art textures for mipmaps and lossy compression, and the project's default canvas filter.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-texture_filter-1.2.0.zip",
+  "readme": "addons/texture_filter/README.md"
+}

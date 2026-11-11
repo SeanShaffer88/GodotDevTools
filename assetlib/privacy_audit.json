@@ -1,0 +1,12 @@
+{
+  "asset_name": "Privacy and Permissions Auditor",
+  "folder": "privacy_audit",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Inventory everything in a project that touches the network, device identifiers, the clipboard, the microphone or camera, or opens external links, for privacy review.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-privacy_audit-1.2.0.zip",
+  "readme": "addons/privacy_audit/README.md"
+}

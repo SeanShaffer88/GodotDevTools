@@ -1,0 +1,12 @@
+{
+  "asset_name": "3D Light and Shadow Cost Estimator",
+  "folder": "light_cost",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Count 3D lights and shadow-casting lights per scene, following instanced scenes, against budgets.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-light_cost-1.2.0.zip",
+  "readme": "addons/light_cost/README.md"
+}

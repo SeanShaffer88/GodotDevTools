@@ -1,0 +1,12 @@
+{
+  "asset_name": "Animation Performance Auditor",
+  "folder": "anim_audit",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Find constant animation tracks, redundant keys, duplicate keys at the same time and animations with too many tracks.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-anim_audit-1.2.0.zip",
+  "readme": "addons/anim_audit/README.md"
+}

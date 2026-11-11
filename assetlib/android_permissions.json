@@ -1,0 +1,12 @@
+{
+  "asset_name": "Android Permissions Reviewer",
+  "folder": "android_permissions",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "List the permissions each Android export preset requests, flag commonly sensitive ones for review, and check each has a written justification.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-android_permissions-1.2.0.zip",
+  "readme": "addons/android_permissions/README.md"
+}
