@@ -38,6 +38,11 @@ func _initialize() -> void:
 	probe2.focus_mode = Control.FOCUS_NONE
 	check("focus check catches an unfocusable button", _unfocusable(probe2).size() == 1)
 	probe2.free()
+	var spin_probe := SpinBox.new()
+	check("focus check accepts a focusable SpinBox editor", _unfocusable(spin_probe).is_empty())
+	spin_probe.get_line_edit().focus_mode = Control.FOCUS_NONE
+	check("focus check catches an unfocusable SpinBox editor", _unfocusable(spin_probe).size() == 1)
+	spin_probe.free()
 	probe.free()
 	check("found a dock for every addon (%d docks, %d addons)" % [docks, addons.size()], docks == addons.size())
 	print("%d passed, %d failed" % [passes, failures])
@@ -70,7 +75,12 @@ func _smoke(addon: String, path: String) -> void:
 
 func _unfocusable(node: Node) -> Array:
 	var out: Array = []
-	if (node is BaseButton or node is LineEdit or node is Range or node is TextEdit or node is ItemList or node is Tree or node is OptionButton) and node is Control and (node as Control).focus_mode == Control.FOCUS_NONE:
+	# SpinBox delegates keyboard editing to an internal LineEdit; its own
+	# Control may correctly use FOCUS_NONE even though the field accepts Tab.
+	if node is SpinBox:
+		if (node as SpinBox).get_line_edit().focus_mode == Control.FOCUS_NONE:
+			out.append("SpinBox '%s' (editor)" % node.name)
+	elif (node is BaseButton or node is LineEdit or node is Range or node is TextEdit or node is ItemList or node is Tree) and node is Control and (node as Control).focus_mode == Control.FOCUS_NONE:
 		out.append("%s '%s'" % [node.get_class(), node.text if "text" in node else node.name])
 	for child in node.get_children():
 		out.append_array(_unfocusable(child))

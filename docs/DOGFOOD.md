@@ -20,4 +20,4 @@ Every dogfood finding that is wrong gets an entry in `docs/false_positives.md` w
 
 ## Performance
 
-`a11y_options` was the slowest scanner (4.4s on the synthetic project). It now compiles one combined regex per option and searches whole files instead of per-line lambdas, and supports incremental caching (`--cache=<file>`): unchanged files (by content hash) are skipped on rescans. See `addons/a11y_options/README.md`. Re-benchmark with `tests/bench/` after the first dogfood run.
+`a11y_options` was the slowest scanner (4.4s on the synthetic project). It now compiles each pattern once, searches whole files, and supports per-file incremental caching (`--cache=<file>`). Changing expectations invalidates the cache. See `addons/a11y_options/README.md`; the revised implementation has not yet been benchmarked on a real project.

@@ -36,7 +36,7 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Performance
 
-- A11y Options: one combined regex per option searched over whole files (was per-pattern, per-line lambdas), plus incremental `--cache` (unchanged files reuse prior evidence). Same findings; re-benchmark via `tests/bench/`.
+- A11y Options: precompiled expressions search whole files, with an incremental per-file `--cache`. Tests cover invalidation, deletion and evidence ordering; re-benchmark via `tests/bench/`.
 
 - Cleanup Workbench builds its reference set with one regex pass instead of searching the whole project text once per asset: 18.1 s down to 0.27 s on a 4,623-file project, with identical findings.
 - Privacy Auditor compiles each pattern once per scan instead of once per line: 6.2 s down to 1.9 s, with identical findings.

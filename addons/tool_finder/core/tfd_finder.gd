@@ -40,11 +40,10 @@ func build_catalog(addons_dir: String = "res://addons") -> Array:
 			continue
 		var title: String = str(name)
 		var desc := ""
-		for line in FileAccess.get_file_as_string(cfg).split("\n"):
-			if line.begins_with("name="):
-				title = line.trim_prefix("name=").trim_prefix("\"").trim_suffix("\"")
-			elif line.begins_with("description="):
-				desc = line.trim_prefix("description=").trim_prefix("\"").trim_suffix("\"")
+		var config := ConfigFile.new()
+		if config.load(cfg) == OK:
+			title = str(config.get_value("plugin", "name", name))
+			desc = str(config.get_value("plugin", "description", ""))
 		out.append({"id": name, "title": title, "description": desc, "folder": "addons/" + name})
 	return out
 
