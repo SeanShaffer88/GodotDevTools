@@ -193,4 +193,4 @@ Scored from evidence that runs in CI. The test gate runs on Godot 4.3-stable and
 | MCP server (stdlib stdio) + VSCode SARIF | mcp/, editors/vscode/ | Initialization and tool-list smoke-tested; Godot-backed calls and VS Code integration unverified |
 | Docker image + standalone naming subset | Dockerfile, tools/gdt, tools/standalone | Image help and standalone exit-code smoke-tested; mounted-project runs unverified |
 | Asset Library metadata generation | tools/assetlib/ | Verified (generator output committed in assetlib/) |
-| Dogfood harness + false-positive log | tests/dogfood/, docs/DOGFOOD.md | CI-ready; Verified after first real-project run |
+| Dogfood harness + false-positive log | tests/dogfood/, docs/DOGFOOD.md | Four scanners completed on pinned Brackeys and platformer projects in Godot 4.5 CI; sample review confirmed sidecar false positives. Full adjudication, a measured false-positive rate and production-scale dogfooding remain outstanding. |

@@ -60,6 +60,11 @@ jobs:
       - name: Show Godot version
         run: '".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64" --headless --version'
 
+      - name: Standalone naming parity with Godot
+        run: |
+          GDT_GODOT_BIN="$PWD/.godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64" \
+            python3 tests/test_standalone.py
+
       # These suites exercise the new addons before the long full gate. A
       # dependent GDScript parse/runtime error can otherwise leave SceneTree
       # running indefinitely, so bound each invocation and surface its log.
@@ -190,8 +195,9 @@ jobs:
       - name: The action wrote reports
         run: test -s reports/node_paths/node_paths.json && test -s reports/report_schema/report.schema.json
 
-      - name: Harness safety regressions
+      - name: Harness safety and reporting regressions
         run: |
           sh tests/dogfood/test_run_dogfood.sh
+          python3 tests/dogfood/test_reporting.py
           sh tests/editor/test_scratch_safety.sh
 

@@ -20,11 +20,5 @@ jobs:
         run: docker build -t godot-dev-tools .
       - name: Smoke test (help + list needs a project mount)
         run: docker run --rm godot-dev-tools --help
-      - name: Standalone parity (no Godot needed)
-        run: |
-          if python3 tools/standalone/standalone.py naming --dir=demo/naming; then
-            echo "Expected exit 2 for the bad naming fixture"
-            exit 1
-          else
-            test "$?" -eq 2
-          fi
+      - name: Standalone naming regressions (no Godot needed)
+        run: python3 tests/test_standalone.py

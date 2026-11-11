@@ -4,6 +4,22 @@ extends RefCounted
 const DEFAULT_PATTERN := "^[a-z][a-z0-9_]*$"
 const DEFAULT_NODE_PATTERN := "^[A-Z][A-Za-z0-9]*$"
 const EXCLUDED := ["addons", "reports", "visual_reports"]
+const GENERATED_SIDECAR_EXTENSIONS := ["import", "uid"]
+
+
+## Godot generates sidecars like texture.png.import and player.gd.uid from
+## the source filename. They are not independently named project assets.
+## A single-extension file (e.g. notes.import) and directories are still
+## audited. This filename heuristic also excludes orphaned sidecars.
+func _is_generated_sidecar(path: String, directory: bool) -> bool:
+    if directory:
+        return false
+    var filename := path.get_file()
+    return (
+        filename.get_extension().to_lower() in GENERATED_SIDECAR_EXTENSIONS
+        and not filename.get_basename().get_extension().is_empty()
+    )
+
 
 func run(root: String = "res://", pattern: String = DEFAULT_PATTERN, symbols: bool = false, symbol_patterns: Dictionary = {}) -> Dictionary:
     var issues: Array = []
@@ -37,10 +53,14 @@ func run(root: String = "res://", pattern: String = DEFAULT_PATTERN, symbols: bo
 
 ## Check explicit entries as well as filesystem scans; paths include res://.
 func analyze(entries: Array, pattern: String = DEFAULT_PATTERN) -> Dictionary:
+    var filtered: Array = []
+    for entry in entries:
+        if not _is_generated_sidecar(str(entry.get("path", "")), bool(entry.get("directory", false))):
+            filtered.append(entry)
     var regex := RegEx.new()
     if pattern.is_empty() or regex.compile(pattern) != OK:
-        return _result(entries, [_issue("error", "invalid_pattern", "", "The naming pattern is empty or invalid.", "Provide a valid non-empty Godot regular expression.")], pattern)
-    return _check_entries(entries, regex, pattern, [])
+        return _result(filtered, [_issue("error", "invalid_pattern", "", "The naming pattern is empty or invalid.", "Provide a valid non-empty Godot regular expression.")], pattern)
+    return _check_entries(filtered, regex, pattern, [])
 
 func _walk(path: String, entries: Array, issues: Array) -> void:
     var dir := DirAccess.open(path)
@@ -53,9 +73,10 @@ func _walk(path: String, entries: Array, issues: Array) -> void:
         if not name.begins_with(".") and name not in EXCLUDED:
             var full := path.path_join(name)
             var is_dir := dir.current_is_dir()
-            entries.append({"path": full, "directory": is_dir})
-            if is_dir:
-                _walk(full, entries, issues)
+            if not _is_generated_sidecar(full, is_dir):
+                entries.append({"path": full, "directory": is_dir})
+                if is_dir:
+                    _walk(full, entries, issues)
         name = dir.get_next()
     dir.list_dir_end()
 

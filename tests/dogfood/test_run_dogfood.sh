@@ -24,7 +24,10 @@ while [ "$#" -gt 0 ]; do
 done
 [ -f "$work/project.godot" ]
 [ "$work" != "$ORIGINAL_PROJECT" ]
-[ -n "$script" ] || exit 0
+if [ -z "$script" ]; then
+  [ "${MOCK_IMPORT_FAIL:-}" != 1 ] || exit 11
+  exit 0
+fi
 relative="${script#res://}"
 [ -f "$work/$relative" ] || { echo "missing script: $script" >&2; exit 1; }
 addon="${relative#addons/}"
@@ -42,7 +45,8 @@ for addon in naming_conventions a11y_options duplicate_code script_complexity; d
   test -f "$TMP/results/$addon.log"
 done
 python3 "$SRC/tests/dogfood/dogfood.py" "$TMP/results" > "$TMP/summary"
-grep -q 'elapsed_ms=' "$TMP/summary"
+grep -q 'process import: elapsed_ms=.*exit_code=0 timed_out=false' "$TMP/summary"
+grep -q 'report naming_conventions.json: timing=recorded' "$TMP/summary"
 if python3 "$SRC/tests/dogfood/timed_run.py" "$TMP/timeout.timing.json" 0.05 python3 -c 'import time; time.sleep(2)' >/dev/null 2>&1; then
   echo "FAIL: timed command did not time out" >&2
   exit 1
@@ -54,7 +58,7 @@ python3 - "$TMP/timeout.timing.json" <<'PY'
 import json, sys
 with open(sys.argv[1], encoding="utf-8") as f:
     timing = json.load(f)
-assert timing["exit_code"] == 124 and timing["elapsed_ms"] >= 0
+assert timing["exit_code"] == 124 and timing["timed_out"] is True and timing["elapsed_ms"] >= 0
 PY
 test "$(cat "$PROJECT/addons/naming_conventions/keep.txt")" = "original addon"
 test ! -e "$PROJECT/addons/naming_conventions/core/nc_audit.gd"
@@ -72,6 +76,18 @@ if ORIGINAL_PROJECT="$PROJECT" MOCK_FAIL=duplicate_code sh "$SRC/tests/dogfood/r
   exit 1
 fi
 test -f "$TMP/failing/duplicate_code.log"
+python3 "$SRC/tests/dogfood/dogfood.py" "$TMP/failing" > "$TMP/failing-summary"
+grep -q 'process duplicate_code: elapsed_ms=.*exit_code=7 timed_out=false' "$TMP/failing-summary"
+if ORIGINAL_PROJECT="$PROJECT" MOCK_IMPORT_FAIL=1 sh "$SRC/tests/dogfood/run_dogfood.sh" "$MOCK" "$PROJECT" "$TMP/import-failing" >/dev/null 2>&1; then
+  echo "FAIL: import error was ignored" >&2
+  exit 1
+fi
+if python3 "$SRC/tests/dogfood/dogfood.py" "$TMP/import-failing" > "$TMP/import-summary" 2>&1; then
+  echo "FAIL: summary without reports was accepted" >&2
+  exit 1
+fi
+grep -q 'process import: elapsed_ms=.*exit_code=11 timed_out=false' "$TMP/import-summary"
+grep -q 'No dogfood reports' "$TMP/import-summary"
 if ORIGINAL_PROJECT="$PROJECT" sh "$SRC/tests/dogfood/run_dogfood.sh" "$MOCK" "$PROJECT" "$PROJECT/results" >/dev/null 2>&1; then
   echo "FAIL: output inside source project was accepted" >&2
   exit 1
