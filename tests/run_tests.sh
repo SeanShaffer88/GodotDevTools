@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp smc pcw ssg npd aeh gsb crp scr pbt rlf pfl ppa ocn eam tfd fxe spm cvg dka docks; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp smc pcw ssg npd aeh gsb crp scr pbt rlf pfl ppa ocn eam tfd fxe spm cvg dka aea ata alt android_docks docks; do
   echo "== test_$t =="
   # A GDScript error in _init can leave SceneTree alive forever. Fail the
   # offending suite promptly rather than timing out the entire CI job.
@@ -423,6 +423,38 @@ echo "== CLI smoke: dock a11y =="
 test -s reports/dock_a11y/dock_a11y.json
 gate "dock a11y must exit 2 on missing tooltip" \
   res://addons/dock_a11y/cli/dka_cli.gd -- --dir=res://demo/dock_a11y --fail-on=missing_tooltip
+echo "== CLI smoke: Android export, touch and logcat =="
+"$GODOT" --headless --path . --script res://addons/android_export_audit/cli/aea_cli.gd -- --presets=res://demo/android_dev/export_clean.cfg --fail-on=errors
+"$GODOT" --headless --path . --script res://addons/android_touch_audit/cli/ata_cli.gd -- --input=res://demo/android_dev/touch_clean.json --fail-on=errors
+"$GODOT" --headless --path . --script res://addons/android_logcat_triage/cli/alt_cli.gd -- --log=res://demo/android_dev/logcat_clean.txt --fail-on=errors
+gate "Android export history catches a repeated version code" \
+  res://addons/android_export_audit/cli/aea_cli.gd -- --presets=res://demo/android_dev/export_presets.cfg --history=res://demo/android_dev/release_history.json --fail-on=version_not_increased
+gate "touch audit catches a small target" \
+  res://addons/android_touch_audit/cli/ata_cli.gd -- --input=res://demo/android_dev/touch_snapshot.json --fail-on=small_target
+gate "logcat triage catches a Java crash" \
+  res://addons/android_logcat_triage/cli/alt_cli.gd -- --log=res://demo/android_dev/logcat.txt --package=com.studio.game --fail-on=java_crash
+for report in android_export_audit android_touch_audit android_logcat_triage; do
+  test -s "reports/$report/$report.json"
+  test -s "reports/$report/$report.md"
+done
+if grep -q 'DEMO_SECRET_NOT_REAL' reports/android_export_audit/android_export_audit.json || grep -q 'DO_NOT_COPY_THIS' reports/android_logcat_triage/android_logcat_triage.json; then
+  echo "FAIL: private fixture values appeared in Android reports"; exit 1
+fi
+expect_input_error() {
+  if "$GODOT" --headless --path . --script "$@"; then
+    echo "FAIL: expected input error exit 1"; exit 1
+  else
+    [ $? -eq 1 ] || { echo "FAIL: expected input error exit 1"; exit 1; }
+  fi
+}
+expect_input_error res://addons/android_export_audit/cli/aea_cli.gd -- --presets=res://missing_android_presets.cfg
+expect_input_error res://addons/android_touch_audit/cli/ata_cli.gd -- --input=res://missing_touch_snapshot.json
+expect_input_error res://addons/android_logcat_triage/cli/alt_cli.gd -- --log=res://missing_logcat.txt
+expect_input_error res://addons/android_touch_audit/cli/ata_cli.gd -- --input=res://demo/android_dev/touch_clean.json --min-dp=not-a-number
+expect_input_error res://addons/android_logcat_triage/cli/alt_cli.gd -- --log=res://demo/android_dev/logcat.txt --fail-on=not-a-kind
+expect_input_error res://addons/android_touch_audit/cli/ata_cli.gd -- --input=res://demo/android_dev/touch_clean.json --fail-on=,
+expect_input_error res://addons/android_export_audit/cli/aea_cli.gd -- --presets=res://demo/android_dev/export_clean.cfg --out=res://demo/android_dev/export_clean.cfg/subdir
+
 echo "== CLI smoke: a11y options incremental cache =="
 "$GODOT" --headless --path . --script res://addons/a11y_options/cli/aoc_cli.gd -- --dir=res://demo/shipping --cache=res://reports/a11y_options/cache.json
 test -s reports/a11y_options/cache.json

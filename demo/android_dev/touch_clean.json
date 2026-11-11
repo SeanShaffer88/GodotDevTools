@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "screen": {"size_px": [400, 800], "safe_area_px": [0, 20, 400, 760], "density_dpi": 160},
+  "targets": [
+    {"path": "/Menu/Play", "rect_px": [30, 80, 80, 60]},
+    {"path": "/Menu/Quit", "rect_px": [140, 80, 80, 60]}
+  ]
+}

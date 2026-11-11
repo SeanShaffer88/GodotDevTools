@@ -1,0 +1,21 @@
+--------- beginning of crash
+11-11 13:00:00.000  120  120 E AndroidRuntime: FATAL EXCEPTION: main
+11-11 13:00:00.001  120  120 E AndroidRuntime: Process: com.studio.game, PID: 120
+11-11 13:00:00.002  120  120 E AndroidRuntime: java.lang.RuntimeException: token=DO_NOT_COPY_THIS
+11-11 13:00:00.003  120  120 E AndroidRuntime:     at com.studio.game.MainActivity.resume(MainActivity.java:42)
+11-11 13:00:00.004  120  120 E AndroidRuntime: Caused by: java.lang.NullPointerException: private player data
+11-11 13:00:00.005  120  120 E AndroidRuntime:     at com.studio.game.Player.load(Player.java:17)
+11-11 13:00:01.000  120  120 E AndroidRuntime: FATAL EXCEPTION: main
+11-11 13:00:01.001  120  120 E AndroidRuntime: Process: com.studio.game, PID: 120
+11-11 13:00:01.002  120  120 E AndroidRuntime: java.lang.RuntimeException: password=ANOTHER_PRIVATE_VALUE
+11-11 13:00:01.003  120  120 E AndroidRuntime:     at com.studio.game.MainActivity.resume(MainActivity.java:88)
+11-11 13:00:01.004  120  120 E AndroidRuntime: Caused by: java.lang.NullPointerException: different message
+11-11 13:00:01.005  120  120 E AndroidRuntime:     at com.studio.game.Player.load(Player.java:18)
+11-11 13:00:02.000  120  121 F libc: Fatal signal 11 (SIGSEGV), code 1, fault addr 0x1234 in tid 121 (RenderThread), pid 120 (com.studio.game)
+11-11 13:00:03.000  700  720 E ActivityManager: ANR in com.studio.game:remote
+11-11 13:00:04.000  333  333 E AndroidRuntime: FATAL EXCEPTION: worker
+11-11 13:00:04.001  333  333 E AndroidRuntime: java.lang.OutOfMemoryError: secret details
+11-11 13:00:05.000  555  555 E AndroidRuntime: FATAL EXCEPTION: main
+11-11 13:00:05.001  555  555 E AndroidRuntime: Process: com.other.app, PID: 555
+11-11 13:00:05.002  555  555 E AndroidRuntime: java.lang.SecurityException: unrelated
+11-11 13:00:05.003  555  555 E AndroidRuntime:     at com.other.app.Start.run(Start.java:1)

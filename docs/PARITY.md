@@ -1,6 +1,6 @@
 # GodotDevTools - Capability Parity
 
-Scored from evidence that runs in CI. The test gate runs on Godot 4.3-stable and 4.5-stable. On Godot 4.3, two more sessions run under Xvfb with software OpenGL: a real-editor session that clicks every dock's run button (`tests/editor/run_editor_session.sh`) and a live-game session that drives every runtime node (`tests/game/run_live_game.sh`).
+Scored from evidence that runs in CI. The test gate runs on Godot 4.3-stable and 4.5-stable. On Godot 4.3, two more sessions run under Xvfb with software OpenGL: a real-editor session that clicks every enabled dock's run button (`tests/editor/run_editor_session.sh`) and a live-game session for the existing runtime nodes (`tests/game/run_live_game.sh`). Historical broad claims below describe the baseline before the three new Android addons; their current evidence is recorded separately at the end.
 
 - **Verified**: a test check, CLI gate or one of those sessions proves it.
 - **Partially Verified**: the core is verified and the dock passes the editor session, but this particular editor interaction is not automated.
@@ -175,8 +175,8 @@ Scored from evidence that runs in CI. The test gate runs on Godot 4.3-stable and
 | Privacy and Permissions Auditor: data-touching API inventory | privacy_audit core + CLI + dock | Verified (headless suite and CLI gate on Godot 4.3 and 4.5; dock in the editor session) |
 | Offline and Poor-Connection Test Harness: static checks plus seeded fault-injecting HTTP node | offline_harness core + CLI + dock + runtime node | Verified (headless suite and CLI gate on Godot 4.3 and 4.5; dock in the editor session; runtime node in the live game) |
 | Editor Action Macro Recorder: recorded property macros with preview and explicit apply | macro_recorder core + CLI + dock | Verified (headless suite and CLI gate on Godot 4.3 and 4.5; dock in the editor session) |
-| Every tool: editor dock with tooltips + offline help | ui/ docks | Verified (all 133 docks: tooltips on every control by `tests/test_docks.gd`; real clicks in a real editor session by `tests/editor`, including Macro Recorder preview and Inspector-edit recording) |
-| Every tool: headless CLI with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
+| Earlier 133-tool baseline: editor docks with tooltips | ui/ docks | Verified (baseline docks: tooltips by `tests/test_docks.gd`; real clicks in a real editor session by `tests/editor`, including Macro Recorder preview and Inspector-edit recording) |
+| Earlier baseline: headless CLIs with JSON/Markdown reports and --fail-on gates | cli/ | Verified |
 | Full gate runs automatically on push/PR, on Godot 4.3-stable and 4.5-stable | .github/workflows/tests.yml | Verified (CI green on both) |
 | Releases: zips built from addons/ and attached on v* tags, gate runs first | .github/workflows/release.yml | Verified (v1.2.0: gate passed, 134 zips published) |
 | Asset Health: per-platform GPU texture estimates (desktop BC1/BC3/BC7/BC5, mobile ETC2/ASTC) and platform budgets | asset_health core + CLI | Verified (format and size rules tested; estimates from import settings, not device measurements) |
@@ -194,3 +194,16 @@ Scored from evidence that runs in CI. The test gate runs on Godot 4.3-stable and
 | Docker image + standalone naming subset | Dockerfile, tools/gdt, tools/standalone | Image help and Python fixture tests passed; standalone/Godot CLI naming parity passed on Linux 4.3/4.5, experimental 4.4/4.6, and Windows 4.3 CI. Mounted-project Docker runs remain unverified. |
 | Asset Library metadata generation | tools/assetlib/ | Verified (generator output committed in assetlib/) |
 | Dogfood harness + false-positive log | tests/dogfood/, docs/DOGFOOD.md | Four scanners completed on pinned Brackeys and platformer projects in Godot 4.5 CI; sample review confirmed sidecar false positives. Full adjudication, a measured false-positive rate and production-scale dogfooding remain outstanding. |
+
+## Android additions (2026-11-11)
+
+At code commit `1678b02`, the full [Linux CI gate](https://github.com/SeanShaffer88/GodotDevTools/actions/runs/43033846983) passed on Godot 4.3 and 4.5, plus the experimental 4.4 and 4.6 targets. The [Windows CI gate](https://github.com/SeanShaffer88/GodotDevTools/actions/runs/43033846801) passed on 4.3. Both workflows also passed their general editor run-button and existing live-game sessions. Hosted sessions do not prove hardware-GPU behavior or Android device behavior.
+
+| Capability | Evidence and limits |
+|---|---|
+| Android export preset and supplied version-code history audit | The full gates include `tests/test_aea.gd`, CLI clean/exit-2/exit-1 cases and fixture-secret omission checks. 28 checks also passed locally in a minimal source-built 4.3 template. No actual Android export or store submission was tested. |
+| Android touch/safe-area snapshot analysis and capture helper | The full gates include `tests/test_ata.gd` and CLI cases; 32 local checks covered synthetic geometry, capture from a headless scene tree, limits and explicit file writing. Coordinate mapping and touch handling have not been verified on an Android device. |
+| Android logcat crash triage | The full gates include `tests/test_alt.gd` and CLI cases; 23 local checks used synthetic threadtime logs, including grouping, package filters and omission of fake secrets. No real-device logs or native symbolication were validated. |
+| Three Android dock wrappers | `tests/test_android_docks.gd` passed 11 headless checks for tooltips/focus, supplied fixture inputs and output refresh. The Linux and Windows editor sessions clicked each new dock's general run button; they did not validate every control interaction or the Android capture helper on a device. |
+
+The initial [Docker image build](https://github.com/SeanShaffer88/GodotDevTools/actions/runs/43033846869) failed before its smoke test, with logs unavailable in this sandbox. A [diagnostic rerun](https://github.com/SeanShaffer88/GodotDevTools/actions/runs/43035324442) showed that the Docker build container could not resolve Ubuntu package servers. A subsequent [host-network attempt](https://github.com/SeanShaffer88/GodotDevTools/actions/runs/43035527114) failed with the same DNS symptoms, so that speculative change was reverted. The workflow emits bounded failure diagnostics; consult the PR's latest checks for the outcome. The underlying DNS cause is unconfirmed.

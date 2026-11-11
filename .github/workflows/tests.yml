@@ -73,7 +73,7 @@ jobs:
         run: |
           set +e
           failed=0
-          for suite in tfd fxe spm cvg dka aoc gdt vfm; do
+          for suite in tfd fxe spm cvg dka aoc gdt vfm aea ata alt android_docks; do
             log="$RUNNER_TEMP/preflight-$suite.log"
             timeout 30s ".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64" --headless --path . --script "res://tests/test_$suite.gd" > "$log" 2>&1
             status=$?

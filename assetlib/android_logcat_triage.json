@@ -1,0 +1,12 @@
+{
+  "asset_name": "Android Logcat Crash Triage",
+  "folder": "android_logcat_triage",
+  "version": "1.0.0",
+  "author": "Sean Shaffer",
+  "description": "Group supported Android logcat fatal exceptions, native signals and ANRs without sharing raw log messages.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-android_logcat_triage-1.0.0.zip",
+  "readme": "addons/android_logcat_triage/README.md"
+}

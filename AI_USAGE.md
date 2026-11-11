@@ -217,6 +217,9 @@ godot --headless --path . --script res://addons/network_sim/cli/mns_cli.gd -- \
 | `suite_presets/cli/spm_cli.gd` | `--preset=full,ci_only,mobile_perf,content,testing` `--project` `--apply` `--out` `--fail-on=unknown_preset` |
 | `coverage_gate/cli/cvg_cli.gd` | `--dir` `--tests` `--min-percent` `--out` `--fail-on=below_threshold` |
 | `dock_a11y/cli/dka_cli.gd` | `--dir` `--out` `--fail-on=missing_tooltip,missing_run_action,keyboard_focus_unverified` |
+| `android_export_audit/cli/aea_cli.gd` | `--presets` (default `res://export_presets.cfg`) `--history` `--out` `--fail-on`; see addon README for kinds |
+| `android_touch_audit/cli/ata_cli.gd` | `--input` (default `user://touch_snapshot.json`) `--min-dp` (48) `--gap-dp` (8) `--out` `--fail-on`; see addon README |
+| `android_logcat_triage/cli/alt_cli.gd` | `--log` (default `user://android_logcat.txt`) `--package` `--out` `--fail-on`; see addon README |
 | `a11y_options/cli/aoc_cli.gd` (updated) | adds `--cache=<file>` for incremental rescans |
 
 Non-GDScript entry points: Docker `gdt gate|list|run <tool>` (`tools/gdt`, `Dockerfile`), MCP `python3 mcp/mcp_server.py` (`run_<tool>` per catalog tool), standalone `python3 tools/standalone/standalone.py naming --dir=...`, docs catalog `python3 tools/docs_site/generate.py`, Asset Library `python3 tools/assetlib/generate_assetlib.py`, coverage trend `python3 tools/coverage/coverage_trend.py <report.json>`.
@@ -224,8 +227,8 @@ Non-GDScript entry points: Docker `gdt gate|list|run <tool>` (`tools/gdt`, `Dock
 ### In the editor
 
 Enable a plugin under **Project -> Project Settings -> Plugins**; its dock
-appears on the editor's right side with **Run check**, a results list and a
-`?` offline help button. Two docks do more than run the check:
+appears in the editor with a run action and a results list. Control tooltips
+and addon READMEs provide offline help. Some docks do more than run a check:
 
 - **Visual Regression**: the Capture section (scene list, output folder,
   **Capture now**) is the one-click shutter - it instantiates each scene in an
