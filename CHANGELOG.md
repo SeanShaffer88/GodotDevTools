@@ -34,6 +34,7 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Fixed
 
+- Release packaging uses a validated shared addon-name manifest, includes the MIT notice in each addon, and checks archives offline before publication. Asset Library metadata can now target the same release-tagged filenames; its existing untagged filenames remain available. `--out` is honored and `--check` detects stale metadata. Existing releases and submissions are unchanged.
 - Seed Replay runtime node: `randi_range` and `randf_range` called the engine's unseeded global `randf()`, so seeded replays diverged. They now use the node's recorded generator. Found by the live-game session; a regression test is added.
 - Pool Advisor runtime counter: an unknown field name now raises a warning and is ignored, instead of causing a script error.
 

@@ -62,11 +62,10 @@ Releases are cut from tags, not from hand-made zips:
 
 1. Update `CHANGELOG.md`: rename `[Unreleased]` to the new version + date,
    start a fresh empty `[Unreleased]`.
-2. Bump `version` in every `addons/*/plugin.cfg` being released.
-3. Merge the release-preparation changes into `main`. Dispatch the release workflow on `main` with the tag, for example `gh workflow run release.yml --ref main -f tag=v1.2.0`. The workflow creates the tag and release only after the gate passes. A manually pushed `v*` tag also triggers the workflow.
-4. The release workflow re-runs the full gate, then builds
-   `GodotDevTools-<Tool>-v1.2.0.zip` per tool plus
-   `GodotDevTools-Suite-v1.2.0.zip` and attaches them to a GitHub Release.
+2. Bump `version` in every `addons/*/plugin.cfg` being released. Add any new addon and its unique release asset stem to `tools/release/manifest.json`, then refresh the untagged metadata with `python3 tools/assetlib/generate_assetlib.py`.
+3. Run `python3 tests/test_release_assets.py` to check manifest completeness, generated metadata and all archive contents without publishing. For release-specific submission JSON and a local archive build, see `docs/ASSETLIB.md`.
+4. Merge the release-preparation changes into `main`. Dispatch the release workflow on `main` with the intended tag, for example `gh workflow run release.yml --ref main -f tag=v1.2.3`. The workflow creates the tag and release only after the gate passes. A manually pushed `v*` tag also triggers the workflow.
+5. The release workflow re-runs the gate, then uses `tools/release/build_archives.py` to build `GodotDevTools-<Tool>-<tag>.zip` per tool plus `GodotDevTools-Suite-<tag>.zip` and attaches them to a GitHub Release. Each packaged addon includes the repository MIT notice. Existing releases are not changed.
 
 If the gate fails, no release is published - fix forward and tag again.
 
