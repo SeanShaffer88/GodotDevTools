@@ -85,8 +85,17 @@ gate "seed replay must exit 2 on the tampered log" \
   res://addons/seed_replay/cli/sdr_cli.gd -- --log=res://demo/seeds/tampered_log.json --fail-on=mismatch
 gate "whitebox must exit 2 on the off-grid fixture" \
   res://addons/whitebox/cli/wbx_cli.gd -- --fail-on=off_grid,steep_slope
-gate "vfs mock must exit 2 on the case collision" \
-  res://addons/vfs_mock/cli/vfm_cli.gd -- --fail-on=case_collision
+gate "vfs mock must exit 2 on a non-portable path" \
+  res://addons/vfs_mock/cli/vfm_cli.gd -- --fail-on=backslash_path
+# The checkout can only contain both fixtures on a case-sensitive filesystem.
+# The in-memory collision detector is tested on every platform in test_vfm.gd.
+case_fixture_count=$(find demo/vfs -maxdepth 1 -type f | awk '/\/(Save\.JSON|save\.json)$/ {n++} END {print n+0}')
+if [ "$case_fixture_count" -eq 2 ]; then
+  gate "vfs mock must exit 2 on the case collision" \
+    res://addons/vfs_mock/cli/vfm_cli.gd -- --fail-on=case_collision
+else
+  echo "SKIP: filesystem cannot represent both case-collision fixtures"
+fi
 gate "tilemap rules must exit 2 on the asymmetric rule" \
   res://addons/tilemap_rules/cli/tmr_cli.gd -- --fail-on=asymmetric_rule
 echo "== CLI smoke: test runner plans the real suite =="

@@ -45,7 +45,11 @@ func _init() -> void:
     _check("backslash literal audited", audit_kinds.has("backslash_path"), str(audit))
     _check("drive letter audited", audit_kinds.has("drive_letter"))
     _check("hardcoded climb audited", audit_kinds.has("path_traversal"))
+    var distinct_names := ["res://demo/vfs/Save.JSON", "res://demo/vfs/save.json"]
+    _check("case collision detected from an explicit file list", _kinds(op.case_collisions(distinct_names)).has("case_collision"))
+    _check("identical path listed twice is not a case collision", not _kinds(op.case_collisions([distinct_names[0], distinct_names[0]])).has("case_collision"))
     var r: Dictionary = op.run()
-    _check("project self-check flags the case collision (gate kind)", _kinds(r["issues"]).has("case_collision"), str(r["by_kind"]))
+    var expected_collision: bool = _kinds(op.case_collisions(files)).has("case_collision")
+    _check("project self-check matches collisions in the actual listing", _kinds(r["issues"]).has("case_collision") == expected_collision, str(r["by_kind"]))
     _check("to_markdown renders a title", op.to_markdown(r).begins_with("# "))
     _finish("Cross-Platform Virtual Filesystem TESTS")

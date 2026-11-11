@@ -97,7 +97,8 @@ jobs:
               tail -100 gate.log
               echo '```'
             } >> "$GITHUB_STEP_SUMMARY"
-            message=$(tail -100 gate.log)
+            message=$(grep -E '^FAIL|SCRIPT ERROR|Parse Error|[1-9][0-9]* failed|^Error:' gate.log | tail -30)
+            if [ -z "$message" ]; then message=$(tail -20 gate.log); fi
             message=${message//'%'/'%25'}
             message=${message//$'\n'/'%0A'}
             message=${message//$'\r'/'%0D'}

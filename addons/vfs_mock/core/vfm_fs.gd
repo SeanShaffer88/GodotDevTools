@@ -161,19 +161,26 @@ func _walk(dir_path: String, out: Array) -> void:
     dir.list_dir_end()
 
 
-func run(requests: Array = [], audit_scripts: bool = true) -> Dictionary:
+## Detect collisions from an explicit list so this logic can be tested even
+## on filesystems that cannot store two names differing only in case.
+func case_collisions(files: Array) -> Array:
     var issues: Array = []
-    var files := collect_files()
-    var checked := 0
     var by_lower: Dictionary = {}
     for f in files:
         var key := str(f).to_lower()
-        if by_lower.has(key):
+        if by_lower.has(key) and str(by_lower[key]) != str(f):
             issues.append({"severity": "error", "kind": "case_collision", "path": str(f),
                 "message": "'%s' and '%s' differ only by case - case-insensitive exports (Windows, macOS) collapse them onto one file." % [str(by_lower[key]), str(f)],
                 "fix": "Rename one of them; the collision survives export and one file silently wins."})
         else:
             by_lower[key] = f
+    return issues
+
+
+func run(requests: Array = [], audit_scripts: bool = true) -> Dictionary:
+    var files := collect_files()
+    var issues: Array = case_collisions(files)
+    var checked := 0
     if requests.is_empty():
         # No explicit requests: self-check the real tree - every file
         # "read" under every profile catches case/reserved/length bugs.

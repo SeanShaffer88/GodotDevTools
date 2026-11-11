@@ -27,7 +27,7 @@ func _init() -> void:
 	add_child(_output)
 
 func _on_run() -> void:
-	var key := Core.PRESETS.keys()[_preset.selected]
+	var key: String = str(Core.PRESETS.keys()[_preset.selected])
 	var result: Dictionary = Core.new().run(key, {})
 	var lines: Array[String] = ["Summary: " + str(result["summary"]), "Enabled: " + ", ".join(result.get("enabled", []).slice(0, 12))]
 	_output.text = "\n".join(lines)
