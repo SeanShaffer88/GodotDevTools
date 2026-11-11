@@ -35,6 +35,11 @@ jobs:
       - name: Show Godot version
         shell: bash
         run: ".godot-bin/Godot_v4.3-stable_win64_console.exe --headless --version || .godot-bin/Godot_v4.3-stable_win64.exe --headless --version"
+      - name: Standalone naming parity with Godot
+        shell: bash
+        run: |
+          GODOT_BIN=$(ls .godot-bin/*console*.exe 2>/dev/null || ls .godot-bin/*.exe | head -n 1)
+          GDT_GODOT_BIN="$(cygpath -w "$PWD/$GODOT_BIN")" python tests/test_standalone.py
       - name: Run full gate (Windows)
         shell: bash
         run: |

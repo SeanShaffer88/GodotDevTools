@@ -65,7 +65,7 @@ Scored from evidence that runs in CI. The test gate runs on Godot 4.3-stable and
 | Prefab instance override classification (dead vs hiding), rollback plans, scene writes only under explicit --apply | prefab_guard core + CLI | Verified (apply path fixture-checked; scenes are source code, so writes are opt-in) |
 | ## doc comment, signal, export and function parsing to Markdown + dependency-free HTML; undocumented-public-API flagging | doc_gen core + CLI | Verified |
 | Scene Dependency Map: literal-reference graph, roots, missing references, cycles, long chains and unused candidates | scene_dependency core + dock + CLI | Verified (gate on 4.3/4.5; dock in the editor session; static analysis can miss dynamic and binary dependencies) |
-| Naming and Folder Convention Enforcer: configurable file and directory naming audit | naming_conventions core + CLI + dock | Verified (gate on 4.3/4.5; dock in the editor session) |
+| Naming and Folder Convention Enforcer: configurable file and directory naming audit | naming_conventions core + CLI + dock | Gate including sidecar regressions passed on Linux 4.3/4.5 and Windows 4.3; two small real-project scans passed. Dock exercised in the editor session; production-scale and hands-on use remain unverified. |
 | Naming Conventions: static scene node, signal and group naming audit | naming_conventions core + CLI + dock | Verified (gate on 4.3/4.5; dock in the editor session; text heuristics) |
 | Subtitle timing and readability: JSON cue audit | subtitle_audit core + CLI + dock | Verified (gate on 4.3/4.5; dock in the editor session; no audio sync) |
 | Player Telemetry Schema Validator: local event and field validation | telemetry_schema core + CLI + dock | Verified (gate on 4.3/4.5; dock in the editor session; no runtime traffic or automatic privacy detection) |
@@ -191,6 +191,6 @@ Scored from evidence that runs in CI. The test gate runs on Godot 4.3-stable and
 | Dock tooltip/focus/run-action audit | dock_a11y core + test_docks focus check | Gate and general editor session passed in CI; source audit is heuristic |
 | Windows gate + sessions | windows-gpu.yml | Passed on hosted CI; hardware-GPU and hands-on use still unverified |
 | MCP server (stdlib stdio) + VSCode SARIF | mcp/, editors/vscode/ | Initialization and tool-list smoke-tested; Godot-backed calls and VS Code integration unverified |
-| Docker image + standalone naming subset | Dockerfile, tools/gdt, tools/standalone | Image help and standalone exit-code smoke-tested; mounted-project runs unverified |
+| Docker image + standalone naming subset | Dockerfile, tools/gdt, tools/standalone | Image help and Python fixture tests passed; standalone/Godot CLI naming parity passed on Linux 4.3/4.5, experimental 4.4/4.6, and Windows 4.3 CI. Mounted-project Docker runs remain unverified. |
 | Asset Library metadata generation | tools/assetlib/ | Verified (generator output committed in assetlib/) |
-| Dogfood harness + false-positive log | tests/dogfood/, docs/DOGFOOD.md | CI-ready; Verified after first real-project run |
+| Dogfood harness + false-positive log | tests/dogfood/, docs/DOGFOOD.md | Four scanners completed on pinned Brackeys and platformer projects in Godot 4.5 CI; sample review confirmed sidecar false positives. Full adjudication, a measured false-positive rate and production-scale dogfooding remain outstanding. |

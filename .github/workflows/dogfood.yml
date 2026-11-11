@@ -87,19 +87,26 @@ jobs:
         run: |
           dir="$RUNNER_TEMP/dogfood-${{ matrix.id }}"
           if [ -d "$dir" ]; then
-            summary=$(python3 tests/dogfood/dogfood.py "$dir")
+            set +e
+            summary=$(python3 tests/dogfood/dogfood.py "$dir" 2>&1)
+            summary_status=$?
+            set -e
             {
               echo '### Dogfood: ${{ matrix.repository }} at ${{ matrix.revision }}'
               echo '```'
               printf '%s\n' "$summary"
               echo '```'
-              echo 'Timings include process startup and are not controlled benchmarks. Findings require human review.'
+              echo 'Elapsed times include process startup and scheduling; these are not scanner-only measurements or controlled benchmarks. Findings require human review.'
             } >> "$GITHUB_STEP_SUMMARY"
-            while IFS= read -r line; do
-              line=${line//'%'/'%25'}
-              line=${line//$'\r'/'%0D'}
-              echo "::notice title=Dogfood ${{ matrix.id }}::$line"
-            done <<< "$summary"
+            # Keep the whole summary together: GitHub caps annotations per step.
+            message=${summary//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::notice title=Dogfood ${{ matrix.id }}::$message"
+            exit "$summary_status"
+          else
+            echo '::error::Dogfood output directory was not created.'
+            exit 1
           fi
 
       - name: Upload dogfood reports and logs

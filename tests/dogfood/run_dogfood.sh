@@ -1,5 +1,6 @@
 #!/bin/sh
-# Dogfood a trusted Godot project without modifying its source directory.
+# Dogfood a trusted Godot project using a disposable copy. This is not a
+# sandbox: project code/plugins and spawned children can access outside it.
 # Usage: sh tests/dogfood/run_dogfood.sh <godot-binary> <project-dir> [new-output-dir]
 set -eu
 GODOT="${1:?godot binary}"
