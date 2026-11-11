@@ -12,7 +12,7 @@ All notable changes to GodotDevTools are recorded here. The format follows
 - Suite Presets (`suite_presets`): `full`, `ci_only`, `mobile_perf`, `content`, `testing` plugin profiles; preview in the dock, apply via CLI `--apply` (backs up `project.godot`). Dock, CLI, fixture and test suite.
 - Coverage Gate (`coverage_gate`): GDScript coverage *estimate* from test evidence (function-name mentions), `--min-percent` gating, trend scripts in `tools/coverage/`. Dock, CLI, fixture and test suite.
 - Dock Accessibility Audit (`dock_a11y`): audits `*_dock.gd` for tooltips, run action and focus; dogfoods a11y on the tools themselves. Dock, CLI, fixture and test suite.
-- Windows CI prototype: `.github/workflows/windows-gpu.yml` (gate + editor/live-game sessions on `windows-latest`), `tests/windows/run_windows_gate.ps1`, `docs/WINDOWS_GPU.md`. Pending a green run; hosted CI cannot establish hands-on hardware-GPU support.
+- Windows CI: `.github/workflows/windows-gpu.yml` (gate + editor/live-game sessions on `windows-latest`), `tests/windows/run_windows_gate.ps1`, `docs/WINDOWS_GPU.md`. The workflow passed on `d430a6c`; hosted CI cannot establish hands-on hardware-GPU support.
 - Docs site + catalog: `mkdocs.yml`, `tools/docs_site/generate.py` -> `docs/catalog.json` + `docs/TOOLS.md` (138 tools).
 - MCP server (`mcp/mcp_server.py`, stdlib stdio, offline) exposing every CLI as `run_<tool>`, plus VSCode SARIF extension (`editors/vscode/`).
 - Docker image (`Dockerfile`, `tools/gdt` wrapper, `.github/workflows/docker.yml`) and standalone Python subset (`tools/standalone/standalone.py`, naming check, exit-2 parity).

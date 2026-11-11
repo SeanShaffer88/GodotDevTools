@@ -59,7 +59,9 @@ for addon_source in "$SRC"/addons/*; do
 done
 
 # Importing a Godot project can execute its code/plugins: use trusted projects.
-if ! "$GODOT" --headless --path "$WORK" --import --quit-after 5 >"$OUTPUT/import.log" 2>&1; then
+# Timing covers process startup and is evidence, not a controlled benchmark.
+TIMER="$SRC/tests/dogfood/timed_run.py"
+if ! python3 "$TIMER" "$OUTPUT/import.timing.json" "${GDT_DOGFOOD_TIMEOUT:-180}" "$GODOT" --headless --path "$WORK" --import --quit-after 5 >"$OUTPUT/import.log" 2>&1; then
   echo "Project import failed; see $OUTPUT/import.log" >&2
   exit 1
 fi
@@ -69,7 +71,7 @@ for entry in naming_conventions/nc_cli.gd a11y_options/aoc_cli.gd duplicate_code
   addon="${entry%%/*}"
   script="${entry#*/}"
   echo "== dogfood: $addon =="
-  if "$GODOT" --headless --path "$WORK" --script "res://addons/$addon/cli/$script" -- --dir=res:// --out=res://reports/dogfood >"$OUTPUT/$addon.log" 2>&1; then
+  if python3 "$TIMER" "$OUTPUT/$addon.timing.json" "${GDT_DOGFOOD_TIMEOUT:-180}" "$GODOT" --headless --path "$WORK" --script "res://addons/$addon/cli/$script" -- --dir=res:// --out=res://reports/dogfood >"$OUTPUT/$addon.log" 2>&1; then
     :
   else
     status=$?

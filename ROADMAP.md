@@ -1,6 +1,6 @@
 # Development roadmap
 
-This roadmap captures 110 original tools and components plus five post-roadmap additions below. The original entries were checked against the historical CI gate; the additions remain unchecked until the expanded CI and editor sessions pass. The shared research item ended in a recorded decision not to build. Each addon needs a pure core, thin editor dock and headless CLI, fixture-driven tests, documentation and honest limitations. A checked item means its core passes its headless suite and CLI gate on Godot 4.3 and 4.5, its dock passes a real-editor session (`tests/editor/run_editor_session.sh`), and any runtime node passes a live game session (`tests/game/run_live_game.sh`). See each addon README and CI for verification status.
+This roadmap captures 110 original tools and components plus five post-roadmap additions below. The expanded CI gate and editor sessions passed on commit `d430a6c`; see `QUALITY.md` for evidence and limits. The shared research item ended in a recorded decision not to build. Each addon needs a pure core, thin editor dock and headless CLI, fixture-driven tests, documentation and honest limitations. A checked item means its core passes its headless suite and CLI gate on Godot 4.3 and 4.5, its dock passes a real-editor session (`tests/editor/run_editor_session.sh`), and any runtime node passes a live game session (`tests/game/run_live_game.sh`). It does not imply complete hardware or real-project verification. See each addon README and CI for current status.
 
 ## Performance and rendering
 
@@ -147,8 +147,8 @@ This roadmap captures 110 original tools and components plus five post-roadmap a
 
 ## Post-roadmap additions (2026-11-11)
 
-- [ ] **Tool Finder** — `addons/tool_finder`: problem-first search over the catalog; expanded gate and editor verification pending.
-- [ ] **Fix Engine** — `addons/fix_engine`: opt-in fixes from reports; expanded gate, apply safety, and editor verification pending.
-- [ ] **Suite Presets** — `addons/suite_presets`: plugin profiles; expanded gate and editor verification pending.
-- [ ] **Coverage Gate** — `addons/coverage_gate`: function-name evidence estimate, not line coverage; expanded gate and editor verification pending.
-- [ ] **Dock Accessibility Audit** — `addons/dock_a11y`: heuristic audit of docks; expanded gate and editor verification pending.
+- [x] **Tool Finder** — `addons/tool_finder`: problem-first search over the catalog; expanded gate and general editor session passed in CI.
+- [x] **Fix Engine** — `addons/fix_engine`: opt-in fixes from reports; gate and general editor session passed in CI. Apply tests do not guarantee safety against concurrent filesystem changes; renames do not update references.
+- [x] **Suite Presets** — `addons/suite_presets`: plugin profiles; gate and general editor session passed in CI, with apply and backup regression tests.
+- [x] **Coverage Gate** — `addons/coverage_gate`: function-name evidence estimate, not line coverage; gate and general editor session passed in CI.
+- [x] **Dock Accessibility Audit** — `addons/dock_a11y`: heuristic audit of docks; gate and general editor session passed in CI, not a screen-reader or usability certification.

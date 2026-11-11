@@ -10,7 +10,7 @@ The tools audit games; this page tracks auditing the tools themselves.
 
 ## Editor interaction coverage
 
-The windowed editor harness now drives the actual controls below and records separate results; these new interaction checks are pending a CI run. A generic successful dock click or screenshot alone is not evidence that an interaction worked.
+The windowed editor harness now drives the actual controls below and records separate results. These interaction checks passed on Linux and Windows in CI at commit `b77e785` ([Linux](https://github.com/SeanShaffer88/GodotDevTools/actions/runs/42957229041), [Windows](https://github.com/SeanShaffer88/GodotDevTools/actions/runs/42957228982)); check the latest workflow for the current revision. A generic successful dock click or screenshot alone is not evidence that an interaction worked.
 
 | Surface | Interaction under test | Scope |
 |---|---|---|
@@ -19,4 +19,4 @@ The windowed editor harness now drives the actual controls below and records sep
 | Responsive preview panes | Click Preview scene and check rendered fixture pixels and dimensions at three viewport sizes. | Scene instances can run `@tool` scripts; device safe areas and project window stretch are not simulated. |
 | Whitebox selection snapping | Select a live 3D node, snap it with subdivisions, then test Undo and Redo. | Snaps local positions only; does not change rotations or save the scene. |
 
-See the CI workflow results for the status of the current revision. Hosted runners use software renderers and do not replace hands-on hardware-GPU testing.
+See the CI workflow results for the status of the current revision. Hosted runners can use software renderers and do not replace hands-on hardware-GPU testing.

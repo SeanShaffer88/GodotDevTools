@@ -34,7 +34,7 @@ echo "Editor session results: $WORK/reports/editor_verify/editor_verify.json"
 # In addition to generic dock clicks, require each named interaction's
 # concrete output (images/painted pixels, scene change, and Undo/Redo).
 python3 - "$WORK/reports/editor_verify/editor_verify.json" <<'PY'
-import json, sys
+import json, os, sys
 d = json.load(open(sys.argv[1]))
 bad = [r["addon"] for r in d["results"] if not (r["dock_in_editor"] and r.get("visible") and r["clicked"] and r["output_changed"])]
 required = {
@@ -45,10 +45,15 @@ required = {
     "whitebox": ["snap_clicked", "snap_applied", "snap_undo", "snap_redo"],
 }
 for row in d["results"]:
-    for field in required.get(row["addon"], []):
+    fields = required.get(row["addon"], [])
+    for field in fields:
         if not row.get(field):
             bad.append(f"{row['addon']} ({field})")
             print(f"Interaction evidence: {row['addon']}: {row}")
+    if fields and os.environ.get("GITHUB_ACTIONS") == "true":
+        evidence = {field: bool(row.get(field)) for field in fields}
+        message = json.dumps(evidence).replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+        print(f"::notice title=Editor interaction {row['addon']}::{message}")
 print("Editor session: %d docks, %d failed%s (%s, %s)" % (len(d["results"]), len(bad), (": " + ", ".join(bad)) if bad else "", d["engine"], d["video_adapter"]))
 sys.exit(1 if bad or len(d["results"]) == 0 else 0)
 PY

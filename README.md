@@ -4,11 +4,11 @@
 
 Independent Godot 4 addons cover testing, performance, content, workflow and release checks. The table below links each addon to its purpose and folder. Many tools are static analyzers, simulations or estimates rather than runtime measurements; consult each addon README for its scope and limitations.
 
-The [roadmap](ROADMAP.md) tracks 110 original entries and five post-roadmap additions. The original entries were checked against the historical CI gate and editor/live-game sessions; the five additions are awaiting a successful expanded gate and editor session. The native-accelerator entry is a research note that ends in a recorded decision not to build. See [QUALITY.md](QUALITY.md) for the evidence.
+The [roadmap](ROADMAP.md) tracks 110 original entries and five post-roadmap additions. The expanded gate and editor/live-game sessions passed in CI on commit `d430a6c`; the workflow badge reports current results. The native-accelerator entry is a research note that ends in a recorded decision not to build. See [QUALITY.md](QUALITY.md) for the evidence and remaining gaps.
 
 Shared, optional components consume tool reports without any tool depending on them: the [Report Schema](addons/report_schema/README.md), [SARIF](addons/sarif_export/README.md) and [JUnit](addons/junit_export/README.md) exporters, the [HTML dashboard](addons/html_dashboard/README.md), [Report Diff](addons/report_diff/README.md), the [Finding Suppression Baseline](addons/suppressions/README.md), the [Suite CLI Dispatcher](addons/suite_dispatcher/README.md), the [pre-commit hook installer](addons/precommit/README.md), the [Fix Engine](addons/fix_engine/README.md) (opt-in safe fixes) and a [reusable CI action](.github/actions/godot-dev-tools/README.md).
 
-Post-roadmap work adds [Tool Finder](addons/tool_finder/README.md), [Suite Presets](addons/suite_presets/README.md), a [coverage estimate](addons/coverage_gate/README.md), [dock audit](addons/dock_a11y/README.md), [Docker and standalone tooling](docs/DOCKER.md), [MCP and VS Code integration](mcp/README.md), a [Windows CI workflow](docs/WINDOWS_GPU.md), and a [docs catalog](docs/TOOLS.md). Asset Library metadata and a [real-game dogfooding harness](docs/DOGFOOD.md) are prepared, but publication and real-project runs are pending. The expanded suite has not yet passed CI; 4.4 and 4.6 are experimental.
+Post-roadmap work adds [Tool Finder](addons/tool_finder/README.md), [Suite Presets](addons/suite_presets/README.md), a [coverage estimate](addons/coverage_gate/README.md), [dock audit](addons/dock_a11y/README.md), [Docker and standalone tooling](docs/DOCKER.md), [MCP and VS Code integration](mcp/README.md), a [Windows CI workflow](docs/WINDOWS_GPU.md), and a [docs catalog](docs/TOOLS.md). Asset Library metadata and a [real-game dogfooding harness](docs/DOGFOOD.md) are prepared, but publication and production-project runs are pending. Godot 4.4 and 4.6 have passed the CI gate but remain experimental.
 
 ## TL;DR
 
@@ -415,7 +415,7 @@ See [AUDIT.md](AUDIT.md) for the security, privacy and quality audit, [CREDITS.m
 - **Test Runner** detects GUT suites from file text but never depends on GUT; this repo's own suite remains `tests/run_tests.sh`.
 - **Whitebox** snaps selected 3D nodes' local positions using an undoable editor action; rotations and world-space snapping are not applied. The headless half audits scene text against grid and slope rules. See `docs/DOCK_A11Y.md` for interaction-test status.
 - **Prefab Guard** writes to scene files only with an explicit `--apply`; otherwise it reports plans, because scene files are source code.
-- The historical editor session clicked the original 133 docks and the live-game session exercised the runtime nodes on Linux under Xvfb with software OpenGL. The expanded 138-dock session has not yet passed; hands-on Windows use with a hardware GPU is still owed. See `QUALITY.md`.
+- The expanded 138-dock editor session and live-game session passed in CI on Linux and Windows. Hosted runners can use software renderers; hands-on Windows use with a hardware GPU is still owed. See `QUALITY.md`.
 
 ## License
 
