@@ -18,6 +18,8 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Test mounted-project smoke harness
         run: python3 tests/test_docker_smoke.py
+      - name: Test mounted-project gate harness
+        run: python3 tests/test_docker_gate.py
       - name: Build image
         shell: bash
         run: |
@@ -42,5 +44,8 @@ jobs:
         run: docker run --rm godot-dev-tools --help
       - name: Smoke test a mounted project
         run: python3 tests/docker_smoke.py --image godot-dev-tools
+      - name: Run full gate in a mounted project
+        timeout-minutes: 15
+        run: bash tests/docker_gate.sh godot-dev-tools
       - name: Standalone naming regressions (no Godot needed)
         run: python3 tests/test_standalone.py
