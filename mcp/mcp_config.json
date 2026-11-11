@@ -3,7 +3,11 @@
     "godot-dev-tools": {
       "command": "python3",
       "args": ["/absolute/path/to/GodotDevTools/mcp/mcp_server.py"],
-      "env": {"GODOT_BIN": "/absolute/path/to/godot"}
+      "env": {
+        "GDT_PROJECT_ROOT": "/absolute/path/to/trusted/godot-project",
+        "GODOT_BIN": "/absolute/path/to/godot",
+        "GDT_MCP_TIMEOUT": "300"
+      }
     }
   }
 }

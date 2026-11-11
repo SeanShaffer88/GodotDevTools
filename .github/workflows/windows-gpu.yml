@@ -35,6 +35,41 @@ jobs:
       - name: Show Godot version
         shell: bash
         run: ".godot-bin/Godot_v4.3-stable_win64_console.exe --headless --version || .godot-bin/Godot_v4.3-stable_win64.exe --headless --version"
+      - name: MCP protocol regressions (Windows)
+        shell: bash
+        run: |
+          set +e
+          log=$(mktemp)
+          python tests/test_mcp.py > "$log" 2>&1
+          status=$?
+          cat "$log"
+          if [ "$status" -ne 0 ]; then
+            message=$(tail -80 "$log")
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=Windows MCP regressions failed (exit $status)::$message"
+          fi
+          rm -f "$log"
+          exit "$status"
+      - name: MCP installed-project smoke (Windows)
+        shell: bash
+        run: |
+          set +e
+          GODOT_BIN=$(ls .godot-bin/*console*.exe 2>/dev/null || ls .godot-bin/*.exe | head -n 1)
+          log=$(mktemp)
+          python tests/mcp_godot_smoke.py --godot "$(cygpath -w "$PWD/$GODOT_BIN")" > "$log" 2>&1
+          status=$?
+          cat "$log"
+          if [ "$status" -ne 0 ]; then
+            message=$(tail -80 "$log")
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=Windows MCP Godot smoke failed (exit $status)::$message"
+          fi
+          rm -f "$log"
+          exit "$status"
       - name: Standalone naming parity with Godot
         shell: bash
         run: |

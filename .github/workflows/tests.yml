@@ -20,6 +20,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  mcp-protocol:
+    name: MCP protocol and runner regressions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Test MCP server without Godot
+        shell: bash
+        run: |
+          set +e
+          log=$(mktemp)
+          python3 tests/test_mcp.py > "$log" 2>&1
+          status=$?
+          cat "$log"
+          if [ "$status" -ne 0 ]; then
+            message=$(tail -80 "$log")
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=MCP regressions failed (exit $status)::$message"
+          fi
+          rm -f "$log"
+          exit "$status"
+
   release-assets:
     name: Release archives and Asset Library metadata
     runs-on: ubuntu-latest
@@ -68,6 +92,9 @@ jobs:
 
       - name: Show Godot version
         run: '".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64" --headless --version'
+
+      - name: MCP installed-project smoke
+        run: python3 tests/mcp_godot_smoke.py --godot "$PWD/.godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64"
 
       - name: Smoke-test installed release archives
         if: matrix.godot == '4.3-stable'
