@@ -1,0 +1,12 @@
+{
+  "asset_name": "Interaction Reachability Checker",
+  "folder": "interaction_reach",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Check that every interactable's trigger area overlaps navmesh the player can walk to from the start point.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-interaction_reach-1.2.0.zip",
+  "readme": "addons/interaction_reach/README.md"
+}

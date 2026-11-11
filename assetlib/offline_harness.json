@@ -1,0 +1,12 @@
+{
+  "asset_name": "Offline and Poor-Connection Test Harness",
+  "folder": "offline_harness",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Find HTTP requests with no timeout or unchecked results, and simulate offline, timeout, slow and server-error responses in game with a seeded fault profile.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-offline_harness-1.2.0.zip",
+  "readme": "addons/offline_harness/README.md"
+}

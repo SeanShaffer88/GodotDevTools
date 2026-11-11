@@ -1,0 +1,12 @@
+{
+  "asset_name": "GDScript Mutation Tester",
+  "folder": "mutation_tester",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Mutate comparison and boolean operators in one GDScript file and run its test against each mutant in an isolated copy; report mutants the test does not catch.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-mutation_tester-1.2.0.zip",
+  "readme": "addons/mutation_tester/README.md"
+}

@@ -22,6 +22,8 @@ func _init() -> void:
             fail_on = Array(value.split(",", false))
         elif key == "--expect":
             options["expect"] = value
+        elif key == "--cache":
+            options["cache"] = value
         else:
             printerr("Unknown argument: ", arg)
             quit(1)

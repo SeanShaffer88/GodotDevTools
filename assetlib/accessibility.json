@@ -1,0 +1,12 @@
+{
+  "asset_name": "Automated Accessibility Checker",
+  "folder": "accessibility",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Detect tiny text, low contrast, missing keyboard navigation and controls that rely only on colour.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-accessibility-1.1.0.zip",
+  "readme": "addons/accessibility/README.md"
+}

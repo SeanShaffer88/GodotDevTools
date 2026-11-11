@@ -1,0 +1,12 @@
+{
+  "asset_name": "State Trace Determinism Diff",
+  "folder": "trace_diff",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Compare two recorded per-frame state traces and report the first frame and keys where they diverge.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-trace_diff-1.2.0.zip",
+  "readme": "addons/trace_diff/README.md"
+}

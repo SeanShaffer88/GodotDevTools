@@ -1,0 +1,12 @@
+{
+  "asset_name": "Autoload Dependency Graph",
+  "folder": "autoload_graph",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Map which autoloads reference which, flag reference cycles, missing scripts and early references to autoloads declared later.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-autoload_graph-1.2.0.zip",
+  "readme": "addons/autoload_graph/README.md"
+}

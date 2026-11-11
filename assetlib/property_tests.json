@@ -1,0 +1,12 @@
+{
+  "asset_name": "Property-Based Gameplay Tester",
+  "folder": "property_tests",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Generate many seeded inputs for pure GDScript functions, check stated properties, and shrink failures to a minimal counterexample.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-property_tests-1.2.0.zip",
+  "readme": "addons/property_tests/README.md"
+}

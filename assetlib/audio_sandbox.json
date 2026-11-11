@@ -1,0 +1,12 @@
+{
+  "asset_name": "Audio Bus and Dynamic Mixing Sandbox",
+  "folder": "audio_sandbox",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Simulate ducking, reverb zones and voice budgets from pure data and catch mixing designs that fight themselves.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-audio_sandbox-1.1.0.zip",
+  "readme": "addons/audio_sandbox/README.md"
+}

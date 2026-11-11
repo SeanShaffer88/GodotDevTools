@@ -1,0 +1,12 @@
+{
+  "asset_name": "Object Pool Advisor",
+  "folder": "pool_advisor",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Find frequently spawned, short-lived scenes and rank them as object-pool candidates.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-pool_advisor-1.2.0.zip",
+  "readme": "addons/pool_advisor/README.md"
+}

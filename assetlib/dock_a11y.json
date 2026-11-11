@@ -1,0 +1,12 @@
+{
+  "asset_name": "Dock Accessibility Audit",
+  "folder": "dock_a11y",
+  "version": "1.0.0",
+  "author": "Sean Shaffer",
+  "description": "Audit editor docks themselves: tooltips, keyboard focus, run action and help text.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-dock_a11y-1.0.0.zip",
+  "readme": "addons/dock_a11y/README.md"
+}

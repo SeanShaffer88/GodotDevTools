@@ -1,0 +1,12 @@
+{
+  "asset_name": "Golden Data Snapshot Tester",
+  "folder": "golden_snapshot",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Compare JSON outputs with approved golden files and report differences by JSON path, with a float tolerance.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-golden_snapshot-1.2.0.zip",
+  "readme": "addons/golden_snapshot/README.md"
+}

@@ -1,0 +1,12 @@
+{
+  "asset_name": "Error Log Grouper",
+  "folder": "log_grouper",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Group Godot error and warning lines from a captured log by normalized signature and count them.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-log_grouper-1.2.0.zip",
+  "readme": "addons/log_grouper/README.md"
+}

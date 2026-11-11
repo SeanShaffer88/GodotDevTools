@@ -1,0 +1,12 @@
+{
+  "asset_name": "Handheld Readiness Checklist",
+  "folder": "handheld_readiness",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Check a project for small handheld screens and gamepad-only play: stretch mode, text size at the target height, gamepad bindings and focusable buttons.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-handheld_readiness-1.2.0.zip",
+  "readme": "addons/handheld_readiness/README.md"
+}

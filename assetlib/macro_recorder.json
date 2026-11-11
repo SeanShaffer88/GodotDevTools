@@ -1,0 +1,12 @@
+{
+  "asset_name": "Editor Action Macro Recorder",
+  "folder": "macro_recorder",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Record Inspector property edits in the editor as a macro, preview what it would change in any scene, and apply it from the command line with an explicit flag.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-macro_recorder-1.2.0.zip",
+  "readme": "addons/macro_recorder/README.md"
+}

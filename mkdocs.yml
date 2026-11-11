@@ -1,0 +1,19 @@
+site_name: GodotDevTools
+site_description: 138 independent, offline Godot 4 devtools — each with an editor dock, headless CLI and CI gate.
+repo_url: https://github.com/SeanShaffer88/GodotDevTools
+theme:
+  name: material
+nav:
+  - Home: README.md
+  - Tool catalog: TOOLS.md
+  - AI guide: AI_USAGE.md
+  - Roadmap: ROADMAP.md
+  - Quality: QUALITY.md
+  - Parity: PARITY.md
+  - Windows/GPU: WINDOWS_GPU.md
+  - Docker: DOCKER.md
+  - Asset Library: ASSETLIB.md
+  - Dogfooding: DOGFOOD.md
+  - Dock a11y: DOCK_A11Y.md
+markdown_extensions:
+  - pymdownx.superfences

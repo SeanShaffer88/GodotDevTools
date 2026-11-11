@@ -1,0 +1,12 @@
+{
+  "asset_name": "JUnit Exporter",
+  "folder": "junit_export",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Convert every tool report in a folder into one JUnit XML file so CI test views show tool findings as failures.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-junit_export-1.2.0.zip",
+  "readme": "addons/junit_export/README.md"
+}

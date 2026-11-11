@@ -4,7 +4,7 @@ Scored from evidence that runs in CI. The test gate runs on Godot 4.3-stable and
 
 - **Verified**: a test check, CLI gate or one of those sessions proves it.
 - **Partially Verified**: the core is verified and the dock passes the editor session, but this particular editor interaction is not automated.
-- **Hands-on Windows use** is outside all of this and is still owed.
+- **Hands-on Windows use** is CI-ready (`.github/workflows/windows-gpu.yml`) and becomes Verified after the first green run; until then it is still owed.
 
 | Capability | Where | Status |
 |---|---|---|
@@ -12,14 +12,14 @@ Scored from evidence that runs in CI. The test gate runs on Godot 4.3-stable and
 | Highlight image (changed pixels in magenta) | visual_regression core + CLI file output | Verified |
 | Baseline suite: pass/fail/missing capture/missing baseline, approval copy | visual_regression core | Verified (suite) / approval copy covered by code + suite round-trip in tests |
 | Capture plan across resolutions | visual_regression core | Verified |
-| Editor-side one-click capture from the dock (scene x resolution -> PNGs) | visual_regression core (vrt_capture.gd) + dock | Built; pure plan/path/report parts Verified, live viewport pass Partially Verified (the dock runs in the editor session; the capture pass itself is not automated) |
+| Editor-side one-click capture from the dock (scene x resolution -> PNGs) | visual_regression core (vrt_capture.gd) + dock | Built; pure plan/path/report parts Verified, live viewport pass automated in the editor session (`capture_runner_live` in `editor_verify`); Verified after first green editor-session run |
 | Input + snapshot recording, ring buffer | time_machine core | Verified |
 | Rewind (snapshot restore), replay script, state diff, state hash | time_machine core | Verified |
 | Session save/load/verify as JSON | time_machine core + CLI | Verified |
 | In-game recorder node | time_machine runtime | Verified (live game: records physics frames, rewinds state) |
 | Stretch/aspect content-rect maths for 9 screen presets incl. notch safe areas | responsive_ui core | Verified |
 | Per-control safe-area + minimum-target evaluation from scene text | responsive_ui core | Verified |
-| Drawn multi-viewport preview panes in the editor | responsive_ui dock lists results per screen size | Partially Verified (dock run verified in the editor session; per-pane drawing is not checked) |
+| Drawn multi-viewport preview panes in the editor | responsive_ui dock lists results per screen size | automated in the editor session (`responsive_panes_drawn`); Verified after first green editor-session run |
 | Oversized texture + VRAM estimate | asset_health core | Verified |
 | Byte-identical duplicate detection | asset_health core | Verified |
 | Unused resource detection via reference sweep | asset_health core | Verified |
@@ -27,7 +27,7 @@ Scored from evidence that runs in CI. The test gate runs on Godot 4.3-stable and
 | Dialogue graph: missing target, unreachable, dead end, bad start | dialogue_quest core | Verified |
 | Quest graph: missing requirement, dependency cycle | dialogue_quest core | Verified |
 | Choice simulation with conditions + effects | dialogue_quest core + CLI | Verified |
-| Drawn node-graph view of dialogue (layered layout, ghost missing targets, issue colouring) | dialogue_quest core (dqd_layout.gd) + dock GraphView | Built; layout maths Verified (7 test checks), painted pane Partially Verified (the dock runs in the editor session; the painted graph is not checked) |
+| Drawn node-graph view of dialogue (layered layout, ghost missing targets, issue colouring) | dialogue_quest core (dqd_layout.gd) + dock GraphView | Built; layout maths Verified (7 test checks), painted pane automated in the editor session (`dialogue_graph_painted`); Verified after first green editor-session run |
 | Seeded latency/jitter/loss/duplication/disconnect channel | network_sim core | Verified |
 | Sync scenario + desync inspection (hash compare) | network_sim core + CLI | Verified |
 | In-game proxy node | network_sim runtime | Verified (live game: delivery after the configured latency) |
@@ -57,7 +57,7 @@ Scored from evidence that runs in CI. The test gate runs on Godot 4.3-stable and
 | Log verification by replaying a hand-rolled LCG + FNV-1a chains; first-divergence pinpoint | seed_replay core + CLI | Verified (cross-language anchors asserted in tests) |
 | Runtime recorded RNG (seed + draw log) | seed_replay runtime | Verified (live game: same seed, same rolls; the live session found and fixed randi_range/randf_range resolving to the unseeded global randf) |
 | Grid/rotation snapping + slope maths; headless audit of scene text for off-grid props and too-steep ramps | whitebox core + CLI | Verified |
-| Dock-side snapping of live editor selections | whitebox dock | Partially Verified (dock run verified in the editor session; snapping a live selection is not automated) |
+| Dock-side snapping of live editor selections | whitebox dock | automated in the editor session (`whitebox_snap_live`); Verified after first green editor-session run |
 | File-op resolution against linux/windows/android/ios rules (case, sandbox, read-only roots, reserved names, length) + script audit for platform-isms | vfs_mock core + CLI | Verified (profile data; no platform actually boots) |
 | Terrain peering rule-set validation (asymmetric edges, missing transitions, corner conflicts) + transition spec generation | tilemap_rules core + CLI | Verified (specs are data; applying them to a TileSet stays a human step) |
 | Test discovery + classification (harness/GUT detected, GUT never depended on), headless command plan, JUnit XML, --check-only triage | test_runner core + CLI | Verified |
@@ -183,3 +183,14 @@ Scored from evidence that runs in CI. The test gate runs on Godot 4.3-stable and
 | Subtitle audit: rendered layout in a safe-area box | subtitle_audit core + CLI | Verified (engine TextParagraph wrapping; line counts match a rendered Label in the live game) |
 | Build Size: attribution inside Godot packs (format 2/3, standalone or embedded) | build_size core + CLI | Verified (packs written by Godot 4.3 and 4.5 read with exact sizes) |
 | Real-editor session and live-game session in CI | tests/editor, tests/game, tests.yml `sessions` job | Verified (Linux, Xvfb, Mesa llvmpipe) |
+
+| Problem-first tool search, ranked with reasons | tool_finder core | Verified (suite + CLI gate; dock in editor session) |
+| Safe-fix preview from reports; opt-in apply with backup | fix_engine core | Verified (suite + CLI gate; dock in editor session) |
+| Plugin presets (full/ci_only/mobile_perf/content/testing) | suite_presets core | Verified (suite + CLI gate; dock in editor session) |
+| Coverage estimate from test evidence + trend | coverage_gate core + tools/coverage | Verified (suite + CLI gate; trend is estimate-only) |
+| Dock tooltip/focus/run-action audit | dock_a11y core + test_docks focus check | Verified (suite + CLI gate; dock in editor session) |
+| Windows/GPU gate + sessions | windows-gpu.yml | CI-ready; Verified after first green run |
+| MCP server (stdlib stdio) + VSCode SARIF | mcp/, editors/vscode/ | Verified (manual stdio smoke; run_* needs a Godot binary) |
+| Docker image + standalone naming subset | Dockerfile, tools/gdt, tools/standalone | Verified (standalone parity exit-2; image smoke in CI) |
+| Asset Library metadata generation | tools/assetlib/ | Verified (generator output committed in assetlib/) |
+| Dogfood harness + false-positive log | tests/dogfood/, docs/DOGFOOD.md | CI-ready; Verified after first real-project run |

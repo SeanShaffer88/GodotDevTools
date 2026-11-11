@@ -1,0 +1,12 @@
+{
+  "asset_name": "Visual Regression Testing",
+  "folder": "visual_regression",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Capture scene screenshots across resolutions and compare them with approved baselines, highlighting pixel-level differences.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-visual_regression-1.1.0.zip",
+  "readme": "addons/visual_regression/README.md"
+}

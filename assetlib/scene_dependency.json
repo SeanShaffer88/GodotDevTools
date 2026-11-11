@@ -1,0 +1,12 @@
+{
+  "asset_name": "Scene Dependency Map",
+  "folder": "scene_dependency",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Visualize static dependencies and flag missing references, cycles and unused candidates.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-scene_dependency-1.1.0.zip",
+  "readme": "addons/scene_dependency/README.md"
+}

@@ -1,9 +1,9 @@
 name: Tests
 
 # Full gate from tests/run_tests.sh, run headless on Linux.
-# Godot 4.3-stable is the verified version (see PROJECT_RULES.md / QUALITY.md);
-# newer 4.x runs are marked experimental so they gather evidence without
-# claiming support until they have passed.
+# Godot 4.3-stable and 4.5-stable are verified (see PROJECT_RULES.md / QUALITY.md);
+# 4.4/4.6 runs are marked experimental so they gather evidence without
+# claiming support until they have passed. Actions are pinned to SHAs (AUDIT F6).
 
 on:
   push:
@@ -30,15 +30,19 @@ jobs:
           - godot: 4.3-stable
             experimental: false
           - godot: 4.5-stable
+            experimental: false
+          - godot: 4.4-stable
+            experimental: true
+          - godot: 4.6-stable
             experimental: true
     continue-on-error: ${{ matrix.experimental }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Cache Godot ${{ matrix.godot }}
         id: godot-cache
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: .godot-bin
           key: godot-${{ matrix.godot }}-linux-x86_64
@@ -79,7 +83,7 @@ jobs:
 
       - name: Upload reports
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: reports-godot-${{ matrix.godot }}
           path: |
@@ -92,11 +96,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Cache Godot 4.3-stable
         id: godot-cache
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: .godot-bin
           key: godot-4.3-stable-linux-x86_64
@@ -122,7 +126,7 @@ jobs:
 
       - name: Upload session evidence
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: session-evidence
           path: |
@@ -135,7 +139,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Run the GodotDevTools action on the demo fixtures
         uses: ./.github/actions/godot-dev-tools

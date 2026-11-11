@@ -1,0 +1,12 @@
+{
+  "asset_name": "Mobile Thermal and Battery Drain Emulation Dock",
+  "folder": "thermal_sim",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Documented-estimate RC thermal model, frame-budget and battery-hours comparisons across workload changes.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-thermal_sim-1.1.0.zip",
+  "readme": "addons/thermal_sim/README.md"
+}

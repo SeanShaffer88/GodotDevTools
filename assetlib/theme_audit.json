@@ -1,0 +1,12 @@
+{
+  "asset_name": "Theme Resource Auditor",
+  "folder": "theme_audit",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Find theme-override sprawl in scenes, too many distinct font sizes, near-duplicate sizes and unused theme type variations.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-theme_audit-1.2.0.zip",
+  "readme": "addons/theme_audit/README.md"
+}

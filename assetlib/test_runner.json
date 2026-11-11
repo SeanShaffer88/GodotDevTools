@@ -1,0 +1,12 @@
+{
+  "asset_name": "CI and Headless Test Runner",
+  "folder": "test_runner",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Discover and classify test files, plan headless commands, JUnit XML output and check-only triage.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-test_runner-1.1.0.zip",
+  "readme": "addons/test_runner/README.md"
+}

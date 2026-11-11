@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "godot-dev-tools": {
+      "command": "python3",
+      "args": ["/absolute/path/to/GodotDevTools/mcp/mcp_server.py"],
+      "env": {"GODOT_BIN": "/absolute/path/to/godot"}
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "asset_name": "Scene Merge Conflict Assistant",
+  "folder": "merge_conflicts",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Find git conflict markers in scenes, resources and project files and explain each conflict by section, node and property. Never edits files.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-merge_conflicts-1.2.0.zip",
+  "readme": "addons/merge_conflicts/README.md"
+}

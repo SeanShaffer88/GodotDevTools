@@ -1,0 +1,12 @@
+{
+  "asset_name": "Environment Feature Cost Matrix",
+  "folder": "env_cost",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "List the post-processing and GI features each Environment enables, with relative cost tiers and renderer support.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-env_cost-1.2.0.zip",
+  "readme": "addons/env_cost/README.md"
+}

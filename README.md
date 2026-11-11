@@ -4,9 +4,11 @@
 
 Independent Godot 4 addons cover testing, performance, content, workflow and release checks. The table below links each addon to its purpose and folder. Many tools are static analyzers, simulations or estimates rather than runtime measurements; consult each addon README for its scope and limitations.
 
-The [roadmap](ROADMAP.md) tracks 110 entries, and all of them are checked. Each tool has a core, an editor dock, a headless CLI, a fixture, a test suite and a CLI gate. Each dock passes a real-editor session and each runtime node passes a live game session, and both sessions run in CI. The native-accelerator entry is a research note that ends in a recorded decision not to build. See [QUALITY.md](QUALITY.md) for the evidence.
+The [roadmap](ROADMAP.md) tracks 115 entries (110 original + 5 post-roadmap additions), and all of them are checked. Each tool has a core, an editor dock, a headless CLI, a fixture, a test suite and a CLI gate. Each dock passes a real-editor session and each runtime node passes a live game session, and both sessions run in CI. The native-accelerator entry is a research note that ends in a recorded decision not to build. See [QUALITY.md](QUALITY.md) for the evidence.
 
-Shared, optional components consume tool reports without any tool depending on them: the [Report Schema](addons/report_schema/README.md), [SARIF](addons/sarif_export/README.md) and [JUnit](addons/junit_export/README.md) exporters, the [HTML dashboard](addons/html_dashboard/README.md), [Report Diff](addons/report_diff/README.md), the [Finding Suppression Baseline](addons/suppressions/README.md), the [Suite CLI Dispatcher](addons/suite_dispatcher/README.md), the [pre-commit hook installer](addons/precommit/README.md) and a [reusable CI action](.github/actions/godot-dev-tools/README.md).
+Shared, optional components consume tool reports without any tool depending on them: the [Report Schema](addons/report_schema/README.md), [SARIF](addons/sarif_export/README.md) and [JUnit](addons/junit_export/README.md) exporters, the [HTML dashboard](addons/html_dashboard/README.md), [Report Diff](addons/report_diff/README.md), the [Finding Suppression Baseline](addons/suppressions/README.md), the [Suite CLI Dispatcher](addons/suite_dispatcher/README.md), the [pre-commit hook installer](addons/precommit/README.md), the [Fix Engine](addons/fix_engine/README.md) (opt-in safe fixes) and a [reusable CI action](.github/actions/godot-dev-tools/README.md).
+
+New since the roadmap closed: [Tool Finder](addons/tool_finder/README.md) (search by problem), [Suite Presets](addons/suite_presets/README.md) (enable only the plugins you need), [Coverage Gate](addons/coverage_gate/README.md) (coverage estimate + trend), [Dock Accessibility Audit](addons/dock_a11y/README.md) (audit the docks themselves), a [Docker image](docs/DOCKER.md) + standalone runner, an [MCP server](mcp/README.md) + VSCode SARIF extension, [Windows/GPU CI](docs/WINDOWS_GPU.md), a [docs site + catalog](docs/TOOLS.md), [Asset Library](docs/ASSETLIB.md) publishing, [dogfooding](docs/DOGFOOD.md) on real games, and Godot 4.5 promoted to verified with 4.4/4.6 in the matrix (actions pinned to SHAs).
 
 ## TL;DR
 
@@ -90,6 +92,11 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | Environment Feature Cost Matrix | Environment features enabled per scene/resource (SDFGI, SSR, SSAO, SSIL, volumetric fog, glow...) with relative cost tiers and Compatibility-renderer support. | `addons/env_cost` |
 | Colour Palette Consistency Checker | Colour literals in scenes, resources and scripts compared with an approved palette by CIE76 delta E. | `addons/palette_check` |
 | Theme Resource Auditor | Theme override counts per scene, distinct and near-duplicate font sizes, and theme type variations no scene uses. | `addons/theme_audit` |
+| Tool Finder | Search 138 tools by problem, not by name, and get ranked matches with reasons. | `addons/tool_finder` |
+| Fix Engine | Preview safe fixes from tool reports; apply only with explicit opt-in and a backup. | `addons/fix_engine` |
+| Suite Presets | Enable only the plugins you need: full suite, CI-only, mobile perf, content or testing packs. | `addons/suite_presets` |
+| Coverage Gate | Estimate GDScript coverage from test evidence and gate CI on a minimum percent (estimate, not measurement). | `addons/coverage_gate` |
+| Dock Accessibility Audit | Audit editor docks themselves: tooltips, keyboard focus, run action and help text. | `addons/dock_a11y` |
 | Flaky Test Detector | Test-run histories (JUnit XML folders or JSON): same-commit pass/fail flips, flip rates and always-failing tests. | `addons/flaky_tests` |
 | Golden Data Snapshot Tester | JSON outputs compared with approved goldens by JSON path (changed, added, removed, type changes) with a float tolerance. | `addons/golden_snapshot` |
 | Error Log Grouper | Godot log errors and warnings grouped by normalized signature (numbers and quoted names masked) with counts and first location. | `addons/log_grouper` |

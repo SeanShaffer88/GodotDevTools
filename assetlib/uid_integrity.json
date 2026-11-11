@@ -1,0 +1,12 @@
+{
+  "asset_name": "Resource UID Integrity Checker",
+  "folder": "uid_integrity",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Check uid:// references in scenes, resources and scripts against the UIDs files declare.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-uid_integrity-1.2.0.zip",
+  "readme": "addons/uid_integrity/README.md"
+}

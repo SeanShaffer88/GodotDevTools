@@ -19,7 +19,7 @@ godot --headless --path . --script res://addons/a11y_options/cli/aoc_cli.gd -- \
   --dir=res://demo/shipping --fail-on=option_not_found
 ```
 
-Options: `--dir=<path>` (default `res://`), `--out=<dir>` (default `res://reports/a11y_options`), `--expect` (JSON file replacing the built-in expected-options list), `--fail-on=<kinds>` (finding kinds above, `issues`, or `errors`). Writes `a11y_options.json` and `a11y_options.md`.
+Options: `--dir=<path>` (default `res://`), `--out=<dir>` (default `res://reports/a11y_options`), `--expect` (JSON file replacing the built-in expected-options list), `--cache=<file>` (incremental cache: unchanged files reuse prior evidence, rescans skip them), `--fail-on=<kinds>` (finding kinds above, `issues`, or `errors`). Writes `a11y_options.json` and `a11y_options.md`. The core compiles one combined regex per option and searches whole files (previously per-pattern, per-line) — the slowest-scanner hotspot noted in `docs/DOGFOOD.md`.
 
 Exit codes: 2 when a `--fail-on` kind is found; 1 for unreadable input, an invalid argument or a report-write failure; otherwise 0.
 

@@ -1,0 +1,15 @@
+{
+  "name": "godot-dev-tools-sarif",
+  "displayName": "GodotDevTools SARIF Diagnostics",
+  "description": "Render GodotDevTools SARIF reports as inline diagnostics in VSCode.",
+  "version": "1.0.0",
+  "publisher": "godot-dev-tools",
+  "engines": { "vscode": "^1.80.0" },
+  "activationEvents": ["onLanguage:gdscript"],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "gdt.loadSarif", "title": "GodotDevTools: Load SARIF report" }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "asset_name": "Shader Variant Budget Manager",
+  "folder": "shader_variants",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Count distinct material feature combinations (each compiles its own shader) and preprocessor branches in custom shaders, against a variant budget.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-shader_variants-1.2.0.zip",
+  "readme": "addons/shader_variants/README.md"
+}

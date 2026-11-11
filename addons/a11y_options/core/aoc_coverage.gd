@@ -33,25 +33,75 @@ func run(input: String = "res://", options: Dictionary = {}) -> Dictionary:
     var texts := {}
     for p in paths:
         texts[p] = FileAccess.get_file_as_string(p)
+    var cache_path := str(opts.get("cache", ""))
+    if cache_path != "":
+        return _run_cached(texts, expect, cache_path)
     return analyze(texts, {"expect_list": expect})
 
 
+## Incremental run: unchanged files (by content hash) reuse prior evidence.
+## Cache format: {"hashes": {path: int}, "evidence": {id: "path:line"}}.
+func _run_cached(texts: Dictionary, expect: Array, cache_path: String) -> Dictionary:
+    var prior: Dictionary = {}
+    if FileAccess.file_exists(cache_path):
+        var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(cache_path))
+        if typeof(parsed) == TYPE_DICTIONARY:
+            prior = parsed
+    var prior_hashes: Dictionary = prior.get("hashes", {})
+    var prior_evidence: Dictionary = prior.get("evidence", {})
+    var changed := {}
+    var hashes := {}
+    for p in texts.keys():
+        var h := str(texts[p]).hash()
+        hashes[p] = h
+        if int(prior_hashes.get(p, -1)) != h:
+            changed[p] = texts[p]
+    var result: Dictionary = analyze(changed, {"expect_list": expect})
+    var evidence: Dictionary = result.get("evidence", {}).duplicate()
+    for id in prior_evidence.keys():
+        if not evidence.has(id):
+            var loc := str(prior_evidence[id])
+            var file_path := loc.substr(0, loc.rfind(":")) if loc.contains(":") else loc
+            if hashes.has(file_path) and int(prior_hashes.get(file_path, -1)) == int(hashes[file_path]):
+                evidence[id] = loc
+    var issues: Array = []
+    for e in expect:
+        if not evidence.has(e["id"]):
+            issues.append(_issue("warning", "option_not_found", "res://", 0, "No evidence of %s." % e.get("label", e["id"]), "Add the option to your settings menu, or adjust the patterns if it exists under another name."))
+    var cache_file := FileAccess.open(cache_path, FileAccess.WRITE)
+    if cache_file != null:
+        cache_file.store_string(JSON.stringify({"hashes": hashes, "evidence": evidence}, "  "))
+        cache_file.close()
+    return _finish({"expected": expect.size(), "found": evidence.size(), "cached_files": texts.size() - changed.size()}, issues, {"evidence": evidence})
+
+
 func analyze(texts: Dictionary, options: Dictionary = {}) -> Dictionary:
+    # Optimized: one combined regex per option, searched over whole files
+    # (was: one regex per pattern, searched per line with a lambda).
     var expect: Array = options.get("expect_list", DEFAULT_EXPECT)
     var issues: Array = []
     var evidence := {}
     var paths: Array = texts.keys()
     paths.sort()
     for e in expect:
-        var res: Array = e.get("patterns", []).map(func(p): return RegEx.create_from_string("(?i)" + str(p)))
+        var patterns: Array = e.get("patterns", [])
+        if patterns.is_empty():
+            continue
+        var parts: Array = []
+        for pat in patterns:
+            parts.append("(" + str(pat) + ")")
+        var regex := RegEx.create_from_string("(?i)" + "|".join(parts))
+        if regex == null:
+            continue
         for path in paths:
             if texts[path] == null or evidence.has(e["id"]):
                 continue
-            var lines := str(texts[path]).split("\n")
-            for index in range(lines.size()):
-                if res.any(func(r): return r != null and r.search(lines[index]) != null):
-                    evidence[e["id"]] = "%s:%d" % [path, index + 1]
-                    break
+            var text := str(texts[path])
+            var match := regex.search(text)
+            if match != null:
+                var line := text.substr(0, match.get_start()).count("\n") + 1
+                evidence[e["id"]] = "%s:%d" % [path, line]
+                break
         if not evidence.has(e["id"]):
             issues.append(_issue("warning", "option_not_found", "res://", 0, "No evidence of %s." % e.get("label", e["id"]), "Add the option to your settings menu, or adjust the patterns if it exists under another name."))
     return _finish({"expected": expect.size(), "found": evidence.size()}, issues, {"evidence": evidence})

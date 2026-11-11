@@ -1,0 +1,12 @@
+{
+  "asset_name": "Multiplayer Network Simulator",
+  "folder": "network_sim",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Add configurable latency, packet loss and disconnects to local multiplayer testing, with tools to inspect synchronisation issues.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-network_sim-1.1.0.zip",
+  "readme": "addons/network_sim/README.md"
+}

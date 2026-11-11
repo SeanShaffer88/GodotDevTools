@@ -1,0 +1,12 @@
+{
+  "asset_name": "Gameplay Scenario Test Builder",
+  "folder": "scenario_tests",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Write repeatable gameplay scenarios as JSON steps (wait, press/release actions, call methods, set properties, assert values) and run them headless.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-scenario_tests-1.2.0.zip",
+  "readme": "addons/scenario_tests/README.md"
+}

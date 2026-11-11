@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Build per-tool and suite zips
         env:
@@ -183,7 +183,12 @@ jobs:
             lifecycle:Lifecycle \
             privacy_audit:PrivacyAudit \
             offline_harness:OfflineHarness \
-            macro_recorder:MacroRecorder
+            macro_recorder:MacroRecorder \
+            tool_finder:ToolFinder \
+            fix_engine:FixEngine \
+            suite_presets:SuitePresets \
+            coverage_gate:CoverageGate \
+            dock_a11y:DockA11y
           do
             folder="${pair%%:*}"
             name="${pair##*:}"

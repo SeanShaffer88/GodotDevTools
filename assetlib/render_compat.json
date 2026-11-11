@@ -1,0 +1,12 @@
+{
+  "asset_name": "Rendering Settings Compatibility Matrix",
+  "folder": "render_compat",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "List rendering nodes and environment features a project uses and flag those the chosen renderer does not implement, from an editable matrix.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-render_compat-1.2.0.zip",
+  "readme": "addons/render_compat/README.md"
+}

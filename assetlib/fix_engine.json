@@ -1,0 +1,12 @@
+{
+  "asset_name": "Fix Engine",
+  "folder": "fix_engine",
+  "version": "1.0.0",
+  "author": "Sean Shaffer",
+  "description": "Preview safe fixes from tool reports; apply only with explicit opt-in and a backup.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-fix_engine-1.0.0.zip",
+  "readme": "addons/fix_engine/README.md"
+}

@@ -1,0 +1,12 @@
+{
+  "asset_name": "Coverage Gate",
+  "folder": "coverage_gate",
+  "version": "1.0.0",
+  "author": "Sean Shaffer",
+  "description": "Estimate GDScript coverage from test evidence and gate CI on a minimum percent.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-coverage_gate-1.0.0.zip",
+  "readme": "addons/coverage_gate/README.md"
+}

@@ -1,0 +1,12 @@
+{
+  "asset_name": "SARIF Exporter",
+  "folder": "sarif_export",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Convert every tool report in a folder into one SARIF 2.1.0 log for code-scanning views.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-sarif_export-1.2.0.zip",
+  "readme": "addons/sarif_export/README.md"
+}

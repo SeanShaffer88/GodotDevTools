@@ -1,0 +1,12 @@
+{
+  "asset_name": "GDScript Warning Baseline",
+  "folder": "warning_baseline",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Count common GDScript warning patterns per file (unused variables and parameters, unreachable code) and ratchet them against a baseline.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-warning_baseline-1.2.0.zip",
+  "readme": "addons/warning_baseline/README.md"
+}

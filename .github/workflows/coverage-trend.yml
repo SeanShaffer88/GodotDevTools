@@ -1,0 +1,36 @@
+name: Coverage trend
+
+# Runs the coverage estimate on main and appends to docs/coverage_trend.csv.
+# Estimate only (see addons/coverage_gate/README.md). Manual dispatch until
+# the trend file is committed back by a maintainer.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Download Godot 4.3-stable
+        run: |
+          mkdir -p .godot-bin
+          curl -fsSL -o .godot-bin/godot.zip "https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip"
+          unzip -q .godot-bin/godot.zip -d .godot-bin
+          rm .godot-bin/godot.zip
+          chmod +x .godot-bin/Godot_v4.3-stable_linux.x86_64
+      - name: Estimate coverage over addons/
+        run: .godot-bin/Godot_v4.3-stable_linux.x86_64 --headless --path . --script res://addons/coverage_gate/cli/cvg_cli.gd -- --dir=res://addons --min-percent=0
+      - name: Append trend
+        run: python3 tools/coverage/coverage_trend.py reports/coverage_gate/coverage_gate.json
+      - name: Upload trend
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: coverage-trend
+          path: |
+            docs/coverage_trend.csv
+            docs/coverage_badge.json

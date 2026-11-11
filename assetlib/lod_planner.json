@@ -1,0 +1,12 @@
+{
+  "asset_name": "LOD and Visibility Range Planner",
+  "folder": "lod_planner",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Find invalid visibility ranges, heavy instanced meshes with no visibility range, and glTF imports with LOD generation turned off.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-lod_planner-1.2.0.zip",
+  "readme": "addons/lod_planner/README.md"
+}

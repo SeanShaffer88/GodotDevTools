@@ -51,7 +51,7 @@ Evidence labels follow PROJECT_RULES.md: **Verified** (run or tested here), **Pa
 
 ### F6 - CI supply chain (note)
 
-- Workflows use `actions/checkout@v7`, `actions/cache@v6` and `actions/upload-artifact@v7` by major tag, not by commit SHA. For stronger supply-chain guarantees, pin them to SHAs. This is left as is to match the repo's existing convention.
+- Workflows previously used major tags (`actions/checkout@v7` etc.). **Fixed:** all actions are now pinned to commit SHAs with the major tag in a comment (checkout `3d3c42e…` # v7, cache `55cc834…` # v6, upload-artifact `cf430e0…` # v7, download-artifact `37930b1…` # v7). New workflows (`windows-gpu.yml`, `docker.yml`, `coverage-trend.yml`) use the pinned SHAs from the start.
 
 ## Quality audit
 

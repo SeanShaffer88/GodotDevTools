@@ -1,0 +1,12 @@
+{
+  "asset_name": "Loot Table and Economy Simulator",
+  "folder": "loot_sim",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Simulate weighted loot tables with a fixed seed: drop odds, expected value per open, observed rates and worst-case droughts.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-loot_sim-1.2.0.zip",
+  "readme": "addons/loot_sim/README.md"
+}

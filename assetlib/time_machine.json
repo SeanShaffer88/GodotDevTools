@@ -1,0 +1,12 @@
+{
+  "asset_name": "Game-State Time Machine",
+  "folder": "time_machine",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Record inputs and state snapshots so you can rewind a bug, inspect variables, and replay the exact sequence that caused it. Includes an in-game recorder node.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-time_machine-1.1.0.zip",
+  "readme": "addons/time_machine/README.md"
+}

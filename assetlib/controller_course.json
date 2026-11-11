@@ -1,0 +1,12 @@
+{
+  "asset_name": "Character Controller Test Course",
+  "folder": "controller_course",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Check a platformer controller's tuning against a course of ledges, gaps and slopes using projectile kinematics.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-controller_course-1.2.0.zip",
+  "readme": "addons/controller_course/README.md"
+}

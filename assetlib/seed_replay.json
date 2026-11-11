@@ -1,0 +1,12 @@
+{
+  "asset_name": "Deterministic Seed and Replay Runner",
+  "folder": "seed_replay",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Verify run logs by replaying a deterministic PRNG and recomputing event hash chains to pinpoint first divergence.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-seed_replay-1.1.0.zip",
+  "readme": "addons/seed_replay/README.md"
+}

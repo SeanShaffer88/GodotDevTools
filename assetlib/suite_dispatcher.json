@@ -1,0 +1,12 @@
+{
+  "asset_name": "Suite CLI Dispatcher",
+  "folder": "suite_dispatcher",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "One entry point that lists every installed tool CLI and runs any of them by name, passing options through and returning its exit code.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-suite_dispatcher-1.2.0.zip",
+  "readme": "addons/suite_dispatcher/README.md"
+}

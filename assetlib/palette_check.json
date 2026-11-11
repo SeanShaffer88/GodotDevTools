@@ -1,0 +1,12 @@
+{
+  "asset_name": "Colour Palette Consistency Checker",
+  "folder": "palette_check",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Compare every Color(...) and #hex colour in scenes, resources and scripts with an approved palette using CIE delta E.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-palette_check-1.2.0.zip",
+  "readme": "addons/palette_check/README.md"
+}

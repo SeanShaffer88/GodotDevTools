@@ -1,0 +1,12 @@
+{
+  "asset_name": "Procedural Generation Constraint Tester",
+  "folder": "procgen_constraints",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Check generated grid layouts (one text map per seed) for an reachable exit, keys reachable before their doors, isolated pockets and dead-end share.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-procgen_constraints-1.2.0.zip",
+  "readme": "addons/procgen_constraints/README.md"
+}

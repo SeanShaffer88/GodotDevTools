@@ -1,0 +1,7 @@
+{
+  "summary": {"issues": 2},
+  "issues": [
+    {"severity": "warning", "kind": "file_name", "path": "res://demo/fix_engine/BadName.tscn", "line": 0, "message": "Name does not match pattern.", "fix": "Rename after reviewing references."},
+    {"severity": "warning", "kind": "duplicate", "path": "res://demo/fix_engine/dup.png", "line": 0, "message": "Duplicate file.", "fix": "Delete one copy manually."}
+  ]
+}

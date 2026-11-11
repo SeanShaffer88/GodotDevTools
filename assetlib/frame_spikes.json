@@ -1,0 +1,12 @@
+{
+  "asset_name": "Frame-Time Spike Investigator",
+  "folder": "frame_spikes",
+  "version": "1.2.0",
+  "author": "Sean Shaffer",
+  "description": "Find frame-time spikes in a recorded frame log and correlate each with markers, node-count jumps and physics time; includes a runtime recorder.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-frame_spikes-1.2.0.zip",
+  "readme": "addons/frame_spikes/README.md"
+}

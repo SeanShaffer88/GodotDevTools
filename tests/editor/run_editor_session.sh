@@ -31,6 +31,8 @@ import json, sys
 d = json.load(open(sys.argv[1]))
 bad = [r["addon"] for r in d["results"] if not (r["dock_in_editor"] and r.get("visible") and r["clicked"] and r["output_changed"])]
 bad += [r["addon"] + " (record)" for r in d["results"] if r["addon"] == "macro_recorder" and not r.get("record_captured")]
+_partial = {"visual_regression": "capture_runner_live", "dialogue_quest": "dialogue_graph_painted", "responsive_ui": "responsive_panes_drawn", "whitebox": "whitebox_snap_live"}
+bad += [r["addon"] + " (" + _partial[r["addon"]] + ")" for r in d["results"] if r["addon"] in _partial and not r.get(_partial[r["addon"]])]
 print("Editor session: %d docks, %d failed%s (%s, %s)" % (len(d["results"]), len(bad), (": " + ", ".join(bad)) if bad else "", d["engine"], d["video_adapter"]))
 sys.exit(1 if bad or len(d["results"]) == 0 else 0)
 PY

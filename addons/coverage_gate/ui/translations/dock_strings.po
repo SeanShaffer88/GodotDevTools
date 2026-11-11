@@ -1,0 +1,10 @@
+# Dock strings for Coverage Gate. Edit msgstr, keep msgid stable.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Run"
+msgstr ""
+
+msgid "Find tools"
+msgstr ""

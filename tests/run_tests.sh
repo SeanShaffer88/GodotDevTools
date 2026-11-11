@@ -17,7 +17,7 @@ gate() { # gate <description> <script> [args...] - the CLI must exit 2
 
 echo "== import (validates every demo scene/script parses in Godot) =="
 "$GODOT" --headless --path . --import --quit-after 5
-for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp smc pcw ssg npd aeh gsb crp scr pbt rlf pfl ppa ocn eam docks; do
+for t in vrt gstm ruip ahd dqd mns nlss a11y bed dbp smg cmv par aud mlh imx shd sgs lmx btd cor sdr wbx vfm tmr ctr thm pfg dcg sdm rg nc sub tel perf flag bs cert coverage priority pbi opa npb usf tcm scx dup era alg uid psd slr lts dca dfs xpc cgv ach wsb rft sba dvl fgc ala aia atp tfc msr lsc ecm pcc tra flk gst lgr lbg sdt isf gwb sst mbh gmt sav apr vcc tpn rln cdc pde ssv aoc hrc rsv srf jux hdb rdf fsb gdt pch svb lod apa rcm gbo fts slp pjt cct hht nml spv irc wba aip gas pgc cgp cvp smc pcw ssg npd aeh gsb crp scr pbt rlf pfl ppa ocn eam tfd fxe spm cvg dka docks; do
   echo "== test_$t =="
   "$GODOT" --headless --path . --script "res://tests/test_$t.gd"
 done
@@ -361,3 +361,31 @@ gate "offline harness flags the unhandled score request" \
 gate "macro preview reports the unmatched step" \
   res://addons/macro_recorder/cli/eam_cli.gd -- --macro=res://demo/macros/center_labels.json --scene=res://demo/workflow/drift/menu.tscn --fail-on=step_unmatched
 echo "ALL GATE CHECKS PASSED"
+
+echo "== CLI smoke: tool finder =="
+"$GODOT" --headless --path . --script res://addons/tool_finder/cli/tfd_cli.gd -- --query="my game lags on mobile"
+test -s reports/tool_finder/tool_finder.json
+gate "tool finder must exit 2 on no match" \
+  res://addons/tool_finder/cli/tfd_cli.gd -- --query="zzzzqqqq" --fail-on=no_match
+echo "== CLI smoke: fix engine preview =="
+"$GODOT" --headless --path . --script res://addons/fix_engine/cli/fxe_cli.gd -- --report=res://demo/fix_engine/report.json
+test -s reports/fix_engine/fix_engine.json
+gate "fix engine must exit 2 on no_safe_fix" \
+  res://addons/fix_engine/cli/fxe_cli.gd -- --report=res://demo/fix_engine/report.json --fail-on=no_safe_fix
+echo "== CLI smoke: suite presets =="
+"$GODOT" --headless --path . --script res://addons/suite_presets/cli/spm_cli.gd -- --preset=mobile_perf
+test -s reports/suite_presets/suite_presets.json
+if "$GODOT" --headless --path . --script res://addons/suite_presets/cli/spm_cli.gd -- --preset=nope --fail-on=unknown_preset; then echo "FAIL: expected exit 1"; exit 1; else [ $? -eq 1 ] || { echo "FAIL: expected exit 1"; exit 1; }; fi
+echo "== CLI smoke: coverage gate =="
+"$GODOT" --headless --path . --script res://addons/coverage_gate/cli/cvg_cli.gd -- --dir=res://demo/coverage_gate --min-percent=0
+test -s reports/coverage_gate/coverage_gate.json
+gate "coverage gate must exit 2 below threshold" \
+  res://addons/coverage_gate/cli/cvg_cli.gd -- --dir=res://demo/coverage_gate --min-percent=99 --fail-on=below_threshold
+echo "== CLI smoke: dock a11y =="
+"$GODOT" --headless --path . --script res://addons/dock_a11y/cli/dka_cli.gd -- --dir=res://demo/dock_a11y
+test -s reports/dock_a11y/dock_a11y.json
+gate "dock a11y must exit 2 on missing tooltip" \
+  res://addons/dock_a11y/cli/dka_cli.gd -- --dir=res://demo/dock_a11y --fail-on=missing_tooltip
+echo "== CLI smoke: a11y options incremental cache =="
+"$GODOT" --headless --path . --script res://addons/a11y_options/cli/aoc_cli.gd -- --dir=res://demo/shipping --cache=res://reports/a11y_options/cache.json
+test -s reports/a11y_options/cache.json

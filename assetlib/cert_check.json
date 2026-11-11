@@ -1,0 +1,12 @@
+{
+  "asset_name": "Platform Certification Checklist Runner",
+  "folder": "cert_check",
+  "version": "1.1.0",
+  "author": "Sean Shaffer",
+  "description": "Offline Platform Certification Checklist Runner checks.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-cert_check-1.1.0.zip",
+  "readme": "addons/cert_check/README.md"
+}
