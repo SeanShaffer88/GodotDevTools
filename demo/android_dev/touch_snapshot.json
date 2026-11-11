@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "screen": {
+    "size_px": [1080, 2400],
+    "safe_area_px": [0, 100, 1080, 2200],
+    "density_dpi": 320
+  },
+  "targets": [
+    {"path": "/Game/Menu/Small", "rect_px": [120, 180, 70, 70]},
+    {"path": "/Game/Menu/Unsafe", "rect_px": [10, 20, 120, 120]},
+    {"path": "/Game/Menu/Start", "rect_px": [300, 300, 120, 120]},
+    {"path": "/Game/Menu/Close", "rect_px": [426, 300, 120, 120]},
+    {"path": "/Game/Menu/Overlap", "rect_px": [520, 300, 120, 120]},
+    {"path": "/Game/Menu/Rotated", "rect_px": [700, 300, 130, 130], "axis_aligned": false}
+  ]
+}

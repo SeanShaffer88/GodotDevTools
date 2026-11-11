@@ -1,0 +1,12 @@
+{
+  "asset_name": "Android Touch and Safe Area Audit",
+  "folder": "android_touch_audit",
+  "version": "1.0.0",
+  "author": "Sean Shaffer",
+  "description": "Analyze captured Android touch target sizes, spacing, overlap and display safe areas.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-android_touch_audit-1.0.0.zip",
+  "readme": "addons/android_touch_audit/README.md"
+}

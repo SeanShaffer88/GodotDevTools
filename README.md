@@ -4,11 +4,11 @@
 
 Independent Godot 4 addons cover testing, performance, content, workflow and release checks. The table below links each addon to its purpose and folder. Many tools are static analyzers, simulations or estimates rather than runtime measurements; consult each addon README for its scope and limitations.
 
-The [roadmap](ROADMAP.md) tracks 110 original entries and five post-roadmap additions. The expanded gate and editor/live-game sessions passed in CI on commit `d430a6c`; the workflow badge reports current results. The native-accelerator entry is a research note that ends in a recorded decision not to build. See [QUALITY.md](QUALITY.md) for the evidence and remaining gaps.
+The [roadmap](ROADMAP.md) tracks 110 original entries; post-roadmap additions include five suite-management tools and three Android development tools. The expanded gate and editor/live-game sessions passed in CI on commit `d430a6c`; the workflow badge reports current results. The native-accelerator entry is a research note that ends in a recorded decision not to build. See [QUALITY.md](QUALITY.md) for the evidence and remaining gaps.
 
 Shared, optional components consume tool reports without any tool depending on them: the [Report Schema](addons/report_schema/README.md), [SARIF](addons/sarif_export/README.md) and [JUnit](addons/junit_export/README.md) exporters, the [HTML dashboard](addons/html_dashboard/README.md), [Report Diff](addons/report_diff/README.md), the [Finding Suppression Baseline](addons/suppressions/README.md), the [Suite CLI Dispatcher](addons/suite_dispatcher/README.md), the [pre-commit hook installer](addons/precommit/README.md), the [Fix Engine](addons/fix_engine/README.md) (opt-in safe fixes) and a [reusable CI action](.github/actions/godot-dev-tools/README.md).
 
-Post-roadmap work adds [Tool Finder](addons/tool_finder/README.md), [Suite Presets](addons/suite_presets/README.md), a [coverage estimate](addons/coverage_gate/README.md), [dock audit](addons/dock_a11y/README.md), [Docker and standalone tooling](docs/DOCKER.md), [MCP and VS Code integration](mcp/README.md), a [Windows CI workflow](docs/WINDOWS_GPU.md), and a [docs catalog](docs/TOOLS.md). Asset Library metadata and a [real-game dogfooding harness](docs/DOGFOOD.md) are prepared, but publication and production-project runs are pending. Godot 4.4 and 4.6 have passed the CI gate but remain experimental.
+Post-roadmap work adds [Android Export Audit](addons/android_export_audit/README.md), [Android Touch Audit](addons/android_touch_audit/README.md), [Android Logcat Triage](addons/android_logcat_triage/README.md), [Tool Finder](addons/tool_finder/README.md), [Suite Presets](addons/suite_presets/README.md), a [coverage estimate](addons/coverage_gate/README.md), [dock audit](addons/dock_a11y/README.md), [Docker and standalone tooling](docs/DOCKER.md), [MCP and VS Code integration](mcp/README.md), a [Windows CI workflow](docs/WINDOWS_GPU.md), and a [docs catalog](docs/TOOLS.md). Asset Library metadata and a [real-game dogfooding harness](docs/DOGFOOD.md) are prepared, but publication and production-project runs are pending. Godot 4.4 and 4.6 have passed the CI gate but remain experimental.
 
 ## TL;DR
 
@@ -109,6 +109,9 @@ AI assistants working in this repo should start at [AI_USAGE.md](AI_USAGE.md): a
 | GDScript Mutation Tester | Operator mutants of one script, each run against its test in an isolated temporary project; surviving mutants show untested behaviour. | `addons/mutation_tester` |
 | Store Asset Validator | Store images (PNG/JPEG headers) against a user-written profile: missing files, wrong sizes, screenshot counts. | `addons/store_assets` |
 | Android Permissions Reviewer | Permissions requested by each Android export preset; sensitive ones flagged for review, optional justification file. | `addons/android_permissions` |
+| Android Export Readiness Audit | Review Android preset ABI, package, SDK, format, signing flags and optional version-code history. | `addons/android_export_audit` |
+| Android Touch and Safe Area Audit | Inspect captured control rectangles for logical-dp size, spacing, overlap and safe-area risks. | `addons/android_touch_audit` |
+| Android Logcat Crash Triage | Group supported local logcat Java crashes, native fatal signals and ANRs without copying raw messages. | `addons/android_logcat_triage` |
 | Version Consistency Checker | Project `config/version` against version strings in export presets (Android, Windows, macOS, iOS, web). | `addons/version_consistency` |
 | Third-Party Notice Collector | License files gathered per addon/vendor folder into a notices report; missing licenses and copyleft licenses flagged for review. | `addons/third_party_notices` |
 | Release Notes Generator | Conventional-commit subjects grouped into draft release notes (breaking, added, fixed, performance, other). | `addons/release_notes` |
@@ -174,7 +177,7 @@ No placeholder images are used in the meantime.
 
 ## Requirements
 
-- Godot **4.3** is the verified version. The headless CI gate also passed on **4.5**, which remains an experimental CI target. Other Godot versions are unverified.
+- The existing suite baseline passed the headless CI gate on Godot **4.3** and **4.5**; see [capability parity](docs/PARITY.md) for evidence on newer additions. Other versions are experimental.
 - No third-party dependencies. No network access is used at any point.
 
 ## Install
@@ -187,7 +190,7 @@ For the whole suite: copy every `addons/` folder from this checkout (or use a su
 
 ### In the editor
 
-Each tool adds a dock on the right side of the editor with a **Run check** button, a results list, and a `?` help button that explains the tool in plain words, offline. Four tools also add pieces beyond the check:
+Each tool adds a dock with inputs, a run action and results. Controls have offline tooltips; consult the addon README for detailed help. Some tools also add pieces beyond the check:
 
 - **Visual Regression**: the dock's Capture section is the one-click shutter - list scene paths (empty = the main scene), press **Capture now**, and every scene is saved as `<scene>__<width>x<height>.png` in the capture folder at each standard resolution, ready for the compare run. Needs the editor's renderer; never runs headless.
 - **Dialogue and Quest**: the dock draws the selected dialogue's branch graph - layered boxes with arrows for choices, `[if]` tags on conditional choices, orange for flagged nodes and a red dashed ghost box for every choice that points at a missing node.
@@ -317,6 +320,9 @@ AI_USAGE.md               AI-agent guide: pasteable prompt + exact tool/CLI map
 | `mutation_tester/cli/gmt_cli.gd` | `--target` `--test` `--max-mutants` `--timeout` `--fail-on` |
 | `store_assets/cli/sav_cli.gd` | `--profile` `--fail-on` |
 | `android_permissions/cli/apr_cli.gd` | `--presets` `--justifications` `--fail-on` |
+| `android_export_audit/cli/aea_cli.gd` | `--presets` `--history` `--out` `--fail-on` |
+| `android_touch_audit/cli/ata_cli.gd` | `--input` `--min-dp` `--gap-dp` `--out` `--fail-on` |
+| `android_logcat_triage/cli/alt_cli.gd` | `--log` `--package` `--out` `--fail-on` |
 | `version_consistency/cli/vcc_cli.gd` | `--project` `--presets` `--expected` `--fail-on` |
 | `third_party_notices/cli/tpn_cli.gd` | `--dir` `--fail-on` |
 | `release_notes/cli/rln_cli.gd` | `--commits` `--version` `--include-other` `--fail-on` |
@@ -406,6 +412,7 @@ See [AUDIT.md](AUDIT.md) for the security, privacy and quality audit, [CREDITS.m
 - **Scene Search** parsing is rule-based by design (offline, explainable, no AI service): it stems simple plurals and drops grammar words, and results always state why they matched.
 - **Accessibility Checker** checks what can be known statically; colour-only information and reading order still need a human pass - it flags suspects for that pass.
 - **Export Doctor** checks configuration and loadability; it does not run a full export (that remains the release step), and the templates check looks in the standard per-user templates folder.
+- **Android Export Audit** reviews selected Godot 4.3 preset settings and supplied history, not actual exports, signing credentials or store compliance. **Android Touch Audit** evaluates captured rectangles, not real touch delivery; clipping, custom hit shapes and device coordinate conventions require manual testing. **Android Logcat Triage** understands only documented threadtime patterns; reports can still contain sensitive names and paths.
 - **Draw-Call Profiler** and **Thermal Dock** produce documented estimates from scene text and workload data, not GPU or device measurements - use them to rank and compare changes, then confirm on real hardware.
 - **Shader Doctor** analyzes `.gdshader` text statically; it does not compile shaders or time them on a GPU, and visual-shader graphs are covered through the shading language Godot generates from them.
 - **Localization Matrix** does no machine translation and no network calls, per project rule; the in-context half is preview data (completeness, length risk, plural forms) rendered next to the source strings.
@@ -415,7 +422,7 @@ See [AUDIT.md](AUDIT.md) for the security, privacy and quality audit, [CREDITS.m
 - **Test Runner** detects GUT suites from file text but never depends on GUT; this repo's own suite remains `tests/run_tests.sh`.
 - **Whitebox** snaps selected 3D nodes' local positions using an undoable editor action; rotations and world-space snapping are not applied. The headless half audits scene text against grid and slope rules. See `docs/DOCK_A11Y.md` for interaction-test status.
 - **Prefab Guard** writes to scene files only with an explicit `--apply`; otherwise it reports plans, because scene files are source code.
-- The expanded 138-dock editor session and live-game session passed in CI on Linux and Windows. Hosted runners can use software renderers; hands-on Windows use with a hardware GPU is still owed. See `QUALITY.md`.
+- The earlier 138-dock editor session and live-game session passed in CI on Linux and Windows; the three new Android docks and capture helper require their own editor/device evidence. Hosted runners can use software renderers; hands-on Windows use with a hardware GPU is still owed. See `QUALITY.md`.
 
 ## License
 

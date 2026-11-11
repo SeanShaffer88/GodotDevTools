@@ -28,6 +28,14 @@ func _init() -> void:
 	check("unknown query reports no_match", str(none["issues"]).contains("no_match"))
 	check("empty query is bad_input", str(finder.run("", {"catalog": catalog})["issues"]).contains("bad_input"))
 	check("catalog builds from real addons dir", finder.build_catalog("res://addons").size() > 100)
+	var android: Dictionary = finder.run("android")
+	check("Android query recommends the three new tools", str(android["results"]).contains("android_export_audit") and str(android["results"]).contains("android_touch_audit") and str(android["results"]).contains("android_logcat_triage"))
+	var logcat: Dictionary = finder.run("logcat")
+	var explained := false
+	for match_result in logcat["results"]:
+		if match_result["id"] == "android_logcat_triage" and "recommended for 'logcat'" in match_result["why"]:
+			explained = true
+	check("logcat query explains its recommendation", explained)
 	var scratch := "user://finder_crlf_%s" % str(OS.get_process_id())
 	var addon := scratch.path_join("sample_tool")
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(addon))

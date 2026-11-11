@@ -1,0 +1,12 @@
+{
+  "asset_name": "Android Export Readiness Audit",
+  "folder": "android_export_audit",
+  "version": "1.0.0",
+  "author": "Sean Shaffer",
+  "description": "Review Android export presets for package, ABI, SDK, signing and release configuration pitfalls.",
+  "category": "Tools",
+  "godot_version": "4.3",
+  "license": "MIT",
+  "zip": "GodotDevTools-android_export_audit-1.0.0.zip",
+  "readme": "addons/android_export_audit/README.md"
+}

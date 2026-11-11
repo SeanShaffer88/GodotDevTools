@@ -1,5 +1,5 @@
 {
-  "count": 138,
+  "count": 141,
   "tools": [
     {
       "id": "a11y_options",
@@ -52,6 +52,26 @@
       "summary": "Evaluate sight and hearing for AI agents in a 2D scenario with walls, trace every decision, and check expected outcomes. Enable the addon in Project Settings \u2192 Plugins and use **Evaluate perception** "
     },
     {
+      "id": "android_export_audit",
+      "title": "Android Export Readiness Audit",
+      "description": "Review Android export presets for package, ABI, SDK, signing and release configuration pitfalls.",
+      "version": "1.0.0",
+      "folder": "addons/android_export_audit",
+      "readme": "addons/android_export_audit/README.md",
+      "cli": "addons/android_export_audit/cli/aea_cli.gd",
+      "summary": "Review Godot Android export presets for common release-configuration mistakes without exporting, reading keystores, or contacting a store. This complements Android Permissions Reviewer, Export Doctor "
+    },
+    {
+      "id": "android_logcat_triage",
+      "title": "Android Logcat Crash Triage",
+      "description": "Group supported Android logcat fatal exceptions, native signals and ANRs without sharing raw log messages.",
+      "version": "1.0.0",
+      "folder": "addons/android_logcat_triage",
+      "readme": "addons/android_logcat_triage/README.md",
+      "cli": "addons/android_logcat_triage/cli/alt_cli.gd",
+      "summary": "Group a local Android `logcat -v threadtime` capture into supported Java fatal exceptions, libc fatal signals and ActivityManager ANR records. This complements the generic Godot log grouper and crash "
+    },
+    {
       "id": "android_permissions",
       "title": "Android Permissions Reviewer",
       "description": "List the permissions each Android export preset requests, flag commonly sensitive ones for review, and check each has a written justification.",
@@ -60,6 +80,16 @@
       "readme": "addons/android_permissions/README.md",
       "cli": "addons/android_permissions/cli/apr_cli.gd",
       "summary": "List the permissions each Android export preset requests, flag commonly sensitive ones for review, and check each has a written justification. Enable the addon in Project Settings \u2192 Plugins and use **"
+    },
+    {
+      "id": "android_touch_audit",
+      "title": "Android Touch and Safe Area Audit",
+      "description": "Analyze captured Android touch target sizes, spacing, overlap and display safe areas.",
+      "version": "1.0.0",
+      "folder": "addons/android_touch_audit",
+      "readme": "addons/android_touch_audit/README.md",
+      "cli": "addons/android_touch_audit/cli/ata_cli.gd",
+      "summary": "Review **resolved** touch-target rectangles from a captured screen: size in logical dp, proximity, overlaps and whether they fit the reported display safe area. The analyzer reads a JSON snapshot, not"
     },
     {
       "id": "anim_audit",

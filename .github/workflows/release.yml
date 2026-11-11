@@ -135,6 +135,9 @@ jobs:
             mutation_tester:MutationTester \
             store_assets:StoreAssets \
             android_permissions:AndroidPermissions \
+            android_export_audit:AndroidExportAudit \
+            android_touch_audit:AndroidTouchAudit \
+            android_logcat_triage:AndroidLogcatTriage \
             version_consistency:VersionCheck \
             third_party_notices:ThirdPartyNotices \
             release_notes:ReleaseNotes \

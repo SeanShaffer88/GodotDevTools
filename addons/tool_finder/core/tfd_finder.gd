@@ -7,18 +7,21 @@ extends RefCounted
 const PROBLEM_TOOLS := {
 	"lag": ["frame_spikes", "overdraw", "batch_profiler", "load_profiler", "thermal_sim"],
 	"slow": ["frame_spikes", "overdraw", "batch_profiler", "load_profiler"],
-	"mobile": ["thermal_sim", "handheld_readiness", "texture_filter", "asset_health", "overdraw"],
-	"crash": ["crash_packager", "load_failure", "save_corruption", "leak_hunter"],
+	"mobile": ["thermal_sim", "handheld_readiness", "texture_filter", "asset_health", "overdraw", "android_touch_audit", "android_export_audit", "android_logcat_triage"],
+	"android": ["android_export_audit", "android_touch_audit", "android_logcat_triage", "android_permissions", "lifecycle"],
+	"touch": ["android_touch_audit", "responsive_ui", "handheld_readiness"],
+	"logcat": ["android_logcat_triage", "crash_packager"],
+	"crash": ["crash_packager", "load_failure", "save_corruption", "leak_hunter", "android_logcat_triage"],
 	"leak": ["leak_hunter", "pool_advisor", "save_bloat"],
 	"test": ["test_runner", "flaky_tests", "mutation_tester", "property_tests", "scenario_tests"],
 	"accessibility": ["accessibility", "a11y_options", "colorvision", "subtitle_audit"],
 	"localization": ["l10n_matrix", "font_glyphs", "subtitle_audit"],
-	"export": ["export_doctor", "export_ranges", "build_size", "release_guard"],
+	"export": ["export_doctor", "export_ranges", "build_size", "release_guard", "android_export_audit"],
 	"shader": ["shader_doctor", "shader_variants", "overdraw"],
 	"audio": ["audio_sandbox", "audio_levels", "audio_import"],
 	"physics": ["physics_jitter", "collision_matrix", "controller_course"],
 	"save": ["schema_migrator", "save_corruption", "save_bloat"],
-	"ui": ["responsive_ui", "theme_audit", "accessibility", "palette_check"],
+	"ui": ["responsive_ui", "theme_audit", "accessibility", "palette_check", "android_touch_audit"],
 }
 
 func run(query: String = "", options: Dictionary = {}) -> Dictionary:

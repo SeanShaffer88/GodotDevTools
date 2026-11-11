@@ -7,13 +7,16 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Added
 
+- Android Export Readiness Audit (`android_export_audit`): preset ABI, package, APK/AAB, SDK and signing-flag review, plus optional supplied version-code history.
+- Android Touch and Safe Area Audit (`android_touch_audit`): snapshot-based logical-dp size, spacing, overlap and safe-area checks with an opt-in runtime capture helper.
+- Android Logcat Crash Triage (`android_logcat_triage`): offline grouping of supported threadtime Java fatal exceptions, libc signals and ANRs, without copying raw message text.
 - Tool Finder (`tool_finder`): problem-first search over the suite catalog (built from `addons/*/plugin.cfg`), ranked with reasons. Dock, CLI, fixture and test suite.
 - Fix Engine (`fix_engine`): shared opt-in fix proposer over tool reports; preview by default, `--apply` writes backups first; allowlist is `file_name`/`directory_name` renames only. Dock, CLI, fixture and test suite.
 - Suite Presets (`suite_presets`): `full`, `ci_only`, `mobile_perf`, `content`, `testing` plugin profiles; preview in the dock, apply via CLI `--apply` (backs up `project.godot`). Dock, CLI, fixture and test suite.
 - Coverage Gate (`coverage_gate`): GDScript coverage *estimate* from test evidence (function-name mentions), `--min-percent` gating, trend scripts in `tools/coverage/`. Dock, CLI, fixture and test suite.
 - Dock Accessibility Audit (`dock_a11y`): audits `*_dock.gd` for tooltips, run action and focus; dogfoods a11y on the tools themselves. Dock, CLI, fixture and test suite.
 - Windows CI: `.github/workflows/windows-gpu.yml` (gate + editor/live-game sessions on `windows-latest`), `tests/windows/run_windows_gate.ps1`, `docs/WINDOWS_GPU.md`. The workflow passed on `d430a6c`; hosted CI cannot establish hands-on hardware-GPU support.
-- Docs site + catalog: `mkdocs.yml`, `tools/docs_site/generate.py` -> `docs/catalog.json` + `docs/TOOLS.md` (138 tools).
+- Docs site + catalog: `mkdocs.yml`, `tools/docs_site/generate.py` -> `docs/catalog.json` + `docs/TOOLS.md` (141 tools).
 - MCP server (`mcp/mcp_server.py`, stdlib stdio, offline) exposing every CLI as `run_<tool>`, plus VSCode SARIF extension (`editors/vscode/`).
 - Docker image (`Dockerfile`, `tools/gdt` wrapper, `.github/workflows/docker.yml`) and standalone Python subset (`tools/standalone/standalone.py`, naming check, exit-2 parity).
 - Asset Library publishing: `tools/assetlib/generate_assetlib.py` -> `assetlib/<tool>.json` + checklist (`docs/ASSETLIB.md`).
