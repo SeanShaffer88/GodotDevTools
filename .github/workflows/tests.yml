@@ -20,6 +20,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  release-assets:
+    name: Release archives and Asset Library metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Test release packaging without publishing
+        run: python3 tests/test_release_assets.py
+
   gate:
     name: Gate on Godot ${{ matrix.godot }}
     runs-on: ubuntu-latest
@@ -59,6 +68,10 @@ jobs:
 
       - name: Show Godot version
         run: '".godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64" --headless --version'
+
+      - name: Smoke-test installed release archives
+        if: matrix.godot == '4.3-stable'
+        run: python3 tests/release_install_smoke.py --godot "$PWD/.godot-bin/Godot_v${{ matrix.godot }}_linux.x86_64"
 
       - name: Standalone naming parity with Godot
         run: |
