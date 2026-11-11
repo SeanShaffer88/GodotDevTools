@@ -38,8 +38,24 @@ chmod +x "$MOCK"
 ORIGINAL_PROJECT="$PROJECT" sh "$SRC/tests/dogfood/run_dogfood.sh" "$MOCK" "$PROJECT" "$TMP/results"
 for addon in naming_conventions a11y_options duplicate_code script_complexity; do
   test -s "$TMP/results/$addon.json"
+  test -s "$TMP/results/$addon.timing.json"
   test -f "$TMP/results/$addon.log"
 done
+python3 "$SRC/tests/dogfood/dogfood.py" "$TMP/results" > "$TMP/summary"
+grep -q 'elapsed_ms=' "$TMP/summary"
+if python3 "$SRC/tests/dogfood/timed_run.py" "$TMP/timeout.timing.json" 0.05 python3 -c 'import time; time.sleep(2)' >/dev/null 2>&1; then
+  echo "FAIL: timed command did not time out" >&2
+  exit 1
+else
+  status=$?
+  [ "$status" -eq 124 ] || { echo "FAIL: expected timeout exit 124" >&2; exit 1; }
+fi
+python3 - "$TMP/timeout.timing.json" <<'PY'
+import json, sys
+with open(sys.argv[1], encoding="utf-8") as f:
+    timing = json.load(f)
+assert timing["exit_code"] == 124 and timing["elapsed_ms"] >= 0
+PY
 test "$(cat "$PROJECT/addons/naming_conventions/keep.txt")" = "original addon"
 test ! -e "$PROJECT/addons/naming_conventions/core/nc_audit.gd"
 test ! -e "$PROJECT/reports"

@@ -1,0 +1,111 @@
+name: Real-project dogfood
+
+# Two small, pinned public Godot projects. The checkout and generated reports
+# live in disposable runner directories; importing a project can execute its
+# code, so never replace these pins with an unreviewed project or mutable ref.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dogfood-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scan:
+    name: Dogfood ${{ matrix.label }} (Godot 4.5)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: Brackeys first game
+            id: brackeys
+            repository: Brackeys/first-game-in-godot
+            revision: 388257461dbd07b1e5020270c72fca48b30c493d
+            project: First Game
+          - label: Platformer starter
+            id: platformer
+            repository: deanblackborough/godot-platformer
+            revision: 5ce74ba7e3ffcd2e9339ebbca763b0a32bab1cf5
+            project: .
+    steps:
+      - name: Check out GodotDevTools
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Check out pinned public project
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: ${{ matrix.repository }}
+          ref: ${{ matrix.revision }}
+          path: .dogfood-source
+          persist-credentials: false
+
+      - name: Cache Godot 4.5-stable
+        id: godot-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: .godot-bin
+          key: godot-4.5-stable-linux-x86_64
+
+      - name: Download Godot 4.5-stable
+        if: steps.godot-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .godot-bin
+          curl -fsSL -o .godot-bin/godot.zip 'https://github.com/godotengine/godot/releases/download/4.5-stable/Godot_v4.5-stable_linux.x86_64.zip'
+          unzip -q .godot-bin/godot.zip -d .godot-bin
+          rm .godot-bin/godot.zip
+          chmod +x .godot-bin/Godot_v4.5-stable_linux.x86_64
+
+      - name: Run scanners against a disposable copy
+        shell: bash
+        run: |
+          set +e
+          sh tests/dogfood/run_dogfood.sh "$PWD/.godot-bin/Godot_v4.5-stable_linux.x86_64" \
+            "$PWD/.dogfood-source/${{ matrix.project }}" "$RUNNER_TEMP/dogfood-${{ matrix.id }}" 2>&1 | tee dogfood.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            message=$(tail -30 dogfood.log)
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=Dogfood failed (${{ matrix.id }})::$message"
+          fi
+          exit "$status"
+
+      - name: Summarize findings and timings
+        if: always()
+        shell: bash
+        run: |
+          dir="$RUNNER_TEMP/dogfood-${{ matrix.id }}"
+          if [ -d "$dir" ]; then
+            summary=$(python3 tests/dogfood/dogfood.py "$dir")
+            {
+              echo '### Dogfood: ${{ matrix.repository }} at ${{ matrix.revision }}'
+              echo '```'
+              printf '%s\n' "$summary"
+              echo '```'
+              echo 'Timings include process startup and are not controlled benchmarks. Findings require human review.'
+            } >> "$GITHUB_STEP_SUMMARY"
+            while IFS= read -r line; do
+              line=${line//'%'/'%25'}
+              line=${line//$'\r'/'%0D'}
+              echo "::notice title=Dogfood ${{ matrix.id }}::$line"
+            done <<< "$summary"
+          fi
+
+      - name: Upload dogfood reports and logs
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: dogfood-${{ matrix.id }}
+          path: ${{ runner.temp }}/dogfood-${{ matrix.id }}/
+          if-no-files-found: ignore

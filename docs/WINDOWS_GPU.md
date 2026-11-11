@@ -4,7 +4,7 @@
 
 ## Verification status
 
-The Windows workflow is under development and has not yet passed. GitHub-hosted Windows runners do not guarantee a hardware GPU, so even a green run is not evidence of hands-on use with a physical GPU. Record the renderer/adapter and test on real Windows hardware before claiming that gap is closed. See `QUALITY.md`.
+The headless gate and windowed editor/live-game sessions passed on Windows for commit `d430a6c` in [CI run 42955115937](https://github.com/SeanShaffer88/GodotDevTools/actions/runs/42955115937). GitHub-hosted Windows runners do not guarantee a hardware GPU, so this is not evidence of hands-on use with a physical GPU. Record the renderer/adapter and test on real Windows hardware before claiming that gap is closed. See `QUALITY.md`.
 
 ## Run the gate locally on Windows
 

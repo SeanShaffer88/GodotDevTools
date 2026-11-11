@@ -55,6 +55,19 @@ func _run() -> void:
 						if _text(dock) != before:
 							break
 					row["output_changed"] = _text(dock) != before and _text(dock).strip_edges() != ""
+			var interaction: Dictionary = {}
+			match addon:
+				"visual_regression":
+					interaction = await _capture_check(dock)
+				"dialogue_quest":
+					interaction = await _graph_check(dock)
+				"responsive_ui":
+					interaction = await _preview_check(dock)
+				"whitebox":
+					interaction = await _snap_check(dock)
+			if not interaction.is_empty():
+				row.merge(interaction, true)
+				print("EDITOR_INTERACTION %s %s" % [addon, JSON.stringify(interaction)])
 			row["screenshot"] = await _shot(addon)
 		_results.append(row)
 		print("EDITOR_VERIFY %s dock=%s clicked=%s changed=%s" % [addon, row["dock_in_editor"], row["clicked"], row["output_changed"]])
@@ -161,6 +174,174 @@ func _macro_check(dock: Node) -> Dictionary:
 		out["recorded_steps"] = dock.get("_steps").size()
 		out["record_captured"] = out["recorded_steps"] >= 1 and _text(dock).contains("Label0.text")
 	return out
+
+
+## The four checks below exercise the named controls and their results, not
+## merely the generic run button or the presence of a screenshot.
+func _capture_check(dock: Node) -> Dictionary:
+	var out := {"capture_clicked": false, "capture_sizes": false, "capture_content": false, "capture_failures": []}
+	var scenes: LineEdit = dock.get("_scenes_edit")
+	var destination: LineEdit = dock.get("_out_edit")
+	var button: Button = dock.get("_capture_btn")
+	if scenes == null or destination == null or button == null:
+		return out
+	scenes.text = "res://tests/editor/fixtures/color_ui.tscn"
+	destination.text = OUT_DIR.path_join("captures")
+	await _click(button)
+	out["capture_clicked"] = true
+	for i in 1800:
+		if not button.disabled:
+			break
+		await get_tree().process_frame
+	var sizes: Array[Vector2i] = [Vector2i(1920, 1080), Vector2i(1280, 720), Vector2i(1152, 648), Vector2i(800, 600), Vector2i(390, 844)]
+	var sizes_ok := not button.disabled
+	var content_ok := sizes_ok
+	for size in sizes:
+		var path := destination.text.path_join("color_ui__%dx%d.png" % [size.x, size.y])
+		var image := Image.new()
+		if image.load(path) != OK or image.get_size() != size:
+			sizes_ok = false
+			content_ok = false
+			out["capture_failures"].append(path + " missing or wrong size")
+		elif not _fixture_pixels(image, size):
+			content_ok = false
+			out["capture_failures"].append(path + " did not contain the expected UI")
+	out["capture_sizes"] = sizes_ok
+	out["capture_content"] = content_ok
+	return out
+
+
+func _preview_check(dock: Node) -> Dictionary:
+	var out := {"preview_clicked": false, "preview_sizes": false, "preview_content": false, "preview_failures": []}
+	var edit: LineEdit = dock.get("_scene_path")
+	var button := _button_named(dock, "Preview scene")
+	if edit == null or button == null:
+		return out
+	edit.text = "res://tests/editor/fixtures/color_ui.tscn"
+	await _click(button)
+	out["preview_clicked"] = true
+	for i in 6:
+		await get_tree().process_frame
+	var views: Array = dock.get("_preview_views")
+	var scroll: ScrollContainer = dock.get("_preview_scroll")
+	var sizes: Array[Vector2i] = [Vector2i(1280, 720), Vector2i(800, 600), Vector2i(390, 844)]
+	if views.size() != sizes.size() or scroll == null:
+		out["preview_failures"].append("Expected three viewport panes")
+		return out
+	var sizes_ok := true
+	var content_ok := true
+	for i in views.size():
+		var viewport: SubViewport = views[i]
+		var panel: Control = viewport.get_parent().get_parent()
+		scroll.ensure_control_visible(panel)
+		for frame in 6:
+			await get_tree().process_frame
+		await RenderingServer.frame_post_draw
+		var image := viewport.get_texture().get_image()
+		if viewport.size != sizes[i] or image == null or image.get_size() != sizes[i]:
+			sizes_ok = false
+			content_ok = false
+			out["preview_failures"].append("Pane %d has the wrong size or no image" % i)
+		elif not _fixture_pixels(image, sizes[i]):
+			content_ok = false
+			out["preview_failures"].append("Pane %d did not render the expected UI" % i)
+	scroll.scroll_horizontal = 0
+	out["preview_sizes"] = sizes_ok
+	out["preview_content"] = content_ok
+	return out
+
+
+func _fixture_pixels(image: Image, size: Vector2i) -> bool:
+	# The red backdrop fills the viewport and the green square is anchored to
+	# the right edge. Both must really be rendered at each target size.
+	if image == null or image.get_size() != size:
+		return false
+	var red := image.get_pixel(10, 10)
+	var green := image.get_pixel(size.x - 80, 80)
+	return red.r > 0.55 and red.r > red.g * 2.0 and green.g > 0.5 and green.g > green.r * 2.0
+
+
+func _graph_check(dock: Node) -> Dictionary:
+	var out := {"graph_layout": false, "graph_painted": false, "graph_evidence": ""}
+	var view: Control = dock.get("_graph_view")
+	if view == null or not view.is_visible_in_tree():
+		out["graph_evidence"] = "Graph view is not visible"
+		return out
+	var layout: Dictionary = view.get("layout")
+	var intro: Dictionary = {}
+	var ghost := false
+	var broken := false
+	for node in layout.get("nodes", []):
+		if node.get("id", "") == "intro":
+			intro = node
+		if node.get("id", "") == "ghost_node" and node.get("ghost", false):
+			ghost = true
+	for edge in layout.get("edges", []):
+		if edge.get("from", "") == "intro" and edge.get("to", "") == "ghost_node" and edge.get("broken", false):
+			broken = true
+	out["graph_layout"] = not intro.is_empty() and ghost and broken
+	if not out["graph_layout"]:
+		out["graph_evidence"] = "Expected intro, missing target, and broken edge"
+		return out
+	await RenderingServer.frame_post_draw
+	var image := EditorInterface.get_base_control().get_viewport().get_texture().get_image()
+	var rect: Rect2 = intro["rect"]
+	var origin := view.get_global_rect().position + rect.position
+	var scroll: Control = view.get_parent()
+	var colored := 0
+	# The fixture's intro node has a missing target and is outlined orange.
+	for x in range(12, int(rect.size.x) - 12):
+		for y in range(-1, 3):
+			var point := Vector2i(origin + Vector2(x, y))
+			if image != null and point.x >= 0 and point.y >= 0 and point.x < image.get_width() and point.y < image.get_height() and scroll.get_global_rect().has_point(Vector2(point)):
+				var pixel := image.get_pixelv(point)
+				if pixel.r > 0.65 and pixel.g > 0.35 and pixel.b < 0.5:
+					colored += 1
+	out["graph_painted"] = colored >= 20
+	out["graph_evidence"] = "orange outline pixels: %d" % colored
+	return out
+
+
+func _snap_check(dock: Node) -> Dictionary:
+	var out := {"snap_clicked": false, "snap_applied": false, "snap_undo": false, "snap_redo": false, "snap_evidence": ""}
+	EditorInterface.open_scene_from_path("res://demo/whitebox/blockout.tscn")
+	for i in 15:
+		await get_tree().process_frame
+	var scene := EditorInterface.get_edited_scene_root()
+	var crate: Node3D = null
+	if scene != null:
+		crate = scene.get_node_or_null("Crate") as Node3D
+	var button := _button_named(dock, "Snap selected 3D positions")
+	var grid: SpinBox = dock.get("_grid_step")
+	var subdivisions: SpinBox = dock.get("_subdivisions")
+	if crate == null or button == null or grid == null or subdivisions == null:
+		out["snap_evidence"] = "Scene, crate or snap controls unavailable"
+		return out
+	var before := crate.position
+	grid.value = 1.0
+	subdivisions.value = 2
+	var selected := EditorInterface.get_selection()
+	selected.clear()
+	selected.add_node(crate)
+	await _click(button)
+	out["snap_clicked"] = true
+	out["snap_applied"] = before.is_equal_approx(Vector3(2.37, 0, 4)) and crate.position.is_equal_approx(Vector3(2.5, 0, 4))
+	# A second no-op must not create an undo entry that obscures the snap.
+	await _click(button)
+	var manager := get_undo_redo()
+	var history := manager.get_history_undo_redo(manager.get_object_history_id(crate))
+	if history != null:
+		out["snap_undo"] = history.undo() and crate.position.is_equal_approx(before)
+		out["snap_redo"] = history.redo() and crate.position.is_equal_approx(Vector3(2.5, 0, 4))
+	out["snap_evidence"] = "before=%s after=%s" % [str(before), str(crate.position)]
+	return out
+
+
+func _button_named(node: Node, text: String) -> Button:
+	for child in _all(node):
+		if child is Button and child.text == text:
+			return child
+	return null
 
 
 func _all(node: Node) -> Array:
