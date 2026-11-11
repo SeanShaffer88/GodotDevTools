@@ -12,6 +12,6 @@ Presets: `full`, `ci_only`, `mobile_perf`, `content`, `testing`. Options: `--pre
 
 ## Scope and limitations
 
-- Preview is read-only. `--apply` rewrites only the `[editor_plugins] enabled=` line and writes a `.bak` first.
-- Presets list addon folder names; unknown folders in your project are disabled by packs (except `full`). Review the preview before applying.
+- Preview is read-only. `--apply` verifies a byte-for-byte `.bak` before rewriting the `[editor_plugins] enabled` setting; it refuses to overwrite an existing backup. Restore the backup manually if a write fails. Multiline settings, mixed line endings and duplicate plugin sections are refused rather than rewritten.
+- Presets enumerate the addon folders next to the selected `--project` file; the directory must exist. Unknown folders in your project are disabled by packs (except `full`). Review the preview before applying. The operation does not offer editor undo.
 - See `docs/ASSETLIB.md` for per-tool Asset Library publishing and `tools/assetlib/` for the generator.

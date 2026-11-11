@@ -4,7 +4,7 @@ All gate evidence so far is on the synthetic `demo/` fixture and a synthetic 4,6
 
 ## Method
 
-`tests/dogfood/run_dogfood.sh <godot-binary> <project-dir>` copies the addons into a real Godot project, runs a scanner subset, and writes `reports/dogfood/dogfood.json` (per-tool findings + timing). `tests/dogfood/dogfood.py` aggregates runs and appends false positives to `docs/false_positives.md`.
+`tests/dogfood/run_dogfood.sh <godot-binary> <project-dir> [new-output-dir]` copies the project into a temporary directory, installs the suite there, imports it and runs four scanners. The harness does not write into the source project. Reports and command logs go to a new directory outside the source project (by default, a unique directory under this repository's `reports/dogfood/`); an existing output directory is refused, and an explicit output's parent must already exist. `tests/dogfood/dogfood.py <reports-dir>` prints report summaries. False-positive review and timing aggregation are still manual. Only run trusted projects: Godot's import may execute their code and plugins, which can themselves access files outside the copy.
 
 ## Candidate real projects (open-source Godot games)
 
@@ -12,7 +12,7 @@ All gate evidence so far is on the synthetic `demo/` fixture and a synthetic 4,6
 |---|---|---|
 | Godot demos (godotengine/godot-demos) | Real, maintained, varied genres | Pending first run |
 | Open-source Godot 4 games on GitHub (search: `godot 4 game`) | Real-world messiness | Pending first run |
-| This repo's own `demo/` (baseline) | Synthetic control | Verified in CI |
+| This repo's own `demo/` (baseline) | Synthetic control | Used by existing tests; dogfood run pending |
 
 ## False positives
 

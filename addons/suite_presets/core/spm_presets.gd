@@ -17,7 +17,7 @@ func run(preset_name: String = "full", options: Dictionary = {}) -> Dictionary:
 		return _fail(preset_name, "Unknown preset '%s'." % preset_name, "Use one of: " + ", ".join(PRESETS.keys()) + ".", "unknown_preset")
 	var preset: Dictionary = PRESETS[preset_name]
 	var addons: Array = options.get("addons", [])
-	if addons.is_empty():
+	if not options.has("addons"):
 		addons = _list_addons(str(options.get("addons_dir", "res://addons")))
 	var include: Array = preset["include"]
 	var enabled: Array = []
@@ -30,35 +30,55 @@ func run(preset_name: String = "full", options: Dictionary = {}) -> Dictionary:
 	return _finish({"preset": preset_name, "enabled": enabled.size(), "disabled": disabled.size()}, [], {"enabled": enabled, "disabled": disabled, "label": preset["label"]})
 
 func apply_preset(project_text: String, preset_name: String, addons: Array) -> String:
+	# Preserve the original API for callers that only need the transformed text.
+	return str(rewrite_preset(project_text, preset_name, addons)["text"])
+
+func rewrite_preset(project_text: String, preset_name: String, addons: Array) -> Dictionary:
 	var result: Dictionary = run(preset_name, {"addons": addons})
-	if result["summary"].has("issues") and int(result["summary"]["issues"]) > 0 and result["issues"].size() > 0 and str(result["issues"][0]["kind"]) == "unknown_preset":
-		return project_text
-	var lines := project_text.split("\n")
+	if not result["issues"].is_empty():
+		return {"ok": false, "text": project_text, "error": "Unknown preset."}
+	var normalized := project_text.replace("\r\n", "\n")
+	if normalized.contains("\r") or (project_text.contains("\r\n") and project_text.replace("\r\n", "").contains("\n")):
+		return {"ok": false, "text": project_text, "error": "Mixed or unsupported line endings."}
+	var newline := "\r\n" if project_text.contains("\r\n") else "\n"
+	var lines := normalized.split("\n")
 	var out: Array = []
 	var in_plugins := false
+	var seen_section := false
 	var wrote := false
 	for line in lines:
-		if line.strip_edges() == "[editor_plugins]":
-			in_plugins = true
+		var stripped := line.strip_edges()
+		if stripped.begins_with("[") and stripped.ends_with("]"):
+			if in_plugins and not wrote:
+				out.append(_enabled_line(result["enabled"]))
+				wrote = true
+			in_plugins = stripped == "[editor_plugins]"
+			if in_plugins:
+				if seen_section:
+					return {"ok": false, "text": project_text, "error": "Duplicate editor_plugins section."}
+				seen_section = true
 			out.append(line)
 			continue
-		if in_plugins and line.begins_with("enabled="):
+		if in_plugins and line.contains("=") and line.get_slice("=", 0).strip_edges() == "enabled":
+			var value := line.substr(line.find("=") + 1).strip_edges()
+			# Refuse multiline or unexpected expressions rather than corrupting them.
+			if wrote or not value.begins_with("PackedStringArray(") or not value.ends_with(")"):
+				return {"ok": false, "text": project_text, "error": "Duplicate, multiline or unsupported enabled setting."}
 			out.append(_enabled_line(result["enabled"]))
 			wrote = true
-			in_plugins = false
 			continue
-		if in_plugins and line.strip_edges() != "" and not line.begins_with("enabled="):
-			in_plugins = false
 		out.append(line)
-	if not wrote:
+	if in_plugins and not wrote:
+		out.append(_enabled_line(result["enabled"]))
+	elif not seen_section:
 		out.append("[editor_plugins]")
 		out.append(_enabled_line(result["enabled"]))
-	return "\n".join(out)
+	return {"ok": true, "text": newline.join(out)}
 
 func _enabled_line(enabled: Array) -> String:
 	var parts: Array = []
 	for a in enabled:
-		parts.append("\"res://addons/%s/plugin.cfg\"" % a)
+		parts.append("\"res://addons/%s/plugin.cfg\"" % str(a).c_escape())
 	return "enabled=PackedStringArray(" + ", ".join(parts) + ")"
 
 func _list_addons(addons_dir: String) -> Array:

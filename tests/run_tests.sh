@@ -396,6 +396,23 @@ echo "== CLI smoke: suite presets =="
 "$GODOT" --headless --path . --script res://addons/suite_presets/cli/spm_cli.gd -- --preset=mobile_perf
 test -s reports/suite_presets/suite_presets.json
 if "$GODOT" --headless --path . --script res://addons/suite_presets/cli/spm_cli.gd -- --preset=nope --fail-on=unknown_preset; then echo "FAIL: expected exit 1"; exit 1; else [ $? -eq 1 ] || { echo "FAIL: expected exit 1"; exit 1; }; fi
+# Exercise apply on a disposable file, including preservation of the original backup.
+mkdir -p reports/suite_presets/apply_test/addons/report_schema reports/suite_presets/apply_test/addons/tool_finder
+: > reports/suite_presets/apply_test/addons/report_schema/plugin.cfg
+: > reports/suite_presets/apply_test/addons/tool_finder/plugin.cfg
+preset_file="$PWD/reports/suite_presets/apply_test/project.godot"
+preset_arg="res://reports/suite_presets/apply_test/project.godot"
+printf '[editor_plugins]\r\n; keep comment\r\nenabled = PackedStringArray("old")\r\n[rendering]\r\n' > "$preset_file"
+rm -f "$preset_file.bak"
+cp "$preset_file" "$preset_file.expected"
+"$GODOT" --headless --path . --script res://addons/suite_presets/cli/spm_cli.gd -- --preset=ci_only --project="$preset_arg" --apply
+cmp "$preset_file.expected" "$preset_file.bak"
+grep -q 'report_schema' "$preset_file"
+if grep -q 'tool_finder' "$preset_file"; then echo "FAIL: non-preset addon enabled"; exit 1; fi
+cp "$preset_file" "$preset_file.applied"
+if "$GODOT" --headless --path . --script res://addons/suite_presets/cli/spm_cli.gd -- --preset=full --project="$preset_arg" --apply; then echo "FAIL: existing backup was overwritten"; exit 1; else [ $? -eq 1 ] || { echo "FAIL: expected backup refusal"; exit 1; }; fi
+cmp "$preset_file.expected" "$preset_file.bak"
+cmp "$preset_file.applied" "$preset_file"
 echo "== CLI smoke: coverage gate =="
 "$GODOT" --headless --path . --script res://addons/coverage_gate/cli/cvg_cli.gd -- --dir=res://demo/coverage_gate --tests=res://demo/coverage_gate_tests --min-percent=0
 test -s reports/coverage_gate/coverage_gate.json

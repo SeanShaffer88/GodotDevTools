@@ -190,3 +190,6 @@ jobs:
       - name: The action wrote reports
         run: test -s reports/node_paths/node_paths.json && test -s reports/report_schema/report.schema.json
 
+      - name: Dogfood harness safety regression
+        run: sh tests/dogfood/test_run_dogfood.sh
+

@@ -33,22 +33,58 @@ func _init() -> void:
 			printerr("Unknown --fail-on kind: %s" % kind)
 			quit(1)
 			return
+	if not FileAccess.file_exists(project):
+		printerr("Project file not found: ", project)
+		quit(1)
+		return
+	var addons_dir := project.get_base_dir().path_join("addons")
+	if DirAccess.open(addons_dir) == null:
+		printerr("Cannot enumerate the target project's addons: ", addons_dir)
+		quit(1)
+		return
 	var op = Core.new()
-	var result: Dictionary = op.run(preset, {})
-	if apply and FileAccess.file_exists(project):
-		var text := FileAccess.get_file_as_string(project)
+	var result: Dictionary = op.run(preset, {"addons_dir": addons_dir})
+	if apply and result["issues"].is_empty():
+		var parent := DirAccess.open(project.get_base_dir())
 		var backup := project + ".bak"
-		var bf := FileAccess.open(backup, FileAccess.WRITE)
-		if bf != null:
-			bf.store_string(text)
-			bf.close()
-		var f := FileAccess.open(project, FileAccess.WRITE)
-		if f == null:
-			printerr("Cannot write project file: ", project)
+		if parent == null or parent.is_link(project.get_file()) or parent.is_link(backup.get_file()):
+			printerr("Project or backup is a symbolic link, or its directory is inaccessible.")
 			quit(1)
 			return
-		f.store_string(op.apply_preset(text, preset, result.get("enabled", []) + result.get("disabled", [])))
-		f.close()
+		var bytes := FileAccess.get_file_as_bytes(project)
+		var text := bytes.get_string_from_utf8()
+		if text.to_utf8_buffer() != bytes:
+			printerr("Project file is not valid UTF-8; it was not changed.")
+			quit(1)
+			return
+		var transform: Dictionary = op.rewrite_preset(text, preset, result.get("enabled", []) + result.get("disabled", []))
+		if not transform["ok"]:
+			printerr("Cannot safely rewrite project.godot: ", transform["error"])
+			quit(1)
+			return
+		var rewritten: String = transform["text"]
+		if rewritten != text:
+			if FileAccess.file_exists(backup) or DirAccess.dir_exists_absolute(backup):
+				printerr("Backup already exists; move it before applying: ", backup)
+				quit(1)
+				return
+			var hash := FileAccess.get_sha256(project)
+			if hash == "" or DirAccess.copy_absolute(ProjectSettings.globalize_path(project), ProjectSettings.globalize_path(backup)) != OK or FileAccess.get_sha256(backup) != hash:
+				printerr("Could not create a verified backup; project was not changed: ", backup)
+				quit(1)
+				return
+			var f := FileAccess.open(project, FileAccess.WRITE)
+			if f == null:
+				printerr("Cannot write project file: ", project, "; backup retained at ", backup)
+				quit(1)
+				return
+			f.store_string(rewritten)
+			var write_error := f.get_error()
+			f.close()
+			if write_error != OK:
+				printerr("Project write failed; restore backup: ", backup)
+				quit(1)
+				return
 	if DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(out)) != OK:
 		printerr("Cannot create report directory: ", out)
 		quit(1)

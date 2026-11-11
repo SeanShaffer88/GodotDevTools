@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Aggregate dogfood reports into docs/false_positives.md template rows.
+"""Print summaries from dogfood reports; false-positive review is manual.
 Usage: python3 tests/dogfood/dogfood.py <reports-dir>
-Stdlib only. Prints per-tool finding counts; human confirms false positives.
+Stdlib only. This does not modify the false-positive log.
 """
 import json, pathlib, sys
 def main():
