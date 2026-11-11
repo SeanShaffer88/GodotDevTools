@@ -9,6 +9,7 @@ var _dock: Control
 
 func _enter_tree() -> void:
     _dock = Dock.new()
+    _dock.call("configure_editor", EditorInterface.get_selection(), get_undo_redo())
     add_control_to_dock(DOCK_SLOT_RIGHT_UL, _dock)
     add_tool_menu_item("Level Whiteboxing and Snapping Suite: Run", func() -> void: _dock._on_run())
 

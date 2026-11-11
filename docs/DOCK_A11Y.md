@@ -5,17 +5,18 @@ The tools audit games; this page tracks auditing the tools themselves.
 ## What exists
 
 - `addons/dock_a11y` provides a source-text heuristic for `tooltip_text`, `_on_run`, and `focus_mode`. It cannot prove that each control has a tooltip or is keyboard accessible.
-- `tests/test_docks.gd` constructs docks, checks interactive controls for tooltips and keyboard focus, and invokes their run actions. The expanded suite is awaiting a successful CI run.
-- `tests/editor/editor_verify/plugin.gd` clicks each dock's run action and saves screenshots; it does **not** prove the individual interactions below work.
+- `tests/test_docks.gd` constructs docks, checks interactive controls for tooltips and keyboard focus, and invokes their run actions. The expanded suite passed in CI on commit `d430a6c`.
 - The new addons include English PO templates. Translation and screen-reader support across the suite remain unfinished.
 
-## Editor interaction gaps
+## Editor interaction coverage
 
-| Surface | Current evidence |
-|---|---|
-| Visual regression live viewport capture | Capture planning is tested; the editor session does not invoke the capture button or verify generated images. |
-| Dialogue quest painted node graph | Layout is tested; the editor session does not check that the graph was painted correctly. |
-| Responsive UI visual preview panes | The dock lists analysis results; multi-viewport preview panes are not implemented. |
-| Whitebox snapping of a live selection | The dock audits scene text; a live-selection snapping action is not implemented. |
+The windowed editor harness now drives the actual controls below and records separate results; these new interaction checks are pending a CI run. A generic successful dock click or screenshot alone is not evidence that an interaction worked.
 
-These gaps need actual interaction tests (and, where noted, implementation) before they can be marked verified. A generic successful dock click or screenshot is not evidence that these operations ran.
+| Surface | Interaction under test | Scope |
+|---|---|---|
+| Visual regression capture | Click Capture now and inspect the dimensions and colored fixture content of all five PNGs. | Renderer and fixture dependent; not a visual baseline for real projects. |
+| Dialogue graph | Run the check, confirm a missing-target graph and sample the painted warning outline. | Tests one fixture and the visible portion of the graph. |
+| Responsive preview panes | Click Preview scene and check rendered fixture pixels and dimensions at three viewport sizes. | Scene instances can run `@tool` scripts; device safe areas and project window stretch are not simulated. |
+| Whitebox selection snapping | Select a live 3D node, snap it with subdivisions, then test Undo and Redo. | Snaps local positions only; does not change rotations or save the scene. |
+
+See the CI workflow results for the status of the current revision. Hosted runners use software renderers and do not replace hands-on hardware-GPU testing.

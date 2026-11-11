@@ -10,7 +10,9 @@ Copy `addons/whitebox` into your project's `addons/` folder, then enable **Level
 
 ## In the editor
 
-The dock runs the check against your project and lists every finding with severity, message and a concrete fix. Every control has a tooltip; the `?` button repeats this help inside the editor, offline.
+Select one or more 3D nodes in an open scene, choose a grid size and number of divisions, and press **Snap selected 3D positions**. The tool snaps each selected `Node3D`'s **local position**, skips other node types, and records one editor Undo/Redo action. It does not change rotations or save the scene. Parent transforms affect the resulting world-space grid; use the same parent coordinate system for adjacent pieces.
+
+**Run check** audits the included `res://demo/whitebox/` fixture if present. To audit another scene, use the CLI's `--scene=<path>` and optional `--grid=<json>` arguments. Every control has a tooltip; `?` repeats the help inside the editor.
 
 ## From the command line
 
@@ -22,4 +24,4 @@ Run the CLI with no options once for a default report; it writes JSON + Markdown
 
 ## How it works
 
-The work lives in one core operation, `core/wbx_snap.gd`, with no editor-only APIs, so the dock, the CLI and the tests all run exactly the same operation; the dock and CLI add no logic of their own. Snapping selections inside the live editor is dock-side work (marked Partially Verified in docs/PARITY.md); the grid and slope audit here runs headless on scene text.
+Grid and slope calculations live in `core/wbx_snap.gd` without editor-only APIs. The dock delegates position calculations to that core and applies the resulting properties through Godot's editor undo manager; the CLI's grid and slope audit runs headless on scene text.

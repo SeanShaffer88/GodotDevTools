@@ -39,7 +39,7 @@ There are 138 addons, each with its own test suite. All 110 roadmap entries are 
   The five new addons and the expanded gate are not yet verified.
   The two sessions run on Linux with software OpenGL; the clicks are synthetic mouse events delivered through the editor's own viewport.
 - Partially Verified:
-  - The capture runner's live viewport pass and painted dialogue graph are not specifically automated; their general dock actions were exercised in the historical editor session.
-  - Responsive UI visual preview panes and whitebox live-selection snapping are not implemented.
+  - Specific editor interaction checks for the capture runner and painted dialogue graph have been added; see `docs/DOCK_A11Y.md` for current CI status.
+  - Responsive UI preview panes and undoable local-position snapping are implemented with stated limitations; their new windowed-editor interaction checks are pending CI.
   - Estimator outputs are estimates, not measurements: thermal_sim device constants, batch_profiler draw calls, and Asset Health's per-platform GPU texture memory. Their comparative use is tested; real-device truth is not claimable here.
 - Unverified: the expanded suite and Windows workflow, hands-on use on Windows with a hardware GPU, timings on a real (non-synthetic) project, and Godot versions other than 4.3 and 4.5. See `docs/WINDOWS_GPU.md` and `docs/DOGFOOD.md`.

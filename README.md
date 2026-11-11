@@ -413,7 +413,7 @@ See [AUDIT.md](AUDIT.md) for the security, privacy and quality audit, [CREDITS.m
 - **VFS Mock** models four platform profiles as data and resolves against your real file listing; no platform actually boots, and export-time packing behaviour stays the export step's job.
 - **Tilemap Rule Generator** outputs transition specs as data; applying them to a TileSet stays a deliberate human step.
 - **Test Runner** detects GUT suites from file text but never depends on GUT; this repo's own suite remains `tests/run_tests.sh`.
-- **Whitebox** live-selection snapping is not yet implemented; the headless half audits scene text against the grid and slope rules. See `docs/PARITY.md`.
+- **Whitebox** snaps selected 3D nodes' local positions using an undoable editor action; rotations and world-space snapping are not applied. The headless half audits scene text against grid and slope rules. See `docs/DOCK_A11Y.md` for interaction-test status.
 - **Prefab Guard** writes to scene files only with an explicit `--apply`; otherwise it reports plans, because scene files are source code.
 - The historical editor session clicked the original 133 docks and the live-game session exercised the runtime nodes on Linux under Xvfb with software OpenGL. The expanded 138-dock session has not yet passed; hands-on Windows use with a hardware GPU is still owed. See `QUALITY.md`.
 

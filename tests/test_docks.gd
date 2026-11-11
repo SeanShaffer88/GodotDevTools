@@ -69,6 +69,21 @@ func _smoke(addon: String, path: String) -> void:
 		check("%s: run action produces output" % addon, after != before and after.strip_edges() != "")
 	else:
 		check("%s: dock has a run action" % addon, false)
+	if addon == "responsive_ui":
+		var path_edit: LineEdit = dock.get("_scene_path")
+		path_edit.text = "res://tests/editor/fixtures/color_ui.tscn"
+		dock.call("_on_preview")
+		var views: Array = dock.get("_preview_views")
+		check("responsive_ui: creates three differently sized scene instances", views.size() == 3 and views[0].size == Vector2i(1280, 720) and views[1].size == Vector2i(800, 600) and views[2].size == Vector2i(390, 844) and views[0].get_child_count() == 1)
+		path_edit.text = "res://demo/whitebox/blockout.tscn"
+		dock.call("_on_preview")
+		check("responsive_ui: rejects non-UI scene roots and clears previews", dock.get("_preview_views").is_empty() and str(dock.get("_preview_status").text).contains("root must"))
+		path_edit.text = "res://missing_preview.tscn"
+		dock.call("_on_preview")
+		check("responsive_ui: reports an absent scene", str(dock.get("_preview_status").text).contains("existing"))
+	elif addon == "whitebox":
+		dock.call("_on_snap_selection")
+		check("whitebox: selection action requires editor context", str(dock.get("_results").text).contains("in the editor"))
 	root.remove_child(dock)
 	dock.free()
 

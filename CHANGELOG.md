@@ -19,7 +19,7 @@ All notable changes to GodotDevTools are recorded here. The format follows
 - Asset Library publishing: `tools/assetlib/generate_assetlib.py` -> `assetlib/<tool>.json` + checklist (`docs/ASSETLIB.md`).
 - Dogfooding: `tests/dogfood/` harness, `docs/DOGFOOD.md`, `docs/false_positives.md` log.
 - Godot version matrix: 4.5 promoted to verified, 4.4/4.6 added experimental; all GitHub Actions pinned to SHAs (AUDIT F6).
-- Dock smoke suite adds a keyboard-focusability check. The capture runner, painted dialogue graph, responsive preview panes, and whitebox live-selection snapping still need specific implementation and/or interaction tests — see `docs/DOCK_A11Y.md`.
+- Dock smoke suite adds a keyboard-focusability check. Responsive UI now has opt-in visual preview panes, and Whitebox can snap selected 3D nodes' local positions with Undo/Redo. The editor harness has dedicated tests for those interactions plus capture and painted graphs; their current CI status and limitations are tracked in `docs/DOCK_A11Y.md`.
 
 - Real-editor session (`tests/editor/run_editor_session.sh`): runs the windowed editor under Xvfb, clicks every dock's run button with real mouse events, takes a screenshot of each dock, and drives Macro Recorder's preview and recording. All 133 docks pass. It runs in CI in the new `sessions` job.
 - Live-game session (`tests/game/run_live_game.sh`): drives all 16 runtime nodes in a windowed game with real frames, physics and input events, and checks the subtitle layout against a rendered Label. All 20 checks pass. It runs in CI.
