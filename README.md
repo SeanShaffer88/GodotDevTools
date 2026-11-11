@@ -422,7 +422,7 @@ See [AUDIT.md](AUDIT.md) for the security, privacy and quality audit, [CREDITS.m
 - **Test Runner** detects GUT suites from file text but never depends on GUT; this repo's own suite remains `tests/run_tests.sh`.
 - **Whitebox** snaps selected 3D nodes' local positions using an undoable editor action; rotations and world-space snapping are not applied. The headless half audits scene text against grid and slope rules. See `docs/DOCK_A11Y.md` for interaction-test status.
 - **Prefab Guard** writes to scene files only with an explicit `--apply`; otherwise it reports plans, because scene files are source code.
-- The earlier 138-dock editor session and live-game session passed in CI on Linux and Windows; the three new Android docks and capture helper require their own editor/device evidence. Hosted runners can use software renderers; hands-on Windows use with a hardware GPU is still owed. See `QUALITY.md`.
+- At commit `1678b02`, the 141-dock general run-button session passed in CI on Linux and Windows, alongside the existing live-game session. These clicks are not Android device tests or proof of every dock interaction. Hosted runners can use software renderers; hands-on Windows use with a hardware GPU is still owed. See `docs/PARITY.md`.
 
 ## License
 
