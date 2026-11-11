@@ -35,6 +35,14 @@ jobs:
       - name: Show Godot version
         shell: bash
         run: ".godot-bin/Godot_v4.3-stable_win64_console.exe --headless --version || .godot-bin/Godot_v4.3-stable_win64.exe --headless --version"
+      - name: MCP protocol regressions (Windows)
+        shell: bash
+        run: python tests/test_mcp.py
+      - name: MCP installed-project smoke (Windows)
+        shell: bash
+        run: |
+          GODOT_BIN=$(ls .godot-bin/*console*.exe 2>/dev/null || ls .godot-bin/*.exe | head -n 1)
+          python tests/mcp_godot_smoke.py --godot "$(cygpath -w "$PWD/$GODOT_BIN")"
       - name: Standalone naming parity with Godot
         shell: bash
         run: |

@@ -17,7 +17,7 @@ All notable changes to GodotDevTools are recorded here. The format follows
 - Dock Accessibility Audit (`dock_a11y`): audits `*_dock.gd` for tooltips, run action and focus; dogfoods a11y on the tools themselves. Dock, CLI, fixture and test suite.
 - Windows CI: `.github/workflows/windows-gpu.yml` (gate + editor/live-game sessions on `windows-latest`), `tests/windows/run_windows_gate.ps1`, `docs/WINDOWS_GPU.md`. The workflow passed on `d430a6c`; hosted CI cannot establish hands-on hardware-GPU support.
 - Docs site + catalog: `mkdocs.yml`, `tools/docs_site/generate.py` -> `docs/catalog.json` + `docs/TOOLS.md` (141 tools).
-- MCP server (`mcp/mcp_server.py`, stdlib stdio, offline) exposing every CLI as `run_<tool>`, plus VSCode SARIF extension (`editors/vscode/`).
+- MCP server (`mcp/mcp_server.py`, stdlib stdio) exposes installed catalog CLIs as `run_<tool>`, plus VSCode SARIF extension (`editors/vscode/`).
 - Docker image (`Dockerfile`, `tools/gdt` wrapper, `.github/workflows/docker.yml`) and standalone Python subset (`tools/standalone/standalone.py`, naming check, exit-2 parity).
 - Asset Library publishing: `tools/assetlib/generate_assetlib.py` -> `assetlib/<tool>.json` + checklist (`docs/ASSETLIB.md`).
 - Dogfooding: `tests/dogfood/` harness, `docs/DOGFOOD.md`, `docs/false_positives.md` log.
@@ -34,6 +34,7 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ### Fixed
 
+- MCP can select a trusted external project, advertises installed CLIs, ranks and explains keyword search, preserves JSON-RPC request IDs, ignores notifications, validates arguments, and bounds subprocess output and execution time. Regression tests cover fake and real Godot calls; subprocess isolation and cancellation are not guaranteed. See `mcp/README.md` for trust and protocol limits.
 - Release packaging uses a validated shared addon-name manifest, includes the MIT notice in each addon, and checks archives offline before publication. Asset Library metadata can now target the same release-tagged filenames; its existing untagged filenames remain available. `--out` is honored and `--check` detects stale metadata. Existing releases and submissions are unchanged.
 - Seed Replay runtime node: `randi_range` and `randf_range` called the engine's unseeded global `randf()`, so seeded replays diverged. They now use the node's recorded generator. Found by the live-game session; a regression test is added.
 - Pool Advisor runtime counter: an unknown field name now raises a warning and is ignored, instead of causing a script error.
