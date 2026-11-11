@@ -10,6 +10,6 @@ Options: `--dir=<path>`, `--tests=<dir>` (default `res://tests`), `--min-percent
 
 ## Scope and limitations
 
-- **Estimate, not measurement.** Godot has no built-in line coverage. A function counts as covered when a test file mentions its name or its file stem. The report sets `estimate: true`.
+- **Estimate, not measurement.** Godot has no built-in line coverage. A function counts as covered when a test file mentions its name as a complete identifier. This can include comments or unrelated functions with the same name and does not show that it executed. The report sets `estimate: true`.
 - Trend tracking lives in `tools/coverage/` (`coverage_trend.py` appends to `docs/coverage_trend.csv`); mutation trending is in `tools/coverage/mutation_trend.py`.
 - Use the number comparatively (is it going up?) rather than as an absolute quality claim.

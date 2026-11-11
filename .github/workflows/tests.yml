@@ -152,7 +152,7 @@ jobs:
           sh tests/editor/run_editor_session.sh "$PWD/.godot-bin/Godot_v4.3-stable_linux.x86_64" "$RUNNER_TEMP/edsess" 2>&1 | tee editor-session.log
           status=${PIPESTATUS[0]}
           if [ "$status" -ne 0 ]; then
-            message=$(tail -100 editor-session.log)
+            message=$(tail -15 editor-session.log)
             message=${message//'%'/'%25'}
             message=${message//$'\n'/'%0A'}
             message=${message//$'\r'/'%0D'}

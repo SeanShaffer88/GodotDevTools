@@ -360,7 +360,6 @@ gate "offline harness flags the unhandled score request" \
   res://addons/offline_harness/cli/ocn_cli.gd -- --dir=res://demo/privacy --fail-on=unhandled_result
 gate "macro preview reports the unmatched step" \
   res://addons/macro_recorder/cli/eam_cli.gd -- --macro=res://demo/macros/center_labels.json --scene=res://demo/workflow/drift/menu.tscn --fail-on=step_unmatched
-echo "ALL GATE CHECKS PASSED"
 
 echo "== CLI smoke: tool finder =="
 "$GODOT" --headless --path . --script res://addons/tool_finder/cli/tfd_cli.gd -- --query="my game lags on mobile"
@@ -377,10 +376,10 @@ echo "== CLI smoke: suite presets =="
 test -s reports/suite_presets/suite_presets.json
 if "$GODOT" --headless --path . --script res://addons/suite_presets/cli/spm_cli.gd -- --preset=nope --fail-on=unknown_preset; then echo "FAIL: expected exit 1"; exit 1; else [ $? -eq 1 ] || { echo "FAIL: expected exit 1"; exit 1; }; fi
 echo "== CLI smoke: coverage gate =="
-"$GODOT" --headless --path . --script res://addons/coverage_gate/cli/cvg_cli.gd -- --dir=res://demo/coverage_gate --min-percent=0
+"$GODOT" --headless --path . --script res://addons/coverage_gate/cli/cvg_cli.gd -- --dir=res://demo/coverage_gate --tests=res://demo/coverage_gate_tests --min-percent=0
 test -s reports/coverage_gate/coverage_gate.json
 gate "coverage gate must exit 2 below threshold" \
-  res://addons/coverage_gate/cli/cvg_cli.gd -- --dir=res://demo/coverage_gate --min-percent=99 --fail-on=below_threshold
+  res://addons/coverage_gate/cli/cvg_cli.gd -- --dir=res://demo/coverage_gate --tests=res://demo/coverage_gate_tests --min-percent=99 --fail-on=below_threshold
 echo "== CLI smoke: dock a11y =="
 "$GODOT" --headless --path . --script res://addons/dock_a11y/cli/dka_cli.gd -- --dir=res://demo/dock_a11y
 test -s reports/dock_a11y/dock_a11y.json
@@ -389,3 +388,4 @@ gate "dock a11y must exit 2 on missing tooltip" \
 echo "== CLI smoke: a11y options incremental cache =="
 "$GODOT" --headless --path . --script res://addons/a11y_options/cli/aoc_cli.gd -- --dir=res://demo/shipping --cache=res://reports/a11y_options/cache.json
 test -s reports/a11y_options/cache.json
+echo "ALL GATE CHECKS PASSED"

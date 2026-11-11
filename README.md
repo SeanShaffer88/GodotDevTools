@@ -4,11 +4,11 @@
 
 Independent Godot 4 addons cover testing, performance, content, workflow and release checks. The table below links each addon to its purpose and folder. Many tools are static analyzers, simulations or estimates rather than runtime measurements; consult each addon README for its scope and limitations.
 
-The [roadmap](ROADMAP.md) tracks 115 entries (110 original + 5 post-roadmap additions), and all of them are checked. Each tool has a core, an editor dock, a headless CLI, a fixture, a test suite and a CLI gate. Each dock passes a real-editor session and each runtime node passes a live game session, and both sessions run in CI. The native-accelerator entry is a research note that ends in a recorded decision not to build. See [QUALITY.md](QUALITY.md) for the evidence.
+The [roadmap](ROADMAP.md) tracks 110 original entries and five post-roadmap additions. The original entries were checked against the historical CI gate and editor/live-game sessions; the five additions are awaiting a successful expanded gate and editor session. The native-accelerator entry is a research note that ends in a recorded decision not to build. See [QUALITY.md](QUALITY.md) for the evidence.
 
 Shared, optional components consume tool reports without any tool depending on them: the [Report Schema](addons/report_schema/README.md), [SARIF](addons/sarif_export/README.md) and [JUnit](addons/junit_export/README.md) exporters, the [HTML dashboard](addons/html_dashboard/README.md), [Report Diff](addons/report_diff/README.md), the [Finding Suppression Baseline](addons/suppressions/README.md), the [Suite CLI Dispatcher](addons/suite_dispatcher/README.md), the [pre-commit hook installer](addons/precommit/README.md), the [Fix Engine](addons/fix_engine/README.md) (opt-in safe fixes) and a [reusable CI action](.github/actions/godot-dev-tools/README.md).
 
-New since the roadmap closed: [Tool Finder](addons/tool_finder/README.md) (search by problem), [Suite Presets](addons/suite_presets/README.md) (enable only the plugins you need), [Coverage Gate](addons/coverage_gate/README.md) (coverage estimate + trend), [Dock Accessibility Audit](addons/dock_a11y/README.md) (audit the docks themselves), a [Docker image](docs/DOCKER.md) + standalone runner, an [MCP server](mcp/README.md) + VSCode SARIF extension, [Windows/GPU CI](docs/WINDOWS_GPU.md), a [docs site + catalog](docs/TOOLS.md), [Asset Library](docs/ASSETLIB.md) publishing, [dogfooding](docs/DOGFOOD.md) on real games, and Godot 4.5 promoted to verified with 4.4/4.6 in the matrix (actions pinned to SHAs).
+Post-roadmap work adds [Tool Finder](addons/tool_finder/README.md), [Suite Presets](addons/suite_presets/README.md), a [coverage estimate](addons/coverage_gate/README.md), [dock audit](addons/dock_a11y/README.md), [Docker and standalone tooling](docs/DOCKER.md), [MCP and VS Code integration](mcp/README.md), a [Windows CI workflow](docs/WINDOWS_GPU.md), and a [docs catalog](docs/TOOLS.md). Asset Library metadata and a [real-game dogfooding harness](docs/DOGFOOD.md) are prepared, but publication and real-project runs are pending. The expanded suite has not yet passed CI; 4.4 and 4.6 are experimental.
 
 ## TL;DR
 
@@ -413,9 +413,9 @@ See [AUDIT.md](AUDIT.md) for the security, privacy and quality audit, [CREDITS.m
 - **VFS Mock** models four platform profiles as data and resolves against your real file listing; no platform actually boots, and export-time packing behaviour stays the export step's job.
 - **Tilemap Rule Generator** outputs transition specs as data; applying them to a TileSet stays a deliberate human step.
 - **Test Runner** detects GUT suites from file text but never depends on GUT; this repo's own suite remains `tests/run_tests.sh`.
-- **Whitebox** snapping of live editor selections is dock-side work (Partially Verified in `docs/PARITY.md`); the headless half audits scene text against the grid and slope rules.
+- **Whitebox** live-selection snapping is not yet implemented; the headless half audits scene text against the grid and slope rules. See `docs/PARITY.md`.
 - **Prefab Guard** writes to scene files only with an explicit `--apply`; otherwise it reports plans, because scene files are source code.
-- Every editor dock is clicked in a real Godot 4.3 editor and every runtime node runs in a live game. These sessions run in CI on Linux under Xvfb with software OpenGL. Hands-on use on Windows with a GPU is still owed; see `QUALITY.md`.
+- The historical editor session clicked the original 133 docks and the live-game session exercised the runtime nodes on Linux under Xvfb with software OpenGL. The expanded 138-dock session has not yet passed; hands-on Windows use with a hardware GPU is still owed. See `QUALITY.md`.
 
 ## License
 

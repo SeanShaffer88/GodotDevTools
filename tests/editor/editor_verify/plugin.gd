@@ -56,8 +56,6 @@ func _run() -> void:
 							break
 					row["output_changed"] = _text(dock) != before and _text(dock).strip_edges() != ""
 			row["screenshot"] = await _shot(addon)
-			if addon in ["visual_regression", "dialogue_quest", "responsive_ui", "whitebox"]:
-				row.merge(await _partial_check(addon, dock, row), true)
 		_results.append(row)
 		print("EDITOR_VERIFY %s dock=%s clicked=%s changed=%s" % [addon, row["dock_in_editor"], row["clicked"], row["output_changed"]])
 	var f := FileAccess.open(OUT_DIR.path_join("editor_verify.json"), FileAccess.WRITE)
@@ -162,23 +160,6 @@ func _macro_check(dock: Node) -> Dictionary:
 		await _click(record)
 		out["recorded_steps"] = dock.get("_steps").size()
 		out["record_captured"] = out["recorded_steps"] >= 1 and _text(dock).contains("Label0.text")
-	return out
-
-
-## Automates the four surfaces that were Partially Verified (docs/DOCK_A11Y.md):
-## each check confirms the dock ran, produced output, and left a screenshot.
-func _partial_check(addon: String, dock: Node, row: Dictionary) -> Dictionary:
-	var out := {"capture_runner_live": false, "dialogue_graph_painted": false, "responsive_panes_drawn": false, "whitebox_snap_live": false}
-	var ok := bool(row.get("clicked", false)) and bool(row.get("output_changed", false)) and str(row.get("screenshot", "")) != ""
-	match addon:
-		"visual_regression":
-			out["capture_runner_live"] = ok
-		"dialogue_quest":
-			out["dialogue_graph_painted"] = ok
-		"responsive_ui":
-			out["responsive_panes_drawn"] = ok
-		"whitebox":
-			out["whitebox_snap_live"] = ok
 	return out
 
 

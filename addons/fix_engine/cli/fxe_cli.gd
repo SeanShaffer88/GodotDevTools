@@ -40,6 +40,8 @@ func _init() -> void:
 		result["applied"] = applied.get("applied", [])
 		for issue in applied["issues"]:
 			result["issues"].append(issue)
+		result["summary"]["applied"] = result["applied"].size()
+		result["summary"]["issues"] = result["issues"].size()
 	if DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(out)) != OK:
 		printerr("Cannot create report directory: ", out)
 		quit(1)
@@ -54,10 +56,13 @@ func _init() -> void:
 	print("Fix Engine: ", result["summary"], " preview: ", op.preview(result.get("fixes", [])))
 	var failed := false
 	var input_error := false
+	var apply_error := false
 	for issue in result["issues"]:
 		print("[%s] %s:%s %s" % [issue["kind"], issue.get("path", ""), issue.get("line", "-"), issue["message"]])
 		if issue["kind"] in INPUT_ERRORS:
 			input_error = true
+		if issue["kind"] == "apply_failed":
+			apply_error = true
 		if issue["kind"] in fail_on or "issues" in fail_on or ("errors" in fail_on and issue["severity"] == "error"):
 			failed = true
-	quit(1 if input_error else (2 if failed else 0))
+	quit(1 if input_error else (2 if failed else (1 if apply_error else 0)))

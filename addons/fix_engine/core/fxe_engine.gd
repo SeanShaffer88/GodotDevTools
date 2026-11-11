@@ -25,9 +25,7 @@ func propose(report: Dictionary) -> Dictionary:
 		var path := str(issue.get("path", ""))
 		if kind in SAFE_KINDS and path != "":
 			var base := path.get_file()
-			var stem := base.get_basename().to_snake_case()
-			var ext := base.get_extension()
-			var suggested := stem + ("." + ext if ext != "" else "")
+			var suggested := _suggested_name(kind, base)
 			if suggested != base and suggested != "":
 				fixes.append({"kind": kind, "path": path, "from": base, "to": suggested, "message": str(issue.get("message", "")), "fix": str(issue.get("fix", ""))})
 			else:
@@ -42,31 +40,137 @@ func preview(fixes: Array) -> String:
 		lines.append("rename %s -> %s" % [f["path"], f["to"]])
 	return "\n".join(lines)
 
-## Apply renames under root, backing up each file first. Returns applied list.
-## Only called when the user explicitly opted in (--apply / dock checkbox).
+## Apply only derived renames within root. Existing targets and backups are
+## never intentionally overwritten. Files are copied as bytes and verified by
+## SHA-256; directories are recursively backed up, including hidden files.
+## Symlinks are refused rather than followed outside the allowed root.
 func apply_fixes(fixes: Array, root: String = "res://", backup_dir: String = "res://reports/fix_engine/backup") -> Dictionary:
 	var applied: Array = []
 	var issues: Array = []
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(backup_dir))
+	if not root.is_absolute_path() or not backup_dir.is_absolute_path():
+		return _fail(root, "Root and backup directory must be absolute paths.", "Choose a project root and a backup directory inside it.", "bad_input")
+	var root_abs := _absolute(root)
+	var backup_abs := _absolute(backup_dir)
+	if not DirAccess.dir_exists_absolute(root_abs) or not _beneath(backup_abs, root_abs):
+		return _fail(backup_dir, "Backup directory must be inside an existing root.", "Choose a backup directory inside the project root.", "bad_input")
+	if _has_link(root_abs, backup_abs):
+		return _fail(backup_dir, "Backup path contains a symbolic link.", "Choose a backup path without symbolic links.", "bad_input")
 	for f in fixes:
-		var src := str(f["path"])
-		var dst := src.get_base_dir().path_join(str(f["to"]))
-		if not FileAccess.file_exists(src):
-			issues.append(_issue("warning", "apply_failed", src, 0, "Source file does not exist.", "Check the path and retry."))
+		if typeof(f) != TYPE_DICTIONARY:
+			issues.append(_apply_error("", "Invalid fix entry."))
 			continue
-		var backup := backup_dir.path_join(src.get_file() + ".bak")
-		var data := FileAccess.get_file_as_string(src)
-		var bf := FileAccess.open(backup, FileAccess.WRITE)
-		if bf == null:
-			issues.append(_issue("error", "apply_failed", src, 0, "Cannot write backup.", "Check backup directory permissions."))
+		var src := str(f.get("path", ""))
+		var kind := str(f.get("kind", ""))
+		var target_name := str(f.get("to", ""))
+		if not src.is_absolute_path() or kind not in SAFE_KINDS:
+			issues.append(_apply_error(src, "Only absolute paths and allowlisted naming fixes are accepted."))
 			continue
-		bf.store_string(data)
-		bf.close()
-		if DirAccess.rename_absolute(src, dst) != OK:
-			issues.append(_issue("error", "apply_failed", src, 0, "Rename failed.", "Restore from the backup copy."))
+		var src_abs := _absolute(src)
+		var base := src_abs.get_file()
+		if not _beneath(src_abs, root_abs) or target_name != _suggested_name(kind, base) or target_name == base or not target_name.is_valid_filename() or target_name in ["", ".", ".."]:
+			issues.append(_apply_error(src, "Path or destination is outside the allowed rename scope."))
+			continue
+		var relative := src_abs.substr((root_abs if root_abs.ends_with("/") else root_abs + "/").length())
+		if ".git" in relative.split("/") or ".godot" in relative.split("/") or _beneath(backup_abs, src_abs) or _beneath(src_abs, backup_abs) or _has_link(root_abs, src_abs):
+			issues.append(_apply_error(src, "Source overlaps a protected path or contains a symbolic link."))
+			continue
+		var is_dir := DirAccess.dir_exists_absolute(src_abs)
+		if (kind == "directory_name" and not is_dir) or (kind == "file_name" and (is_dir or not FileAccess.file_exists(src_abs))):
+			issues.append(_apply_error(src, "Source does not exist or does not match the fix kind."))
+			continue
+		var dst := src_abs.get_base_dir().path_join(target_name)
+		var backup := backup_abs.path_join(relative + ".bak")
+		if _exists(dst) or _exists(backup) or _has_link(root_abs, dst) or _has_link(root_abs, backup):
+			issues.append(_apply_error(src, "Destination or backup already exists, or backup path contains a symbolic link."))
+			continue
+		if DirAccess.make_dir_recursive_absolute(backup.get_base_dir()) != OK:
+			issues.append(_apply_error(src, "Cannot create backup directory."))
+			continue
+		var backup_status := _copy_tree(src_abs, backup) if is_dir else _copy_file(src_abs, backup)
+		if backup_status != OK:
+			issues.append(_apply_error(src, "Backup failed; source was not renamed. A partial backup may need removal."))
+			continue
+		# Recheck the target immediately before the rename to avoid replacing an
+		# existing project file. Concurrent external changes remain a limitation.
+		if _exists(dst) or _has_link(root_abs, dst) or DirAccess.rename_absolute(src_abs, dst) != OK:
+			issues.append(_apply_error(src, "Destination appeared or rename failed; backup was retained."))
 			continue
 		applied.append({"from": src, "to": dst, "backup": backup})
 	return _finish({"applied": applied.size()}, issues, {"applied": applied})
+
+
+func _suggested_name(kind: String, base: String) -> String:
+	if kind == "directory_name":
+		return base.to_snake_case()
+	var ext := base.get_extension()
+	return base.get_basename().to_snake_case() + ("." + ext if ext != "" else "")
+
+
+func _absolute(path: String) -> String:
+	return ProjectSettings.globalize_path(path).replace("\\", "/").simplify_path().trim_suffix("/")
+
+
+func _beneath(path: String, root: String) -> bool:
+	var prefix := root if root.ends_with("/") else root + "/"
+	return path.begins_with(prefix)
+
+
+func _exists(path: String) -> bool:
+	return FileAccess.file_exists(path) or DirAccess.dir_exists_absolute(path)
+
+
+func _has_link(root: String, path: String) -> bool:
+	var prefix := root if root.ends_with("/") else root + "/"
+	if not path.begins_with(prefix):
+		return true
+	var current := root
+	for part in path.substr(prefix.length()).split("/", false):
+		var parent := DirAccess.open(current)
+		if parent == null:
+			break # Later components do not exist yet.
+		if parent.is_link(part):
+			return true
+		current = current.path_join(part)
+	return false
+
+
+func _copy_file(src: String, dst: String) -> int:
+	var checksum := FileAccess.get_sha256(src)
+	if checksum == "":
+		return ERR_CANT_OPEN
+	var err := DirAccess.copy_absolute(src, dst)
+	if err != OK:
+		return err
+	return OK if FileAccess.get_sha256(dst) == checksum else ERR_FILE_CORRUPT
+
+
+func _copy_tree(src: String, dst: String) -> int:
+	var dir := DirAccess.open(src)
+	if dir == null:
+		return ERR_CANT_OPEN
+	var err := DirAccess.make_dir_recursive_absolute(dst)
+	if err != OK:
+		return err
+	dir.include_hidden = true
+	dir.list_dir_begin()
+	var name := dir.get_next()
+	while name != "":
+		if dir.is_link(name):
+			dir.list_dir_end()
+			return ERR_UNAVAILABLE
+		var child_src := src.path_join(name)
+		var child_dst := dst.path_join(name)
+		err = _copy_tree(child_src, child_dst) if dir.current_is_dir() else _copy_file(child_src, child_dst)
+		if err != OK:
+			dir.list_dir_end()
+			return err
+		name = dir.get_next()
+	dir.list_dir_end()
+	return OK
+
+
+func _apply_error(path: String, message: String) -> Dictionary:
+	return _issue("error", "apply_failed", path, 0, message, "Review the path, destination and backup; nothing was renamed for this entry.")
 
 func _issue(severity: String, kind: String, path: String, line: int, message: String, fix: String) -> Dictionary:
 	return {"severity": severity, "kind": kind, "path": path, "line": line, "message": message, "fix": fix}

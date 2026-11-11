@@ -12,14 +12,14 @@ All notable changes to GodotDevTools are recorded here. The format follows
 - Suite Presets (`suite_presets`): `full`, `ci_only`, `mobile_perf`, `content`, `testing` plugin profiles; preview in the dock, apply via CLI `--apply` (backs up `project.godot`). Dock, CLI, fixture and test suite.
 - Coverage Gate (`coverage_gate`): GDScript coverage *estimate* from test evidence (function-name mentions), `--min-percent` gating, trend scripts in `tools/coverage/`. Dock, CLI, fixture and test suite.
 - Dock Accessibility Audit (`dock_a11y`): audits `*_dock.gd` for tooltips, run action and focus; dogfoods a11y on the tools themselves. Dock, CLI, fixture and test suite.
-- Windows/GPU verification: `.github/workflows/windows-gpu.yml` (gate + editor/live-game sessions on `windows-latest`), `tests/windows/run_windows_gate.ps1`, `docs/WINDOWS_GPU.md`. CI-ready; Verified after first green run.
+- Windows CI prototype: `.github/workflows/windows-gpu.yml` (gate + editor/live-game sessions on `windows-latest`), `tests/windows/run_windows_gate.ps1`, `docs/WINDOWS_GPU.md`. Pending a green run; hosted CI cannot establish hands-on hardware-GPU support.
 - Docs site + catalog: `mkdocs.yml`, `tools/docs_site/generate.py` -> `docs/catalog.json` + `docs/TOOLS.md` (138 tools).
 - MCP server (`mcp/mcp_server.py`, stdlib stdio, offline) exposing every CLI as `run_<tool>`, plus VSCode SARIF extension (`editors/vscode/`).
 - Docker image (`Dockerfile`, `tools/gdt` wrapper, `.github/workflows/docker.yml`) and standalone Python subset (`tools/standalone/standalone.py`, naming check, exit-2 parity).
 - Asset Library publishing: `tools/assetlib/generate_assetlib.py` -> `assetlib/<tool>.json` + checklist (`docs/ASSETLIB.md`).
 - Dogfooding: `tests/dogfood/` harness, `docs/DOGFOOD.md`, `docs/false_positives.md` log.
 - Godot version matrix: 4.5 promoted to verified, 4.4/4.6 added experimental; all GitHub Actions pinned to SHAs (AUDIT F6).
-- Dock smoke suite now also checks keyboard focusability; editor session now checks the four previously Partially Verified surfaces (capture runner, dialogue graph, responsive panes, whitebox snapping) — see `docs/DOCK_A11Y.md`.
+- Dock smoke suite adds a keyboard-focusability check. The capture runner, painted dialogue graph, responsive preview panes, and whitebox live-selection snapping still need specific implementation and/or interaction tests — see `docs/DOCK_A11Y.md`.
 
 - Real-editor session (`tests/editor/run_editor_session.sh`): runs the windowed editor under Xvfb, clicks every dock's run button with real mouse events, takes a screenshot of each dock, and drives Macro Recorder's preview and recording. All 133 docks pass. It runs in CI in the new `sessions` job.
 - Live-game session (`tests/game/run_live_game.sh`): drives all 16 runtime nodes in a windowed game with real frames, physics and input events, and checks the subtitle layout against a rendered Label. All 20 checks pass. It runs in CI.

@@ -36,4 +36,6 @@ func _on_run() -> void:
 	if _apply.button_pressed and not result.get("fixes", []).is_empty():
 		var applied: Dictionary = op.apply_fixes(result["fixes"], "res://", "res://reports/fix_engine/backup")
 		lines.append("Applied: " + str(applied["summary"]))
+		for issue in applied["issues"]:
+			lines.append("[%s] %s: %s" % [issue["kind"], issue.get("path", ""), issue["message"]])
 	_output.text = "\n".join(lines)

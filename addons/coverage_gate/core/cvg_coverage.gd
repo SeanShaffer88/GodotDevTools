@@ -1,7 +1,7 @@
 ## Coverage Gate - GDScript coverage estimate from test evidence.
 ## Godot has no built-in line coverage, so this is an honest ESTIMATE:
 ## a core function counts as covered when a test file mentions its name
-## or its file stem. Dynamic evidence (a test log) can be passed in.
+## as a complete identifier. This is not evidence that the function executed.
 ## Never present the number as measured line coverage. See README.
 extends RefCounted
 
@@ -21,9 +21,13 @@ func analyze(files: Dictionary, tests: Dictionary, options: Dictionary = {}) -> 
 	var total_funcs := 0
 	var covered_funcs := 0
 	var per_file := {}
-	var test_text := ""
+	# Index complete identifiers once; a file stem or a substring of another
+	# identifier is not evidence that an individual function is mentioned.
+	var test_identifiers := {}
+	var identifier_re := RegEx.create_from_string("[A-Za-z_][A-Za-z0-9_]*")
 	for t in tests.values():
-		test_text += str(t) + "\n"
+		for token in identifier_re.search_all(str(t)):
+			test_identifiers[token.get_string()] = true
 	var paths: Array = files.keys()
 	paths.sort()
 	for path in paths:
@@ -37,7 +41,7 @@ func analyze(files: Dictionary, tests: Dictionary, options: Dictionary = {}) -> 
 					funcs.append(fname)
 		var covered := 0
 		for f in funcs:
-			if test_text.contains(f) or test_text.contains(path.get_file().get_basename()):
+			if test_identifiers.has(f):
 				covered += 1
 		total_funcs += funcs.size()
 		covered_funcs += covered

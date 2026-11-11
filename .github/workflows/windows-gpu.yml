@@ -1,9 +1,8 @@
 name: Windows + GPU verification
 
-# Closes the "hands-on Windows with a GPU" gap in QUALITY.md.
-# Runs the full gate, editor session and live-game session on Windows.
-# Status: CI-ready; becomes Verified after the first green run on main.
-# See docs/WINDOWS_GPU.md.
+# Runs the full gate and windowed sessions on Windows. Hosted runners do not
+# guarantee a hardware GPU; a green CI run cannot replace hands-on GPU use.
+# See docs/WINDOWS_GPU.md for verification status.
 
 on:
   push:
@@ -44,7 +43,14 @@ jobs:
           echo "Using $GODOT_BIN"
           timeout 900 sh tests/run_tests.sh "$GODOT_BIN" 2>&1 | tee gate-windows.log
           status=${PIPESTATUS[0]}
-          if [ "$status" -ne 0 ]; then tail -100 gate-windows.log >> "$GITHUB_STEP_SUMMARY"; fi
+          if [ "$status" -ne 0 ]; then
+            tail -100 gate-windows.log >> "$GITHUB_STEP_SUMMARY"
+            message=$(tail -20 gate-windows.log)
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=Windows gate failed (exit $status)::$message"
+          fi
           exit "$status"
       - name: Upload reports
         if: always()
@@ -79,8 +85,18 @@ jobs:
       - name: Editor session (every dock, real clicks, GPU)
         shell: bash
         run: |
+          set +e
           GODOT_BIN=$(ls .godot-bin/*console*.exe 2>/dev/null || ls .godot-bin/*.exe | head -n 1)
-          sh tests/editor/run_editor_session.sh "$GODOT_BIN" "$RUNNER_TEMP/edsess-windows"
+          sh tests/editor/run_editor_session.sh "$GODOT_BIN" "$RUNNER_TEMP/edsess-windows" 2>&1 | tee editor-windows.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            message=$(tail -15 editor-windows.log)
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=Windows editor session failed (exit $status)::$message"
+          fi
+          exit "$status"
       - name: Upload session evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7

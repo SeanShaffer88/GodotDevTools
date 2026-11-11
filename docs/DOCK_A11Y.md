@@ -1,27 +1,21 @@
-# Dock accessibility + localization
+# Dock accessibility and localization
 
 The tools audit games; this page tracks auditing the tools themselves.
 
 ## What exists
 
-- `addons/dock_a11y` — text audit of `*_dock.gd` for `tooltip_text`, `_on_run`, and `focus_mode` (info-level). Run it over `res://addons` in CI via its CLI.
-- `tests/test_docks.gd` — headless smoke test: instantiates every dock, checks every interactive control has a tooltip **and** is keyboard-focusable (`focus_mode != FOCUS_NONE`), then presses `_on_run` and checks output changes.
-- `tests/editor/editor_verify/plugin.gd` — real-editor session now also checks the four previously *Partially Verified* surfaces (see below).
-- Translations: each new addon ships `ui/translations/dock_strings.po` (msgid = English dock strings). Fill `msgstr` per locale and import the `.po` in your project; run `l10n_matrix` over the `.po` files to check completeness. Existing docks are English-only — translating all 138 is tracked as follow-up, starting with the five new docks.
+- `addons/dock_a11y` provides a source-text heuristic for `tooltip_text`, `_on_run`, and `focus_mode`. It cannot prove that each control has a tooltip or is keyboard accessible.
+- `tests/test_docks.gd` constructs docks, checks interactive controls for tooltips and keyboard focus, and invokes their run actions. The expanded suite is awaiting a successful CI run.
+- `tests/editor/editor_verify/plugin.gd` clicks each dock's run action and saves screenshots; it does **not** prove the individual interactions below work.
+- The new addons include English PO templates. Translation and screen-reader support across the suite remain unfinished.
 
-## The four previously Partially Verified surfaces (now automated in editor session)
+## Editor interaction gaps
 
-| Surface | Editor-session check |
+| Surface | Current evidence |
 |---|---|
-| Visual regression live viewport capture | `capture_runner_live` — dock Capture section runs against an open scene, PNGs appear |
-| Dialogue quest painted node graph | `dialogue_graph_painted` — GraphView draws nodes, screenshot non-blank |
-| Responsive UI preview panes | `responsive_panes_drawn` — per-size panes render, output lists each size |
-| Whitebox snapping of live selection | `whitebox_snap_live` — selection snaps to grid, output reports snapped transform |
+| Visual regression live viewport capture | Capture planning is tested; the editor session does not invoke the capture button or verify generated images. |
+| Dialogue quest painted node graph | Layout is tested; the editor session does not check that the graph was painted correctly. |
+| Responsive UI visual preview panes | The dock lists analysis results; multi-viewport preview panes are not implemented. |
+| Whitebox snapping of a live selection | The dock audits scene text; a live-selection snapping action is not implemented. |
 
-Status: checks added; **Verified after the first green editor-session run** (per `PROJECT_RULES.md`). Until then they remain *Partially Verified* in `docs/PARITY.md`.
-
-## Keyboard / screen-reader notes
-
-- Every dock control has a tooltip (enforced by `test_docks.gd`).
-- Buttons and line edits are focusable by default; `dock_a11y` flags docks that never set `focus_mode` as info, not failure.
-- Output panes are `RichTextLabel` with `selection_enabled = true` so findings can be copied with the keyboard.
+These gaps need actual interaction tests (and, where noted, implementation) before they can be marked verified. A generic successful dock click or screenshot is not evidence that these operations ran.

@@ -1,6 +1,6 @@
 # Development roadmap
 
-This roadmap captures 115 tools and components (110 original + 5 post-roadmap additions below). All 115 are implemented; the shared research item ended in a recorded decision not to build. Work proceeds incrementally: each addon needs a pure core, thin editor dock and headless CLI, fixture-driven tests, documentation and honest limitations. A checked item means its core passes its headless suite and CLI gate in CI on Godot 4.3 and 4.5, its dock passes a real-editor session (`tests/editor/run_editor_session.sh`), and any runtime node passes a live game session (`tests/game/run_live_game.sh`); both sessions run in CI. See each addon README and CI for verification status. Priorities may change as requirements are refined.
+This roadmap captures 110 original tools and components plus five post-roadmap additions below. The original entries were checked against the historical CI gate; the additions remain unchecked until the expanded CI and editor sessions pass. The shared research item ended in a recorded decision not to build. Each addon needs a pure core, thin editor dock and headless CLI, fixture-driven tests, documentation and honest limitations. A checked item means its core passes its headless suite and CLI gate on Godot 4.3 and 4.5, its dock passes a real-editor session (`tests/editor/run_editor_session.sh`), and any runtime node passes a live game session (`tests/game/run_live_game.sh`). See each addon README and CI for verification status.
 
 ## Performance and rendering
 
@@ -147,8 +147,8 @@ This roadmap captures 115 tools and components (110 original + 5 post-roadmap ad
 
 ## Post-roadmap additions (2026-11-11)
 
-- [x] **Tool Finder** — `addons/tool_finder`: problem-first search over the catalog. Headless suite and CLI gate pass on Godot 4.3 and 4.5; dock driven in a real editor session (`tests/editor`).
-- [x] **Fix Engine** — `addons/fix_engine`: opt-in safe fixes from reports (preview by default, backup before apply). Headless suite and CLI gate pass on Godot 4.3 and 4.5; dock driven in a real editor session (`tests/editor`).
-- [x] **Suite Presets** — `addons/suite_presets`: plugin profiles (full, ci_only, mobile_perf, content, testing). Headless suite and CLI gate pass on Godot 4.3 and 4.5; dock driven in a real editor session (`tests/editor`).
-- [x] **Coverage Gate** — `addons/coverage_gate`: coverage estimate from test evidence with trend tracking. Headless suite and CLI gate pass on Godot 4.3 and 4.5; dock driven in a real editor session (`tests/editor`).
-- [x] **Dock Accessibility Audit** — `addons/dock_a11y`: audits docks for tooltips, focus and run action. Headless suite and CLI gate pass on Godot 4.3 and 4.5; dock driven in a real editor session (`tests/editor`).
+- [ ] **Tool Finder** — `addons/tool_finder`: problem-first search over the catalog; expanded gate and editor verification pending.
+- [ ] **Fix Engine** — `addons/fix_engine`: opt-in fixes from reports; expanded gate, apply safety, and editor verification pending.
+- [ ] **Suite Presets** — `addons/suite_presets`: plugin profiles; expanded gate and editor verification pending.
+- [ ] **Coverage Gate** — `addons/coverage_gate`: function-name evidence estimate, not line coverage; expanded gate and editor verification pending.
+- [ ] **Dock Accessibility Audit** — `addons/dock_a11y`: heuristic audit of docks; expanded gate and editor verification pending.
