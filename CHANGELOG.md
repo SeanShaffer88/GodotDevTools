@@ -5,6 +5,8 @@ All notable changes to GodotDevTools are recorded here. The format follows
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-11-11
+
 ### Added
 
 - Android Export Readiness Audit (`android_export_audit`): preset ABI, package, APK/AAB, SDK and signing-flag review, plus optional supplied version-code history.

@@ -9,3 +9,9 @@ __pycache__/
 /editors/vscode/node_modules/
 /editors/vscode/.vscode-test/
 /editors/vscode/*.vsix
+
+# Staged by the docs workflow
+/docs/README.md
+/docs/AI_USAGE.md
+/docs/ROADMAP.md
+/docs/QUALITY.md

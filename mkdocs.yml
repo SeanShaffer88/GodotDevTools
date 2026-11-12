@@ -1,5 +1,5 @@
 site_name: GodotDevTools
-site_description: 138 independent, offline Godot 4 devtools — each with an editor dock, headless CLI and CI gate.
+site_description: 141 independent, offline Godot 4 devtools — each with an editor dock, headless CLI and CI gate.
 repo_url: https://github.com/SeanShaffer88/GodotDevTools
 theme:
   name: material
