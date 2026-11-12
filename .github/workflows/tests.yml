@@ -53,6 +53,92 @@ jobs:
       - name: Test release packaging without publishing
         run: python3 tests/test_release_assets.py
 
+  vscode-sarif:
+    name: VS Code SARIF importer and extension host
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Install pinned test dependencies
+        working-directory: editors/vscode
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Cache Godot 4.3-stable
+        id: godot-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: .godot-bin
+          key: godot-4.3-stable-linux-x86_64
+      - name: Download Godot 4.3-stable
+        if: steps.godot-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .godot-bin
+          curl -fsSL -o .godot-bin/godot.zip \
+            "https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip"
+          unzip -q .godot-bin/godot.zip -d .godot-bin
+          rm .godot-bin/godot.zip
+          chmod +x .godot-bin/Godot_v4.3-stable_linux.x86_64
+      - name: Generate SARIF with the real exporter
+        shell: bash
+        run: |
+          set +e
+          rm -f reports/vscode_sarif/gdt.sarif
+          log="$RUNNER_TEMP/vscode-godot.log"
+          timeout 40s .godot-bin/Godot_v4.3-stable_linux.x86_64 --headless --path . \
+            --script res://addons/sarif_export/cli/srf_cli.gd -- \
+            --reports=res://demo/suite/after --out=res://reports/vscode_sarif > "$log" 2>&1
+          status=$?
+          cat "$log"
+          if [ "$status" -ne 0 ] || grep -Eq 'SCRIPT ERROR|Parse Error|Failed to load script' "$log" || [ ! -s reports/vscode_sarif/gdt.sarif ]; then
+            message=$(tail -50 "$log")
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=VS Code SARIF fixture generation failed (exit $status)::$message"
+            exit 1
+          fi
+      - name: Importer regressions against the exporter output
+        working-directory: editors/vscode
+        shell: bash
+        env:
+          GDT_SARIF_REPORT: ${{ github.workspace }}/reports/vscode_sarif/gdt.sarif
+        run: |
+          set +e
+          npm test > "$RUNNER_TEMP/vscode-importer.log" 2>&1
+          status=$?
+          cat "$RUNNER_TEMP/vscode-importer.log"
+          if [ "$status" -ne 0 ]; then
+            message=$(tail -80 "$RUNNER_TEMP/vscode-importer.log")
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=VS Code SARIF regressions failed (exit $status)::$message"
+          fi
+          exit "$status"
+      - name: Install virtual display if needed
+        run: |
+          if ! command -v xvfb-run >/dev/null 2>&1 || ! command -v xauth >/dev/null 2>&1; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq xvfb xauth >/dev/null
+          fi
+      - name: Real VS Code extension host smoke
+        working-directory: editors/vscode
+        shell: bash
+        env:
+          GDT_SARIF_REPORT: ${{ github.workspace }}/reports/vscode_sarif/gdt.sarif
+        run: |
+          set +e
+          timeout 300s xvfb-run -a npm run test:host > "$RUNNER_TEMP/vscode-host.log" 2>&1
+          status=$?
+          cat "$RUNNER_TEMP/vscode-host.log"
+          if [ "$status" -ne 0 ]; then
+            message=$(tail -80 "$RUNNER_TEMP/vscode-host.log")
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=VS Code extension host failed (exit $status)::$message"
+          fi
+          exit "$status"
+
   gate:
     name: Gate on Godot ${{ matrix.godot }}
     runs-on: ubuntu-latest
