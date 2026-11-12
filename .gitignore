@@ -6,3 +6,6 @@ visual_reports/
 *.translation
 __pycache__/
 *.py[cod]
+/editors/vscode/node_modules/
+/editors/vscode/.vscode-test/
+/editors/vscode/*.vsix

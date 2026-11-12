@@ -92,6 +92,26 @@ jobs:
             echo "::error title=Windows gate failed (exit $status)::$message"
           fi
           exit "$status"
+      - name: VS Code SARIF importer regressions (Windows)
+        working-directory: editors/vscode
+        shell: bash
+        run: |
+          set +e
+          log="$RUNNER_TEMP/vscode-sarif-windows.log"
+          {
+            npm ci --ignore-scripts --no-audit --no-fund &&
+            GDT_SARIF_REPORT="$(cygpath -w "$PWD/../../reports/sarif_export/gdt.sarif")" npm test
+          } > "$log" 2>&1
+          status=$?
+          cat "$log"
+          if [ "$status" -ne 0 ]; then
+            message=$(tail -80 "$log")
+            message=${message//'%'/'%25'}
+            message=${message//$'\n'/'%0A'}
+            message=${message//$'\r'/'%0D'}
+            echo "::error title=Windows VS Code SARIF regressions failed (exit $status)::$message"
+          fi
+          exit "$status"
       - name: Upload reports
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
