@@ -1,6 +1,6 @@
 # Suite Presets
 
-Enable only the plugins you need. Enabling all 138 plugins slows editor startup and clutters the dock wall; presets fix that. Enable the addon, pick a preset in the dock, and select **Preview preset**.
+Enable only the plugins you need. Enabling all 141 plugins slows editor startup and clutters the dock wall; presets fix that. Enable the addon, pick a preset in the dock, and select **Preview preset**.
 
 ```sh
 godot --headless --path . --script res://addons/suite_presets/cli/spm_cli.gd -- --preset=mobile_perf

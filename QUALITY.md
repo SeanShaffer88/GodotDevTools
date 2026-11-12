@@ -20,15 +20,15 @@ A green gate is evidence for its tested cases, not proof of complete correctness
 
 ## CI coverage and historical baseline
 
-There are 138 addons, each with its own test suite. All 110 roadmap entries are checked; see ROADMAP.md for what a check requires. CI runs three kinds of evidence on every PR:
+There are 141 addons, each with its own test suite. All 110 roadmap entries are checked; see ROADMAP.md for what a check requires. CI runs three kinds of evidence on every PR:
 
-- **Gate** (`sh tests/run_tests.sh`, on Godot 4.3 and 4.5, plus experimental 4.4 and 4.6): per-tool suites, CLI smoke tests and exit-code gates, plus the dock smoke suite. It constructs the 138 docks, checks interactive controls' tooltips and focus, and exercises their run actions where supported outside the editor.
+- **Gate** (`sh tests/run_tests.sh`, on Godot 4.3 and 4.5, plus experimental 4.4 and 4.6): per-tool suites, CLI smoke tests and exit-code gates, plus the dock smoke suite. It constructs every dock (141), checks interactive controls' tooltips and focus, and exercises their run actions where supported outside the editor.
 - **Real-editor session** (`tests/editor/run_editor_session.sh`, Godot 4.3, Xvfb, Mesa llvmpipe):
   - the windowed editor loads every plugin;
   - a test plugin brings each dock to the front, clicks its run button with real mouse events, and checks that output appears;
   - it takes a screenshot of each dock;
   - for Macro Recorder, it opens a scene, clicks Preview, and records an Inspector edit.
-  The expanded 138-dock session passed in CI; specific interactions are tracked separately in `docs/DOCK_A11Y.md`.
+  The 141-dock session passed in CI on commit `1e8251b`; specific interactions are tracked separately in `docs/DOCK_A11Y.md`.
 - **Live-game session** (`tests/game/run_live_game.sh`): the 16 runtime nodes run in a windowed game with real frames, physics and input events, for 19 checks. A further check confirms that the subtitle layout measure matches a rendered Label. All 20 checks pass.
   - The live session found a real defect: `seed_replay`'s `randi_range`/`randf_range` called the engine's unseeded global `randf()`, so seeded replays diverged. It is fixed and covered by a regression test.
 
