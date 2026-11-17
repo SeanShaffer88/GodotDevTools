@@ -1,0 +1,142 @@
+{
+  "repo": "knowledge",
+  "generated": "2026-11-17",
+  "purpose": "Godot Android development \u2014 knowledge base",
+  "startHere": [
+    "AGENTS.md",
+    "README.md"
+  ],
+  "readingOrder": [
+    "README.md",
+    "AGENTS.md",
+    "SOURCES.md",
+    "docs/01-engine-and-versions.md",
+    "docs/02-project-anatomy.md",
+    "docs/03-export-pipeline.md",
+    "docs/04-languages.md",
+    "docs/05-google-play.md",
+    "docs/06-plugins.md",
+    "docs/07-asset-store.md",
+    "docs/08-testing-and-ci.md",
+    "docs/09-permissions.md",
+    "reference/android-preset-options.md",
+    "reference/version-matrix.md",
+    "checklists/first-export-checklist.md",
+    "checklists/play-release-checklist.md",
+    "templates/README.md",
+    "examples/README.md",
+    "tools/README.md"
+  ],
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 2112,
+      "summary": "AGENTS.md \u2014 rules for any AI working with Godot for Android"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4616,
+      "summary": "Godot Android development \u2014 knowledge base"
+    },
+    {
+      "path": "SOURCES.md",
+      "bytes": 2591,
+      "summary": "SOURCES.md \u2014 where the facts live"
+    },
+    {
+      "path": "checklists/first-export-checklist.md",
+      "bytes": 863,
+      "summary": "First Android export checklist"
+    },
+    {
+      "path": "checklists/play-release-checklist.md",
+      "bytes": 1182,
+      "summary": "Google Play release checklist"
+    },
+    {
+      "path": "docs/01-engine-and-versions.md",
+      "bytes": 1745,
+      "summary": "01 \u2014 The engine and its versions"
+    },
+    {
+      "path": "docs/02-project-anatomy.md",
+      "bytes": 2467,
+      "summary": "02 \u2014 Project anatomy and version control"
+    },
+    {
+      "path": "docs/03-export-pipeline.md",
+      "bytes": 3684,
+      "summary": "03 \u2014 The Android export pipeline"
+    },
+    {
+      "path": "docs/04-languages.md",
+      "bytes": 1884,
+      "summary": "04 \u2014 Languages: GDScript, C#, GDExtension"
+    },
+    {
+      "path": "docs/05-google-play.md",
+      "bytes": 2826,
+      "summary": "05 \u2014 Google Play: the hard requirements in force"
+    },
+    {
+      "path": "docs/06-plugins.md",
+      "bytes": 2749,
+      "summary": "06 \u2014 Android plugins"
+    },
+    {
+      "path": "docs/07-asset-store.md",
+      "bytes": 1659,
+      "summary": "07 \u2014 The Asset Store (and the Asset Library it replaced)"
+    },
+    {
+      "path": "docs/08-testing-and-ci.md",
+      "bytes": 2067,
+      "summary": "08 \u2014 Testing and CI"
+    },
+    {
+      "path": "docs/09-permissions.md",
+      "bytes": 1361,
+      "summary": "09 \u2014 Android permissions"
+    },
+    {
+      "path": "examples/README.md",
+      "bytes": 919,
+      "summary": "Examples"
+    },
+    {
+      "path": "reference/android-preset-options.md",
+      "bytes": 1348,
+      "summary": "Android export preset \u2014 option groups"
+    },
+    {
+      "path": "reference/version-matrix.md",
+      "bytes": 1805,
+      "summary": "Version matrix (checked 2026-11-17)"
+    },
+    {
+      "path": "templates/README.md",
+      "bytes": 495,
+      "summary": "Templates"
+    },
+    {
+      "path": "templates/godot.gitignore",
+      "bytes": 188,
+      "summary": ""
+    },
+    {
+      "path": "templates/project-seed.md",
+      "bytes": 1213,
+      "summary": "Seeding a new Godot Android project"
+    },
+    {
+      "path": "tools/README.md",
+      "bytes": 576,
+      "summary": "Tools"
+    },
+    {
+      "path": "tools/build-ai-bundle.py",
+      "bytes": 4415,
+      "summary": ""
+    }
+  ]
+}

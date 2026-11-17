@@ -1,0 +1,11 @@
+# Godot 4.1+ — official ignores (Version control systems docs)
+.godot/
+*.translation
+
+# Release signing — never in the repo
+*.keystore
+*.jks
+
+# Local export outputs
+/builds/
+/exports/

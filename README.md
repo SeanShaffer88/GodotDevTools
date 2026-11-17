@@ -433,3 +433,7 @@ MIT - see `LICENSE`.
 ## Credits
 
 Built for Godot 4. Uses only the Godot engine's own APIs; no third-party code.
+
+## Knowledge base
+
+The [`knowledge/`](knowledge/) folder of this repo is a self-contained Godot-for-Android development knowledge base — engine versions and support windows, project anatomy, the Android export pipeline (APK and AAB), languages, the Google Play requirements in force, plugins, testing, and CI — written for AI coding agents and human developers. It is built to be downloaded and used locally: start with [`knowledge/manifest.json`](knowledge/manifest.json) and [`knowledge/AGENTS.md`](knowledge/AGENTS.md), or upload [`knowledge/ai-bundle.md`](knowledge/ai-bundle.md) as a single file.
